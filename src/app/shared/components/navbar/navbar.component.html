@@ -1,0 +1,59 @@
+<header class="navbar">
+    <div class="navbar__container">
+
+        <!-- Marca / Logo -->
+        <a class="navbar__brand" routerLink="/" (click)="cerrarMenu()">
+            <span class="navbar__logo" aria-hidden="true">TV</span>
+            <span class="navbar__brand-text">
+                <span class="navbar__brand-title">TV Tecno</span>
+                <span class="navbar__brand-subtitle">Instituto Tecnológico de Durango</span>
+            </span>
+        </a>
+
+        <!-- Botón hamburguesa (solo móvil) -->
+        <button class="navbar__toggle" type="button" (click)="toggleMenu()" [attr.aria-expanded]="menuAbierto"
+            aria-label="Abrir menú de navegación">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round">
+                @if (!menuAbierto) {
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+                } @else {
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                }
+            </svg>
+        </button>
+
+        <!-- Navegación -->
+        <nav class="navbar__nav" [class.navbar__nav--open]="menuAbierto">
+            <ul class="navbar__links">
+                <li>
+                    <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }"
+                        (click)="cerrarMenu()">Inicio</a>
+                </li>
+                <li>
+                    <a routerLink="/programacion" routerLinkActive="is-active" (click)="cerrarMenu()">Programación</a>
+                </li>
+                <li>
+                    <a routerLink="/biblioteca" routerLinkActive="is-active" (click)="cerrarMenu()">Biblioteca</a>
+                </li>
+                <li>
+                    <a routerLink="/ciencia-tecnologia" routerLinkActive="is-active" (click)="cerrarMenu()">Ciencia y
+                        Tecnología</a>
+                </li>
+                <li>
+                    <a routerLink="/acerca-de" routerLinkActive="is-active" (click)="cerrarMenu()">Acerca de</a>
+                </li>
+            </ul>
+
+            <!-- Botón En vivo (dentro del nav para que aparezca también en móvil) -->
+            <a class="navbar__live" routerLink="/en-vivo" (click)="cerrarMenu()">
+                <span class="navbar__live-dot" aria-hidden="true"></span>
+                En vivo ahora
+            </a>
+        </nav>
+
+    </div>
+</header>

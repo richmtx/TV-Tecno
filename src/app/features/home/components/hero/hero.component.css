@@ -1,0 +1,236 @@
+.hero {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    color: #fff;
+
+    /* ===========================================================
+     FONDO GUINDA — esto es lo único que cambiarás por la imagen.
+     Para usar imagen, reemplaza el "background" de abajo por:
+        background: url('/ruta/imagen.jpg') center/cover no-repeat;
+     y deja el .hero__overlay para que el texto siga legible.
+     =========================================================== */
+    background:
+        radial-gradient(circle at 85% 50%, rgba(176, 58, 99, 0.35), transparent 45%),
+        linear-gradient(135deg, #4d0e28 0%, #6b1538 55%, #3a0a1f 100%);
+}
+
+/* Capa oscura encima del fondo (útil sobre todo cuando sea imagen) */
+.hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(20, 5, 12, 0.55), transparent 70%);
+    pointer-events: none;
+}
+
+.hero__container {
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 3rem;
+    min-height: 520px;
+}
+
+/* ---------- Contenido izquierdo ---------- */
+.hero__content {
+    max-width: 560px;
+}
+
+.hero__badge {
+    display: inline-block;
+    padding: 0.4rem 1.1rem;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    margin-bottom: 1.75rem;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.hero__title {
+    font-family: var(--font-titulo);
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.05;
+    color: #fff;
+    margin-bottom: 1.5rem;
+}
+
+.hero__title-accent {
+    display: block;
+    color: var(--tv-pink);
+}
+
+.hero__subtitle {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.82);
+    margin-bottom: 2.25rem;
+    max-width: 480px;
+}
+
+/* ---------- Botones ---------- */
+.hero__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.hero__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.75rem;
+    border-radius: 8px;
+    font-family: var(--font-cuerpo);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.hero__btn:hover {
+    transform: translateY(-2px);
+}
+
+.hero__btn--primary {
+    background: var(--tv-wine);
+    color: #fff;
+    border: 1px solid var(--tv-wine);
+}
+
+.hero__btn--primary:hover {
+    background: var(--tv-wine-dark);
+}
+
+.hero__btn--ghost {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.hero__btn--ghost:hover {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.hero__btn-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--tv-live);
+    box-shadow: 0 0 0 0 rgba(226, 55, 68, 0.6);
+    animation: hero-pulse 1.6s infinite;
+}
+
+@keyframes hero-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(226, 55, 68, 0.6);
+    }
+
+    70% {
+        box-shadow: 0 0 0 8px rgba(226, 55, 68, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(226, 55, 68, 0);
+    }
+}
+
+/* ---------- Tarjeta "transmitiendo ahora" ---------- */
+.hero__now {
+    width: 290px;
+    flex-shrink: 0;
+    padding: 1.15rem 1.35rem;
+    border-radius: 12px;
+    background: rgba(10, 3, 7, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(6px);
+    margin-bottom: 0.25rem;
+}
+
+.hero__now-label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.6rem;
+}
+
+.hero__now-title {
+    font-family: var(--font-titulo);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.35rem;
+}
+
+.hero__now-time {
+    display: block;
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1rem;
+}
+
+.hero__progress {
+    width: 100%;
+    height: 5px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+}
+
+.hero__progress-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: var(--tv-live);
+    transition: width 0.4s ease;
+}
+
+/* ===========================================================
+   Responsivo
+   =========================================================== */
+@media (max-width: 900px) {
+    .hero__container {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 3.5rem 1.5rem;
+        gap: 2.5rem;
+        min-height: auto;
+    }
+
+    .hero__title {
+        font-size: 2.5rem;
+    }
+
+    .hero__now {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero__title {
+        font-size: 2rem;
+    }
+
+    .hero__subtitle {
+        font-size: 1.05rem;
+    }
+
+    .hero__actions {
+        width: 100%;
+    }
+
+    .hero__btn {
+        flex: 1;
+        justify-content: center;
+    }
+}

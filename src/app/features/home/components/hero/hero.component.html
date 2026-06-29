@@ -1,0 +1,44 @@
+<section class="hero">
+    <div class="hero__overlay"></div>
+
+    <div class="hero__container">
+
+        <!-- Columna izquierda: contenido -->
+        <div class="hero__content">
+            <span class="hero__badge">Canal oficial ITD</span>
+
+            <h1 class="hero__title">
+                El canal del
+                <span class="hero__title-accent">Tecnológico</span>
+            </h1>
+
+            <p class="hero__subtitle">
+                Noticias, eventos, cultura y ciencia desde el Instituto
+                Tecnológico de Durango para toda la comunidad.
+            </p>
+
+            <div class="hero__actions">
+                <a routerLink="/en-vivo" class="hero__btn hero__btn--primary">
+                    <span class="hero__btn-dot" aria-hidden="true"></span>
+                    Ver en vivo
+                </a>
+                <a routerLink="/programacion" class="hero__btn hero__btn--ghost">
+                    Programación
+                </a>
+            </div>
+        </div>
+
+        <!-- Columna derecha: tarjeta "transmitiendo ahora" -->
+        <aside class="hero__now">
+            <span class="hero__now-label">Transmitiendo ahora</span>
+            <h2 class="hero__now-title">{{ programaActual.titulo }}</h2>
+            <span class="hero__now-time">{{ programaActual.horario }}</span>
+
+            <div class="hero__progress" role="progressbar" [attr.aria-valuenow]="programaActual.progreso"
+                aria-valuemin="0" aria-valuemax="100">
+                <div class="hero__progress-fill" [style.width.%]="programaActual.progreso"></div>
+            </div>
+        </aside>
+
+    </div>
+</section>

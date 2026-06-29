@@ -1,1 +1,74 @@
-/* You can add global styles to this file, and also import other style files */
+/* ===========================================
+   Tipografía — Google Fonts
+   Raleway (títulos y cuerpo)
+   =========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
+
+/* ===========================================
+   Variables globales
+   =========================================== */
+:root {
+  /* Tipografías */
+  --font-titulo: 'Raleway', system-ui, sans-serif;
+  --font-cuerpo: 'Raleway', system-ui, sans-serif;
+
+  /* Paleta TV Tecno */
+  --tv-wine: #6b1538;
+  --tv-wine-dark: #4d0e28;
+  --tv-pink: #b03a63;
+  --tv-live: #e23744;
+
+  /* Texto */
+  --tv-text: #1f1f1f;
+  --tv-text-soft: #555555;
+
+  /* Superficies */
+  --tv-bg: #ffffff;
+  --tv-border: #ececec;
+}
+
+/* ===========================================
+   Reset básico
+   =========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-cuerpo);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--tv-text);
+  background: var(--tv-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===========================================
+   Títulos → Raleway
+   =========================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-titulo);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--tv-text);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+
+/* ===========================================
+   Enlaces base
+   =========================================== */
+a {
+  color: inherit;
+  text-decoration: none;
+}

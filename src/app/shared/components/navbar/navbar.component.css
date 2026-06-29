@@ -1,0 +1,211 @@
+:host {
+    --tv-wine: #6b1538;
+    --tv-wine-dark: #4d0e28;
+    --tv-pink: #b03a63;
+    --tv-text: #1f1f1f;
+    --tv-live: #e23744;
+}
+
+.navbar {
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #ececec;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+/* Marca */
+.navbar__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    text-decoration: none;
+    color: var(--tv-text);
+}
+
+.navbar__logo {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--tv-wine);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+}
+
+.navbar__brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.navbar__brand-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.navbar__brand-subtitle {
+    font-size: 0.8rem;
+    color: #555;
+}
+
+/* Navegación */
+.navbar__nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.navbar__links {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar__links a {
+    text-decoration: none;
+    color: var(--tv-text);
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.25rem 0;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.navbar__links a:hover {
+    color: var(--tv-wine);
+}
+
+.navbar__links a.is-active {
+    color: var(--tv-wine);
+    border-bottom-color: var(--tv-wine);
+}
+
+/* Botón En vivo */
+.navbar__live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    background: var(--tv-wine);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+    white-space: nowrap;
+}
+
+.navbar__live:hover {
+    background: var(--tv-wine-dark);
+}
+
+.navbar__live-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--tv-live);
+    box-shadow: 0 0 0 0 rgba(226, 55, 68, 0.6);
+    animation: pulse 1.6s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(226, 55, 68, 0.6);
+    }
+
+    70% {
+        box-shadow: 0 0 0 8px rgba(226, 55, 68, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(226, 55, 68, 0);
+    }
+}
+
+/* Botón hamburguesa */
+.navbar__toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--tv-wine);
+    cursor: pointer;
+    padding: 0.25rem;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+    .navbar__toggle {
+        display: inline-flex;
+    }
+
+    .navbar__nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        background: #fff;
+        padding: 1.25rem 1.5rem 1.75rem;
+        border-bottom: 1px solid #ececec;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+        transform: translateY(-12px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .navbar__nav--open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .navbar__links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.1rem;
+        width: 100%;
+    }
+
+    .navbar__links a {
+        width: 100%;
+        border-bottom: none;
+    }
+
+    .navbar__links a.is-active {
+        border-bottom: none;
+    }
+
+    .navbar__live {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 420px) {
+    .navbar__brand-subtitle {
+        display: none;
+    }
+}
