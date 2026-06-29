@@ -1,0 +1,33 @@
+<section class="seccion">
+    <div class="seccion__header">
+        <h2 class="seccion__titulo">
+            <svg class="seccion__icono" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 4h13v16H4z"></path>
+                <path d="M17 8h3v10a2 2 0 0 1-2 2"></path>
+                <path d="M7 8h6M7 12h6M7 16h4"></path>
+            </svg>
+            Últimas noticias
+        </h2>
+        <a class="seccion__link">
+            Ver más
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6"></path>
+            </svg>
+        </a>
+    </div>
+
+    <div class="noticias">
+        @for (noticia of noticias; track noticia.titulo) {
+        <article class="noticia">
+            <div class="noticia__meta">
+                <span class="noticia__categoria" [attr.data-tema]="noticia.tema">{{ noticia.categoria }}</span>
+                <span class="noticia__fecha">{{ noticia.fecha }}</span>
+            </div>
+            <h3 class="noticia__titulo">{{ noticia.titulo }}</h3>
+            <p class="noticia__extracto">{{ noticia.extracto }}</p>
+        </article>
+        }
+    </div>
+</section>

@@ -1,0 +1,138 @@
+.seccion {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 0;
+}
+
+.seccion__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+}
+
+.seccion__titulo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--tv-text);
+    /* antes #fff → ahora oscuro para fondo blanco */
+}
+
+.seccion__icono {
+    color: var(--tv-wine);
+}
+
+.seccion__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--tv-wine);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.seccion__link:hover {
+    opacity: 0.75;
+}
+
+/* ---------- Grid de programas ---------- */
+.programas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.programa {
+    background: #ffffff;
+    /* antes #242424 */
+    border: 1px solid #000;
+    /* borde guinda */
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.programa:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(107, 21, 56, 0.15);
+}
+
+.programa__cabecera {
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Color de cabecera según la categoría (se queda como "imagen") */
+.programa__cabecera[data-tema="noticias"] {
+    background: var(--tv-wine-dark);
+}
+
+.programa__cabecera[data-tema="ciencia"] {
+    background: #1a2e3d;
+}
+
+.programa__cabecera[data-tema="tecnologia"] {
+    background: #252040;
+}
+
+.programa__icono-circulo {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.programa__cuerpo {
+    padding: 0.85rem 1rem 1.1rem;
+}
+
+.programa__categoria {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.programa__categoria[data-tema="noticias"] {
+    color: var(--tv-wine);
+}
+
+.programa__categoria[data-tema="ciencia"] {
+    color: #0f6e56;
+}
+
+.programa__categoria[data-tema="tecnologia"] {
+    color: #185fa5;
+}
+
+.programa__titulo {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--tv-text);
+    /* antes #fff */
+    margin: 6px 0 4px;
+}
+
+.programa__horario {
+    font-size: 0.85rem;
+    color: var(--tv-text-soft);
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 820px) {
+    .programas {
+        grid-template-columns: 1fr;
+    }
+}

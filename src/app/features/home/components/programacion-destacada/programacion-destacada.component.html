@@ -1,0 +1,59 @@
+<section class="seccion">
+    <div class="seccion__header">
+        <h2 class="seccion__titulo">
+            <svg class="seccion__icono" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                <path d="M16 2v4M8 2v4M3 10h18"></path>
+            </svg>
+            Programación destacada
+        </h2>
+        <a class="seccion__link">
+            Ver toda
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6"></path>
+            </svg>
+        </a>
+    </div>
+
+    <div class="programas">
+        @for (programa of programas; track programa.titulo) {
+        <article class="programa">
+            <div class="programa__cabecera" [attr.data-tema]="programa.tema">
+                <div class="programa__icono-circulo">
+                    @switch (programa.icono) {
+                    @case ('noticias') {
+                    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M4 4h13v16H4z"></path>
+                        <path d="M17 8h3v10a2 2 0 0 1-2 2"></path>
+                        <path d="M7 8h6M7 12h6M7 16h4"></path>
+                    </svg>
+                    }
+                    @case ('ciencia') {
+                    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M6 18h8M9 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"></path>
+                    </svg>
+                    }
+                    @case ('tecnologia') {
+                    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="3" y="4" width="18" height="12" rx="1"></rect>
+                        <path d="M2 20h20"></path>
+                    </svg>
+                    }
+                    }
+                </div>
+            </div>
+
+            <div class="programa__cuerpo">
+                <span class="programa__categoria" [attr.data-tema]="programa.tema">{{ programa.categoria }}</span>
+                <h3 class="programa__titulo">{{ programa.titulo }}</h3>
+                <span class="programa__horario">{{ programa.horario }}</span>
+            </div>
+        </article>
+        }
+    </div>
+</section>
