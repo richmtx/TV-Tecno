@@ -29,5 +29,11 @@ export const routes: Routes = [
         (m) => m.VideotecaComponent
       ),
   },
-  // aquí irán las demás features...
+  {
+  path: 'en-vivo',
+  loadComponent: () =>
+    import('./features/home/pages/en-vivo/en-vivo.component').then(
+      (m) => m.EnVivoComponent
+    ),
+},
 ];
