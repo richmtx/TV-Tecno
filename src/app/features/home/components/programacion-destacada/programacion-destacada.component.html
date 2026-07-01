@@ -8,7 +8,7 @@
             </svg>
             Programación destacada
         </h2>
-        <a class="seccion__link">
+        <a class="seccion__link" routerLink="/programacion">
             Ver toda
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -17,43 +17,90 @@
         </a>
     </div>
 
-    <div class="programas">
-        @for (programa of programas; track programa.titulo) {
-        <article class="programa">
-            <div class="programa__cabecera" [attr.data-tema]="programa.tema">
-                <div class="programa__icono-circulo">
-                    @switch (programa.icono) {
-                    @case ('noticias') {
-                    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M4 4h13v16H4z"></path>
-                        <path d="M17 8h3v10a2 2 0 0 1-2 2"></path>
-                        <path d="M7 8h6M7 12h6M7 16h4"></path>
-                    </svg>
-                    }
-                    @case ('ciencia') {
-                    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M6 18h8M9 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"></path>
-                    </svg>
-                    }
-                    @case ('tecnologia') {
-                    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <rect x="3" y="4" width="18" height="12" rx="1"></rect>
-                        <path d="M2 20h20"></path>
-                    </svg>
-                    }
-                    }
-                </div>
-            </div>
+    <div class="carrusel">
+        <button class="carrusel__flecha carrusel__flecha--prev" type="button" (click)="anterior()"
+            aria-label="Programa anterior">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 18l-6-6 6-6"></path>
+            </svg>
+        </button>
 
-            <div class="programa__cuerpo">
-                <span class="programa__categoria" [attr.data-tema]="programa.tema">{{ programa.categoria }}</span>
-                <h3 class="programa__titulo">{{ programa.titulo }}</h3>
-                <span class="programa__horario">{{ programa.horario }}</span>
+        <div class="carrusel__viewport" #viewport>
+            <div class="carrusel__track" [class.carrusel__track--sin-transicion]="sinTransicion"
+                [style.transform]="'translateX(' + desplazamiento + 'px)'">
+                @for (slide of slides; track $index) {
+                <article class="carrusel__slide" #slide>
+                    <div class="programa" [attr.data-tema]="slide.programa.tema">
+                        <div class="programa__fondo">
+                            <div class="programa__icono-circulo">
+                                @switch (slide.programa.icono) {
+                                @case ('noticias') {
+                                <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M4 4h13v16H4z"></path>
+                                    <path d="M17 8h3v10a2 2 0 0 1-2 2"></path>
+                                    <path d="M7 8h6M7 12h6M7 16h4"></path>
+                                </svg>
+                                }
+                                @case ('ciencia') {
+                                <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M6 18h8M9 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"></path>
+                                </svg>
+                                }
+                                @case ('tecnologia') {
+                                <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <rect x="3" y="4" width="18" height="12" rx="1"></rect>
+                                    <path d="M2 20h20"></path>
+                                </svg>
+                                }
+                                @case ('entrevista') {
+                                <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                                    <line x1="12" y1="19" x2="12" y2="23"></line>
+                                    <line x1="8" y1="23" x2="16" y2="23"></line>
+                                </svg>
+                                }
+                                @case ('cultura') {
+                                <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                    <path d="M21 15l-5-5L5 21"></path>
+                                </svg>
+                                }
+                                }
+                            </div>
+                        </div>
+
+                        <div class="programa__overlay">
+                            <span class="programa__categoria">{{ slide.programa.categoria }}</span>
+                            <h3 class="programa__titulo">{{ slide.programa.titulo }}</h3>
+                            <span class="programa__horario">{{ slide.programa.horario }}</span>
+                        </div>
+                    </div>
+                </article>
+                }
             </div>
-        </article>
+        </div>
+
+        <button class="carrusel__flecha carrusel__flecha--next" type="button" (click)="siguiente()"
+            aria-label="Programa siguiente">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"></path>
+            </svg>
+        </button>
+    </div>
+
+    <div class="carrusel__puntos">
+        @for (programa of programas; track programa.titulo; let i = $index) {
+        <button class="carrusel__punto" type="button" [class.carrusel__punto--activo]="i === indiceActivo"
+            (click)="irA(i)" [attr.aria-label]="'Ir al programa ' + (i + 1)"></button>
         }
     </div>
 </section>
