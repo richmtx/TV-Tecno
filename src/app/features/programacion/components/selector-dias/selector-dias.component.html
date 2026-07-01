@@ -1,0 +1,9 @@
+<nav class="dias-selector" aria-label="Selector de día">
+    <button *ngFor="let dia of dias" class="dias-selector__item"
+        [class.dias-selector__item--activo]="dia.index === diaSeleccionado"
+        [class.dias-selector__item--hoy]="esDiaActual(dia.index)" (click)="seleccionar(dia.index)" type="button">
+        <span class="dias-selector__nombre">{{ dia.nombre }}</span>
+        <span class="dias-selector__fecha">{{ dia.fecha }}</span>
+        <span class="dias-selector__contador">{{ dia.count }}</span>
+    </button>
+</nav>

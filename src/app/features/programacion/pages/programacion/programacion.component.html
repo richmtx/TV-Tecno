@@ -1,0 +1,17 @@
+<section class="programacion">
+
+    <header class="programacion__header">
+        <h1 class="programacion__titulo">Programación</h1>
+        <p class="programacion__subtitulo">
+            Consulta el contenido de TV Tecno día por día
+        </p>
+    </header>
+
+    <app-selector-dias [dias]="diasSemana" [diaSeleccionado]="diaSeleccionado" [diaHoy]="diaHoy"
+        (diaSeleccionadoChange)="onDiaSeleccionado($event)"></app-selector-dias>
+
+    <app-en-vivo-ahora [programa]="programaEnVivo"></app-en-vivo-ahora>
+
+    <app-lista-programacion [programas]="programasDelDia" [nombreDia]="nombreDiaSeleccionado"></app-lista-programacion>
+
+</section>

@@ -11,28 +11,28 @@ export const routes: Routes = [
   {
     path: 'programacion',
     loadComponent: () =>
-      import('./features/programacion/programacion.component').then(
+      import('./features/programacion/pages/programacion/programacion.component').then(
         (m) => m.ProgramacionComponent
       ),
   },
   {
     path: 'acerca',
     loadComponent: () =>
-      import('./features/acerca/acerca.component').then(
+      import('./features/acerca/pages/acerca/acerca.component').then(
         (m) => m.AcercaComponent
       ),
   },
   {
     path: 'videoteca',
     loadComponent: () =>
-      import('./features/videoteca/videoteca.component').then(
+      import('./features/videoteca/pages/videoteca/videoteca.component').then(
         (m) => m.VideotecaComponent
       ),
   },
   {
   path: 'en-vivo',
   loadComponent: () =>
-    import('./features/en-vivo/en-vivo.component').then(
+    import('./features/en-vivo/pages/en-vivo/en-vivo.component').then(
       (m) => m.EnVivoComponent
     ),
 },

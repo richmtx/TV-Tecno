@@ -1,0 +1,39 @@
+<div class="lista-programacion">
+    <div class="lista-programacion__encabezado">
+        <h3>Programación de {{ nombreDia }}</h3>
+        <span class="lista-programacion__total">{{ total }} programas</span>
+    </div>
+
+    <div class="lista-programacion__grid">
+        <article class="programa-card" *ngFor="let programa of programas"
+            [class.programa-card--en-vivo]="programa.enVivo">
+            <div class="programa-card__hora">
+                <span class="programa-card__hora-inicio">{{ programa.hora }}</span>
+                <span class="programa-card__hora-fin">{{ programa.horaFin }}</span>
+            </div>
+
+            <div class="programa-card__cuerpo">
+                <div class="programa-card__cabecera">
+                    <span class="programa-card__badge" [attr.data-categoria]="programa.categoria">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path [attr.d]="iconosCategoria[programa.categoria]"></path>
+                        </svg>
+                        {{ programa.categoria }}
+                    </span>
+                    <span class="programa-card__en-vivo" *ngIf="programa.enVivo">
+                        <span class="programa-card__en-vivo-punto"></span>
+                        En vivo
+                    </span>
+                </div>
+
+                <h4 class="programa-card__titulo">{{ programa.titulo }}</h4>
+                <p class="programa-card__descripcion">{{ programa.descripcion }}</p>
+            </div>
+        </article>
+
+        <p class="lista-programacion__vacio" *ngIf="total === 0">
+            No hay programas registrados para este día.
+        </p>
+    </div>
+</div>

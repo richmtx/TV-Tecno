@@ -1,0 +1,20 @@
+<div class="en-vivo" *ngIf="programa as p">
+    <span class="en-vivo__etiqueta">
+        <span class="en-vivo__punto"></span>
+        En vivo ahora
+    </span>
+
+    <div class="en-vivo__contenido">
+        <div class="en-vivo__categoria">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path [attr.d]="iconosCategoria[p.categoria]"></path>
+            </svg>
+            <span>{{ p.categoria }}</span>
+        </div>
+
+        <h2 class="en-vivo__titulo">{{ p.titulo }}</h2>
+        <p class="en-vivo__descripcion">{{ p.descripcion }}</p>
+        <span class="en-vivo__horario">{{ p.hora }} – {{ p.horaFin }} hrs</span>
+    </div>
+</div>

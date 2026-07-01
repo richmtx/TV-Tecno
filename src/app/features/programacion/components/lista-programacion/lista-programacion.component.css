@@ -1,0 +1,151 @@
+.lista-programacion__encabezado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+}
+
+.lista-programacion__encabezado h3 {
+    color: var(--tv-text);
+}
+
+.lista-programacion__total {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--tv-wine);
+    background: rgba(107, 21, 56, 0.08);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+}
+
+.lista-programacion__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.lista-programacion__vacio {
+    color: var(--tv-text-soft);
+    text-align: center;
+    padding: 2.5rem 0;
+}
+
+.programa-card {
+    display: flex;
+    gap: 1.25rem;
+    padding: 1.1rem 1.25rem;
+    border: 1.5px solid var(--tv-border);
+    border-radius: 16px;
+    background: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.programa-card:hover {
+    border-color: var(--tv-pink);
+    box-shadow: 0 6px 20px rgba(107, 21, 56, 0.08);
+}
+
+.programa-card--en-vivo {
+    border-color: var(--tv-wine);
+    background: rgba(107, 21, 56, 0.03);
+}
+
+.programa-card__hora {
+    flex: 0 0 72px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 1.5px solid var(--tv-border);
+    padding-right: 1.25rem;
+}
+
+.programa-card__hora-inicio {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--tv-wine);
+}
+
+.programa-card__hora-fin {
+    font-size: 0.75rem;
+    color: var(--tv-text-soft);
+}
+
+.programa-card__cuerpo {
+    flex: 1;
+    min-width: 0;
+}
+
+.programa-card__cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.programa-card__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--tv-wine);
+    background: rgba(107, 21, 56, 0.08);
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+}
+
+.programa-card__badge svg {
+    width: 13px;
+    height: 13px;
+}
+
+.programa-card__en-vivo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--tv-live);
+    text-transform: uppercase;
+}
+
+.programa-card__en-vivo-punto {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--tv-live);
+    animation: pulso 1.6s infinite;
+}
+
+.programa-card__titulo {
+    font-size: 1.05rem;
+    color: var(--tv-text);
+    margin-bottom: 0.25rem;
+}
+
+.programa-card__descripcion {
+    font-size: 0.88rem;
+    color: var(--tv-text-soft);
+    line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+    .programa-card {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .programa-card__hora {
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 0.5rem;
+        border-right: none;
+        border-bottom: 1.5px solid var(--tv-border);
+        padding-right: 0;
+        padding-bottom: 0.6rem;
+    }
+}
