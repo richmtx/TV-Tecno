@@ -1,1 +1,109 @@
-<p>footer works!</p>
+<footer class="footer">
+    <div class="footer__container">
+
+        <!-- Columna 1: Marca + redes -->
+        <div class="footer__marca">
+            <a class="footer__brand" routerLink="/">
+                <span class="footer__logo" aria-hidden="true">TV</span>
+                <span class="footer__brand-text">
+                    <span class="footer__brand-title">TV Tecno</span>
+                    <span class="footer__brand-subtitle">Instituto Tecnológico de Durango</span>
+                </span>
+            </a>
+
+            <p class="footer__descripcion">
+                El canal del Tecnológico. Noticias, eventos, cultura y ciencia
+                para toda la comunidad.
+            </p>
+
+            <div class="footer__redes">
+                @for (red of redes; track red.nombre) {
+                <a class="footer__red" [href]="red.url" target="_blank" rel="noopener noreferrer"
+                    [attr.aria-label]="red.nombre">
+                    @switch (red.icono) {
+                    @case ('facebook') {
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                        <path
+                            d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z" />
+                    </svg>
+                    }
+                    @case ('instagram') {
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                    }
+                    @case ('youtube') {
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                        <path
+                            d="M23 12s0-3.87-.49-5.72a2.88 2.88 0 0 0-2.02-2.04C18.65 3.75 12 3.75 12 3.75s-6.65 0-8.49.49A2.88 2.88 0 0 0 1.49 6.28C1 8.13 1 12 1 12s0 3.87.49 5.72a2.88 2.88 0 0 0 2.02 2.04c1.84.49 8.49.49 8.49.49s6.65 0 8.49-.49a2.88 2.88 0 0 0 2.02-2.04C23 15.87 23 12 23 12zM9.75 15.5v-7l6 3.5-6 3.5z" />
+                    </svg>
+                    }
+                    }
+                </a>
+                }
+            </div>
+        </div>
+
+        <!-- Columna 2: Navegación -->
+        <nav class="footer__columna">
+            <h3 class="footer__titulo">Navegación</h3>
+            <ul class="footer__lista">
+                @for (enlace of navegacion; track enlace.texto) {
+                <li><a [routerLink]="enlace.ruta">{{ enlace.texto }}</a></li>
+                }
+            </ul>
+        </nav>
+
+        <!-- Columna 3: Institucional -->
+        <nav class="footer__columna">
+            <h3 class="footer__titulo">Institucional</h3>
+            <ul class="footer__lista">
+                @for (enlace of institucional; track enlace.texto) {
+                <li><a [href]="enlace.ruta">{{ enlace.texto }}</a></li>
+                }
+            </ul>
+        </nav>
+
+        <!-- Columna 4: Contacto -->
+        <div class="footer__columna">
+            <h3 class="footer__titulo">Contacto</h3>
+            <ul class="footer__contacto">
+                <li>
+                    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                        <path d="m22 7-10 5L2 7"></path>
+                    </svg>
+                    <a [href]="'mailto:' + contacto.correo">{{ contacto.correo }}</a>
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z">
+                        </path>
+                    </svg>
+                    <a [href]="'tel:' + contacto.telefono">{{ contacto.telefono }}</a>
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <span>{{ contacto.direccion }}</span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Barra inferior -->
+    <div class="footer__base">
+        <span>© {{ anioActual }} TV Tecno — Instituto Tecnológico de Durango. Todos los derechos reservados.</span>
+        <span>Desarrollado por el Centro de Innovación Tecnológica</span>
+    </div>
+</footer>

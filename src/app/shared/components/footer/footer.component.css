@@ -1,0 +1,181 @@
+.footer {
+    background: var(--tv-wine-dark);
+    color: #fff;
+}
+
+.footer__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 2rem;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    gap: 2rem;
+}
+
+/* ---------- Columna de marca ---------- */
+.footer__brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    margin-bottom: 1rem;
+}
+
+.footer__logo {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 11px;
+    background: var(--tv-wine);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.05rem;
+    flex-shrink: 0;
+}
+
+.footer__brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+}
+
+.footer__brand-title {
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.footer__brand-subtitle {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.78rem;
+}
+
+.footer__descripcion {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    max-width: 280px;
+}
+
+/* ---------- Redes sociales ---------- */
+.footer__redes {
+    display: flex;
+    gap: 10px;
+}
+
+.footer__red {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.footer__red:hover {
+    background: var(--tv-wine);
+    transform: translateY(-3px);
+}
+
+/* ---------- Columnas de enlaces ---------- */
+.footer__titulo {
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.footer__lista {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.footer__lista a {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer__lista a:hover {
+    color: #fff;
+}
+
+/* ---------- Contacto ---------- */
+.footer__contacto {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.footer__contacto li {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.footer__contacto svg {
+    color: var(--tv-pink);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.footer__contacto a {
+    color: rgba(255, 255, 255, 0.72);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer__contacto a:hover {
+    color: #fff;
+}
+
+/* ---------- Barra inferior ---------- */
+.footer__base {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1.1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.footer__base span {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.82rem;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 900px) {
+    .footer__container {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 560px) {
+    .footer__container {
+        grid-template-columns: 1fr;
+    }
+
+    .footer__base {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
