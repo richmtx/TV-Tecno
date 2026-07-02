@@ -1,0 +1,29 @@
+<section class="mv">
+    <div class="mv__grid">
+        @for (bloque of bloques; track bloque.titulo) {
+        <article class="mv__card">
+            <div class="mv__icon">
+                @switch (bloque.icono) {
+                @case ('target') {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9" />
+                    <circle cx="12" cy="12" r="5" />
+                    <circle cx="12" cy="12" r="1" />
+                </svg>
+                }
+                @case ('eye') {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
+                    <circle cx="12" cy="12" r="3" />
+                </svg>
+                }
+                }
+            </div>
+            <h3 class="mv__title">{{ bloque.titulo }}</h3>
+            <p class="mv__text">{{ bloque.texto }}</p>
+        </article>
+        }
+    </div>
+</section>

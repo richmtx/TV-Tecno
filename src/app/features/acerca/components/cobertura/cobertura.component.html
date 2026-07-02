@@ -1,0 +1,55 @@
+<section class="cob">
+    <div class="cob__info">
+        <span class="cob__eyebrow">Cobertura</span>
+        <h2 class="cob__title">Transmitimos para todo Durango</h2>
+        <p class="cob__text">
+            Nuestra señal llega a través de plataformas digitales, redes sociales y el
+            circuito interno del campus, con contenido disponible en vivo y bajo demanda.
+        </p>
+        <ul class="cob__lista">
+            @for (canal of canales; track canal.texto) {
+            <li class="cob__item">
+                <span class="cob__icon">
+                    @switch (canal.icono) {
+                    @case ('broadcast') {
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="2" />
+                        <path
+                            d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14" />
+                    </svg>
+                    }
+                    @case ('tv') {
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="2" y="7" width="20" height="13" rx="2" />
+                        <path d="m17 2-5 5-5-5" />
+                    </svg>
+                    }
+                    @case ('youtube') {
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path
+                            d="M22 8.6a2.7 2.7 0 0 0-1.9-1.9C18.4 6.2 12 6.2 12 6.2s-6.4 0-8.1.5A2.7 2.7 0 0 0 2 8.6 28 28 0 0 0 1.6 12 28 28 0 0 0 2 15.4a2.7 2.7 0 0 0 1.9 1.9c1.7.5 8.1.5 8.1.5s6.4 0 8.1-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22.4 12 28 28 0 0 0 22 8.6Z" />
+                        <path d="m10 15 5-3-5-3z" />
+                    </svg>
+                    }
+                    }
+                </span>
+                <span class="cob__label">{{ canal.texto }}</span>
+            </li>
+            }
+        </ul>
+    </div>
+
+    <!-- Placeholder del mapa: aquí puedes montar tu componente Leaflet reutilizable -->
+    <div class="cob__mapa">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" class="cob__mapa-icon">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+            <circle cx="12" cy="10" r="3" />
+        </svg>
+        <span class="cob__mapa-place">Durango, México</span>
+        <span class="cob__mapa-hint">[ Mapa de cobertura ]</span>
+    </div>
+</section>

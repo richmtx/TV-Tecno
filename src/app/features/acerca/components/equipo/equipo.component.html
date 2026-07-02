@@ -1,0 +1,17 @@
+<section class="eq">
+    <div class="eq__head">
+        <span class="eq__eyebrow">Equipo</span>
+        <h2 class="eq__title">Detrás de cámaras</h2>
+    </div>
+    <div class="eq__grid">
+        @for (miembro of miembros; track miembro.iniciales) {
+        <div class="eq__item">
+            <div class="eq__avatar">
+                {{ miembro.iniciales }}
+            </div>
+            <div class="eq__rol">{{ miembro.rol }}</div>
+            <div class="eq__area">{{ miembro.area }}</div>
+        </div>
+        }
+    </div>
+</section>

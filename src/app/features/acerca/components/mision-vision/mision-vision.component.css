@@ -1,0 +1,54 @@
+.mv {
+    padding: 44px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.mv__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.mv__card {
+    border-radius: 12px;
+    padding: 28px;
+}
+
+.mv__icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: #f7e9ef;
+    color: var(--tv-wine);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.mv__icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.mv__title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.mv__text {
+    color: var(--tv-text-soft);
+    font-weight: 400;
+}
+
+@media (max-width: 640px) {
+    .mv {
+        padding: 32px 24px;
+    }
+
+    .mv__grid {
+        grid-template-columns: 1fr;
+    }
+}

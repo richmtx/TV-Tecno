@@ -1,0 +1,89 @@
+.cob {
+    padding: 44px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 36px;
+    align-items: center;
+}
+
+.cob__eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--tv-pink);
+}
+
+.cob__title {
+    font-size: 1.9rem;
+    font-weight: 800;
+    margin: 8px 0 14px;
+}
+
+.cob__text {
+    color: var(--tv-text-soft);
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.cob__lista {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cob__item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cob__icon {
+    color: var(--tv-wine);
+    display: inline-flex;
+}
+
+.cob__icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.cob__label {
+    font-weight: 500;
+}
+
+.cob__mapa {
+    background: linear-gradient(135deg, var(--tv-wine), var(--tv-wine-dark));
+    border-radius: 14px;
+    height: 230px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    gap: 10px;
+}
+
+.cob__mapa-icon {
+    width: 44px;
+    height: 44px;
+}
+
+.cob__mapa-place {
+    font-weight: 600;
+}
+
+.cob__mapa-hint {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 768px) {
+    .cob {
+        grid-template-columns: 1fr;
+        padding: 32px 24px;
+    }
+}

@@ -1,0 +1,57 @@
+.val {
+    padding: 44px 40px;
+}
+
+.val__title {
+    font-size: 1.9rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.val__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.val__card {
+    background: var(--tv-bg);
+    border-radius: 12px;
+    padding: 22px;
+    text-align: center;
+}
+
+.val__icon {
+    color: var(--tv-wine);
+    display: inline-flex;
+}
+
+.val__icon svg {
+    width: 26px;
+    height: 26px;
+}
+
+.val__card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 10px 0 6px;
+}
+
+.val__card-text {
+    font-size: 0.88rem;
+    color: var(--tv-text-soft);
+    font-weight: 400;
+}
+
+@media (max-width: 768px) {
+    .val {
+        padding: 32px 24px;
+    }
+
+    .val__grid {
+        grid-template-columns: 1fr;
+    }
+}

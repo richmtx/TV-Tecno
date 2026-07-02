@@ -1,0 +1,11 @@
+<section class="num">
+    <h2 class="num__title">TV Tecno en números</h2>
+    <div class="num__grid">
+        @for (cifra of cifras; track cifra.etiqueta) {
+        <div class="num__item">
+            <div class="num__valor">{{ cifra.valor }}</div>
+            <div class="num__etiqueta">{{ cifra.etiqueta }}</div>
+        </div>
+        }
+    </div>
+</section>
