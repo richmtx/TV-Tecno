@@ -22,16 +22,24 @@
 }
 
 .footer__logo {
-    display: grid;
-    place-items: center;
-    width: 46px;
-    height: 46px;
-    border-radius: 11px;
-    background: var(--tv-wine);
-    color: #fff;
-    font-weight: 700;
-    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    background: #fff;
     flex-shrink: 0;
+    overflow: hidden;
+}
+
+.footer__logo-img {
+    width: 130%;
+    height: 130%;
+    object-fit: contain;
+    padding: 6px;
+    box-sizing: border-box;
+    /* clave: el padding no desborda el círculo */
 }
 
 .footer__brand-text {
