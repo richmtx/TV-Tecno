@@ -36,15 +36,15 @@ export class TransmisionVivoComponent {
 
   // TODO: reemplazar por datos del API (NestJS) cuando esté disponible.
   @Input() programaActual: ProgramaActual = {
-    titulo: 'TV Médica',
-    descripcion: 'Atención al paciente asmático',
-    categoria: 'Salud',
-    horario: '12:30 – 13:30',
+    titulo: 'Noticiero Tecnológico',
+    descripcion: 'Cobertura de eventos, becas y convocatorias vigentes.',
+    categoria: 'Noticias',
+    horario: '11:00 – 12:00',
   };
 
   @Input() siguientePrograma: ProgramaSiguiente = {
-    hora: '13:30',
-    titulo: 'Mucho + Q2',
+    hora: '13:00',
+    titulo: 'Conexión Vinculación',
     medio: 'Por TV e Internet',
   };
 
