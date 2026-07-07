@@ -1,0 +1,43 @@
+.parrilla {
+    max-width: 1300px;
+    margin: 0 auto 48px;
+    padding: 20px 32px 24px;
+    background: var(--tv-wine-dark);
+    border-radius: 12px;
+}
+
+.parrilla__titulo {
+    color: #f0c9d6;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0 0 12px;
+}
+
+.parrilla__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+}
+
+.franja {
+    border-left: 3px solid rgba(255, 255, 255, 0.25);
+    padding-left: 12px;
+}
+
+.franja--activa {
+    border-left-color: var(--tv-live);
+}
+
+.franja__hora {
+    color: #fff;
+    font-size: 1.375rem;
+    font-weight: 800;
+    margin: 0;
+}
+
+.franja__info {
+    color: #f0c9d6;
+    font-size: 0.75rem;
+    margin: 2px 0 0;
+}

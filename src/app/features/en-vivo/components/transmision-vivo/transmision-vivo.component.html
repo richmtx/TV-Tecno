@@ -1,0 +1,94 @@
+<section class="transmision">
+    <!-- Encabezado: badge EN VIVO + canal -->
+    <div class="transmision__head">
+        <span class="badge-vivo">
+            <span class="badge-vivo__dot"></span>EN VIVO
+        </span>
+        <span class="transmision__canal">{{ canal }}</span>
+    </div>
+
+    <div class="transmision__grid">
+        <!-- Columna principal: reproductor -->
+        <div class="reproductor-col">
+            <div class="reproductor">
+                <!-- Si hay stream se muestra el iframe; si no, el placeholder -->
+                <iframe *ngIf="streamSeguro as url; else placeholder" class="reproductor__frame" [src]="url"
+                    title="Transmisión en vivo TV Tecno" allow="autoplay; encrypted-media; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+
+                <ng-template #placeholder>
+                    <span class="reproductor__live">
+                        <span class="reproductor__live-dot"></span>LIVE
+                    </span>
+
+                    <button class="reproductor__play" type="button" aria-label="Reproducir transmisión">
+                        <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true">
+                            <path d="M9 6.5v11a1 1 0 0 0 1.5.87l9-5.5a1 1 0 0 0 0-1.74l-9-5.5A1 1 0 0 0 9 6.5z" />
+                        </svg>
+                    </button>
+
+                    <div class="reproductor__controls">
+                        <!-- pausa -->
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                            <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
+                        </svg>
+                        <!-- volumen -->
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12z" />
+                        </svg>
+                        <div class="reproductor__bar"><span></span></div>
+                        <span class="reproductor__endirecto">EN DIRECTO</span>
+                        <!-- pantalla completa -->
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                            <path d="M7 14H5v5h5v-2H7zM5 10h2V7h3V5H5zm12 7h-3v2h5v-5h-2zm-3-12v2h3v3h2V5z" />
+                        </svg>
+                    </div>
+                </ng-template>
+            </div>
+
+            <p class="reproductor__aviso">
+                La programación transmitida en línea puede variar respecto a la señal de TV
+                por derechos de autor. Consulta horarios completos en la sección
+                <a routerLink="/programacion">Programación</a>.
+            </p>
+        </div>
+
+        <!-- Columna lateral: fichas -->
+        <aside class="info-col">
+            <!-- Estás viendo -->
+            <div class="ficha">
+                <span class="ficha__label ficha__label--rosa">ESTÁS VIENDO</span>
+                <h3 class="ficha__titulo">{{ programaActual.titulo }}</h3>
+                <p class="ficha__desc">{{ programaActual.descripcion }}</p>
+
+                <span class="ficha__categoria">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+                        <path
+                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                    </svg>
+                    {{ programaActual.categoria }}
+                </span>
+
+                <div class="ficha__horario">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 10.4 4 2.3-.75 1.3L11 13V7h2z" />
+                    </svg>
+                    {{ programaActual.horario }}
+                </div>
+            </div>
+
+            <!-- A continuación -->
+            <div class="ficha">
+                <span class="ficha__label">A CONTINUACIÓN</span>
+                <div class="siguiente">
+                    <span class="siguiente__hora">{{ siguientePrograma.hora }}</span>
+                    <div class="siguiente__info">
+                        <p class="siguiente__titulo">{{ siguientePrograma.titulo }}</p>
+                        <p class="siguiente__medio">{{ siguientePrograma.medio }}</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+</section>

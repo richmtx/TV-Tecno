@@ -1,0 +1,10 @@
+<section class="parrilla">
+    <p class="parrilla__titulo">— {{ titulo }} —</p>
+
+    <div class="parrilla__grid">
+        <article class="franja" [class.franja--activa]="franja.activa" *ngFor="let franja of franjas">
+            <p class="franja__hora">{{ franja.hora }}</p>
+            <p class="franja__info">{{ franja.titulo }} · {{ franja.medio }}</p>
+        </article>
+    </div>
+</section>
