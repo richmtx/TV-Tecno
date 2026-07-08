@@ -51,4 +51,8 @@ export class FooterComponent {
     { nombre: 'Instagram', url: '#', icono: 'instagram' },
     { nombre: 'YouTube', url: '#', icono: 'youtube' },
   ];
+
+  scrollArriba(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }
