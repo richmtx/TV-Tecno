@@ -1,5 +1,12 @@
+:host {
+    --tv-gold: #c8a96e;
+}
+
 .en-vivo {
-    background: linear-gradient(135deg, var(--tv-wine) 0%, var(--tv-wine-dark) 100%);
+    background: linear-gradient(135deg,
+            var(--tv-wine) 0%,
+            var(--tv-wine-dark) 55%,
+            color-mix(in srgb, var(--tv-wine) 88%, #fff) 100%);
     border-radius: 20px;
     padding: 1.75rem 2rem;
     color: #fff;
@@ -8,19 +15,13 @@
     overflow: hidden;
 }
 
-.en-vivo::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.08), transparent 60%);
-    pointer-events: none;
-}
-
 .en-vivo__etiqueta {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(200, 169, 110, 0.18);
+    border: 1px solid rgba(200, 169, 110, 0.5);
+    color: var(--tv-gold);
     padding: 0.35rem 0.9rem;
     border-radius: 20px;
     font-size: 0.75rem;
@@ -84,9 +85,17 @@
 }
 
 .en-vivo__horario {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     font-size: 0.85rem;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--tv-gold);
+}
+
+.en-vivo__horario svg {
+    width: 15px;
+    height: 15px;
 }
 
 @media (max-width: 640px) {

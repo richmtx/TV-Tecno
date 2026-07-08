@@ -15,6 +15,14 @@
 
         <h2 class="en-vivo__titulo">{{ p.titulo }}</h2>
         <p class="en-vivo__descripcion">{{ p.descripcion }}</p>
-        <span class="en-vivo__horario">{{ p.hora }} – {{ p.horaFin }} hrs</span>
+
+        <span class="en-vivo__horario">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"></circle>
+                <polyline points="12 7 12 12 15 14"></polyline>
+            </svg>
+            {{ p.hora }} – {{ p.horaFin }} hrs
+        </span>
     </div>
 </div>

@@ -1,3 +1,10 @@
+:host {
+    /* Cambia entre las dos opciones aquí ↓ */
+    --tv-strip: #c8a96e;
+    /*  Dorado (Opción B) */
+    /* --tv-strip: var(--tv-wine);   Guinda (Opción A) */
+}
+
 .lista-programacion__encabezado {
     display: flex;
     align-items: center;
@@ -34,20 +41,28 @@
     display: flex;
     gap: 1.25rem;
     padding: 1.1rem 1.25rem;
-    border: 1.5px solid var(--tv-border);
+    border: 1px solid var(--tv-border);
     border-radius: 16px;
     background: #fff;
+    /* Franja izquierda uniforme */
+    box-shadow: inset 4px 0 0 var(--tv-strip);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .programa-card:hover {
     border-color: var(--tv-pink);
-    box-shadow: 0 6px 20px rgba(107, 21, 56, 0.08);
+    box-shadow: inset 4px 0 0 var(--tv-strip),
+        0 6px 20px rgba(107, 21, 56, 0.08);
 }
 
 .programa-card--en-vivo {
-    border-color: var(--tv-wine);
-    background: rgba(107, 21, 56, 0.03);
+    border: 2px solid var(--tv-strip);
+    background: rgba(200, 169, 110, 0.06);
+    box-shadow: none;
+}
+
+.programa-card--en-vivo:hover {
+    box-shadow: 0 6px 20px rgba(107, 21, 56, 0.08);
 }
 
 .programa-card__hora {
@@ -56,7 +71,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-right: 1.5px solid var(--tv-border);
+    border-right: 1px solid var(--tv-border);
     padding-right: 1.25rem;
 }
 
@@ -144,7 +159,7 @@
         justify-content: flex-start;
         gap: 0.5rem;
         border-right: none;
-        border-bottom: 1.5px solid var(--tv-border);
+        border-bottom: 1px solid var(--tv-border);
         padding-right: 0;
         padding-bottom: 0.6rem;
     }
