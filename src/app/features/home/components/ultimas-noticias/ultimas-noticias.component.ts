@@ -43,13 +43,12 @@ export class UltimasNoticiasComponent {
     },
   ];
 
-  // Degradados de respaldo (cuando la noticia no tiene imagen).
-  // Degradados de respaldo (cuando la noticia no tiene imagen).
+  // Degradados de respaldo (cuando la noticia no tiene imagen), dentro de la paleta guinda de marca.
   private readonly fallbacks: string[] = [
-    'linear-gradient(155deg, #836d23, #5e4e19)',
-    'linear-gradient(155deg, #b42e38, #7d1f26)',
-    'linear-gradient(155deg, #5c2c56, #3d1c39)',
-    'linear-gradient(155deg, #04513c, #033628)',
+    'linear-gradient(155deg, #b03a63, #6b1538)',
+    'linear-gradient(155deg, #6b1538, #4d0e28)',
+    'linear-gradient(155deg, #8a2a52, #4d0e28)',
+    'linear-gradient(155deg, #4d0e28, #2c0819)',
   ];
 
   fallbackFor(index: number): string {

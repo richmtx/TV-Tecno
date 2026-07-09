@@ -1,6 +1,5 @@
 .noticias {
-    --guinda: #6b1538;
-    font-family: 'Raleway', sans-serif;
+    font-family: var(--font-cuerpo);
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 1.5rem;
@@ -16,7 +15,7 @@
 .noticias__icono {
     width: 26px;
     height: 26px;
-    color: var(--guinda);
+    color: var(--tv-wine);
 }
 
 .noticias__titulo {
@@ -24,65 +23,163 @@
     font-weight: 700;
     letter-spacing: -0.01em;
     margin: 0;
-    color: #1a1a1a;
+    color: var(--tv-text);
 }
 
 .noticias__grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
 }
 
-.tarjeta__imagen {
-    aspect-ratio: 16 / 9;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+@media (min-width: 640px) {
+    .noticias__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
 }
 
+@media (min-width: 1024px) {
+    .noticias__grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+}
+
+/* ---------- Tarjeta ---------- */
 .tarjeta {
     display: flex;
     flex-direction: column;
     background: #fff;
-    border: 1px solid #e5e5e5;
-    border-radius: 16px;
+    border-radius: 20px;
     overflow: hidden;
     cursor: pointer;
-    transition: border-color 0.18s ease, transform 0.18s ease;
+    box-shadow: 0 2px 10px rgba(107, 21, 56, 0.08);
+    transition: transform 0.3s cubic-bezier(0.65, 0, 0.35, 1),
+        box-shadow 0.3s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .tarjeta:hover {
-    border-color: var(--tv-text);
-    transform: translateY(-3px);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(107, 21, 56, 0.22);
 }
 
-.tarjeta__imagen img {
+/* ---------- Media (imagen real o degradado de respaldo) ---------- */
+.tarjeta__media {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+.tarjeta__media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.25s ease;
+    transition: transform 0.35s ease, filter 0.35s ease;
 }
 
-.tarjeta:hover .tarjeta__imagen img {
-    transform: scale(1.05);
+.tarjeta:hover .tarjeta__media img {
+    transform: scale(1.06);
+    filter: brightness(1.04);
+}
+
+.tarjeta__fallback {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: filter 0.35s ease;
+}
+
+.tarjeta:hover .tarjeta__fallback {
+    filter: brightness(1.08);
+}
+
+/* Brillo diagonal sutil sobre el degradado, para que no se sienta un bloque plano */
+.tarjeta__brillo {
+    position: absolute;
+    inset: -20% -40%;
+    background: linear-gradient(115deg,
+            transparent 40%,
+            rgba(255, 255, 255, 0.16) 50%,
+            transparent 60%);
+    transform: translateX(-15%);
+    transition: transform 0.5s ease;
+}
+
+.tarjeta:hover .tarjeta__brillo {
+    transform: translateX(15%);
 }
 
 .tarjeta__placeholder {
+    position: relative;
     width: 32px;
     height: 32px;
-    color: rgba(255, 255, 255, 0.45);
-    transition: transform 0.2s ease;
+    color: rgba(255, 255, 255, 0.5);
+    transition: transform 0.3s ease;
 }
 
 .tarjeta:hover .tarjeta__placeholder {
     transform: scale(1.12);
 }
 
+/* ---------- Cuerpo ---------- */
 .tarjeta__cuerpo {
-    padding: 18px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 20px 22px 18px;
+}
+
+.tarjeta__categoria {
+    display: inline-flex;
+    align-self: flex-start;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: var(--tv-wine);
+    background: rgba(107, 21, 56, 0.08);
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+}
+
+.tarjeta__titulo {
+    font-family: var(--font-titulo);
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0 0 10px;
+    color: var(--tv-text);
+    transition: color 0.2s ease;
+}
+
+.tarjeta:hover .tarjeta__titulo {
+    color: var(--tv-wine);
+}
+
+.tarjeta__descripcion {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--tv-text-soft);
+    margin: 0 0 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.tarjeta__pie {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid var(--tv-border);
 }
 
 .tarjeta__fecha {
@@ -91,37 +188,68 @@
     gap: 6px;
     font-size: 0.78rem;
     font-weight: 600;
-    color: #8a8a8a;
-    margin-bottom: 9px;
+    color: var(--tv-text-soft);
 }
 
 .tarjeta__fecha svg {
     width: 14px;
     height: 14px;
+    flex-shrink: 0;
 }
 
-.tarjeta__titulo {
-    font-size: 1.12rem;
+.tarjeta__leer-mas {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.78rem;
     font-weight: 700;
-    line-height: 1.3;
-    margin: 0 0 9px;
-    color: #1a1a1a;
-    transition: color 0.18s ease;
+    color: var(--tv-wine);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.tarjeta:hover .tarjeta__titulo {
-    color: var(--tv-text);
+.tarjeta__leer-mas svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.25s ease;
 }
 
-.tarjeta__descripcion {
-    font-size: 0.85rem;
-    line-height: 1.6;
-    color: var(--tv-text-soft);
-    margin: 0;
+.tarjeta:hover .tarjeta__leer-mas {
+    opacity: 1;
+    transform: translateX(0);
 }
 
-@media (max-width: 640px) {
-    .noticias__grid {
-        grid-template-columns: 1fr;
+.tarjeta:hover .tarjeta__leer-mas svg {
+    transform: translateX(3px);
+}
+
+/* ---------- Accesibilidad: movimiento reducido ---------- */
+@media (prefers-reduced-motion: reduce) {
+
+    .tarjeta,
+    .tarjeta__media img,
+    .tarjeta__fallback,
+    .tarjeta__placeholder,
+    .tarjeta__titulo,
+    .tarjeta__leer-mas,
+    .tarjeta__leer-mas svg {
+        transition: none !important;
+    }
+
+    .tarjeta:hover {
+        transform: none;
+    }
+
+    .tarjeta:hover .tarjeta__media img,
+    .tarjeta:hover .tarjeta__fallback,
+    .tarjeta:hover .tarjeta__placeholder {
+        transform: none;
+        filter: none;
+    }
+
+    .tarjeta__brillo {
+        display: none;
     }
 }
