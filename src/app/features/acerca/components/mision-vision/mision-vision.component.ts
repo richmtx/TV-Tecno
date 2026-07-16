@@ -18,13 +18,13 @@ export class MisionVisionComponent {
       titulo: 'Nuestra misión',
       icono: 'target',
       texto:
-        'Difundir el conocimiento científico y tecnológico generado en el ITD mediante contenido audiovisual de calidad que informe, forme e inspire a la comunidad estudiantil y a la sociedad.',
+        'Difundir el conocimiento científico y tecnológico del ITD con contenido audiovisual que informa, forma e inspira a la comunidad.',
     },
     {
       titulo: 'Nuestra visión',
       icono: 'eye',
       texto:
-        'Ser el referente en comunicación educativa del tecnológico, reconocido por la innovación en sus producciones y por conectar el talento estudiantil con audiencias cada vez más amplias.',
+        'Ser el referente en comunicación educativa del Tecnológico, conectando el talento estudiantil con audiencias cada vez más amplias.',
     },
   ];
 }

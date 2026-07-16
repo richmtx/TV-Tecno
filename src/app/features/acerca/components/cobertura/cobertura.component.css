@@ -1,5 +1,20 @@
 .cob {
-    padding: 44px 40px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--tv-wine) 0%, #5c1230 55%, var(--tv-wine-dark) 100%);
+    padding: 72px 48px;
+}
+
+.cob__glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 8% 15%, rgba(255, 255, 255, 0.08), transparent 40%);
+    pointer-events: none;
+}
+
+.cob__grid {
+    position: relative;
+    z-index: 1;
     max-width: 1100px;
     margin: 0 auto;
     display: grid;
@@ -13,17 +28,18 @@
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--tv-pink);
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .cob__title {
+    color: #fff;
     font-size: 1.9rem;
     font-weight: 800;
     margin: 8px 0 14px;
 }
 
 .cob__text {
-    color: var(--tv-text-soft);
+    color: rgba(255, 255, 255, 0.85);
     font-weight: 400;
     margin-bottom: 20px;
 }
@@ -32,58 +48,148 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
 }
 
 .cob__item {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
 }
 
 .cob__icon {
-    color: var(--tv-wine);
-    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
 .cob__icon svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
 }
 
 .cob__label {
     font-weight: 500;
+    color: rgba(255, 255, 255, 0.92);
 }
 
+/* ---------- Tarjeta del mapa: cristal flotante + ondas de señal ---------- */
 .cob__mapa {
-    background: linear-gradient(135deg, var(--tv-wine), var(--tv-wine-dark));
-    border-radius: 14px;
-    height: 230px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    height: 240px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     color: #fff;
-    gap: 10px;
+    gap: 8px;
+    overflow: hidden;
+}
+
+.cob__mapa-rings {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.cob__mapa-ring {
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    animation: mapa-ring 3s ease-out infinite;
+}
+
+.cob__mapa-ring:nth-child(2) {
+    animation-delay: 1s;
+}
+
+.cob__mapa-ring:nth-child(3) {
+    animation-delay: 2s;
+}
+
+@keyframes mapa-ring {
+    0% {
+        width: 56px;
+        height: 56px;
+        opacity: 0.55;
+    }
+
+    100% {
+        width: 220px;
+        height: 220px;
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cob__mapa-ring {
+        animation: none;
+        opacity: 0.3;
+    }
+
+    .cob__mapa-ring:nth-child(2),
+    .cob__mapa-ring:nth-child(3) {
+        display: none;
+    }
 }
 
 .cob__mapa-icon {
-    width: 44px;
-    height: 44px;
+    position: relative;
+    width: 40px;
+    height: 40px;
 }
 
 .cob__mapa-place {
+    position: relative;
     font-weight: 600;
 }
 
 .cob__mapa-hint {
+    position: relative;
     font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.7);
 }
 
+@media (max-width: 1024px) {
+    .cob {
+        padding: 64px 40px;
+    }
+}
+
 @media (max-width: 768px) {
     .cob {
+        padding: 48px 32px;
+    }
+
+    .cob__grid {
         grid-template-columns: 1fr;
-        padding: 32px 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cob {
+        padding: 40px 20px;
+    }
+
+    .cob__title {
+        font-size: 1.6rem;
+    }
+
+    .cob__mapa {
+        height: 200px;
     }
 }

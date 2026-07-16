@@ -1,8 +1,12 @@
 <section class="val">
-    <h2 class="val__title">Lo que nos mueve</h2>
+    <div class="val__head">
+        <span class="val__eyebrow">Valores</span>
+        <h2 class="val__title">Lo que nos mueve</h2>
+    </div>
     <div class="val__grid">
         @for (valor of valores; track valor.titulo) {
         <article class="val__card">
+            <span class="val__numero" aria-hidden="true">{{ valor.numero }}</span>
             <span class="val__icon">
                 @switch (valor.icono) {
                 @case ('bulb') {
@@ -29,7 +33,7 @@
                 }
                 }
             </span>
-            <h4 class="val__card-title">{{ valor.titulo }}</h4>
+            <h3 class="val__card-title">{{ valor.titulo }}</h3>
             <p class="val__card-text">{{ valor.texto }}</p>
         </article>
         }

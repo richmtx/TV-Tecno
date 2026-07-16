@@ -3,15 +3,34 @@
         <span class="eq__eyebrow">Equipo</span>
         <h2 class="eq__title">Detrás de cámaras</h2>
     </div>
-    <div class="eq__grid">
-        @for (miembro of miembros; track miembro.iniciales) {
-        <div class="eq__item">
-            <div class="eq__avatar">
-                {{ miembro.iniciales }}
-            </div>
-            <div class="eq__rol">{{ miembro.rol }}</div>
-            <div class="eq__area">{{ miembro.area }}</div>
+
+    <div class="eq__tira-wrap">
+        <button type="button" class="eq__flecha eq__flecha--prev" (click)="desplazar(-1)"
+            [disabled]="!puedeIzquierda" aria-label="Ver miembro anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="m15 18-6-6 6-6" />
+            </svg>
+        </button>
+
+        <div class="eq__tira" #tira tabindex="0" role="group"
+            aria-label="Créditos del equipo, desplázate para ver más" (scroll)="actualizarEstado()">
+            @for (miembro of miembros; track miembro.iniciales) {
+            <article class="eq__item">
+                <span class="eq__numero" aria-hidden="true">{{ miembro.numero }}</span>
+                <div class="eq__avatar">{{ miembro.iniciales }}</div>
+                <h3 class="eq__rol">{{ miembro.rol }}</h3>
+                <p class="eq__area">{{ miembro.area }}</p>
+            </article>
+            }
         </div>
-        }
+
+        <button type="button" class="eq__flecha eq__flecha--next" (click)="desplazar(1)" [disabled]="!puedeDerecha"
+            aria-label="Ver siguiente miembro">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6" />
+            </svg>
+        </button>
     </div>
 </section>

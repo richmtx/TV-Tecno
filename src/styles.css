@@ -25,6 +25,10 @@
   /* Superficies */
   --tv-bg: #ffffff;
   --tv-border: #ececec;
+
+  /* Bandas cálidas (secciones claras alternadas, "Acerca") */
+  --tv-cream: #faf1ec;
+  --tv-cream-border: #f0dcd8;
 }
 
 /* ===========================================

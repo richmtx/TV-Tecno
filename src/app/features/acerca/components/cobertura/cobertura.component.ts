@@ -13,7 +13,7 @@ interface Canal {
 })
 export class CoberturaComponent {
   canales: Canal[] = [
-    { texto: 'Transmisión en vivo por streaming', icono: 'broadcast' },
+    { texto: 'Streaming en vivo', icono: 'broadcast' },
     { texto: 'Circuito interno del campus ITD', icono: 'tv' },
     { texto: 'Contenido bajo demanda en redes', icono: 'youtube' },
   ];

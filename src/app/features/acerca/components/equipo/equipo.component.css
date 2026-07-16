@@ -1,68 +1,192 @@
 .eq {
-    padding: 44px 40px;
-    max-width: 1100px;
-    margin: 0 auto;
+    background: var(--tv-cream);
+    padding: 72px 48px;
 }
 
 .eq__head {
+    max-width: 1100px;
+    margin: 0 auto 32px;
     text-align: center;
-    margin-bottom: 30px;
 }
 
 .eq__eyebrow {
+    display: inline-block;
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--tv-pink);
+    margin-bottom: 6px;
 }
 
 .eq__title {
     font-size: 1.9rem;
     font-weight: 800;
-    margin-top: 8px;
 }
 
-.eq__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
+/* ---------- Tira de créditos ---------- */
+.eq__tira-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
+.eq__tira {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 8px 4px 16px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.eq__tira::-webkit-scrollbar {
+    display: none;
+}
+
+.eq__tira:focus-visible {
+    outline: 2px solid var(--tv-wine);
+    outline-offset: 4px;
+    border-radius: 8px;
+}
+
+/* Tarjeta tipo fotograma de crédito, mismo motivo de perforaciones que Valores */
 .eq__item {
+    position: relative;
+    scroll-snap-align: start;
+    flex: 0 0 auto;
+    width: 240px;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    padding: 30px 20px 22px;
     text-align: center;
+    box-shadow: 0 8px 20px rgba(107, 21, 56, 0.07);
+}
+
+.eq__item::before,
+.eq__item::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background-color: var(--tv-wine);
+    background-image: radial-gradient(circle, var(--tv-cream) 3px, transparent 3.2px);
+    background-size: 18px 10px;
+    background-position: 9px center;
+    background-repeat: repeat-x;
+}
+
+.eq__item::before {
+    top: 0;
+}
+
+.eq__item::after {
+    bottom: 0;
+}
+
+.eq__numero {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 2rem;
+    font-weight: 800;
+    color: rgba(107, 21, 56, 0.09);
+    line-height: 1;
+    pointer-events: none;
 }
 
 .eq__avatar {
-    width: 84px;
-    height: 84px;
+    position: relative;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
     background: var(--tv-wine);
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    margin: 0 auto 12px;
+    margin: 6px auto 14px;
 }
 
 .eq__rol {
+    position: relative;
+    font-size: 1.05rem;
     font-weight: 700;
+    margin-bottom: 4px;
 }
 
 .eq__area {
+    position: relative;
     font-size: 0.85rem;
     color: var(--tv-text-soft);
 }
 
+/* ---------- Flechas ---------- */
+.eq__flecha {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: var(--tv-wine);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+}
+
+.eq__flecha svg {
+    width: 20px;
+    height: 20px;
+}
+
+.eq__flecha:hover:not(:disabled) {
+    background: var(--tv-wine-dark);
+    transform: scale(1.06);
+}
+
+.eq__flecha:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+@media (max-width: 1024px) {
+    .eq {
+        padding: 64px 40px;
+    }
+}
+
 @media (max-width: 768px) {
     .eq {
-        padding: 32px 24px;
+        padding: 48px 32px;
     }
 
-    .eq__grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 28px;
+    .eq__flecha {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .eq {
+        padding: 40px 20px;
+    }
+
+    .eq__title {
+        font-size: 1.6rem;
+    }
+
+    .eq__item {
+        width: 210px;
     }
 }

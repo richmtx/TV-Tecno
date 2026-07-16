@@ -1,10 +1,12 @@
 <section class="cob">
+    <div class="cob__glow" aria-hidden="true"></div>
+    <div class="cob__grid">
     <div class="cob__info">
         <span class="cob__eyebrow">Cobertura</span>
         <h2 class="cob__title">Transmitimos para todo Durango</h2>
         <p class="cob__text">
-            Nuestra señal llega a través de plataformas digitales, redes sociales y el
-            circuito interno del campus, con contenido disponible en vivo y bajo demanda.
+            Nuestra señal llega a plataformas digitales, redes sociales y el circuito
+            interno del campus — en vivo y bajo demanda.
         </p>
         <ul class="cob__lista">
             @for (canal of canales; track canal.texto) {
@@ -44,12 +46,18 @@
 
     <!-- Placeholder del mapa: aquí puedes montar tu componente Leaflet reutilizable -->
     <div class="cob__mapa">
+        <div class="cob__mapa-rings" aria-hidden="true">
+            <span class="cob__mapa-ring"></span>
+            <span class="cob__mapa-ring"></span>
+            <span class="cob__mapa-ring"></span>
+        </div>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
             stroke-linejoin="round" class="cob__mapa-icon">
             <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
             <circle cx="12" cy="10" r="3" />
         </svg>
         <span class="cob__mapa-place">Durango, México</span>
-        <span class="cob__mapa-hint">[ Mapa de cobertura ]</span>
+        <span class="cob__mapa-hint">Señal en expansión constante</span>
+    </div>
     </div>
 </section>
