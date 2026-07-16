@@ -1,12 +1,14 @@
 <section class="mv">
     <div class="mv__head">
-        <span class="mv__eyebrow">Propósito</span>
-        <h2 class="mv__title-main">Para qué existimos</h2>
+        <span class="mv__eyebrow">Quiénes somos</span>
+        <h2 class="mv__title-main">Misión y visión</h2>
+        <span class="mv__rule" aria-hidden="true"></span>
     </div>
+
     <div class="mv__grid">
         @for (bloque of bloques; track bloque.titulo) {
         <article class="mv__card">
-            <div class="mv__icon">
+            <div class="mv__icon" [class]="'mv__icon mv__icon--' + bloque.variante" aria-hidden="true">
                 @switch (bloque.icono) {
                 @case ('target') {
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -25,9 +27,22 @@
                 }
                 }
             </div>
+
+            <span class="mv__card-eyebrow" [class]="'mv__card-eyebrow mv__card-eyebrow--' + bloque.variante">
+                {{ bloque.eyebrow }}
+            </span>
             <h3 class="mv__title">{{ bloque.titulo }}</h3>
             <p class="mv__text">{{ bloque.texto }}</p>
         </article>
         }
     </div>
+
+    <ul class="mv__valores">
+        @for (valor of valores; track valor) {
+        <li class="mv__valor">
+            <span class="mv__valor-label">Valor</span>
+            <span class="mv__valor-name">{{ valor }}</span>
+        </li>
+        }
+    </ul>
 </section>

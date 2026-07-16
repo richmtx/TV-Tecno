@@ -1,0 +1,11 @@
+<section class="mosaico">
+    <div class="mosaico__inner">
+        @for (item of items; track item.src; let i = $index) {
+        <figure class="mosaico__item {{ item.modificador }}">
+            <img [ngSrc]="item.src" [alt]="item.alt" [width]="item.width" [height]="item.height" [priority]="i === 0"
+                class="mosaico__img" />
+            <figcaption class="mosaico__etiqueta">{{ item.etiqueta }}</figcaption>
+        </figure>
+        }
+    </div>
+</section>

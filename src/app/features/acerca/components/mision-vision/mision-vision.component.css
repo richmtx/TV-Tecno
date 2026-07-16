@@ -1,29 +1,41 @@
 .mv {
-    background: var(--tv-cream);
+    background: var(--tv-bg);
     padding: 72px 48px;
 }
 
+/* Encabezado */
 .mv__head {
     max-width: 1100px;
-    margin: 0 auto 32px;
+    margin: 0 auto 36px;
     text-align: center;
 }
 
 .mv__eyebrow {
     display: inline-block;
     font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    font-weight: 600;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--tv-pink);
-    margin-bottom: 6px;
+    color: var(--tv-gold);
+    margin-bottom: 8px;
 }
 
 .mv__title-main {
     font-size: 1.9rem;
-    font-weight: 800;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--tv-wine);
 }
 
+.mv__rule {
+    display: block;
+    width: 56px;
+    height: 2px;
+    background: var(--tv-gold);
+    margin: 12px auto 0;
+}
+
+/* Tarjetas */
 .mv__grid {
     max-width: 1100px;
     margin: 0 auto;
@@ -33,24 +45,20 @@
 }
 
 .mv__card {
-    background: #fff;
+    background: var(--tv-cream);
     border-radius: 16px;
     padding: 32px;
-    box-shadow: 0 8px 24px rgba(107, 21, 56, 0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
 .mv__card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 28px rgba(107, 21, 56, 0.14);
 }
 
 .mv__icon {
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    border: 2px solid var(--tv-wine);
-    color: var(--tv-wine);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,17 +70,86 @@
     height: 22px;
 }
 
-.mv__title {
-    font-size: 1.35rem;
+.mv__icon--wine {
+    background: var(--tv-wine);
+    color: #fff;
+}
+
+.mv__icon--gold {
+    background: var(--tv-gold);
+    color: #412402;
+}
+
+.mv__card-eyebrow {
+    display: block;
+    font-size: 0.7rem;
     font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.mv__card-eyebrow--wine {
+    color: var(--tv-pink);
+}
+
+.mv__card-eyebrow--gold {
+    color: var(--tv-gold-dark);
+}
+
+.mv__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--tv-wine);
     margin-bottom: 10px;
 }
 
 .mv__text {
-    color: var(--tv-text-soft);
+    font-size: 0.95rem;
     font-weight: 400;
+    color: var(--tv-text-soft);
 }
 
+/* Valores */
+.mv__valores {
+    max-width: 1100px;
+    margin: 24px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--tv-border);
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.mv__valor {
+    text-align: center;
+}
+
+.mv__valor:nth-child(2) {
+    border-left: 1px solid var(--tv-border);
+    border-right: 1px solid var(--tv-border);
+}
+
+.mv__valor-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--tv-gold);
+    margin-bottom: 4px;
+}
+
+.mv__valor-name {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--tv-text);
+}
+
+/* Responsivo */
 @media (max-width: 1024px) {
     .mv {
         padding: 64px 40px;
@@ -101,5 +178,28 @@
 
     .mv__title-main {
         font-size: 1.6rem;
+    }
+
+    .mv__valores {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .mv__valor:nth-child(2) {
+        border-left: 0;
+        border-right: 0;
+        border-top: 1px solid var(--tv-border);
+        border-bottom: 1px solid var(--tv-border);
+        padding: 14px 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mv__card {
+        transition: none;
+    }
+
+    .mv__card:hover {
+        transform: none;
     }
 }

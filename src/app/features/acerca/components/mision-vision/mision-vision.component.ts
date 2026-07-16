@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 
 interface Bloque {
+  eyebrow: string;
   titulo: string;
   texto: string;
   icono: 'target' | 'eye';
+  variante: 'wine' | 'gold';
 }
 
 @Component({
@@ -13,18 +15,24 @@ interface Bloque {
   styleUrl: './mision-vision.component.css',
 })
 export class MisionVisionComponent {
-  bloques: Bloque[] = [
+  readonly bloques: Bloque[] = [
     {
-      titulo: 'Nuestra misión',
+      eyebrow: 'Misión',
+      titulo: 'Contar el Tecnológico desde adentro',
       icono: 'target',
+      variante: 'wine',
       texto:
-        'Difundir el conocimiento científico y tecnológico del ITD con contenido audiovisual que informa, forma e inspira a la comunidad.',
+        'Producir y transmitir contenidos que difundan la ciencia, la tecnología y la vida estudiantil del Instituto Tecnológico de Durango, formando a la vez a los estudiantes que los crean.',
     },
     {
-      titulo: 'Nuestra visión',
+      eyebrow: 'Visión',
+      titulo: 'Ser la referencia educativa de Durango',
       icono: 'eye',
+      variante: 'gold',
       texto:
-        'Ser el referente en comunicación educativa del Tecnológico, conectando el talento estudiantil con audiencias cada vez más amplias.',
+        'Consolidarnos como el canal universitario de mayor alcance en el estado, reconocido por la calidad de su producción y por abrir espacio a las voces jóvenes de la región.',
     },
   ];
+
+  readonly valores: string[] = ['Formación', 'Identidad', 'Divulgación'];
 }
