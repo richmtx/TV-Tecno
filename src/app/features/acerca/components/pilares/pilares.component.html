@@ -1,0 +1,26 @@
+<section class="pilares">
+    <div class="pilares__head">
+        <span class="pilares__eyebrow">Respaldo institucional</span>
+        <h2 class="pilares__title-main">Tres pilares, una señal</h2>
+        <span class="pilares__rule" aria-hidden="true"></span>
+    </div>
+
+    <ul class="pilares__grid">
+        @for (pilar of pilares; track pilar.nombre) {
+        <li class="pilares__item">
+            <div class="pilares__riel">
+                <img [ngSrc]="pilar.logo" [alt]="pilar.alt" [width]="pilar.width" [height]="pilar.height"
+                    class="pilares__logo" />
+            </div>
+
+            <h3 class="pilares__nombre">{{ pilar.nombre }}</h3>
+            <span class="pilares__rol">{{ pilar.rol }}</span>
+            <p class="pilares__text">{{ pilar.texto }}</p>
+        </li>
+        }
+    </ul>
+
+    <p class="pilares__cierre">
+        Un proyecto conjunto al servicio de la comunidad tecnológica de Durango.
+    </p>
+</section>

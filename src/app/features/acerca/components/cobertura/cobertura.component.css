@@ -1,195 +1,243 @@
-.cob {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(135deg, var(--tv-wine) 0%, #5c1230 55%, var(--tv-wine-dark) 100%);
+.cobertura {
+    background: var(--tv-bg);
     padding: 72px 48px;
 }
 
-.cob__glow {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 8% 15%, rgba(255, 255, 255, 0.08), transparent 40%);
-    pointer-events: none;
-}
-
-.cob__grid {
-    position: relative;
-    z-index: 1;
+.cobertura__inner {
     max-width: 1100px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 36px;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
     align-items: center;
 }
 
-.cob__eyebrow {
+/* --- Par desfasado --- */
+.cobertura__media {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 14px;
+}
+
+.cobertura__figura {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    border-radius: 12px;
+    background: var(--tv-cream);
+}
+
+.cobertura__figura--principal {
+    grid-column: 1;
+    height: 340px;
+    margin-top: 34px;
+}
+
+.cobertura__figura--secundaria {
+    grid-column: 2;
+    height: 240px;
+    align-self: end;
+    margin-bottom: 38px;
+}
+
+.cobertura__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.cobertura__figura:hover .cobertura__img {
+    transform: scale(1.04);
+}
+
+.cobertura__etiqueta {
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+    padding: 5px 12px;
+    border-radius: 100px;
     font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.cob__title {
+    font-weight: 600;
+    letter-spacing: 0.02em;
     color: #fff;
+    background: rgba(107, 21, 56, 0.88);
+    backdrop-filter: blur(4px);
+}
+
+/* --- Información --- */
+.cobertura__eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--tv-gold);
+    margin-bottom: 8px;
+}
+
+.cobertura__title {
     font-size: 1.9rem;
-    font-weight: 800;
-    margin: 8px 0 14px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--tv-wine);
+    margin-bottom: 12px;
 }
 
-.cob__text {
-    color: rgba(255, 255, 255, 0.85);
+.cobertura__text {
+    font-size: 0.95rem;
     font-weight: 400;
-    margin-bottom: 20px;
+    color: var(--tv-text-soft);
+    margin-bottom: 22px;
 }
 
-.cob__lista {
+.cobertura__canales {
     list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+    margin: 0;
+    padding: 0;
 }
 
-.cob__item {
+.cobertura__canal {
     display: flex;
     align-items: center;
     gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--tv-border);
 }
 
-.cob__icon {
+.cobertura__canal:last-child {
+    border-bottom: 0;
+}
+
+.cobertura__canal-icon {
     width: 34px;
     height: 34px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.12);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     flex-shrink: 0;
-}
-
-.cob__icon svg {
-    width: 18px;
-    height: 18px;
-}
-
-.cob__label {
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.92);
-}
-
-/* ---------- Tarjeta del mapa: cristal flotante + ondas de señal ---------- */
-.cob__mapa {
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    backdrop-filter: blur(8px);
-    border-radius: 16px;
-    height: 240px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    gap: 8px;
-    overflow: hidden;
-}
-
-.cob__mapa-rings {
-    position: absolute;
-    inset: 0;
+    border-radius: 8px;
+    background: var(--tv-cream);
+    color: var(--tv-wine);
     display: flex;
     align-items: center;
     justify-content: center;
-    pointer-events: none;
 }
 
-.cob__mapa-ring {
-    position: absolute;
-    width: 56px;
-    height: 56px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 50%;
-    animation: mapa-ring 3s ease-out infinite;
+.cobertura__canal-icon svg {
+    width: 17px;
+    height: 17px;
 }
 
-.cob__mapa-ring:nth-child(2) {
-    animation-delay: 1s;
+.cobertura__canal-texto {
+    font-size: 0.95rem;
+    color: var(--tv-text);
 }
 
-.cob__mapa-ring:nth-child(3) {
-    animation-delay: 2s;
+/* --- Datos duros --- */
+.cobertura__datos {
+    display: flex;
+    gap: 28px;
+    margin: 24px 0 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--tv-border);
 }
 
-@keyframes mapa-ring {
-    0% {
-        width: 56px;
-        height: 56px;
-        opacity: 0.55;
-    }
-
-    100% {
-        width: 220px;
-        height: 220px;
-        opacity: 0;
-    }
+.cobertura__dato-valor {
+    font-family: var(--font-titulo);
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--tv-wine);
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .cob__mapa-ring {
-        animation: none;
-        opacity: 0.3;
-    }
-
-    .cob__mapa-ring:nth-child(2),
-    .cob__mapa-ring:nth-child(3) {
-        display: none;
-    }
-}
-
-.cob__mapa-icon {
-    position: relative;
-    width: 40px;
-    height: 40px;
-}
-
-.cob__mapa-place {
-    position: relative;
+.cobertura__dato-label {
+    margin: 3px 0 0;
+    font-size: 0.7rem;
     font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--tv-gold);
 }
 
-.cob__mapa-hint {
-    position: relative;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.7);
-}
-
+/* --- Responsivo --- */
 @media (max-width: 1024px) {
-    .cob {
+    .cobertura {
         padding: 64px 40px;
+    }
+
+    .cobertura__inner {
+        gap: 36px;
+    }
+
+    .cobertura__figura--principal {
+        height: 280px;
+        margin-top: 26px;
+    }
+
+    .cobertura__figura--secundaria {
+        height: 200px;
+        margin-bottom: 30px;
+    }
+
+    .cobertura__title {
+        font-size: 1.7rem;
     }
 }
 
 @media (max-width: 768px) {
-    .cob {
+    .cobertura {
         padding: 48px 32px;
     }
 
-    .cob__grid {
+    .cobertura__inner {
         grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .cobertura__figura--principal {
+        height: 260px;
+        margin-top: 24px;
+    }
+
+    .cobertura__figura--secundaria {
+        height: 190px;
+        margin-bottom: 28px;
     }
 }
 
 @media (max-width: 480px) {
-    .cob {
+    .cobertura {
         padding: 40px 20px;
     }
 
-    .cob__title {
-        font-size: 1.6rem;
+    .cobertura__media {
+        grid-template-columns: 1fr;
+        gap: 12px;
     }
 
-    .cob__mapa {
+    .cobertura__figura--principal,
+    .cobertura__figura--secundaria {
+        grid-column: 1;
         height: 200px;
+        align-self: stretch;
+        margin: 0;
+    }
+
+    .cobertura__title {
+        font-size: 1.5rem;
+    }
+
+    .cobertura__datos {
+        gap: 20px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cobertura__img {
+        transition: none;
+    }
+
+    .cobertura__figura:hover .cobertura__img {
+        transform: none;
     }
 }
