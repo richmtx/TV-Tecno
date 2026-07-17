@@ -4,7 +4,7 @@ interface Bloque {
   eyebrow: string;
   titulo: string;
   texto: string;
-  icono: 'target' | 'eye';
+  icono: 'broadcast' | 'telescope';
   variante: 'wine' | 'gold';
 }
 
@@ -19,7 +19,7 @@ export class MisionVisionComponent {
     {
       eyebrow: 'Misión',
       titulo: 'Contar el Tecnológico desde adentro',
-      icono: 'target',
+      icono: 'broadcast',
       variante: 'wine',
       texto:
         'Producir y transmitir contenidos que difundan la ciencia, la tecnología y la vida estudiantil del Instituto Tecnológico de Durango, formando a la vez a los estudiantes que los crean.',
@@ -27,7 +27,7 @@ export class MisionVisionComponent {
     {
       eyebrow: 'Visión',
       titulo: 'Ser la referencia educativa de Durango',
-      icono: 'eye',
+      icono: 'telescope',
       variante: 'gold',
       texto:
         'Consolidarnos como el canal universitario de mayor alcance en el estado, reconocido por la calidad de su producción y por abrir espacio a las voces jóvenes de la región.',

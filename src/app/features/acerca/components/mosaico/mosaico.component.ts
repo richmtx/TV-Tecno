@@ -20,33 +20,33 @@ interface MosaicoItem {
 export class MosaicoComponent {
   readonly items: MosaicoItem[] = [
     {
-      src: 'assets/img/mosaico/estudio.jpg',
+      src: 'assets/acerca/Totem.png',
       alt: 'Cabina de transmisión de TV Tecno en el campus ITD',
-      etiqueta: 'Estudio',
-      width: 800,
-      height: 1000,
+      etiqueta: 'Nuestra Casa',
+      width: 941,
+      height: 1672,
       modificador: 'mosaico__item--alta'
     },
     {
-      src: 'assets/img/mosaico/en-vivo.jpg',
+      src: 'assets/acerca/Estudio2.png',
       alt: 'Transmisión en vivo desde el set de TV Tecno',
-      etiqueta: 'En vivo',
-      width: 1280,
-      height: 720,
+      etiqueta: 'Noticiero',
+      width: 1535,
+      height: 1024,
       modificador: 'mosaico__item--ancha'
     },
     {
-      src: 'assets/img/mosaico/produccion.jpg',
+      src: 'assets/acerca/Estudio3.png',
       alt: 'Equipo de producción grabando en el campus',
-      etiqueta: 'Producción',
+      etiqueta: 'Entrevistas',
       width: 900,
       height: 900,
       modificador: 'mosaico__item--cuadrada'
     },
     {
-      src: 'assets/img/mosaico/campus.jpg',
+      src: 'assets/acerca/EstudioMusica.png',
       alt: 'Vida estudiantil en el Instituto Tecnológico de Durango',
-      etiqueta: 'Campus',
+      etiqueta: 'Foro Musical',
       width: 900,
       height: 1200,
       modificador: 'mosaico__item--desfasada'

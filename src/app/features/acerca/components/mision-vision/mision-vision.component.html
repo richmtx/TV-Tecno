@@ -10,19 +10,22 @@
         <article class="mv__card">
             <div class="mv__icon" [class]="'mv__icon mv__icon--' + bloque.variante" aria-hidden="true">
                 @switch (bloque.icono) {
-                @case ('target') {
+                @case ('broadcast') {
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="9" />
-                    <circle cx="12" cy="12" r="5" />
-                    <circle cx="12" cy="12" r="1" />
+                    <path d="M18.364 19.364a9 9 0 1 0 -12.728 0" />
+                    <path d="M15.536 16.536a5 5 0 1 0 -7.072 0" />
+                    <circle cx="12" cy="13" r="1" />
                 </svg>
                 }
-                @case ('eye') {
+                @case ('telescope') {
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
-                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
-                    <circle cx="12" cy="12" r="3" />
+                    <path d="M6 21l6 -5l6 5" />
+                    <path d="M12 13v8" />
+                    <path
+                        d="M3.294 13.678l.166 .281c.52 .88 1.624 1.265 2.605 .91l14.242 -5.165a1.023 1.023 0 0 0 .565 -1.456l-2.62 -4.705a1.087 1.087 0 0 0 -1.447 -.42l-12.784 6.694a1.989 1.989 0 0 0 -.727 2.961z" />
+                    <path d="M14 5l3 5.5" />
                 </svg>
                 }
                 }

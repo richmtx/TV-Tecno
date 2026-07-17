@@ -29,6 +29,11 @@
   /* Bandas cálidas (secciones claras alternadas, "Acerca") */
   --tv-cream: #faf1ec;
   --tv-cream-border: #f0dcd8;
+
+  /* Acento dorado */
+  --tv-gold: #c8a96e;
+  --tv-gold-dark: #854f0b;
+  --tv-gold-ink: #412402;
 }
 
 /* ===========================================

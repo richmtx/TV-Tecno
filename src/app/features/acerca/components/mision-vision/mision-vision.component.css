@@ -77,7 +77,7 @@
 
 .mv__icon--gold {
     background: var(--tv-gold);
-    color: #412402;
+    color: var(--tv-gold-ink);
 }
 
 .mv__card-eyebrow {
