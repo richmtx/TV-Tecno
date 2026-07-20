@@ -1,6 +1,11 @@
 .dias-selector {
     display: flex;
-    gap: 0.6rem;
+    align-items: stretch;
+    background: #fff;
+    border: 1px solid rgba(50, 8, 24, 0.05);
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(50, 8, 24, 0.15);
+    padding: 0.25rem;
     margin-bottom: 2rem;
 }
 
@@ -11,40 +16,62 @@
     flex-direction: column;
     align-items: center;
     gap: 0.15rem;
-    padding: 0.75rem 0.5rem;
-    border: 1.5px solid var(--tv-border);
-    border-radius: 14px;
-    background: #fff;
+    padding: 0.9rem 0.5rem;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
     cursor: pointer;
     font-family: var(--font-cuerpo);
-    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
     position: relative;
+    transition: background 0.2s ease;
 }
 
-.dias-selector__item:hover {
-    border-color: var(--tv-pink);
-    box-shadow: 0 4px 12px rgba(107, 21, 56, 0.15);
+/* Separador vertical corto entre días */
+.dias-selector__item+.dias-selector__item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 55%;
+    background: var(--tv-border);
+}
+
+.dias-selector__item:not(.dias-selector__item--activo):hover {
+    background: rgba(107, 21, 56, 0.05);
+}
+
+.dias-selector__icono {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 16px;
+    height: 16px;
+    color: #fff;
+    opacity: 0.9;
 }
 
 .dias-selector__nombre {
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--tv-text);
 }
 
 .dias-selector__fecha {
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     color: var(--tv-text-soft);
 }
 
 .dias-selector__contador {
-    margin-top: 0.3rem;
+    margin-top: 0.45rem;
     font-size: 0.7rem;
     font-weight: 700;
     color: var(--tv-wine);
     background: rgba(107, 21, 56, 0.08);
-    padding: 0.1rem 0.5rem;
+    padding: 0.2rem 0.7rem;
     border-radius: 20px;
+    white-space: nowrap;
 }
 
 .dias-selector__item--hoy .dias-selector__nombre::after {
@@ -58,9 +85,16 @@
     vertical-align: middle;
 }
 
+/* Día activo: bloque vino que sobresale de la barra */
 .dias-selector__item--activo {
     background: var(--tv-wine);
-    border-color: var(--tv-wine);
+    border-radius: 12px;
+}
+
+/* Quita los separadores que tocan el bloque activo */
+.dias-selector__item--activo::before,
+.dias-selector__item--activo+.dias-selector__item::before {
+    display: none;
 }
 
 .dias-selector__item--activo .dias-selector__nombre,
@@ -71,4 +105,14 @@
 .dias-selector__item--activo .dias-selector__contador {
     background: rgba(255, 255, 255, 0.2);
     color: #fff;
+}
+
+@media (max-width: 640px) {
+    .dias-selector__nombre {
+        font-size: 0.8rem;
+    }
+
+    .dias-selector__contador-label {
+        display: none;
+    }
 }

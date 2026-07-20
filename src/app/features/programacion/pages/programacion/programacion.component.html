@@ -1,17 +1,51 @@
 <section class="programacion">
 
-    <header class="programacion__header">
-        <h1 class="programacion__titulo">Programación</h1>
-        <p class="programacion__subtitulo">
-            Consulta el contenido de TV Tecno día por día
-        </p>
-    </header>
+    <div class="hero">
+        <div class="hero__inner">
 
-    <app-selector-dias [dias]="diasSemana" [diaSeleccionado]="diaSeleccionado" [diaHoy]="diaHoy"
-        (diaSeleccionadoChange)="onDiaSeleccionado($event)"></app-selector-dias>
+            <div class="hero__contenido">
+                <h1 class="hero__titulo">
+                    Programación<br>
+                    de <span class="hero__titulo-destacado">TV Tecno</span>
+                </h1>
 
-    <app-en-vivo-ahora [programa]="programaEnVivo"></app-en-vivo-ahora>
+                <p class="hero__subtitulo">
+                    Tu ventana al conocimiento, la cultura y la tecnología.
+                </p>
 
-    <app-lista-programacion [programas]="programasDelDia" [nombreDia]="nombreDiaSeleccionado"></app-lista-programacion>
+                <div class="hero__badge">
+                    <span class="hero__badge-icono" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" width="26" height="26">
+                            <rect x="2" y="7" width="20" height="15" rx="2"></rect>
+                            <polyline points="17 2 12 7 7 2"></polyline>
+                        </svg>
+                    </span>
+                    <span class="hero__badge-texto">
+                        <span class="hero__badge-titulo">Contenido educativo y cultural</span>
+                        <span class="hero__badge-sub">Hecho por y para nuestra comunidad</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="hero__ilustracion">
+                <img ngSrc="/public/assets/programacion/tv-programacion.png" width="760" height="600" priority
+                    alt="Televisor retro de TV Tecno" class="hero__ilustracion-img" />
+            </div>
+
+        </div>
+    </div>
+
+    <div class="programacion__cuerpo">
+
+        <app-selector-dias [dias]="diasSemana" [diaSeleccionado]="diaSeleccionado" [diaHoy]="diaHoy"
+            (diaSeleccionadoChange)="onDiaSeleccionado($event)"></app-selector-dias>
+
+        <app-en-vivo-ahora [programa]="programaEnVivo"></app-en-vivo-ahora>
+
+        <app-lista-programacion [programas]="programasDelDia"
+            [nombreDia]="nombreDiaSeleccionado"></app-lista-programacion>
+
+    </div>
 
 </section>
