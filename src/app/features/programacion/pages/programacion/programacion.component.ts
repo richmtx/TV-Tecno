@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Programa, DiaSemana } from '../../models/programa.model';
 import { SelectorDiasComponent } from '../../components/selector-dias/selector-dias.component';
 import { EnVivoAhoraComponent } from '../../components/en-vivo-ahora/en-vivo-ahora.component';
@@ -64,7 +64,7 @@ const PROGRAMAS_POR_DIA: Record<number, Programa[]> = {
 @Component({
   selector: 'app-programacion',
   standalone: true,
-  imports: [CommonModule, SelectorDiasComponent, EnVivoAhoraComponent, ListaProgramacionComponent],
+  imports: [CommonModule, NgOptimizedImage, SelectorDiasComponent, EnVivoAhoraComponent, ListaProgramacionComponent],
   templateUrl: './programacion.component.html',
   styleUrl: './programacion.component.css'
 })

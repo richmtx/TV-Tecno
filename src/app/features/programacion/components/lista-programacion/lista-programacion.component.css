@@ -1,22 +1,56 @@
 :host {
-    /* Cambia entre las dos opciones aquí ↓ */
     --tv-strip: #c8a96e;
-    /*  Dorado (Opción B) */
-    /* --tv-strip: var(--tv-wine);   Guinda (Opción A) */
 }
 
 .lista-programacion__encabezado {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
     margin-bottom: 1.25rem;
+}
+
+.lista-programacion__titulo-grupo {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    min-width: 0;
+}
+
+.lista-programacion__icono {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    color: var(--tv-wine);
+    background: rgba(107, 21, 56, 0.08);
+}
+
+.lista-programacion__icono svg {
+    width: 22px;
+    height: 22px;
+}
+
+.lista-programacion__texto {
+    min-width: 0;
 }
 
 .lista-programacion__encabezado h3 {
     color: var(--tv-text);
+    line-height: 1.2;
+}
+
+.lista-programacion__subtitulo {
+    margin-top: 0.15rem;
+    font-size: 0.85rem;
+    color: var(--tv-text-soft);
 }
 
 .lista-programacion__total {
+    flex: 0 0 auto;
     font-size: 0.8rem;
     font-weight: 700;
     color: var(--tv-wine);
@@ -162,5 +196,9 @@
         border-bottom: 1px solid var(--tv-border);
         padding-right: 0;
         padding-bottom: 0.6rem;
+    }
+
+    .lista-programacion__encabezado {
+        flex-wrap: wrap;
     }
 }
