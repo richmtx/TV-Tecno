@@ -1,0 +1,218 @@
+<section class="catalogo">
+    <!-- Barra lateral: categorías + filtro de fecha -->
+    <aside class="catalogo__sidebar">
+        <div class="catalogo__panel">
+            <h2 class="catalogo__panel-titulo">Explorar por categorías</h2>
+
+            <ul class="catalogo__categorias">
+                @for (categoria of categorias; track categoria.id) {
+                <li>
+                    <button type="button" class="categoria"
+                        [class.categoria--activa]="categoriaActiva() === categoria.id"
+                        (click)="seleccionarCategoria(categoria.id)">
+                        <span class="categoria__icono" aria-hidden="true">
+                            @switch (categoria.id) {
+                            @case ('todos') {
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                            }
+                            @case ('noticias') {
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h13a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z">
+                                </path>
+                                <path d="M19 8h2a1 1 0 0 1 1 1v9a2 2 0 0 1-2 2"></path>
+                                <line x1="7" y1="8" x2="15" y2="8"></line>
+                                <line x1="7" y1="12" x2="15" y2="12"></line>
+                                <line x1="7" y1="16" x2="12" y2="16"></line>
+                            </svg>
+                            }
+                            @case ('cultura') {
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 3 4 6v5c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-3Z"></path>
+                                <path d="M9 11a3 3 0 0 0 6 0"></path>
+                            </svg>
+                            }
+                            @case ('ciencia') {
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="2"></circle>
+                                <path d="M12 2c3 4 3 16 0 20"></path>
+                                <path d="M12 2c-3 4-3 16 0 20"></path>
+                                <path d="M2.5 8.5c4.5-1 14.5-1 19 0"></path>
+                                <path d="M2.5 15.5c4.5 1 14.5 1 19 0"></path>
+                            </svg>
+                            }
+                            @case ('educacion') {
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 9 12 5 2 9l10 4 10-4Z"></path>
+                                <path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"></path>
+                            </svg>
+                            }
+                            @case ('deportes') {
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <path d="m12 7 3 2.2-1.2 3.6h-3.6L9 9.2 12 7Z"></path>
+                                <line x1="12" y1="3" x2="12" y2="7"></line>
+                                <line x1="4.5" y1="9.5" x2="9" y2="9.2"></line>
+                                <line x1="19.5" y1="9.5" x2="15" y2="9.2"></line>
+                            </svg>
+                            }
+                            @case ('entrevistas') {
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="9" cy="8" r="3"></circle>
+                                <path d="M3 20a6 6 0 0 1 12 0"></path>
+                                <circle cx="17" cy="9" r="2.2"></circle>
+                                <path d="M15 20a5 5 0 0 1 6.5-4.8"></path>
+                            </svg>
+                            }
+                            @case ('eventos') {
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="17" rx="2"></rect>
+                                <line x1="3" y1="9" x2="21" y2="9"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                            </svg>
+                            }
+                            }
+                        </span>
+
+                        <span class="categoria__nombre">{{ categoria.nombre }}</span>
+                        <span class="categoria__cantidad">{{ categoria.cantidad }}</span>
+                    </button>
+                </li>
+                }
+            </ul>
+        </div>
+
+        <div class="catalogo__panel catalogo__panel--filtro">
+            <h2 class="catalogo__panel-titulo">Filtrar por fecha</h2>
+
+            <!-- Dropdown personalizado: Filtrar por fecha -->
+            <div class="dropdown dropdown--completo">
+                <button type="button" class="dropdown__boton" (click)="alternarFecha()"
+                    [attr.aria-expanded]="fechaAbierto()" aria-haspopup="listbox">
+                    <span class="dropdown__valor">{{ fechaEtiqueta() }}</span>
+                    <svg class="dropdown__flecha" [class.dropdown__flecha--abierta]="fechaAbierto()" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+
+                @if (fechaAbierto()) {
+                <ul class="dropdown__lista" role="listbox">
+                    @for (opcion of opcionesFecha; track opcion.valor) {
+                    <li role="option" [attr.aria-selected]="fechaActiva() === opcion.valor">
+                        <button type="button" class="dropdown__opcion"
+                            [class.dropdown__opcion--activa]="fechaActiva() === opcion.valor"
+                            (click)="seleccionarFecha(opcion.valor)">
+                            {{ opcion.etiqueta }}
+                        </button>
+                    </li>
+                    }
+                </ul>
+                }
+            </div>
+        </div>
+    </aside>
+
+    <!-- Contenido principal: encabezado + cuadrícula -->
+    <div class="catalogo__contenido">
+        <header class="catalogo__barra">
+            <p class="catalogo__conteo">
+                Mostrando <strong>{{ totalMostrado() }}</strong> videos
+            </p>
+
+            <div class="catalogo__controles">
+                <!-- Dropdown personalizado: Ordenar -->
+                <div class="dropdown">
+                    <button type="button" class="dropdown__boton" (click)="alternarOrden()"
+                        [attr.aria-expanded]="ordenAbierto()" aria-haspopup="listbox">
+                        <span class="dropdown__valor">{{ ordenEtiqueta() }}</span>
+                        <svg class="dropdown__flecha" [class.dropdown__flecha--abierta]="ordenAbierto()"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+
+                    @if (ordenAbierto()) {
+                    <ul class="dropdown__lista dropdown__lista--derecha" role="listbox">
+                        @for (opcion of opcionesOrden; track opcion.valor) {
+                        <li role="option" [attr.aria-selected]="ordenActivo() === opcion.valor">
+                            <button type="button" class="dropdown__opcion"
+                                [class.dropdown__opcion--activa]="ordenActivo() === opcion.valor"
+                                (click)="seleccionarOrden(opcion.valor)">
+                                {{ opcion.etiqueta }}
+                            </button>
+                        </li>
+                        }
+                    </ul>
+                    }
+                </div>
+
+                <div class="catalogo__vista" role="group" aria-label="Cambiar vista">
+                    <button type="button" class="catalogo__vista-boton"
+                        [class.catalogo__vista-boton--activo]="vista() === 'cuadricula'"
+                        (click)="cambiarVista('cuadricula')" aria-label="Vista de cuadrícula">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                    </button>
+                    <button type="button" class="catalogo__vista-boton"
+                        [class.catalogo__vista-boton--activo]="vista() === 'lista'" (click)="cambiarVista('lista')"
+                        aria-label="Vista de lista">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="8" y1="6" x2="21" y2="6"></line>
+                            <line x1="8" y1="12" x2="21" y2="12"></line>
+                            <line x1="8" y1="18" x2="21" y2="18"></line>
+                            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="catalogo__grid" [class.catalogo__grid--lista]="vista() === 'lista'">
+            @for (video of videos; track video.titulo; let i = $index) {
+            <article class="video">
+                <div class="video__miniatura" [style.background]="colorMiniatura(i)">
+                    <span class="video__duracion">{{ video.duracion }}</span>
+                </div>
+
+                <div class="video__meta">
+                    <span class="video__etiqueta">{{ video.categoria }}</span>
+                    <button type="button" class="video__opciones" aria-label="Más opciones">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <circle cx="12" cy="5" r="1.6"></circle>
+                            <circle cx="12" cy="12" r="1.6"></circle>
+                            <circle cx="12" cy="19" r="1.6"></circle>
+                        </svg>
+                    </button>
+                </div>
+
+                <h3 class="video__titulo">{{ video.titulo }}</h3>
+                <p class="video__descripcion">{{ video.descripcion }}</p>
+            </article>
+            }
+        </div>
+    </div>
+</section>

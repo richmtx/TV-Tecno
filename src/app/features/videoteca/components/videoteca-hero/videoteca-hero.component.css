@@ -5,7 +5,7 @@
 }
 
 .videoteca-hero__card {
-    background: rgba(107, 21, 56, 0.05);   /* más suave — equivale aprox. a #f7eff1 */
+    background: rgba(107, 21, 56, 0.09);
     border: 1px solid rgba(107, 21, 56, 0.14);
     border-radius: 16px;
     padding: 3rem 3.25rem;
