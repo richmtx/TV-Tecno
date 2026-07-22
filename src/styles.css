@@ -57,6 +57,7 @@ body {
   color: var(--tv-text);
   background: var(--tv-bg);
   padding-top: 72px;
+  overflow-x: hidden;   /* ← recorta el sobrante de los 100vw del carrusel */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
