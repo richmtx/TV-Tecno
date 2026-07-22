@@ -30,10 +30,17 @@ export const routes: Routes = [
       ),
   },
   {
-  path: 'en-vivo',
-  loadComponent: () =>
-    import('./features/en-vivo/pages/en-vivo/en-vivo.component').then(
-      (m) => m.EnVivoComponent
-    ),
-},
+    path: 'en-vivo',
+    loadComponent: () =>
+      import('./features/en-vivo/pages/en-vivo/en-vivo.component').then(
+        (m) => m.EnVivoComponent
+      ),
+  },
+  {
+    path: 'galeria',
+    loadComponent: () =>
+      import('./features/galeria/pages/galeria/galeria.component').then(
+        (m) => m.GaleriaComponent
+      ),
+  },
 ];

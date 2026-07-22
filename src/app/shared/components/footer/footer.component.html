@@ -64,7 +64,13 @@
             <h3 class="footer__titulo">Institucional</h3>
             <ul class="footer__lista">
                 @for (enlace of institucional; track enlace.texto) {
-                <li><a [href]="enlace.ruta">{{ enlace.texto }}</a></li>
+                <li>
+                    @if (enlace.externo) {
+                    <a [href]="enlace.ruta" target="_blank" rel="noopener noreferrer">{{ enlace.texto }}</a>
+                    } @else {
+                    <a [href]="enlace.ruta">{{ enlace.texto }}</a>
+                    }
+                </li>
                 }
             </ul>
         </nav>

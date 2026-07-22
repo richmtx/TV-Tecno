@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 interface EnlaceNav {
   texto: string;
   ruta: string;
+  externo?: boolean;
 }
 
 interface RedSocial {
@@ -26,6 +27,7 @@ export class FooterComponent {
     { texto: 'Inicio', ruta: '/' },
     { texto: 'Programación', ruta: '/programacion' },
     { texto: 'Videoteca', ruta: '/videoteca' },
+    { texto: 'Galería', ruta: '/galeria' },
     { texto: 'Acerca de', ruta: '/acerca' },
     { texto: 'En vivo', ruta: '/en-vivo' },
   ];
@@ -35,7 +37,7 @@ export class FooterComponent {
     { texto: 'Transparencia', ruta: '#' },
     { texto: 'Marco normativo', ruta: '#' },
     { texto: 'Aviso de privacidad', ruta: '#' },
-    { texto: 'Sitio del ITD', ruta: '#' },
+    { texto: 'Sitio del ITD', ruta: 'https://www.itdurango.edu.mx/', externo: true },
   ];
 
   // Datos de contacto (PLACEHOLDER: reemplazar por los reales)
