@@ -56,18 +56,26 @@
     display: grid;
     grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
     gap: 16px;
+    align-items: stretch;
 }
 
 /* ===== Reproductor ===== */
 .reproductor {
     position: relative;
-    aspect-ratio: 16 / 9;
-    background: #0d0d0d;
+    flex: 1;
+    min-height: 445px;
+    background: radial-gradient(circle at 72% 38%, #ffffff 0%, #f6eef2 100%);
     border-radius: 12px;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.reproductor-col {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .reproductor__frame {
@@ -99,26 +107,39 @@
     border-radius: 50%;
 }
 
-.reproductor__play {
-    width: 62px;
-    height: 62px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.12);
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    color: #fff;
+/* ===== Marca en el placeholder ===== */
+.reproductor__marca {
     display: flex;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.2s ease;
+    gap: 22px;
 }
 
-.reproductor__play:hover {
-    background: rgba(255, 255, 255, 0.22);
+.reproductor__marca-linea {
+    width: 4px;
+    align-self: stretch;
+    background: var(--tv-wine);
+    border-radius: 4px;
 }
 
-.reproductor__play svg {
-    margin-left: -3px;
+.reproductor__marca-texto {
+    display: flex;
+    flex-direction: column;
+}
+
+.reproductor__logo {
+    font-size: 3.4rem;
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: 1px;
+    color: var(--tv-wine);
+}
+
+.reproductor__lema {
+    margin-top: 12px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--tv-wine);
 }
 
 .reproductor__controls {
@@ -126,19 +147,19 @@
     left: 0;
     right: 0;
     bottom: 0;
-    height: 42px;
+    height: 64px;
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 0 14px;
-    color: #fff;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+    padding: 12px 14px 0;
+    color: var(--tv-wine);
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.45));
 }
 
 .reproductor__bar {
     flex: 1;
     height: 4px;
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(107, 21, 56, 0.15);
     border-radius: 4px;
     position: relative;
 }
@@ -151,11 +172,22 @@
 }
 
 .reproductor__endirecto {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     font-size: 0.6875rem;
     font-weight: 600;
     white-space: nowrap;
 }
 
+.reproductor__endirecto-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--tv-live);
+    border-radius: 50%;
+}
+
+/* ===== Aviso ===== */
 .reproductor__aviso {
     font-size: 0.75rem;
     color: var(--tv-text-soft);
@@ -205,6 +237,8 @@
     font-size: 0.875rem;
     color: var(--tv-text-soft);
     margin: 0 0 12px;
+    line-height: 1.5;
+    max-width: 230px;
 }
 
 .ficha__categoria {
@@ -223,15 +257,58 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    border-top: 0.5px solid var(--tv-border);
     margin-top: 14px;
-    padding-top: 12px;
     font-size: 0.8125rem;
     color: var(--tv-text-soft);
 }
 
 .ficha__horario svg {
     color: var(--tv-wine);
+}
+
+/* ===== Badge EN VIVO en el horario ===== */
+.ficha__vivo {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--tv-live);
+    color: #fff;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 3px 8px;
+    border-radius: 12px;
+}
+
+.ficha__vivo-dot {
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+/* ===== Descripción de la ficha ===== */
+.ficha__detalle {
+    border-top: 1px solid #e0d1d9;
+    margin-top: 14px;
+    padding-top: 12px;
+    max-width: 260px;
+}
+
+.ficha__detalle-titulo {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--tv-text);
+    margin-bottom: 6px;
+}
+
+.ficha__detalle-texto {
+    font-size: 0.8125rem;
+    color: var(--tv-text-soft);
+    line-height: 1.5;
+    margin: 0;
+    max-width: 280px;
 }
 
 /* A continuación */
@@ -273,5 +350,14 @@
 @media (max-width: 860px) {
     .transmision__grid {
         grid-template-columns: 1fr;
+    }
+
+    .reproductor {
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+    }
+
+    .reproductor-col {
+        height: auto;
     }
 }
