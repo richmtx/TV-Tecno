@@ -41,3 +41,95 @@
     font-size: 0.75rem;
     margin: 2px 0 0;
 }
+
+/* El wrapper ahora lleva la separación inferior */
+.parrilla {
+    margin: 0 auto;
+}
+
+.parrilla-wrapper {
+    max-width: 1300px;
+    margin: 0 auto 48px;
+}
+
+/* ===== No te pierdas nada ===== */
+.recordatorio {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 16px 0 0;
+    padding: 18px 22px;
+    background: #f5f1f3;
+    border: 0.5px solid #e6dce1;
+    border-radius: 12px;
+}
+
+.recordatorio__icono {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--tv-wine);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.recordatorio__texto {
+    flex: 1;
+    min-width: 0;
+}
+
+.recordatorio__titulo {
+    font-size: 0.9375rem;
+    font-weight: 800;
+    color: var(--tv-wine);
+    margin: 0 0 2px;
+}
+
+.recordatorio__sub {
+    font-size: 0.8125rem;
+    color: var(--tv-text-soft);
+    margin: 0;
+}
+
+.recordatorio__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    background: var(--tv-wine);
+    color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    border: 0;
+    padding: 11px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.recordatorio__btn:hover {
+    background: var(--tv-wine-dark);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 720px) {
+    .recordatorio {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .recordatorio__btn {
+        align-self: stretch;
+        justify-content: center;
+    }
+}
+
+/* ===== Movimiento reducido ===== */
+@media (prefers-reduced-motion: reduce) {
+    .recordatorio__btn {
+        transition: none;
+    }
+}
