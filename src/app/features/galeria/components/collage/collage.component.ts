@@ -1,5 +1,4 @@
 import { Component, computed, signal } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 export type TabId = 'timeline' | 'albums' | 'instalaciones' | 'estudiantes';
@@ -10,8 +9,9 @@ export interface GaleriaTab {
 }
 
 export interface EraPhoto {
-  src: string;
-  alt: string;
+  id: string;
+  label: string;     // descripción para accesibilidad
+  gradient: string;  // color sólido temporal
 }
 
 export interface Era {
@@ -23,10 +23,18 @@ export interface Era {
   photos: EraPhoto[];
 }
 
+const G = {
+  oliva: 'linear-gradient(135deg, #4a3d13, #836d23)',
+  rojo: 'linear-gradient(135deg, #661a20, #b42e38)',
+  morado: 'linear-gradient(135deg, #341830, #5c2c56)',
+  verde: 'linear-gradient(135deg, #022e22, #04513c)',
+  azul: 'linear-gradient(135deg, #191f5a, #2c379d)'
+};
+
 @Component({
   selector: 'app-collage',
   standalone: true,
-  imports: [NgOptimizedImage, FormsModule],
+  imports: [FormsModule],
   templateUrl: './collage.component.html',
   styleUrl: './collage.component.css'
 })
@@ -54,10 +62,10 @@ export class CollageComponent {
       description: 'Los primeros pasos del Instituto Tecnológico de Durango.',
       photoCount: 24,
       photos: [
-        { src: 'assets/galeria/1920-01.jpg', alt: 'Edificio original del ITD, década de 1920' },
-        { src: 'assets/galeria/1920-02.jpg', alt: 'Grupo de estudiantes fundadores' },
-        { src: 'assets/galeria/1920-03.jpg', alt: 'Fachada histórica del plantel' },
-        { src: 'assets/galeria/1920-04.jpg', alt: 'Aula de clases en los primeros años' }
+        { id: 'a1', label: 'Edificio original del ITD, década de 1920', gradient: G.oliva },
+        { id: 'a2', label: 'Grupo de estudiantes fundadores', gradient: G.rojo },
+        { id: 'a3', label: 'Fachada histórica del plantel', gradient: G.morado },
+        { id: 'a4', label: 'Aula de clases en los primeros años', gradient: G.verde }
       ]
     },
     {
@@ -67,10 +75,10 @@ export class CollageComponent {
       description: 'Una época de expansión académica y desarrollo institucional.',
       photoCount: 86,
       photos: [
-        { src: 'assets/galeria/1951-01.jpg', alt: 'Nuevo edificio académico del ITD' },
-        { src: 'assets/galeria/1951-02.jpg', alt: 'Estudiantes en clase, década de 1960' },
-        { src: 'assets/galeria/1951-03.jpg', alt: 'Vista aérea del campus' },
-        { src: 'assets/galeria/1951-04.jpg', alt: 'Generación de egresados' }
+        { id: 'b1', label: 'Nuevo edificio académico del ITD', gradient: G.azul },
+        { id: 'b2', label: 'Estudiantes en clase, década de 1960', gradient: G.oliva },
+        { id: 'b3', label: 'Vista aérea del campus', gradient: G.rojo },
+        { id: 'b4', label: 'Generación de egresados', gradient: G.morado }
       ]
     },
     {
@@ -80,10 +88,10 @@ export class CollageComponent {
       description: 'Nuevas carreras, infraestructura y tecnología.',
       photoCount: 112,
       photos: [
-        { src: 'assets/galeria/1981-01.jpg', alt: 'Edificio principal del ITD renovado' },
-        { src: 'assets/galeria/1981-02.jpg', alt: 'Alumnos en laboratorio de prácticas' },
-        { src: 'assets/galeria/1981-03.jpg', alt: 'Andador central del campus' },
-        { src: 'assets/galeria/1981-04.jpg', alt: 'Trabajo en taller de mecánica' }
+        { id: 'c1', label: 'Edificio principal del ITD renovado', gradient: G.verde },
+        { id: 'c2', label: 'Alumnos en laboratorio de prácticas', gradient: G.azul },
+        { id: 'c3', label: 'Andador central del campus', gradient: G.oliva },
+        { id: 'c4', label: 'Trabajo en taller de mecánica', gradient: G.rojo }
       ]
     },
     {
@@ -93,10 +101,10 @@ export class CollageComponent {
       description: 'Impulso a la investigación y al desarrollo tecnológico.',
       photoCount: 156,
       photos: [
-        { src: 'assets/galeria/2001-01.jpg', alt: 'Edificio de innovación tecnológica' },
-        { src: 'assets/galeria/2001-02.jpg', alt: 'Equipo de estudiantes en proyecto de robótica' },
-        { src: 'assets/galeria/2001-03.jpg', alt: 'Pasillo interior del edificio académico' },
-        { src: 'assets/galeria/2001-04.jpg', alt: 'Nuevas instalaciones del plantel' }
+        { id: 'd1', label: 'Edificio de innovación tecnológica', gradient: G.morado },
+        { id: 'd2', label: 'Equipo de estudiantes en proyecto de robótica', gradient: G.verde },
+        { id: 'd3', label: 'Pasillo interior del edificio académico', gradient: G.azul },
+        { id: 'd4', label: 'Nuevas instalaciones del plantel', gradient: G.oliva }
       ]
     },
     {
@@ -106,10 +114,10 @@ export class CollageComponent {
       description: 'Formando líderes para un mundo en constante evolución.',
       photoCount: 210,
       photos: [
-        { src: 'assets/galeria/2011-01.jpg', alt: 'Fachada actual del Instituto Tecnológico de Durango' },
-        { src: 'assets/galeria/2011-02.jpg', alt: 'Estudiantes trabajando en prototipo' },
-        { src: 'assets/galeria/2011-03.jpg', alt: 'Vista panorámica del campus actual' },
-        { src: 'assets/galeria/2011-04.jpg', alt: 'Comunidad estudiantil del ITD' }
+        { id: 'e1', label: 'Fachada actual del Instituto Tecnológico de Durango', gradient: G.rojo },
+        { id: 'e2', label: 'Estudiantes trabajando en prototipo', gradient: G.morado },
+        { id: 'e3', label: 'Vista panorámica del campus actual', gradient: G.verde },
+        { id: 'e4', label: 'Comunidad estudiantil del ITD', gradient: G.azul }
       ]
     }
   ];

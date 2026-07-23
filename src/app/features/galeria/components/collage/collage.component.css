@@ -22,7 +22,7 @@
 .collage {
     max-width: 1180px;
     margin: 0 auto;
-    padding: 0 1.5rem 4rem;
+    padding: 0 1.5rem 0;
 }
 
 .collage__sr-only {
@@ -270,7 +270,7 @@
 .collage__era {
     position: relative;
     display: grid;
-    grid-template-columns: 200px repeat(4, 1fr) 150px;
+    grid-template-columns: 200px repeat(5, minmax(0, 1fr));
     gap: 1.1rem;
     align-items: start;
     padding-bottom: 2.6rem;
@@ -289,6 +289,17 @@
     border-radius: 50%;
     background: var(--collage-wine);
     box-shadow: 0 0 0 4px var(--collage-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.collage__era-dot::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #fff;
 }
 
 /* Info de la época */
@@ -332,7 +343,7 @@
 .collage__era-photos {
     grid-column: 2 / -1;
     display: grid;
-    grid-template-columns: repeat(4, 1fr) 150px;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 1.1rem;
 }
 
@@ -340,9 +351,9 @@
     position: relative;
     padding: 0;
     border: none;
+    box-sizing: border-box;
     border-radius: 10px;
     overflow: hidden;
-    background: var(--collage-line);
     aspect-ratio: 1 / 1;
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(43, 43, 43, 0.08);
@@ -359,18 +370,6 @@
     outline-offset: 3px;
 }
 
-.collage__photo-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.45s ease;
-}
-
-.collage__photo:hover .collage__photo-img {
-    transform: scale(1.06);
-}
-
 /* Tarjeta "Ver todas" */
 .collage__see-all {
     display: flex;
@@ -378,7 +377,12 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    aspect-ratio: 1 / 1;
+
+    width: 100%;
+    height: 100%;
+    align-self: stretch;
+    box-sizing: border-box;
+
     border: 1px solid var(--collage-line);
     border-radius: 10px;
     background: var(--collage-surface);
@@ -451,7 +455,8 @@
     padding: 1.5rem 1.75rem;
     border: 1px solid var(--collage-line);
     border-radius: 16px;
-    background: var(--collage-surface);
+    background: #f5f1f3;
+    /* antes: var(--collage-surface) */
 }
 
 .collage__cta-left {
@@ -532,14 +537,26 @@
 
 .collage__quote {
     position: relative;
+    width: 93vw;
+    max-width: 1800px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
-    gap: 1.25rem;
-    overflow: hidden;
+    gap: 1.5rem;
     margin: 1.5rem 0 0;
-    padding: 2.25rem 2rem;
+    padding: 4.5rem 3rem;
     border-radius: 16px;
     background: var(--collage-bg);
+}
+
+.collage__quote-inner {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
 }
 
 .collage__quote-mark {
@@ -558,7 +575,8 @@
 
 .collage__quote-text {
     margin: 0;
-    max-width: 620px;
+    max-width: none;
+    flex: 1;
 }
 
 .collage__quote-text p {
@@ -567,20 +585,6 @@
     line-height: 1.75;
     font-weight: 500;
     color: var(--collage-ink);
-}
-
-.collage__quote-art {
-    position: absolute;
-    right: 1.5rem;
-    bottom: -0.5rem;
-    width: 240px;
-    color: rgba(107, 21, 56, 0.16);
-    pointer-events: none;
-}
-
-.collage__quote-art svg {
-    width: 100%;
-    height: auto;
 }
 
 /* ============ ANIMACIONES ============ */
@@ -601,16 +605,16 @@
 
 @media (max-width: 1080px) {
     .collage__era {
-        grid-template-columns: 180px repeat(3, 1fr);
+        grid-template-columns: 180px repeat(3, minmax(0, 1fr));
     }
 
     .collage__era-photos {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .collage__see-all {
         grid-column: span 3;
-        aspect-ratio: auto;
+        height: auto;
         flex-direction: row;
         padding: 0.9rem;
     }
@@ -650,19 +654,18 @@
     .collage__see-all {
         grid-column: span 2;
     }
-
-    .collage__quote-art {
-        display: none;
-    }
-
-    .collage__quote-text {
-        max-width: none;
-    }
 }
 
 @media (max-width: 560px) {
     .collage {
-        padding: 0 1rem 3rem;
+        padding: 0 1rem 0;
+    }
+
+    .collage__quote {
+        width: 100%;
+        left: auto;
+        transform: none;
+        padding: 2.5rem 1.5rem;
     }
 
     .collage__timeline {

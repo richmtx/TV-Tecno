@@ -126,9 +126,9 @@
             </div>
 
             <div class="collage__era-photos">
-                @for (photo of era.photos; track photo.src) {
-                <button type="button" class="collage__photo" [attr.aria-label]="photo.alt">
-                    <img [ngSrc]="photo.src" [alt]="photo.alt" width="320" height="320" class="collage__photo-img" />
+                @for (photo of era.photos; track photo.id) {
+                <button type="button" class="collage__photo" [style.background]="photo.gradient"
+                    [attr.aria-label]="photo.label">
                 </button>
                 }
 
@@ -202,17 +202,6 @@
             <p>"Nuestra historia está hecha de personas, aprendizajes y sueños.</p>
             <p>Cada foto guarda un momento que nos ha llevado hasta aquí."</p>
         </blockquote>
-
-        <span class="collage__quote-art" aria-hidden="true">
-            <svg viewBox="0 0 220 120" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round">
-                <path d="M10 110V52L110 18l100 34v58"></path>
-                <path d="M10 110h200"></path>
-                <path d="M40 110V66h140v44"></path>
-                <path d="M62 110V86h22v24M136 110V86h22v24"></path>
-                <path d="M100 110V88h20v22"></path>
-                <path d="M40 78h140"></path>
-            </svg>
-        </span>
     </figure>
 
 </section>
