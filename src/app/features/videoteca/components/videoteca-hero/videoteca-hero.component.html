@@ -1,25 +1,103 @@
 <section class="videoteca-hero">
     <div class="videoteca-hero__card">
-        <h1 class="videoteca-hero__title">Videoteca</h1>
-        <p class="videoteca-hero__subtitle">Explora, aprende y revive nuestro contenido.</p>
-        <p class="videoteca-hero__lead">Accede a todos nuestros programas, entrevistas, coberturas<br
-                class="videoteca-hero__lead-salto"> y producciones cuando quieras y desde cualquier
-            dispositivo.</p>
 
-        <form class="videoteca-hero__buscador" (submit)="onBuscar($event, campoBusqueda.value)">
-            <label for="videoteca-hero-busqueda" class="videoteca-hero__buscador-label">Buscar en la
-                videoteca</label>
+        <div class="videoteca-hero__contenido">
+            <h1 class="videoteca-hero__title">Videoteca</h1>
+            <p class="videoteca-hero__subtitle">Explora, aprende y revive nuestro contenido.</p>
+            <p class="videoteca-hero__lead">Accede a todos nuestros programas, entrevistas, coberturas<br
+                    class="videoteca-hero__lead-salto"> y producciones cuando quieras y desde cualquier
+                dispositivo.</p>
 
-            <svg class="videoteca-hero__buscador-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="11" cy="11" r="7"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            <form class="videoteca-hero__buscador" (submit)="onBuscar($event, campoBusqueda.value)">
+                <label for="videoteca-hero-busqueda" class="videoteca-hero__buscador-label">Buscar en la
+                    videoteca</label>
+
+                <svg class="videoteca-hero__buscador-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+
+                <input #campoBusqueda id="videoteca-hero-busqueda" class="videoteca-hero__buscador-input" type="search"
+                    name="busqueda" placeholder="Buscar videos, programas, temas..." autocomplete="off">
+
+                <button type="submit" class="videoteca-hero__buscador-boton">Buscar</button>
+            </form>
+        </div>
+
+        <figure class="videoteca-hero__figura">
+
+            <svg class="videoteca-hero__deco" viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true" focusable="false">
+
+                <defs>
+                    <!-- Malla de puntos -->
+                    <pattern id="vtHeroPuntos" x="0" y="0" width="19" height="19" patternUnits="userSpaceOnUse">
+                        <circle class="vt-deco__punto-malla" cx="3" cy="3" r="2.4" />
+                    </pattern>
+
+                    <!-- Difuminado radial reutilizable para máscaras -->
+                    <radialGradient id="vtHeroFade">
+                        <stop offset="35%" stop-color="#ffffff" stop-opacity="1" />
+                        <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                    </radialGradient>
+
+                    <mask id="vtHeroMascaraMalla">
+                        <rect x="215" y="140" width="215" height="230" fill="url(#vtHeroFade)" />
+                    </mask>
+
+                    <mask id="vtHeroMascaraAnillos">
+                        <rect x="0" y="0" width="900" height="520" fill="url(#vtHeroFade)" />
+                    </mask>
+                </defs>
+
+                <!-- Blobs suaves de fondo -->
+                <g class="vt-deco__blobs">
+                    <circle class="vt-deco__blob vt-deco__blob--a" cx="762" cy="118" r="96" />
+                    <circle class="vt-deco__blob vt-deco__blob--b" cx="826" cy="392" r="58" />
+                    <circle class="vt-deco__blob vt-deco__blob--c" cx="196" cy="404" r="44" />
+                </g>
+
+                <!-- Anillos concéntricos (rotan lentamente) -->
+                <g class="vt-deco__orbitas" mask="url(#vtHeroMascaraAnillos)">
+                    <circle class="vt-deco__anillo" cx="330" cy="278" r="88" />
+                    <circle class="vt-deco__anillo" cx="330" cy="278" r="132" />
+                    <circle class="vt-deco__anillo vt-deco__anillo--guion" cx="330" cy="278" r="182" />
+                    <circle class="vt-deco__anillo" cx="330" cy="278" r="238" />
+                    <circle class="vt-deco__anillo vt-deco__anillo--tenue" cx="330" cy="278" r="300" />
+                </g>
+
+                <!-- Arco parcial que gira en sentido inverso -->
+                <g class="vt-deco__orbita-inversa">
+                    <circle class="vt-deco__anillo vt-deco__anillo--arco" cx="330" cy="278" r="156" />
+                </g>
+
+                <!-- Malla de puntos -->
+                <rect class="vt-deco__malla" x="215" y="140" width="215" height="230" fill="url(#vtHeroPuntos)"
+                    mask="url(#vtHeroMascaraMalla)" />
+
+                <!-- Donas -->
+                <circle class="vt-deco__dona vt-deco__dona--grande" cx="712" cy="336" r="52" />
+                <circle class="vt-deco__dona vt-deco__dona--media" cx="838" cy="212" r="26" />
+                <circle class="vt-deco__dona vt-deco__dona--chica" cx="268" cy="118" r="15" />
+
+                <!-- Partículas -->
+                <g class="vt-deco__particulas">
+                    <circle class="vt-deco__particula vt-deco__particula--vino" cx="522" cy="58" r="7" />
+                    <circle class="vt-deco__particula vt-deco__particula--rojo" cx="852" cy="126" r="6" />
+                    <circle class="vt-deco__particula vt-deco__particula--oro" cx="618" cy="452" r="5.5" />
+                    <circle class="vt-deco__particula vt-deco__particula--vino" cx="874" cy="452" r="8" />
+                    <circle class="vt-deco__particula vt-deco__particula--rojo" cx="452" cy="352" r="4.5" />
+                    <circle class="vt-deco__particula vt-deco__particula--oro" cx="196" cy="238" r="5" />
+                    <circle class="vt-deco__particula vt-deco__particula--vino" cx="770" cy="486" r="4" />
+                    <circle class="vt-deco__particula vt-deco__particula--rojo" cx="404" cy="72" r="4.5" />
+                </g>
+
             </svg>
 
-            <input #campoBusqueda id="videoteca-hero-busqueda" class="videoteca-hero__buscador-input" type="search"
-                name="busqueda" placeholder="Buscar videos, programas, temas..." autocomplete="off">
+            <img ngSrc="assets/videoteca/Videoteca.png" width="720" height="540" priority alt=""
+                class="videoteca-hero__imagen">
+        </figure>
 
-            <button type="submit" class="videoteca-hero__buscador-boton">Buscar</button>
-        </form>
     </div>
 </section>

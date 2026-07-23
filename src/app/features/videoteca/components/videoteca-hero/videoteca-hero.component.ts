@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-videoteca-hero',
   standalone: true,
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './videoteca-hero.component.html',
   styleUrl: './videoteca-hero.component.css'
 })
