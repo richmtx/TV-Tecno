@@ -41,10 +41,8 @@
         <app-selector-dias [dias]="diasSemana" [diaSeleccionado]="diaSeleccionado" [diaHoy]="diaHoy"
             (diaSeleccionadoChange)="onDiaSeleccionado($event)"></app-selector-dias>
 
-        <app-en-vivo-ahora [programa]="programaEnVivo"></app-en-vivo-ahora>
-
-        <app-lista-programacion [programas]="programasDelDia"
-            [nombreDia]="nombreDiaSeleccionado"></app-lista-programacion>
+        <app-lista-programacion [programas]="programasDelDia" [nombreDia]="nombreDiaSeleccionado"
+            [programaEnVivo]="programaEnVivo"></app-lista-programacion>
 
     </div>
 

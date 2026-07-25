@@ -18,6 +18,8 @@
         <span class="lista-programacion__total">{{ total }} programas</span>
     </div>
 
+    <app-en-vivo-ahora [programa]="programaEnVivo"></app-en-vivo-ahora>
+
     <div class="lista-programacion__grid">
         <article class="programa-card" *ngFor="let programa of programas"
             [class.programa-card--en-vivo]="programa.enVivo">

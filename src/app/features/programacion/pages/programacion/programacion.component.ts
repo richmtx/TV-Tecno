@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Programa, DiaSemana } from '../../models/programa.model';
 import { SelectorDiasComponent } from '../../components/selector-dias/selector-dias.component';
-import { EnVivoAhoraComponent } from '../../components/en-vivo-ahora/en-vivo-ahora.component';
 import { ListaProgramacionComponent } from '../../components/lista-programacion/lista-programacion.component';
 
 const NOMBRES_DIAS = [
@@ -19,14 +18,13 @@ const NOMBRES_DIAS = [
 const PROGRAMAS_POR_DIA: Record<number, Programa[]> = {
   0: [
     { hora: '07:00', horaFin: '08:00', titulo: 'Buenos Días ITD', descripcion: 'Resumen matutino de actividades académicas y avisos institucionales.', categoria: 'Noticias' },
-    { hora: '08:00', horaFin: '09:30', titulo: 'Aula Abierta', descripcion: 'Cápsulas educativas sobre programación y desarrollo de software.', categoria: 'Educativo' },
-    { hora: '10:00', horaFin: '11:00', titulo: 'Laboratorio Vivo', descripcion: 'Recorrido por los laboratorios de Ingeniería Electromecánica.', categoria: 'Ciencia' },
+    { hora: '08:00', horaFin: '09:30', titulo: 'Aula Abierta', descripcion: 'Cápsulas educativas sobre programación y desarrollo de software.', categoria: 'Educativo', enVivo: true }, { hora: '10:00', horaFin: '11:00', titulo: 'Laboratorio Vivo', descripcion: 'Recorrido por los laboratorios de Ingeniería Electromecánica.', categoria: 'Ciencia' },
     { hora: '12:00', horaFin: '13:00', titulo: 'Voces ITD', descripcion: 'Entrevista con egresados destacados del Tecnológico.', categoria: 'Entrevista' },
     { hora: '17:00', horaFin: '18:00', titulo: 'Crónicas del Campus', descripcion: 'Documental sobre la historia del Instituto Tecnológico de Durango.', categoria: 'Documental' },
   ],
   1: [
     { hora: '07:00', horaFin: '08:00', titulo: 'Noticiero Tecnológico', descripcion: 'Cobertura de eventos, becas y convocatorias vigentes.', categoria: 'Noticias' },
-    { hora: '09:00', horaFin: '10:00', titulo: 'IA en Contexto', descripcion: 'Charla sobre aplicaciones de inteligencia artificial en la región.', categoria: 'Ciencia' },
+    { hora: '09:00', horaFin: '10:00', titulo: 'IA en Contexto', descripcion: 'Charla sobre aplicaciones de inteligencia artificial en la región.', categoria: 'Ciencia', enVivo: true },
     { hora: '11:00', horaFin: '12:00', titulo: 'Deporte Tecno', descripcion: 'Resumen de la jornada deportiva interna del ITD.', categoria: 'Deportes' },
     { hora: '16:00', horaFin: '17:00', titulo: 'Cultura Durango', descripcion: 'Expresiones artísticas de estudiantes y talleres culturales.', categoria: 'Cultura' },
   ],
@@ -39,23 +37,23 @@ const PROGRAMAS_POR_DIA: Record<number, Programa[]> = {
   ],
   3: [
     { hora: '07:00', horaFin: '08:00', titulo: 'Noticiero Tecnológico', descripcion: 'Cobertura de eventos, becas y convocatorias vigentes.', categoria: 'Noticias' },
-    { hora: '09:00', horaFin: '10:00', titulo: 'Ingeniería en Acción', descripcion: 'Visita a proyectos de titulación de distintas carreras.', categoria: 'Ciencia' },
+    { hora: '09:00', horaFin: '10:00', titulo: 'Ingeniería en Acción', descripcion: 'Visita a proyectos de titulación de distintas carreras.', categoria: 'Ciencia', enVivo: true },
     { hora: '12:00', horaFin: '13:00', titulo: 'Diálogos ITD', descripcion: 'Mesa de discusión con docentes sobre innovación educativa.', categoria: 'Entrevista' },
     { hora: '17:00', horaFin: '18:00', titulo: 'Arte y Campus', descripcion: 'Talleres culturales y presentaciones estudiantiles.', categoria: 'Cultura' },
   ],
   4: [
     { hora: '07:00', horaFin: '08:00', titulo: 'Buenos Días ITD', descripcion: 'Resumen matutino de actividades académicas y avisos institucionales.', categoria: 'Noticias' },
-    { hora: '10:00', horaFin: '11:00', titulo: 'Congreso Tecnológico', descripcion: 'Cobertura en vivo del Congreso de Tecnología e Ingeniería.', categoria: 'Documental' },
+    { hora: '10:00', horaFin: '11:00', titulo: 'Congreso Tecnológico', descripcion: 'Cobertura en vivo del Congreso de Tecnología e Ingeniería.', categoria: 'Documental', enVivo: true },
     { hora: '13:00', horaFin: '14:00', titulo: 'Deporte Tecno', descripcion: 'Resumen de la jornada deportiva interna del ITD.', categoria: 'Deportes' },
     { hora: '18:00', horaFin: '19:00', titulo: 'Voces ITD', descripcion: 'Entrevista con egresados destacados del Tecnológico.', categoria: 'Entrevista' },
   ],
   5: [
     { hora: '08:00', horaFin: '09:00', titulo: 'Fin de Semana Tecno', descripcion: 'Actividades culturales y deportivas del fin de semana.', categoria: 'Cultura' },
-    { hora: '10:00', horaFin: '11:00', titulo: 'Ruta STEM', descripcion: 'Proyectos estudiantiles de ciencia, tecnología e ingeniería.', categoria: 'Educativo' },
+    { hora: '10:00', horaFin: '11:00', titulo: 'Ruta STEM', descripcion: 'Proyectos estudiantiles de ciencia, tecnología e ingeniería.', categoria: 'Educativo', enVivo: true },
     { hora: '15:00', horaFin: '16:00', titulo: 'Crónicas del Campus', descripcion: 'Documental sobre la historia del Instituto Tecnológico de Durango.', categoria: 'Documental' },
   ],
   6: [
-    { hora: '10:00', horaFin: '11:00', titulo: 'Resumen Semanal', descripcion: 'Lo más destacado de la semana en el Tecnológico.', categoria: 'Noticias' },
+    { hora: '10:00', horaFin: '11:00', titulo: 'Resumen Semanal', descripcion: 'Lo más destacado de la semana en el Tecnológico.', categoria: 'Noticias', enVivo: true },
     { hora: '13:00', horaFin: '14:00', titulo: 'Cultura Durango', descripcion: 'Expresiones artísticas de estudiantes y talleres culturales.', categoria: 'Cultura' },
     { hora: '16:00', horaFin: '17:00', titulo: 'Laboratorio Vivo', descripcion: 'Recorrido por los laboratorios de Ingeniería Electromecánica.', categoria: 'Ciencia' },
   ]
@@ -64,7 +62,7 @@ const PROGRAMAS_POR_DIA: Record<number, Programa[]> = {
 @Component({
   selector: 'app-programacion',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, SelectorDiasComponent, EnVivoAhoraComponent, ListaProgramacionComponent],
+  imports: [CommonModule, NgOptimizedImage, SelectorDiasComponent, ListaProgramacionComponent],
   templateUrl: './programacion.component.html',
   styleUrl: './programacion.component.css'
 })
