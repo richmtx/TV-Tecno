@@ -3,6 +3,11 @@
 }
 
 .en-vivo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-decoration: none;
+    cursor: pointer;
     background: linear-gradient(135deg,
             var(--tv-wine) 0%,
             var(--tv-wine-dark) 55%,
@@ -13,6 +18,12 @@
     margin-bottom: 2.5rem;
     position: relative;
     overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.en-vivo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
 .en-vivo__etiqueta {

@@ -16,7 +16,8 @@
     flex-direction: column;
     align-items: center;
     gap: 0.15rem;
-    padding: 0.9rem 0.5rem;
+    /* padding fluido: solo escala, no cambia el look */
+    padding: clamp(0.6rem, 2vw, 0.9rem) clamp(0.25rem, 1.5vw, 0.5rem);
     border: none;
     border-radius: 12px;
     background: transparent;
@@ -24,6 +25,11 @@
     font-family: var(--font-cuerpo);
     position: relative;
     transition: background 0.2s ease;
+}
+
+/* Por defecto solo se ve el nombre largo */
+.dias-selector__nombre--corto {
+    display: none;
 }
 
 /* Separador vertical corto entre días */
@@ -42,24 +48,16 @@
     background: rgba(107, 21, 56, 0.05);
 }
 
-.dias-selector__icono {
-    position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
-    width: 16px;
-    height: 16px;
-    color: #fff;
-    opacity: 0.9;
-}
-
 .dias-selector__nombre {
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: clamp(0.78rem, 2.2vw, 0.9rem);
     color: var(--tv-text);
+    line-height: 1.2;
+    text-align: center;
 }
 
 .dias-selector__fecha {
-    font-size: 0.78rem;
+    font-size: clamp(0.68rem, 1.8vw, 0.78rem);
     color: var(--tv-text-soft);
 }
 
@@ -85,7 +83,7 @@
     vertical-align: middle;
 }
 
-/* Día activo: bloque vino que sobresale de la barra */
+/* Día activo: bloque vino DENTRO de la barra (como estaba originalmente) */
 .dias-selector__item--activo {
     background: var(--tv-wine);
     border-radius: 12px;
@@ -107,12 +105,33 @@
     color: #fff;
 }
 
-@media (max-width: 640px) {
-    .dias-selector__nombre {
-        font-size: 0.8rem;
-    }
+/* --- Responsivo --- */
 
+/* Tablet: quitamos la palabra "programas", dejamos solo el número */
+@media (max-width: 720px) {
     .dias-selector__contador-label {
         display: none;
+    }
+}
+
+/* Móvil: nombres cortos */
+@media (max-width: 520px) {
+    .dias-selector__nombre--largo {
+        display: none;
+    }
+
+    .dias-selector__nombre--corto {
+        display: inline;
+    }
+
+    .dias-selector__contador {
+        padding: 0.18rem 0.5rem;
+    }
+}
+
+/* Respeta prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .dias-selector__item {
+        transition: none;
     }
 }

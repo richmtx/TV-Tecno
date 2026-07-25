@@ -1,4 +1,4 @@
-<div class="en-vivo" *ngIf="programa as p">
+<a class="en-vivo" *ngIf="programa as p" routerLink="/en-vivo">
     <span class="en-vivo__etiqueta">
         <span class="en-vivo__punto"></span>
         En vivo ahora
@@ -25,4 +25,4 @@
             {{ p.hora }} – {{ p.horaFin }} hrs
         </span>
     </div>
-</div>
+</a>
