@@ -4,8 +4,10 @@
 
 .noticias {
     --nota-radio: 18px;
-    --media-alto: 152px;
-    padding: clamp(2.5rem, 5vw, 4rem) clamp(1rem, 4vw, 3rem);
+    --media-alto: 132px;
+    /* antes 152px */
+    padding: clamp(2rem, 4vw, 3rem) clamp(0.9rem, 2vw, 1.75rem);
+    /* laterales más delgados */
     background: var(--tv-bg, #ffffff);
 }
 
@@ -17,12 +19,12 @@
 .noticias__marca {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
+    gap: 0.65rem;
 }
 
 .noticias__icono {
-    width: 34px;
-    height: 34px;
+    width: 26px;
+    height: 26px;
     flex: none;
     color: var(--tv-wine, #6b1538);
 }
@@ -30,10 +32,10 @@
 .noticias__titulo {
     margin: 0;
     font-family: var(--tv-font-titulo, 'Outfit', sans-serif);
-    font-size: clamp(1.85rem, 3vw, 2.5rem);
+    font-size: clamp(1.35rem, 2vw, 1.7rem);
     font-weight: 700;
-    letter-spacing: -0.025em;
-    color: var(--tv-wine, #6b1538);
+    letter-spacing: -0.02em;
+    color: var(--tv-text, #241820);
 }
 
 .noticias__subtitulo {
@@ -47,8 +49,8 @@
 /* ===================== GRID PRINCIPAL ===================== */
 .noticias__grid {
     display: grid;
-    grid-template-columns: minmax(0, 0.98fr) minmax(0, 1.02fr);
-    gap: 1.25rem;
+    grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.24fr);
+    gap: 1.1rem;
     align-items: stretch;
 }
 
@@ -56,14 +58,14 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
+    gap: 1.1rem;
 }
 
 /* ===================== NOTICIA DESTACADA ===================== */
 .destacada {
     position: relative;
     isolation: isolate;
-    min-height: 645px;
+    min-height: 430px;
     border-radius: var(--nota-radio);
     overflow: hidden;
     cursor: pointer;
@@ -161,8 +163,8 @@
     inset: auto 0 0 0;
     display: flex;
     flex-direction: column;
-    gap: 0.85rem;
-    padding: clamp(1.4rem, 2.4vw, 2rem);
+    gap: 0.7rem;
+    padding: clamp(1.2rem, 2vw, 1.6rem);
     color: #fff;
 }
 
@@ -180,9 +182,9 @@
 
 .destacada__titulo {
     margin: 0;
-    max-width: 20ch;
+    max-width: 24ch;
     font-family: var(--tv-font-titulo, 'Outfit', sans-serif);
-    font-size: clamp(1.55rem, 2.3vw, 2.05rem);
+    font-size: clamp(1.4rem, 1.9vw, 1.8rem);
     font-weight: 700;
     line-height: 1.18;
     letter-spacing: -0.02em;
@@ -326,41 +328,46 @@
 .tarjeta__cuerpo {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.4rem;
     flex: 1;
-    padding: 1.7rem 1.15rem 1.05rem;
+    padding: 1.5rem 1.1rem 0.9rem;
 }
 
 .tarjeta__titulo {
     margin: 0;
     font-family: var(--tv-font-titulo, 'Outfit', sans-serif);
-    font-size: 1.02rem;
+    font-size: 0.98rem;
     font-weight: 700;
-    line-height: 1.32;
+    line-height: 1.28;
     letter-spacing: -0.01em;
     color: var(--tv-text, #241820);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
 }
 
 .tarjeta__descripcion {
     margin: 0;
-    font-size: 0.85rem;
-    line-height: 1.5;
+    font-size: 0.83rem;
+    line-height: 1.45;
     color: var(--tv-text-soft, #6f6a70);
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
     overflow: hidden;
 }
 
 .tarjeta__pie {
     margin-top: auto;
-    padding-top: 1rem;
+    padding-top: 0.85rem;
     display: flex;
     align-items: center;
-    gap: 1.15rem;
+    gap: 1rem;
     font-family: var(--tv-font-num, 'Outfit', sans-serif);
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     color: var(--tv-text-soft, #8a838a);
 }
 
@@ -433,39 +440,41 @@
     display: flex;
     align-items: center;
     gap: 1.1rem;
-    padding: 1.15rem 1.4rem;
-    border: 1px solid var(--tv-border, #ecebec);
-    border-radius: var(--nota-radio);
-    background: linear-gradient(90deg, rgba(107, 21, 56, 0.05), rgba(107, 21, 56, 0.012));
+    padding: 1.1rem 1.35rem;
+    border: 0;
+    border-radius: 14px;
+    background: var(--tv-surface, #f5f1f3);
+    /* gris plano, sin degradado */
 }
 
 .aviso__icono {
     display: grid;
     place-items: center;
-    width: 50px;
-    height: 50px;
+    width: 46px;
+    height: 46px;
     flex: none;
     border-radius: 50%;
-    background: rgba(107, 21, 56, 0.09);
-    color: var(--tv-wine, #6b1538);
+    background: var(--tv-wine, #6b1538);
+    color: #ffffff;
 }
 
 .aviso__icono svg {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
 }
 
 .aviso__titulo {
     margin: 0;
     font-family: var(--tv-font-titulo, 'Outfit', sans-serif);
-    font-size: 1.05rem;
+    font-size: 0.98rem;
     font-weight: 700;
     color: var(--tv-wine, #6b1538);
 }
 
 .aviso__descripcion {
-    margin: 0.2rem 0 0;
-    font-size: 0.88rem;
+    margin: 0.15rem 0 0;
+    font-size: 0.92rem;
+    line-height: 1.45;
     color: var(--tv-text-soft, #6f6a70);
 }
 
@@ -473,22 +482,22 @@
     margin-left: auto;
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
-    padding: 0.9rem 1.5rem;
+    gap: 0.55rem;
+    padding: 0.75rem 1.3rem;
     border: 0;
-    border-radius: 12px;
+    border-radius: 10px;
     background: var(--tv-wine, #6b1538);
     color: #fff;
     font-family: inherit;
-    font-size: 0.92rem;
-    font-weight: 600;
+    font-size: 0.9rem;
+    font-weight: 700;
     cursor: pointer;
     transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .aviso__boton svg {
-    width: 17px;
-    height: 17px;
+    width: 16px;
+    height: 16px;
 }
 
 .aviso__boton:hover {
@@ -504,7 +513,7 @@
     }
 
     .destacada {
-        min-height: 480px;
+        min-height: 420px;
     }
 
     .noticias__secundarias {
