@@ -10,7 +10,8 @@
             <h2 class="noticias__titulo" id="noticias-titulo">Últimas noticias</h2>
         </div>
         <p class="noticias__subtitulo">
-            Entérate de los acontecimientos más importantes del Instituto Tecnológico de Durango.
+            Entérate de los acontecimientos más importantes del
+            <strong class="noticias__institucion">Instituto Tecnológico de Durango.</strong>
         </p>
     </header>
 
@@ -22,7 +23,7 @@
                 @if (principal.imagen) {
                 <img [src]="principal.imagen" [alt]="principal.titulo" loading="lazy" />
                 } @else {
-                <div class="destacada__fallback" [style.background]="fallbackFor(0)"></div>
+                <div class="destacada__fallback" [style.background]="fallbackDestacada"></div>
                 }
             </div>
             <span class="destacada__velo" aria-hidden="true"></span>

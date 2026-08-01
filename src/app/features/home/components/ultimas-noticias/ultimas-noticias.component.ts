@@ -12,13 +12,21 @@ export interface Noticia {
   titulo: string;
   descripcion: string;
   categoria: CategoriaNoticia;
-  fecha: string;            // texto visible: '2 junio 2026'
-  tiempoLectura: string;    // '5 min'
-  vistas?: number;          // solo se usa en la destacada
+  fecha: string;            
+  tiempoLectura: string;  
+  vistas?: number;        
   imagen?: string;
   enlace?: string;
   fechaCorta?: { dia: string; mes: string; anio: string };
 }
+
+const G = {
+  oliva: 'linear-gradient(135deg, #4a3d13, #836d23)',
+  rojo: 'linear-gradient(135deg, #661a20, #b42e38)',
+  morado: 'linear-gradient(135deg, #341830, #5c2c56)',
+  verde: 'linear-gradient(135deg, #022e22, #04513c)',
+  azul: 'linear-gradient(135deg, #191f5a, #2c379d)',
+};
 
 @Component({
   selector: 'app-ultimas-noticias',
@@ -31,7 +39,6 @@ export class UltimasNoticiasComponent {
   destacada?: Noticia;
   secundarias: Noticia[] = [];
 
-  /** El primer elemento se renderiza como noticia destacada; los 4 siguientes van a la derecha. */
   @Input() set noticias(valor: Noticia[]) {
     const lista = valor?.length ? valor : this.noticiasPorDefecto;
     this.destacada = lista[0];
@@ -41,6 +48,8 @@ export class UltimasNoticiasComponent {
   @Output() seleccionar = new EventEmitter<Noticia>();
   @Output() masOpciones = new EventEmitter<Noticia>();
   @Output() activarNotificaciones = new EventEmitter<void>();
+
+  readonly fallbackDestacada = G.oliva;
 
   private readonly noticiasPorDefecto: Noticia[] = [
     {
@@ -52,7 +61,6 @@ export class UltimasNoticiasComponent {
       fechaCorta: { dia: '2', mes: 'Jun', anio: '2026' },
       tiempoLectura: '5 min de lectura',
       vistas: 1245,
-      imagen: 'assets/noticias/riego-inteligente.jpg',
     },
     {
       titulo: 'El ITD será sede del Congreso de Tecnología e Innovación 2026',
@@ -61,7 +69,6 @@ export class UltimasNoticiasComponent {
       categoria: 'academico',
       fecha: '1 junio 2026',
       tiempoLectura: '3 min',
-      imagen: 'assets/noticias/congreso-2026.jpg',
     },
     {
       titulo: 'Firma de convenio con la industria regional de software',
@@ -70,7 +77,6 @@ export class UltimasNoticiasComponent {
       categoria: 'vinculacion',
       fecha: '30 mayo 2026',
       tiempoLectura: '4 min',
-      imagen: 'assets/noticias/convenio-software.jpg',
     },
     {
       titulo: 'Estudiantes ganan concurso nacional de robótica',
@@ -79,7 +85,6 @@ export class UltimasNoticiasComponent {
       categoria: 'tecnologia',
       fecha: '28 mayo 2026',
       tiempoLectura: '3 min',
-      imagen: 'assets/noticias/robotica-nacional.jpg',
     },
     {
       titulo: 'Gran presentación del Ballet Folclórico del ITD',
@@ -88,7 +93,6 @@ export class UltimasNoticiasComponent {
       categoria: 'cultura',
       fecha: '25 mayo 2026',
       tiempoLectura: '2 min',
-      imagen: 'assets/noticias/ballet-folclorico.jpg',
     },
   ];
 
@@ -101,10 +105,11 @@ export class UltimasNoticiasComponent {
   };
 
   private readonly fallbacks: string[] = [
-    'linear-gradient(155deg, #b03a63, #6b1538)',
-    'linear-gradient(155deg, #6b1538, #4d0e28)',
-    'linear-gradient(155deg, #8a2a52, #4d0e28)',
-    'linear-gradient(155deg, #4d0e28, #2c0819)',
+    G.oliva,
+    G.azul,
+    G.rojo,
+    G.verde,
+    G.morado,
   ];
 
   constructor() {
@@ -116,7 +121,7 @@ export class UltimasNoticiasComponent {
   }
 
   fallbackFor(index: number): string {
-    return this.fallbacks[index % this.fallbacks.length];
+    return this.fallbacks[(index + 1) % this.fallbacks.length];
   }
 
   formatearVistas(vistas?: number): string {
