@@ -1,6 +1,7 @@
-.index__contenido {
-    background: #ffffff;
-    padding-bottom: 3rem;
+/* Recorta el relleno inferior de las noticias, que es lo que empuja
+   la barra hacia abajo (heredado de .index__contenido > *). */
+.index__contenido > app-ultimas-noticias {
+    padding-bottom: 0.5rem;
 }
 
 .index__contenido>* {
@@ -11,4 +12,14 @@
     margin: 0 auto;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+}
+
+/* Barra más ancha y pegada a las noticias.
+   Anula el max-width/padding de .index__contenido > *. */
+.index__aviso {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0; 
+    box-sizing: border-box;
 }

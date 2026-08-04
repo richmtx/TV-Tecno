@@ -3,6 +3,7 @@ import { HeroComponent } from "../../components/hero/hero.component";
 import { NoticiasTickerComponent } from "../../components/noticias-ticker/noticias-ticker.component";
 import { ProgramacionDestacadaComponent } from "../../components/programacion-destacada/programacion-destacada.component";
 import { UltimasNoticiasComponent } from "../../components/ultimas-noticias/ultimas-noticias.component";
+import { RecordatoriosComponent } from "../../../../shared/components/recordatorios/recordatorios.component";
 
 @Component({
   selector: 'app-index',
@@ -11,11 +12,16 @@ import { UltimasNoticiasComponent } from "../../components/ultimas-noticias/ulti
     HeroComponent,
     NoticiasTickerComponent,
     ProgramacionDestacadaComponent,
-    UltimasNoticiasComponent
+    UltimasNoticiasComponent,
+    RecordatoriosComponent
   ],
   templateUrl: './index.component.html',
   styleUrl: './index.component.css'
 })
 export class IndexComponent {
 
+  onActivarNotificaciones(): void {
+    // TODO: pedir permiso de notificaciones / suscribir al usuario
+    console.log('Activar notificaciones');
+  }
 }

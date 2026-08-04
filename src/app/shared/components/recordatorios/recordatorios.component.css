@@ -1,0 +1,89 @@
+/* ============================================================
+   RECORDATORIOS — CTA "¡No te pierdas nada!"
+   Componente compartido · TV Tecno
+   ============================================================ */
+
+:host {
+    display: block;
+    font-family: 'Raleway', system-ui, sans-serif;
+}
+
+.recordatorios {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    background: #f5f1f3;
+    border: 0.5px solid #e6dce1;
+    border-radius: 12px;
+}
+
+.recordatorios__icono {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--tv-wine, #6b1538);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.recordatorios__texto {
+    flex: 1;
+    min-width: 0;
+}
+
+.recordatorios__titulo {
+    font-size: 0.9375rem;
+    font-weight: 800;
+    color: var(--tv-wine, #6b1538);
+    margin: 0 0 2px;
+}
+
+.recordatorios__sub {
+    font-size: 0.8125rem;
+    color: var(--tv-text-soft, #6f6a6d);
+    margin: 0;
+}
+
+.recordatorios__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    background: var(--tv-wine, #6b1538);
+    color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    border: 0;
+    padding: 11px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.recordatorios__btn:hover {
+    background: var(--tv-wine-dark, #55102c);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 720px) {
+    .recordatorios {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .recordatorios__btn {
+        align-self: stretch;
+        justify-content: center;
+    }
+}
+
+/* ===== Movimiento reducido ===== */
+@media (prefers-reduced-motion: reduce) {
+    .recordatorios__btn {
+        transition: none;
+    }
+}

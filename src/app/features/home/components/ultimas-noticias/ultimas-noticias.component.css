@@ -431,83 +431,6 @@
     --cat-texto: #7b2c9e;
 }
 
-/* ===================== BARRA DE NOTIFICACIONES ===================== */
-
-.aviso {
-    width: auto;
-    margin: 32px 0 0;
-    transform: none;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 18px 22px;
-    background: #f5f1f3;
-    border: 0.5px solid #e6dce1;
-    border-radius: 12px;
-}
-
-.aviso__icono {
-    width: 48px;
-    height: 48px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    background: var(--tv-wine, #6b1538);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.aviso__icono svg {
-    width: 22px;
-    height: 22px;
-}
-
-.aviso__texto {
-    flex: 1;
-    min-width: 0;
-}
-
-.aviso__titulo {
-    margin: 0 0 2px;
-    font-size: 0.9375rem;
-    font-weight: 800;
-    color: var(--tv-wine, #6b1538);
-}
-
-.aviso__descripcion {
-    margin: 0;
-    font-size: 0.8125rem;
-    color: var(--tv-text-soft, #6f6a70);
-}
-
-.aviso__boton {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-    margin-left: 0;
-    padding: 11px 18px;
-    border: 0;
-    border-radius: 10px;
-    background: var(--tv-wine, #6b1538);
-    color: #fff;
-    font-family: inherit;
-    font-size: 0.8125rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.aviso__boton svg {
-    width: 16px;
-    height: 16px;
-}
-
-.aviso__boton:hover {
-    background: var(--tv-wine-dark, #4d0e28);
-}
-
 /* ===================== RESPONSIVO ===================== */
 @media (max-width: 1180px) {
     .noticias__grid {
@@ -546,18 +469,6 @@
         width: 100%;
         justify-content: center;
     }
-
-    .aviso {
-        flex-direction: column;
-        align-items: flex-start;
-        flex-wrap: nowrap;
-    }
-
-    .aviso__boton {
-        align-self: stretch;
-        justify-content: center;
-        width: auto;
-    }
 }
 
 /* ===================== ACCESIBILIDAD ===================== */
@@ -567,16 +478,14 @@
     .tarjeta,
     .tarjeta__media img,
     .destacada__boton,
-    .destacada__boton svg,
-    .aviso__boton {
+    .destacada__boton svg {
         transition: none !important;
     }
 
     .destacada:hover .destacada__media img,
     .tarjeta:hover,
     .tarjeta:hover .tarjeta__media img,
-    .destacada__boton:hover,
-    .aviso__boton:hover {
+    .destacada__boton:hover {
         transform: none !important;
     }
 }

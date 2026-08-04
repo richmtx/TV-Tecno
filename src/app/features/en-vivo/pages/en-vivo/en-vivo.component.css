@@ -1,0 +1,10 @@
+/* Mismo ancho que la parrilla "HOY, EN TV TECNO" (1300px), centrado,
+   con más aire hacia el footer. */
+app-recordatorios {
+    display: block;
+    width: 100%;
+    max-width: 1365px;
+    margin: 0 auto 80px; /* ↓ más espacio debajo (antes 48px) */
+    padding: 0 32px; /* mismo padding lateral que la parrilla */
+    box-sizing: border-box;
+}

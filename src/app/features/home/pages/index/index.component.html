@@ -4,4 +4,11 @@
 <div class="index__contenido">
   <app-programacion-destacada></app-programacion-destacada>
   <app-ultimas-noticias></app-ultimas-noticias>
+
+  <div class="index__aviso">
+    <app-recordatorios titulo="¡No te pierdas nada!"
+      subtitulo="Activa notificaciones y recibe las noticias más importantes al instante."
+      textoBoton="Activar notificaciones" (activar)="onActivarNotificaciones()">
+    </app-recordatorios>
+  </div>
 </div>

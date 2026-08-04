@@ -39,7 +39,6 @@ export class UltimasNoticiasComponent {
 
   @Output() seleccionar = new EventEmitter<Noticia>();
   @Output() masOpciones = new EventEmitter<Noticia>();
-  @Output() activarNotificaciones = new EventEmitter<void>();
 
   private readonly noticiasPorDefecto: Noticia[] = [
     {
