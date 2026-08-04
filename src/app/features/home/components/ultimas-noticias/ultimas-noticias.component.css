@@ -308,19 +308,6 @@
     transform: scale(1.06);
 }
 
-.tarjeta__fallback {
-    display: grid;
-    place-items: center;
-    width: 100%;
-    height: 100%;
-    color: rgba(255, 255, 255, 0.35);
-}
-
-.tarjeta__placeholder {
-    width: 30px;
-    height: 30px;
-}
-
 .tarjeta__categoria {
     position: absolute;
     left: 0.95rem;

@@ -20,11 +20,7 @@
         @if (destacada; as principal) {
         <article class="destacada" (click)="abrir(principal)">
             <div class="destacada__media">
-                @if (principal.imagen) {
                 <img [src]="principal.imagen" [alt]="principal.titulo" loading="lazy" />
-                } @else {
-                <div class="destacada__fallback" [style.background]="fallbackDestacada"></div>
-                }
             </div>
             <span class="destacada__velo" aria-hidden="true"></span>
 
@@ -101,18 +97,7 @@
             @for (noticia of secundarias; track trackByTitulo($index, noticia); let i = $index) {
             <article class="tarjeta" (click)="abrir(noticia)">
                 <div class="tarjeta__media">
-                    @if (noticia.imagen) {
                     <img [src]="noticia.imagen" [alt]="noticia.titulo" loading="lazy" />
-                    } @else {
-                    <div class="tarjeta__fallback" [style.background]="fallbackFor(i)">
-                        <svg class="tarjeta__placeholder" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                            <circle cx="9" cy="9" r="2" />
-                            <path d="m21 15-3.5-3.5a2 2 0 0 0-2.8 0L6 20" />
-                        </svg>
-                    </div>
-                    }
                 </div>
 
                 <span class="tarjeta__categoria categoria--{{ noticia.categoria }}">

@@ -12,21 +12,13 @@ export interface Noticia {
   titulo: string;
   descripcion: string;
   categoria: CategoriaNoticia;
-  fecha: string;            
-  tiempoLectura: string;  
-  vistas?: number;        
-  imagen?: string;
+  fecha: string;
+  tiempoLectura: string;
+  imagen: string;
+  vistas?: number;
   enlace?: string;
   fechaCorta?: { dia: string; mes: string; anio: string };
 }
-
-const G = {
-  oliva: 'linear-gradient(135deg, #4a3d13, #836d23)',
-  rojo: 'linear-gradient(135deg, #661a20, #b42e38)',
-  morado: 'linear-gradient(135deg, #341830, #5c2c56)',
-  verde: 'linear-gradient(135deg, #022e22, #04513c)',
-  azul: 'linear-gradient(135deg, #191f5a, #2c379d)',
-};
 
 @Component({
   selector: 'app-ultimas-noticias',
@@ -49,8 +41,6 @@ export class UltimasNoticiasComponent {
   @Output() masOpciones = new EventEmitter<Noticia>();
   @Output() activarNotificaciones = new EventEmitter<void>();
 
-  readonly fallbackDestacada = G.oliva;
-
   private readonly noticiasPorDefecto: Noticia[] = [
     {
       titulo: 'Estudiantes del ITD desarrollan sistema de riego inteligente con IA',
@@ -61,6 +51,7 @@ export class UltimasNoticiasComponent {
       fechaCorta: { dia: '2', mes: 'Jun', anio: '2026' },
       tiempoLectura: '5 min de lectura',
       vistas: 1245,
+      imagen: 'assets/desarrollo/EstudiantesIA.png',
     },
     {
       titulo: 'El ITD será sede del Congreso de Tecnología e Innovación 2026',
@@ -69,6 +60,7 @@ export class UltimasNoticiasComponent {
       categoria: 'academico',
       fecha: '1 junio 2026',
       tiempoLectura: '3 min',
+      imagen: 'assets/desarrollo/Congreso.png',
     },
     {
       titulo: 'Firma de convenio con la industria regional de software',
@@ -77,6 +69,7 @@ export class UltimasNoticiasComponent {
       categoria: 'vinculacion',
       fecha: '30 mayo 2026',
       tiempoLectura: '4 min',
+      imagen: 'assets/desarrollo/Convenio.png',
     },
     {
       titulo: 'Estudiantes ganan concurso nacional de robótica',
@@ -85,6 +78,7 @@ export class UltimasNoticiasComponent {
       categoria: 'tecnologia',
       fecha: '28 mayo 2026',
       tiempoLectura: '3 min',
+      imagen: 'assets/desarrollo/Robotica.png',
     },
     {
       titulo: 'Gran presentación del Ballet Folclórico del ITD',
@@ -93,6 +87,7 @@ export class UltimasNoticiasComponent {
       categoria: 'cultura',
       fecha: '25 mayo 2026',
       tiempoLectura: '2 min',
+      imagen: 'assets/desarrollo/BalletF.png',
     },
   ];
 
@@ -104,24 +99,12 @@ export class UltimasNoticiasComponent {
     cultura: 'Cultura',
   };
 
-  private readonly fallbacks: string[] = [
-    G.oliva,
-    G.azul,
-    G.rojo,
-    G.verde,
-    G.morado,
-  ];
-
   constructor() {
     this.noticias = this.noticiasPorDefecto;
   }
 
   etiquetaDe(categoria: CategoriaNoticia): string {
     return this.etiquetas[categoria] ?? 'Noticias';
-  }
-
-  fallbackFor(index: number): string {
-    return this.fallbacks[(index + 1) % this.fallbacks.length];
   }
 
   formatearVistas(vistas?: number): string {
