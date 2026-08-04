@@ -195,6 +195,9 @@
             @for (video of videos; track video.titulo; let i = $index) {
             <article class="video">
                 <div class="video__miniatura" [style.background]="colorMiniatura(i)">
+                    <img class="video__imagen" [src]="video.imagen" [alt]="video.alt || video.titulo"
+                        [loading]="i < 4 ? 'eager' : 'lazy'" decoding="async" />
+
                     <span class="video__duracion">{{ video.duracion }}</span>
                 </div>
 

@@ -11,6 +11,8 @@ interface VideoItem {
   categoria: string;
   descripcion: string;
   duracion: string;
+  imagen: string;
+  alt?: string;
 }
 
 interface OpcionSelect {
@@ -46,52 +48,68 @@ export class VideotecaCatalogoComponent {
       categoria: 'Noticias',
       descripcion: 'Las noticias más relevantes del Instituto Tecnológico de Durango.',
       duracion: '24:35',
+      imagen: '/assets/desarrollo/NoticieroTec.png',
+      alt: 'Set del noticiero de TV Tecno durante una transmisión',
     },
     {
       titulo: 'Conexión Vinculación - Episodio 12',
       categoria: 'Entrevistas',
       descripcion: 'Hablamos con líderes de la industria sobre innovación y colaboración.',
       duracion: '30:12',
+      imagen: '/assets/desarrollo/ConexVin.png',
+      alt: 'Entrevista en estudio con invitados del sector industrial',
     },
     {
       titulo: 'Cultura Durango: Tradición que nos une',
       categoria: 'Cultura',
       descripcion: 'Conoce más sobre nuestras raíces y expresiones culturales.',
       duracion: '15:48',
+      imagen: '/assets/desarrollo/Bailarinas.png',
+      alt: 'Danza tradicional durante un evento cultural en Durango',
     },
     {
       titulo: 'Laboratorio Vivo - Ingeniería Electromecánica',
       categoria: 'Ciencia y Tecnología',
       descripcion: 'Recorrido por los laboratorios y proyectos de nuestros estudiantes.',
       duracion: '22:10',
+      imagen: '/assets/desarrollo/IngElec.png',
+      alt: 'Estudiantes trabajando en el laboratorio de electromecánica',
     },
     {
       titulo: 'Tecno Deportes - Jornada 5',
       categoria: 'Deportes',
       descripcion: 'Resumen de la jornada deportiva de los equipos representativos.',
       duracion: '18:20',
+      imagen: '/assets/desarrollo/Futbol.png',
+      alt: 'Partido de los equipos representativos del ITD',
     },
     {
       titulo: 'Foro de Innovación Educativa 2025',
       categoria: 'Eventos',
       descripcion: 'Cobertura completa del foro con ponentes nacionales e internacionales.',
       duracion: '41:05',
+      imagen: '/assets/desarrollo/ForoInnov.png',
+      alt: 'Ponente en el escenario del Foro de Innovación Educativa',
     },
     {
       titulo: 'Tips para crear mejores videos',
       categoria: 'Educación',
       descripcion: 'Consejos prácticos de producción para creadores de contenido.',
       duracion: '10:22',
+      imagen: '/assets/desarrollo/Videos.png',
+      alt: 'Cámara de video montada en trípode dentro del estudio',
     },
     {
       titulo: 'Entrevista con egresados destacados',
       categoria: 'Entrevistas',
       descripcion: 'Historias de éxito de quienes hoy transforman su industria.',
       duracion: '27:33',
+      imagen: '/assets/desarrollo/EntrevistaEgresados.png',
+      alt: 'Egresado del ITD durante una entrevista en cabina',
     },
   ];
 
-  // Gradientes de ejemplo para las miniaturas mientras no haya imágenes reales.
+  // Gradientes usados como placeholder detrás de la imagen (y respaldo si falla).
   private readonly paleta = [
     'linear-gradient(135deg, #6b1538, #a83f63)',
     'linear-gradient(135deg, #1e2a5a, #3b4d8f)',
