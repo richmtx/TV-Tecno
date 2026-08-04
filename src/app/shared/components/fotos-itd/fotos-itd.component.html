@@ -1,0 +1,29 @@
+<div class="fotos-itd">
+    <div class="fotos-itd__left">
+        <span class="fotos-itd__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                <circle cx="8.5" cy="10" r="1.4"></circle>
+                <path d="m4 17 4.5-4.5 3 3L15 12l5 5"></path>
+            </svg>
+        </span>
+
+        <div class="fotos-itd__text">
+            <h3 class="fotos-itd__title">{{ titulo }}</h3>
+            <p class="fotos-itd__subtitle">{{ subtitulo }}</p>
+        </div>
+    </div>
+
+    <button type="button" class="fotos-itd__btn" (click)="onEnviar()">
+        <span class="fotos-itd__btn-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M6.5 18a4 4 0 0 1-.4-7.98 5.5 5.5 0 0 1 10.62-1.7A3.9 3.9 0 0 1 20.5 18"></path>
+                <polyline points="9.5 12.5 12 10 14.5 12.5"></polyline>
+                <line x1="12" y1="10" x2="12" y2="18"></line>
+            </svg>
+        </span>
+        <span>{{ textoBoton }}</span>
+    </button>
+</div>

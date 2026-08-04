@@ -162,11 +162,6 @@ export class CollageComponent {
     console.log('Ver todas las fotos de', era.years);
   }
 
-  enviarFotos(): void {
-    // TODO: abrir modal o navegar al formulario de envío
-    console.log('Enviar mis fotos');
-  }
-
   trackByEra(_index: number, era: Era): string {
     return era.id;
   }
