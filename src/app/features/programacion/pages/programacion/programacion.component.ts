@@ -3,6 +3,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Programa, DiaSemana } from '../../models/programa.model';
 import { SelectorDiasComponent } from '../../components/selector-dias/selector-dias.component';
 import { ListaProgramacionComponent } from '../../components/lista-programacion/lista-programacion.component';
+import { RecordatoriosComponent } from '../../../../shared/components/recordatorios/recordatorios.component';
 
 const NOMBRES_DIAS = [
   { nombre: 'Lunes', corta: 'lun' },
@@ -62,7 +63,13 @@ const PROGRAMAS_POR_DIA: Record<number, Programa[]> = {
 @Component({
   selector: 'app-programacion',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, SelectorDiasComponent, ListaProgramacionComponent],
+  imports: [
+    CommonModule,
+    NgOptimizedImage,
+    SelectorDiasComponent,
+    ListaProgramacionComponent,
+    RecordatoriosComponent,
+],
   templateUrl: './programacion.component.html',
   styleUrl: './programacion.component.css'
 })

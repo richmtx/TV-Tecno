@@ -118,6 +118,13 @@ app-selector-dias {
     display: block;
 }
 
+app-recordatorios {
+    display: block;
+    max-width: 1300px;
+    margin: 0 auto 5rem;
+    padding: 0 1.5rem;
+}
+
 @media (max-width: 860px) {
     .hero__inner {
         flex-direction: column;
@@ -145,5 +152,10 @@ app-selector-dias {
     .programacion__cuerpo {
         margin-top: -3.25rem;
         padding: 0 1rem 3.5rem;
+    }
+
+    app-recordatorios {
+        margin-bottom: 3.5rem;
+        padding: 0 1rem;
     }
 }
