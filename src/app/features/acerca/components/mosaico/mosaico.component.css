@@ -1,21 +1,30 @@
+/* ============================================================
+   MOSAICO — collage asimétrico
+   Las filas escalan con el viewport (clamp + vw) para que la
+   relación de aspecto de cada recorte no se deforme al bajar
+   de resolución.
+   ============================================================ */
+
 .mosaico {
     background: var(--tv-bg);
-    padding: 8px 48px 88px;
+    padding: 8px clamp(20px, 5vw, 48px) clamp(40px, 7vw, 88px);
 }
 
 .mosaico__inner {
     max-width: 1100px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 380px 320px;
-    gap: 16px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: clamp(250px, 33vw, 380px) clamp(210px, 28vw, 320px);
+    gap: clamp(12px, 1.4vw, 16px);
 }
 
 .mosaico__item {
     position: relative;
     overflow: hidden;
     margin: 0;
+    min-width: 0;
+    min-height: 0;
     border-radius: 12px;
     background: var(--tv-cream);
 }
@@ -46,78 +55,51 @@
     backdrop-filter: blur(4px);
 }
 
-/* Acomodo asimétrico */
+/* ---------- Acomodo asimétrico (3 columnas) ---------- */
+
 .mosaico__item--alta {
     grid-column: 1;
     grid-row: 1 / span 2;
-    margin-top: 56px;
-    margin-bottom: 36px;
+    margin-top: clamp(32px, 4.8vw, 56px);
+    margin-bottom: clamp(20px, 3.2vw, 36px);
 }
 
 .mosaico__item--ancha {
     grid-column: 2 / span 2;
     grid-row: 1;
-    margin-bottom: 28px;
+    margin-bottom: clamp(16px, 2.4vw, 28px);
 }
 
 .mosaico__item--cuadrada {
     grid-column: 2;
     grid-row: 2;
-    margin-top: -28px;
+    margin-top: clamp(-28px, -2.4vw, -16px);
 }
 
 .mosaico__item--desfasada {
     grid-column: 3;
     grid-row: 2;
     align-self: start;
-    height: 264px;
-    margin-top: -28px;
+    height: clamp(180px, 23vw, 264px);
+    margin-top: clamp(-28px, -2.4vw, -16px);
 }
 
-/* Responsivo */
-@media (max-width: 1024px) {
-    .mosaico {
-        padding: 8px 40px 72px;
-    }
+/* ---------- Tablet: 2 columnas (900px → 601px) ---------- */
 
-    .mosaico__inner {
-        grid-template-rows: 320px 270px;
-        gap: 14px;
-    }
-
-    .mosaico__item--alta {
-        margin-top: 44px;
-        margin-bottom: 28px;
-    }
-
-    .mosaico__item--ancha {
-        margin-bottom: 22px;
-    }
-
-    .mosaico__item--cuadrada {
-        margin-top: -22px;
-    }
-
-    .mosaico__item--desfasada {
-        height: 220px;
-        margin-top: -22px;
-    }
-}
-
-@media (max-width: 768px) {
-    .mosaico {
-        padding: 8px 32px 56px;
-    }
-
+@media (max-width: 900px) {
     .mosaico__inner {
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 280px 200px 200px;
+        grid-template-rows:
+            clamp(200px, 31vw, 300px) /* fila 1 */
+            clamp(150px, 23vw, 225px) /* fila 2 */
+            clamp(190px, 36vw, 320px); /* fila 3 (ancho completo) */
+        gap: 14px;
     }
 
     .mosaico__item--alta {
         grid-column: 1;
         grid-row: 1 / span 2;
-        margin-top: 32px;
+        margin-top: clamp(16px, 3.5vw, 32px);
         margin-bottom: 0;
     }
 
@@ -130,7 +112,7 @@
     .mosaico__item--cuadrada {
         grid-column: 2;
         grid-row: 2;
-        margin-top: 24px;
+        margin-top: clamp(12px, 2.6vw, 24px);
     }
 
     .mosaico__item--desfasada {
@@ -138,17 +120,16 @@
         grid-row: 3;
         align-self: stretch;
         height: auto;
+        margin-top: clamp(12px, 2.6vw, 24px);
     }
 }
 
-@media (max-width: 480px) {
-    .mosaico {
-        padding: 8px 20px 40px;
-    }
+/* ---------- Móvil: una columna (≤ 600px) ---------- */
 
+@media (max-width: 600px) {
     .mosaico__inner {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(4, 200px);
+        grid-template-rows: auto;
         gap: 12px;
     }
 
@@ -161,6 +142,20 @@
         align-self: stretch;
         height: auto;
         margin: 0;
+    }
+
+    /* Cada foto conserva su encuadre natural en vez de un alto fijo */
+    .mosaico__item--ancha,
+    .mosaico__item--cuadrada {
+        aspect-ratio: 4 / 3;
+    }
+
+    .mosaico__item--alta {
+        aspect-ratio: 3 / 4; /* toma vertical del monumento */
+    }
+
+    .mosaico__item--desfasada {
+        aspect-ratio: 16 / 9; /* foro musical, toma panorámica */
     }
 }
 
