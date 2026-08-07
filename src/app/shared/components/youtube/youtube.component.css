@@ -1,0 +1,230 @@
+:host {
+    --yt-cta-radius: 20px;
+    --yt-cta-surface: linear-gradient(115deg,
+            #120306 0%,
+            #3a0710 42%,
+            #8e0f1e 72%,
+            #c4121f 100%);
+    --yt-cta-brand: #ff0033;
+    --yt-cta-accent: #ff4d4d;
+    --yt-cta-text: #f0d9dc;
+    --yt-cta-text-soft: #e6c9cd;
+    --yt-cta-divider: rgba(255, 255, 255, 0.18);
+
+    display: block;
+    width: 100%;
+}
+
+.yt-cta {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding: 1.25rem clamp(1rem, 2vw, 2rem);
+}
+
+.yt-cta__inner {
+    padding: 1.5rem clamp(1.5rem, 3vw, 3.5rem);
+    border-radius: var(--yt-cta-radius);
+    background: var(--yt-cta-surface);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 3vw, 3.5rem);
+    align-items: center;
+    overflow: hidden;
+}
+
+/* ---- Bloque principal ---- */
+
+.yt-cta__main {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.25rem, 2vw, 2rem);
+}
+
+.yt-cta__logo {
+    flex: 0 0 auto;
+    width: clamp(72px, 6vw, 96px);
+}
+
+.yt-cta__logo svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.yt-cta__content {
+    min-width: 0;
+}
+
+.yt-cta__title {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-titulo);
+    font-size: clamp(1.375rem, 1.9vw, 1.875rem);
+    font-weight: 500;
+    line-height: 1.15;
+    color: #fff;
+    text-wrap: balance;
+}
+
+.yt-cta__title-accent {
+    color: var(--yt-cta-accent);
+}
+
+.yt-cta__text {
+    margin: 0 0 0.875rem;
+    max-width: 60ch;
+    font-family: var(--font-cuerpo);
+    font-size: clamp(0.8125rem, 0.95vw, 0.9375rem);
+    line-height: 1.5;
+    color: var(--yt-cta-text);
+}
+
+/* ---- Botón ---- */
+
+.yt-cta__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border: 1px solid #6b1220;
+    border-radius: 999px;
+    background: #0e0205;
+    color: #fff;
+    font-family: var(--font-cuerpo);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 0.25s ease, background-color 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.yt-cta__button:hover,
+.yt-cta__button:focus-visible {
+    background: #1a0308;
+    border-color: var(--yt-cta-accent);
+    transform: translateY(-2px);
+}
+
+.yt-cta__button:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+
+.yt-cta__button-brand {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+}
+
+.yt-cta__button-arrow {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 auto;
+    transition: transform 0.25s ease;
+}
+
+.yt-cta__button:hover .yt-cta__button-arrow {
+    transform: translateX(4px);
+}
+
+/* ---- Beneficios ---- */
+
+.yt-cta__features {
+    margin: 0;
+    padding: 0 0 0 clamp(1.5rem, 3vw, 3.5rem);
+    list-style: none;
+    border-left: 1px solid var(--yt-cta-divider);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: start;
+}
+
+.yt-cta__feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.375rem;
+    text-align: center;
+}
+
+.yt-cta__feature-icon {
+    display: block;
+    color: #fff;
+}
+
+.yt-cta__feature-icon svg {
+    display: block;
+    width: 22px;
+    height: 22px;
+}
+
+.yt-cta__feature-title {
+    margin: 0;
+    font-family: var(--font-titulo);
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #fff;
+}
+
+.yt-cta__feature-text {
+    margin: 0;
+    font-family: var(--font-cuerpo);
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    color: var(--yt-cta-text-soft);
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 900px) {
+    .yt-cta__inner {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 1.75rem 1.5rem;
+        gap: 1.75rem;
+    }
+
+    .yt-cta__features {
+        border-left: none;
+        border-top: 1px solid var(--yt-cta-divider);
+        padding: 1.5rem 0 0;
+    }
+}
+
+@media (max-width: 640px) {
+    .yt-cta__main {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .yt-cta__features {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: none;
+        gap: 1.5rem;
+    }
+
+    .yt-cta__feature {
+        grid-row: auto;
+        grid-template-rows: none;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .yt-cta__button,
+    .yt-cta__button-arrow {
+        transition: none;
+    }
+
+    .yt-cta__button:hover,
+    .yt-cta__button:focus-visible {
+        transform: none;
+    }
+
+    .yt-cta__button:hover .yt-cta__button-arrow {
+        transform: none;
+    }
+}

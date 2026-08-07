@@ -4,6 +4,7 @@ import { NoticiasTickerComponent } from "../../components/noticias-ticker/notici
 import { ProgramacionDestacadaComponent } from "../../components/programacion-destacada/programacion-destacada.component";
 import { UltimasNoticiasComponent } from "../../components/ultimas-noticias/ultimas-noticias.component";
 import { RecordatoriosComponent } from "../../../../shared/components/recordatorios/recordatorios.component";
+import { YoutubeComponent } from "../../../../shared/components/youtube/youtube.component";
 
 @Component({
   selector: 'app-index',
@@ -13,8 +14,9 @@ import { RecordatoriosComponent } from "../../../../shared/components/recordator
     NoticiasTickerComponent,
     ProgramacionDestacadaComponent,
     UltimasNoticiasComponent,
-    RecordatoriosComponent
-  ],
+    RecordatoriosComponent,
+    YoutubeComponent
+],
   templateUrl: './index.component.html',
   styleUrl: './index.component.css'
 })
