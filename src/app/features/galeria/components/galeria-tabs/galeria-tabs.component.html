@@ -1,8 +1,7 @@
-<div class="galeria-tabs" role="tablist" [attr.aria-label]="ariaLabel()">
+<nav class="galeria-tabs" [attr.aria-label]="ariaLabel()">
     @for (tab of tabs(); track tab.id) {
-    <button type="button" role="tab" class="galeria-tabs__tab"
-        [class.galeria-tabs__tab--active]="activeTab() === tab.id" [attr.aria-selected]="activeTab() === tab.id"
-        (click)="seleccionar(tab.id)">
+    <a class="galeria-tabs__tab" [routerLink]="['/galeria', tab.ruta]" routerLinkActive="galeria-tabs__tab--active"
+        #rla="routerLinkActive" [attr.aria-current]="rla.isActive ? 'page' : null">
 
         <span class="galeria-tabs__icon" aria-hidden="true">
             @switch (tab.id) {
@@ -41,6 +40,6 @@
         </span>
 
         <span class="galeria-tabs__label">{{ tab.label }}</span>
-    </button>
+    </a>
     }
-</div>
+</nav>

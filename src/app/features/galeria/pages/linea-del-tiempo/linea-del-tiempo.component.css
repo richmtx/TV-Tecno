@@ -1,0 +1,5 @@
+/* Sin estilos propios por ahora: el ancho y los márgenes los
+   resuelven el layout y el componente collage. */
+:host {
+    display: block;
+}

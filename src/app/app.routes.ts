@@ -38,9 +38,7 @@ export const routes: Routes = [
   },
   {
     path: 'galeria',
-    loadComponent: () =>
-      import('./features/galeria/pages/galeria/galeria.component').then(
-        (m) => m.GaleriaComponent
-      ),
+    loadChildren: () =>
+      import('./features/galeria/galeria.routes').then((m) => m.GALERIA_ROUTES),
   },
 ];

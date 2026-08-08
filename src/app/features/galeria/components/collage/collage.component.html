@@ -1,17 +1,6 @@
 <section class="collage" aria-labelledby="collage-title">
-    <h2 id="collage-title" class="collage__sr-only">Galería histórica del ITD</h2>
+    <h2 id="collage-title" class="collage__sr-only">Línea del tiempo del ITD</h2>
 
-    <!-- ============ BARRA DE CONTROLES ============ -->
-    <div class="collage__toolbar">
-
-        <app-galeria-tabs [tabs]="tabs" [activeTab]="activeTab()" (tabChange)="setTab($event)"></app-galeria-tabs>
-
-        <app-barra-filtros [opciones]="filterOptions" [filtroActivo]="activeFilter()" [valorBusqueda]="searchTerm()"
-            (busquedaChange)="onSearch($event)" (filtroChange)="selectFilter($event)"></app-barra-filtros>
-
-    </div>
-
-    <!-- ============ LÍNEA DEL TIEMPO ============ -->
     <div class="collage__timeline">
         @for (era of filteredEras(); track era.id) {
         <article class="collage__era">

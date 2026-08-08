@@ -1,7 +1,6 @@
-import { Component, computed, signal } from '@angular/core';
-import { BarraFiltrosComponent } from '../barra-filtros/barra-filtros.component';
-import { GaleriaTabsComponent } from '../galeria-tabs/galeria-tabs.component';
-import { GaleriaTab, OpcionFiltro, TabId } from '../../models/filtros-galeria.model';
+import { Component, computed, inject } from '@angular/core';
+import { GaleriaFiltrosService } from '../../services/galeria-filtros.service';
+import { OpcionFiltro } from '../../models/filtros-galeria.model';
 
 export interface EraPhoto {
   id: string;
@@ -26,28 +25,24 @@ const G = {
   azul: 'linear-gradient(135deg, #191f5a, #2c379d)'
 };
 
+/** Opciones del menú "Filtrar" para esta sección. */
+const OPCIONES_TIMELINE: OpcionFiltro[] = [
+  'Más recientes',
+  'Más antiguas',
+  'Más vistas',
+  'Blanco y negro'
+];
+
 @Component({
   selector: 'app-collage',
   standalone: true,
-  imports: [GaleriaTabsComponent, BarraFiltrosComponent],
+  imports: [],
   templateUrl: './collage.component.html',
   styleUrl: './collage.component.css'
 })
 export class CollageComponent {
 
-  readonly tabs: GaleriaTab[] = [
-    { id: 'timeline', label: 'Línea del tiempo' },
-    { id: 'albums', label: 'Álbumes' },
-    { id: 'instalaciones', label: 'Instalaciones' },
-    { id: 'estudiantes', label: 'Estudiantes' }
-  ];
-
-  readonly filterOptions: OpcionFiltro[] = [
-    'Más recientes',
-    'Más antiguas',
-    'Más vistas',
-    'Blanco y negro'
-  ];
+  private readonly filtros = inject(GaleriaFiltrosService);
 
   readonly eras: Era[] = [
     {
@@ -117,13 +112,9 @@ export class CollageComponent {
     }
   ];
 
-  readonly activeTab = signal<TabId>('timeline');
-  readonly searchTerm = signal<string>('');
-  readonly activeFilter = signal<OpcionFiltro>('Más recientes');
-
   /** Filtrado en cliente por años, título o descripción. */
   readonly filteredEras = computed<Era[]>(() => {
-    const term = this.searchTerm().trim().toLowerCase();
+    const term = this.filtros.busqueda().trim().toLowerCase();
     if (!term) {
       return this.eras;
     }
@@ -134,16 +125,9 @@ export class CollageComponent {
     );
   });
 
-  setTab(id: TabId): void {
-    this.activeTab.set(id);
-  }
-
-  onSearch(value: string): void {
-    this.searchTerm.set(value);
-  }
-
-  selectFilter(option: OpcionFiltro): void {
-    this.activeFilter.set(option);
+  constructor() {
+    // Declara al layout qué opciones debe mostrar la barra de filtros.
+    this.filtros.configurar(OPCIONES_TIMELINE, 'Buscar fotos...');
   }
 
   verTodas(era: Era): void {

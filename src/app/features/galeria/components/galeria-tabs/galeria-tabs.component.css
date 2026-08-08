@@ -44,7 +44,6 @@
     gap: 0.5rem;
     flex: 0 0 auto;
     padding: 0.65rem 1.05rem;
-    border: none;
     border-radius: 10px;
     background: transparent;
     color: var(--gt-muted);
@@ -52,6 +51,7 @@
     font-size: 0.9rem;
     font-weight: 600;
     line-height: 1.2;
+    text-decoration: none;
     cursor: pointer;
     white-space: nowrap;
     transition: background-color 0.22s ease, color 0.22s ease;

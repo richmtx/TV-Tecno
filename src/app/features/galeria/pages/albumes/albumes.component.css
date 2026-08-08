@@ -1,0 +1,29 @@
+:host {
+    display: block;
+    font-family: 'Raleway', system-ui, sans-serif;
+}
+
+.seccion-galeria {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem 3rem;
+}
+
+.seccion-galeria__titulo {
+    margin: 0 0 0.6rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--tv-wine, #6b1538);
+}
+
+.seccion-galeria__texto {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--tv-text-soft, #6f6a6d);
+}
+
+@media (max-width: 560px) {
+    .seccion-galeria {
+        padding: 1rem 1rem 2.5rem;
+    }
+}
