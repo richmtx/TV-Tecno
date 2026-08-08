@@ -1,0 +1,117 @@
+/* ============================================================
+   INSTALACION-CARD — Tarjeta de instalación (Galería ITD)
+   ============================================================ */
+
+:host {
+    --ic-wine: #6b1538;
+    --ic-wine-soft: #f7edf1;
+    --ic-gold: #c8a96e;
+    --ic-ink: #2b2b2b;
+    --ic-muted: #6f6a6d;
+    --ic-line: #e7e2e4;
+    --ic-surface: #ffffff;
+
+    display: block;
+    font-family: 'Raleway', system-ui, sans-serif;
+}
+
+.instalacion-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    overflow: hidden;
+    text-align: left;
+    background: var(--ic-surface);
+    border: 1px solid var(--ic-line);
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(43, 43, 43, 0.05);
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.instalacion-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(107, 21, 56, 0.28);
+    box-shadow: 0 12px 26px rgba(43, 43, 43, 0.13);
+}
+
+.instalacion-card:focus-visible {
+    outline: 2px solid var(--ic-gold);
+    outline-offset: 3px;
+}
+
+/* --- Portada --- */
+
+.instalacion-card__media {
+    display: block;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+}
+
+.instalacion-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.instalacion-card:hover .instalacion-card__img {
+    transform: scale(1.05);
+}
+
+/* --- Cuerpo --- */
+
+.instalacion-card__body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+    flex: 1 1 auto;
+    padding: 1rem 1.05rem 1.15rem;
+}
+
+.instalacion-card__titulo {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--ic-ink);
+}
+
+.instalacion-card__desc {
+    font-size: 0.83rem;
+    line-height: 1.55;
+    color: var(--ic-muted);
+}
+
+.instalacion-card__etiqueta {
+    margin-top: auto;
+    padding: 0.32rem 0.75rem;
+    border-radius: 999px;
+    background: var(--ic-wine-soft);
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: var(--ic-wine);
+}
+
+/* ============ ACCESIBILIDAD ============ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .instalacion-card,
+    .instalacion-card__img {
+        transition: none !important;
+    }
+
+    .instalacion-card:hover {
+        transform: none;
+    }
+
+    .instalacion-card:hover .instalacion-card__img {
+        transform: none;
+    }
+}

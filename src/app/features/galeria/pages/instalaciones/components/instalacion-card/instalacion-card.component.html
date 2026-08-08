@@ -1,0 +1,15 @@
+<button type="button" class="instalacion-card" (click)="onClick()"
+    [attr.aria-label]="'Ver fotos de ' + instalacion().titulo">
+
+    <span class="instalacion-card__media" [style.background]="instalacion().fallback">
+        <img class="instalacion-card__img" [src]="instalacion().portada" [alt]="instalacion().portadaAlt" loading="lazy"
+            (error)="onImgError($event)" />
+    </span>
+
+    <span class="instalacion-card__body">
+        <span class="instalacion-card__titulo">{{ instalacion().titulo }}</span>
+        <span class="instalacion-card__desc">{{ instalacion().descripcion }}</span>
+        <span class="instalacion-card__etiqueta">{{ instalacion().categoriaLabel }}</span>
+    </span>
+
+</button>

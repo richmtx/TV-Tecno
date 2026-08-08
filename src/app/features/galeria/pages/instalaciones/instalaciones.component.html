@@ -1,1 +1,28 @@
-<p>instalaciones works!</p>
+<section class="instalaciones" aria-labelledby="instalaciones-title">
+    <h2 id="instalaciones-title" class="instalaciones__sr-only">Instalaciones del ITD</h2>
+
+    <div class="instalaciones__chips">
+        <app-chips-categoria [chips]="chips" [activo]="categoriaActiva()"
+            ariaLabel="Filtrar instalaciones por categoría" (seleccion)="onCategoria($event)"></app-chips-categoria>
+    </div>
+
+    @if (instalacionesVisibles().length > 0) {
+
+    <div class="instalaciones__grid">
+        @for (instalacion of instalacionesVisibles(); track instalacion.id) {
+        <app-instalacion-card [instalacion]="instalacion" (abrir)="abrirInstalacion($event)"></app-instalacion-card>
+        }
+    </div>
+
+    @if (totalPaginas() > 1) {
+    <div class="instalaciones__paginacion">
+        <app-paginacion [paginaActual]="paginaActual()" [totalPaginas]="totalPaginas()"
+            (cambioPagina)="irAPagina($event)"></app-paginacion>
+    </div>
+    }
+
+    } @else {
+    <p class="instalaciones__empty">No encontramos instalaciones que coincidan con tu búsqueda.</p>
+    }
+
+</section>

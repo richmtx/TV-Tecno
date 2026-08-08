@@ -1,0 +1,8 @@
+<div class="chips" role="group" [attr.aria-label]="ariaLabel()">
+    @for (chip of chips(); track chip.id) {
+    <button type="button" class="chips__chip" [class.chips__chip--activo]="activo() === chip.id"
+        [attr.aria-pressed]="activo() === chip.id" (click)="onClick(chip.id)">
+        {{ chip.label }}
+    </button>
+    }
+</div>

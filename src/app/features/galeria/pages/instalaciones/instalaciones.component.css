@@ -1,0 +1,96 @@
+/* ============================================================
+   INSTALACIONES — Sección de instalaciones de la Galería ITD
+   ============================================================ */
+
+:host {
+    --in-muted: #6f6a6d;
+
+    display: block;
+    font-family: 'Raleway', system-ui, sans-serif;
+}
+
+.instalaciones {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    overflow-x: clip;
+}
+
+.instalaciones__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* --- Chips --- */
+
+.instalaciones__chips {
+    margin-bottom: 1.75rem;
+}
+
+/* --- Cuadrícula --- */
+
+.instalaciones__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.4rem;
+    align-items: stretch;
+}
+
+/* --- Paginación --- */
+
+.instalaciones__paginacion {
+    margin-top: 2.75rem;
+}
+
+.instalaciones__empty {
+    padding: 3rem 0;
+    text-align: center;
+    color: var(--in-muted);
+    font-size: 0.95rem;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 1080px) {
+    .instalaciones__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.2rem;
+    }
+}
+
+@media (max-width: 860px) {
+    .instalaciones__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 560px) {
+    .instalaciones {
+        padding: 0 1rem;
+    }
+
+    .instalaciones__chips {
+        margin-bottom: 1.4rem;
+    }
+
+    .instalaciones__grid {
+        gap: 1rem;
+    }
+
+    .instalaciones__paginacion {
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .instalaciones__grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
