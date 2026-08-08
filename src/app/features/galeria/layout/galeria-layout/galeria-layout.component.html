@@ -16,7 +16,8 @@
 <router-outlet></router-outlet>
 
 <div class="galeria-layout__cta">
-    <app-fotos-itd (enviar)="onEnviarFotos()"></app-fotos-itd>
+    <app-fotos-itd [titulo]="contenido().fotos.titulo" [subtitulo]="contenido().fotos.subtitulo"
+        [textoBoton]="contenido().fotos.textoBoton" (enviar)="onEnviarFotos()"></app-fotos-itd>
 </div>
 
-<app-historia></app-historia>
+<app-historia [lineas]="contenido().historia.lineas"></app-historia>
