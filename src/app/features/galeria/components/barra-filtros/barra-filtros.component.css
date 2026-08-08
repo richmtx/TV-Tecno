@@ -1,0 +1,238 @@
+/* ============================================================
+   BARRA-FILTROS — Buscador + menú de filtros (Galería ITD)
+   ============================================================ */
+
+:host {
+    --bf-wine: #6b1538;
+    --bf-wine-soft: #f7edf1;
+    --bf-gold: #c8a96e;
+    --bf-ink: #2b2b2b;
+    --bf-muted: #6f6a6d;
+    --bf-line: #e7e2e4;
+    --bf-surface: #ffffff;
+
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 0 1 auto;
+    min-width: 0;
+    font-family: 'Raleway', system-ui, sans-serif;
+    color: var(--bf-ink);
+}
+
+/* --- Buscador --- */
+
+.barra-filtros__search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1 1 220px;
+    min-width: 0;
+}
+
+.barra-filtros__search-input {
+    width: 100%;
+    min-width: 0;
+    padding: 0.85rem 2.9rem 0.85rem 1.1rem;
+    border: 1px solid var(--bf-line);
+    border-radius: 12px;
+    background: var(--bf-surface);
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: var(--bf-ink);
+    transition: border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.barra-filtros__search-input::placeholder {
+    color: #a9a3a6;
+}
+
+.barra-filtros__search-input:focus {
+    outline: none;
+    border-color: var(--bf-wine);
+    box-shadow: 0 0 0 3px rgba(107, 21, 56, 0.1);
+}
+
+.barra-filtros__search-input::-webkit-search-cancel-button {
+    display: none;
+}
+
+.barra-filtros__search-icon {
+    position: absolute;
+    right: 1rem;
+    display: inline-flex;
+    width: 17px;
+    height: 17px;
+    color: var(--bf-wine);
+    pointer-events: none;
+}
+
+.barra-filtros__search-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* --- Filtro --- */
+
+.barra-filtros__filter {
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.barra-filtros__filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.85rem 1.1rem;
+    border: 1px solid var(--bf-line);
+    border-radius: 12px;
+    background: var(--bf-surface);
+    color: var(--bf-ink);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: border-color 0.22s ease, background-color 0.22s ease;
+}
+
+.barra-filtros__filter-btn:hover,
+.barra-filtros__filter-btn--open {
+    border-color: var(--bf-wine);
+    background: var(--bf-wine-soft);
+}
+
+.barra-filtros__filter-btn:focus-visible {
+    outline: 2px solid var(--bf-gold);
+    outline-offset: 2px;
+}
+
+.barra-filtros__filter-icon,
+.barra-filtros__filter-chevron {
+    display: inline-flex;
+    flex: 0 0 auto;
+    color: var(--bf-muted);
+}
+
+.barra-filtros__filter-icon {
+    width: 17px;
+    height: 17px;
+}
+
+.barra-filtros__filter-chevron {
+    width: 15px;
+    height: 15px;
+    transition: transform 0.22s ease;
+}
+
+.barra-filtros__filter-icon svg,
+.barra-filtros__filter-chevron svg {
+    width: 100%;
+    height: 100%;
+}
+
+.barra-filtros__filter-btn--open .barra-filtros__filter-chevron {
+    transform: rotate(180deg);
+}
+
+.barra-filtros__filter-menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    z-index: 20;
+    min-width: 190px;
+    max-width: min(240px, calc(100vw - 2.5rem));
+    margin: 0;
+    padding: 0.4rem;
+    list-style: none;
+    background: var(--bf-surface);
+    border: 1px solid var(--bf-line);
+    border-radius: 12px;
+    box-shadow: 0 12px 28px rgba(43, 43, 43, 0.12);
+    animation: barra-filtros-fade-in 0.18s ease;
+}
+
+.barra-filtros__filter-option {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    text-align: left;
+    font-family: inherit;
+    font-size: 0.87rem;
+    color: var(--bf-ink);
+    cursor: pointer;
+    transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.barra-filtros__filter-option:hover {
+    background: var(--bf-wine-soft);
+    color: var(--bf-wine);
+}
+
+.barra-filtros__filter-option--active {
+    color: var(--bf-wine);
+    font-weight: 700;
+}
+
+/* ============ ANIMACIONES ============ */
+
+@keyframes barra-filtros-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 1080px) {
+    :host {
+        width: 100%;
+    }
+}
+
+@media (max-width: 560px) {
+    :host {
+        flex-wrap: wrap;
+    }
+
+    .barra-filtros__search {
+        flex: 1 1 100%;
+    }
+
+    .barra-filtros__filter {
+        flex: 1 1 100%;
+    }
+
+    .barra-filtros__filter-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .barra-filtros__filter-menu {
+        right: 0;
+        left: 0;
+        max-width: none;
+    }
+}
+
+/* ============ ACCESIBILIDAD ============ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .barra-filtros__filter-chevron,
+    .barra-filtros__filter-menu,
+    .barra-filtros__filter-option,
+    .barra-filtros__filter-btn,
+    .barra-filtros__search-input {
+        transition: none !important;
+        animation: none !important;
+    }
+}

@@ -1,1 +1,52 @@
-<p>barra-filtros works!</p>
+<div class="barra-filtros__search">
+    <input type="search" class="barra-filtros__search-input" [placeholder]="placeholder()"
+        [attr.aria-label]="ariaLabelBusqueda()" [value]="valorBusqueda()" (input)="onSearch($event)" />
+
+    <span class="barra-filtros__search-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="11" cy="11" r="6.5"></circle>
+            <line x1="16" y1="16" x2="21" y2="21"></line>
+        </svg>
+    </span>
+</div>
+
+<div class="barra-filtros__filter">
+    <button type="button" class="barra-filtros__filter-btn" [class.barra-filtros__filter-btn--open]="isFilterOpen()"
+        [attr.aria-expanded]="isFilterOpen()" aria-haspopup="listbox" (click)="toggleFilter()">
+
+        <span class="barra-filtros__filter-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                <line x1="4" y1="7" x2="20" y2="7"></line>
+                <line x1="4" y1="12" x2="20" y2="12"></line>
+                <line x1="4" y1="17" x2="20" y2="17"></line>
+                <circle cx="9" cy="7" r="2" fill="var(--bf-surface)"></circle>
+                <circle cx="15" cy="12" r="2" fill="var(--bf-surface)"></circle>
+                <circle cx="8" cy="17" r="2" fill="var(--bf-surface)"></circle>
+            </svg>
+        </span>
+
+        <span class="barra-filtros__filter-label">{{ etiquetaFiltro() }}</span>
+
+        <span class="barra-filtros__filter-chevron" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </span>
+    </button>
+
+    @if (isFilterOpen()) {
+    <ul class="barra-filtros__filter-menu" role="listbox">
+        @for (option of opciones(); track option) {
+        <li>
+            <button type="button" role="option" class="barra-filtros__filter-option"
+                [class.barra-filtros__filter-option--active]="filtroActivo() === option"
+                [attr.aria-selected]="filtroActivo() === option" (click)="selectFilter(option)">
+                {{ option }}
+            </button>
+        </li>
+        }
+    </ul>
+    }
+</div>

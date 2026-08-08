@@ -1,6 +1,8 @@
 /* ============================================================
-   COLLAGE — Galería ITD (TV Tecno)
+   COLLAGE — Línea del tiempo, Galería ITD (TV Tecno)
    Paleta: vino #6b1538 · dorado #c8a96e · Raleway
+   Las pestañas y la barra de filtros viven en sus propios
+   componentes (galeria-tabs, barra-filtros).
    ============================================================ */
 
 :host {
@@ -48,246 +50,6 @@
     flex-wrap: wrap;
     min-width: 0;
     margin-bottom: 3rem;
-}
-
-/* --- Tabs --- */
-
-.collage__tabs {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    flex: 0 1 auto;
-    min-width: 0;
-    max-width: 100%;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding: 0.4rem;
-    background: var(--collage-surface);
-    border: 1px solid var(--collage-line);
-    border-radius: 14px;
-    box-shadow: 0 1px 2px rgba(43, 43, 43, 0.04);
-}
-
-.collage__tabs::-webkit-scrollbar {
-    display: none;
-}
-
-.collage__tab {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    flex: 0 0 auto;
-    padding: 0.65rem 1.05rem;
-    border: none;
-    border-radius: 10px;
-    background: transparent;
-    color: var(--collage-muted);
-    font-family: inherit;
-    font-size: 0.9rem;
-    font-weight: 600;
-    line-height: 1.2;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background-color 0.22s ease, color 0.22s ease;
-}
-
-.collage__tab:hover {
-    background: var(--collage-wine-soft);
-    color: var(--collage-wine);
-}
-
-.collage__tab--active,
-.collage__tab--active:hover {
-    background: var(--collage-wine);
-    color: #fff;
-    box-shadow: 0 2px 8px rgba(107, 21, 56, 0.22);
-}
-
-.collage__tab:focus-visible {
-    outline: 2px solid var(--collage-gold);
-    outline-offset: 2px;
-}
-
-.collage__tab-icon {
-    display: inline-flex;
-    flex: 0 0 auto;
-    width: 17px;
-    height: 17px;
-}
-
-.collage__tab-icon svg {
-    width: 100%;
-    height: 100%;
-}
-
-.collage__tab-label {
-    min-width: 0;
-}
-
-/* --- Herramientas (buscador + filtro) --- */
-
-.collage__tools {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    flex: 0 1 auto;
-    min-width: 0;
-}
-
-.collage__search {
-    position: relative;
-    display: flex;
-    align-items: center;
-    flex: 1 1 220px;
-    min-width: 0;
-}
-
-.collage__search-input {
-    width: 100%;
-    min-width: 0;
-    padding: 0.85rem 2.9rem 0.85rem 1.1rem;
-    border: 1px solid var(--collage-line);
-    border-radius: 12px;
-    background: var(--collage-surface);
-    font-family: inherit;
-    font-size: 0.9rem;
-    color: var(--collage-ink);
-    transition: border-color 0.22s ease, box-shadow 0.22s ease;
-}
-
-.collage__search-input::placeholder {
-    color: #a9a3a6;
-}
-
-.collage__search-input:focus {
-    outline: none;
-    border-color: var(--collage-wine);
-    box-shadow: 0 0 0 3px rgba(107, 21, 56, 0.1);
-}
-
-.collage__search-input::-webkit-search-cancel-button {
-    display: none;
-}
-
-.collage__search-icon {
-    position: absolute;
-    right: 1rem;
-    display: inline-flex;
-    width: 17px;
-    height: 17px;
-    color: var(--collage-wine);
-    pointer-events: none;
-}
-
-.collage__search-icon svg {
-    width: 100%;
-    height: 100%;
-}
-
-/* Filtro */
-.collage__filter {
-    position: relative;
-    flex: 0 0 auto;
-}
-
-.collage__filter-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-    padding: 0.85rem 1.1rem;
-    border: 1px solid var(--collage-line);
-    border-radius: 12px;
-    background: var(--collage-surface);
-    color: var(--collage-ink);
-    font-family: inherit;
-    font-size: 0.9rem;
-    font-weight: 600;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: border-color 0.22s ease, background-color 0.22s ease;
-}
-
-.collage__filter-btn:hover,
-.collage__filter-btn--open {
-    border-color: var(--collage-wine);
-    background: var(--collage-wine-soft);
-}
-
-.collage__filter-btn:focus-visible {
-    outline: 2px solid var(--collage-gold);
-    outline-offset: 2px;
-}
-
-.collage__filter-icon,
-.collage__filter-chevron {
-    display: inline-flex;
-    flex: 0 0 auto;
-    color: var(--collage-muted);
-}
-
-.collage__filter-icon {
-    width: 17px;
-    height: 17px;
-}
-
-.collage__filter-chevron {
-    width: 15px;
-    height: 15px;
-    transition: transform 0.22s ease;
-}
-
-.collage__filter-icon svg,
-.collage__filter-chevron svg {
-    width: 100%;
-    height: 100%;
-}
-
-.collage__filter-btn--open .collage__filter-chevron {
-    transform: rotate(180deg);
-}
-
-.collage__filter-menu {
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    right: 0;
-    z-index: 20;
-    min-width: 190px;
-    max-width: min(240px, calc(100vw - 2.5rem));
-    margin: 0;
-    padding: 0.4rem;
-    list-style: none;
-    background: var(--collage-surface);
-    border: 1px solid var(--collage-line);
-    border-radius: 12px;
-    box-shadow: 0 12px 28px rgba(43, 43, 43, 0.12);
-    animation: collage-fade-in 0.18s ease;
-}
-
-.collage__filter-option {
-    width: 100%;
-    padding: 0.6rem 0.8rem;
-    border: none;
-    border-radius: 8px;
-    background: transparent;
-    text-align: left;
-    font-family: inherit;
-    font-size: 0.87rem;
-    color: var(--collage-ink);
-    cursor: pointer;
-    transition: background-color 0.18s ease, color 0.18s ease;
-}
-
-.collage__filter-option:hover {
-    background: var(--collage-wine-soft);
-    color: var(--collage-wine);
-}
-
-.collage__filter-option--active {
-    color: var(--collage-wine);
-    font-weight: 700;
 }
 
 /* ============ LÍNEA DEL TIEMPO ============ */
@@ -483,46 +245,12 @@
     font-size: 0.95rem;
 }
 
-/* ============ ANIMACIONES ============ */
-
-@keyframes collage-fade-in {
-    from {
-        opacity: 0;
-        transform: translateY(-6px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 /* ============ RESPONSIVE ============ */
 
-/* --- Tabs y tools ya no caben cómodos en una fila --- */
 @media (max-width: 1080px) {
     .collage__toolbar {
         flex-direction: column;
         align-items: stretch;
-    }
-
-    .collage__tabs {
-        flex: 0 0 auto;
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        overflow-x: visible;
-    }
-
-    .collage__tab {
-        flex: initial;
-        width: 100%;
-        padding: 0.65rem 0.6rem;
-        font-size: 0.86rem;
-    }
-
-    .collage__tools {
-        width: 100%;
     }
 
     .collage__era {
@@ -541,27 +269,7 @@
     }
 }
 
-/* --- Las etiquetas largas ya no caben junto al icono --- */
 @media (max-width: 860px) {
-    .collage__tabs {
-        gap: 0.2rem;
-        padding: 0.35rem;
-    }
-
-    .collage__tab {
-        flex-direction: column;
-        gap: 0.35rem;
-        padding: 0.6rem 0.35rem;
-        font-size: 0.76rem;
-        text-align: center;
-    }
-
-    .collage__tab-label {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 100%;
-    }
-
     .collage__era {
         grid-template-columns: 1fr;
     }
@@ -576,7 +284,6 @@
     }
 }
 
-/* --- Móvil: tabs en 2×2, tools apilados --- */
 @media (max-width: 560px) {
     .collage {
         padding: 0 1rem 0;
@@ -585,42 +292,6 @@
     .collage__toolbar {
         gap: 0.75rem;
         margin-bottom: 2.25rem;
-    }
-
-    .collage__tabs {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.3rem;
-        border-radius: 16px;
-    }
-
-    .collage__tab {
-        flex-direction: row;
-        gap: 0.45rem;
-        padding: 0.7rem 0.5rem;
-        font-size: 0.82rem;
-    }
-
-    .collage__tools {
-        flex-wrap: wrap;
-    }
-
-    .collage__search {
-        flex: 1 1 100%;
-    }
-
-    .collage__filter {
-        flex: 1 1 100%;
-    }
-
-    .collage__filter-btn {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .collage__filter-menu {
-        right: 0;
-        left: 0;
-        max-width: none;
     }
 
     .collage__timeline {
@@ -636,37 +307,19 @@
     }
 }
 
-/* --- Pantallas muy angostas: una columna de tabs sería excesivo,
-       se mantiene 2×2 pero sin etiquetas largas apretadas --- */
-@media (max-width: 380px) {
-    .collage__tab {
-        flex-direction: column;
-        gap: 0.3rem;
-        font-size: 0.74rem;
-    }
-}
-
 /* ============ ACCESIBILIDAD ============ */
 
 @media (prefers-reduced-motion: reduce) {
 
-    .collage__tab,
     .collage__photo,
-    .collage__photo-img,
     .collage__see-all,
-    .collage__see-all-arrow,
-    .collage__filter-chevron,
-    .collage__filter-menu {
+    .collage__see-all-arrow {
         transition: none !important;
         animation: none !important;
     }
 
     .collage__photo:hover,
     .collage__see-all:hover {
-        transform: none;
-    }
-
-    .collage__photo:hover .collage__photo-img {
         transform: none;
     }
 }

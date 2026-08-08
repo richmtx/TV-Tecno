@@ -1,12 +1,7 @@
 import { Component, computed, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
-export type TabId = 'timeline' | 'albums' | 'instalaciones' | 'estudiantes';
-
-export interface GaleriaTab {
-  id: TabId;
-  label: string;
-}
+import { BarraFiltrosComponent } from '../barra-filtros/barra-filtros.component';
+import { GaleriaTabsComponent } from '../galeria-tabs/galeria-tabs.component';
+import { GaleriaTab, OpcionFiltro, TabId } from '../../models/filtros-galeria.model';
 
 export interface EraPhoto {
   id: string;
@@ -34,7 +29,7 @@ const G = {
 @Component({
   selector: 'app-collage',
   standalone: true,
-  imports: [FormsModule],
+  imports: [GaleriaTabsComponent, BarraFiltrosComponent],
   templateUrl: './collage.component.html',
   styleUrl: './collage.component.css'
 })
@@ -47,7 +42,7 @@ export class CollageComponent {
     { id: 'estudiantes', label: 'Estudiantes' }
   ];
 
-  readonly filterOptions: string[] = [
+  readonly filterOptions: OpcionFiltro[] = [
     'Más recientes',
     'Más antiguas',
     'Más vistas',
@@ -124,8 +119,7 @@ export class CollageComponent {
 
   readonly activeTab = signal<TabId>('timeline');
   readonly searchTerm = signal<string>('');
-  readonly isFilterOpen = signal<boolean>(false);
-  readonly activeFilter = signal<string>('Más recientes');
+  readonly activeFilter = signal<OpcionFiltro>('Más recientes');
 
   /** Filtrado en cliente por años, título o descripción. */
   readonly filteredEras = computed<Era[]>(() => {
@@ -148,21 +142,12 @@ export class CollageComponent {
     this.searchTerm.set(value);
   }
 
-  toggleFilter(): void {
-    this.isFilterOpen.update(open => !open);
-  }
-
-  selectFilter(option: string): void {
+  selectFilter(option: OpcionFiltro): void {
     this.activeFilter.set(option);
-    this.isFilterOpen.set(false);
   }
 
   verTodas(era: Era): void {
     // TODO: navegar al álbum completo de la época
     console.log('Ver todas las fotos de', era.years);
-  }
-
-  trackByEra(_index: number, era: Era): string {
-    return era.id;
   }
 }

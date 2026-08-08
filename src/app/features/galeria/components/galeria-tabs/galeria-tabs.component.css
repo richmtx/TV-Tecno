@@ -1,0 +1,165 @@
+/* ============================================================
+   GALERIA-TABS — Navegación de la Galería ITD
+   ============================================================ */
+
+:host {
+    --gt-wine: #6b1538;
+    --gt-wine-soft: #f7edf1;
+    --gt-gold: #c8a96e;
+    --gt-muted: #6f6a6d;
+    --gt-line: #e7e2e4;
+    --gt-surface: #ffffff;
+
+    display: block;
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    font-family: 'Raleway', system-ui, sans-serif;
+}
+
+.galeria-tabs {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    min-width: 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0.4rem;
+    background: var(--gt-surface);
+    border: 1px solid var(--gt-line);
+    border-radius: 14px;
+    box-shadow: 0 1px 2px rgba(43, 43, 43, 0.04);
+}
+
+.galeria-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.galeria-tabs__tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex: 0 0 auto;
+    padding: 0.65rem 1.05rem;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--gt-muted);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.22s ease, color 0.22s ease;
+}
+
+.galeria-tabs__tab:hover {
+    background: var(--gt-wine-soft);
+    color: var(--gt-wine);
+}
+
+.galeria-tabs__tab--active,
+.galeria-tabs__tab--active:hover {
+    background: var(--gt-wine);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(107, 21, 56, 0.22);
+}
+
+.galeria-tabs__tab:focus-visible {
+    outline: 2px solid var(--gt-gold);
+    outline-offset: 2px;
+}
+
+.galeria-tabs__icon {
+    display: inline-flex;
+    flex: 0 0 auto;
+    width: 17px;
+    height: 17px;
+}
+
+.galeria-tabs__icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.galeria-tabs__label {
+    min-width: 0;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 1080px) {
+    :host {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+    .galeria-tabs {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        overflow-x: visible;
+    }
+
+    .galeria-tabs__tab {
+        flex: initial;
+        width: 100%;
+        padding: 0.65rem 0.6rem;
+        font-size: 0.86rem;
+    }
+}
+
+@media (max-width: 860px) {
+    .galeria-tabs {
+        gap: 0.2rem;
+        padding: 0.35rem;
+    }
+
+    .galeria-tabs__tab {
+        flex-direction: column;
+        gap: 0.35rem;
+        padding: 0.6rem 0.35rem;
+        font-size: 0.76rem;
+        text-align: center;
+    }
+
+    .galeria-tabs__label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 560px) {
+    .galeria-tabs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.3rem;
+        border-radius: 16px;
+    }
+
+    .galeria-tabs__tab {
+        flex-direction: row;
+        gap: 0.45rem;
+        padding: 0.7rem 0.5rem;
+        font-size: 0.82rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .galeria-tabs__tab {
+        flex-direction: column;
+        gap: 0.3rem;
+        font-size: 0.74rem;
+    }
+}
+
+/* ============ ACCESIBILIDAD ============ */
+
+@media (prefers-reduced-motion: reduce) {
+    .galeria-tabs__tab {
+        transition: none !important;
+    }
+}
