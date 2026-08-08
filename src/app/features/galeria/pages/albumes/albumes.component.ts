@@ -1,6 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { AlbumCardComponent } from './components/album-card/album-card.component';
-import { PaginacionComponent } from './components/paginacion/paginacion.component';
+import { PaginacionComponent } from '../../components/paginacion/paginacion.component';
 import { GaleriaFiltrosService } from '../../services/galeria-filtros.service';
 import { OpcionFiltro } from '../../models/filtros-galeria.model';
 import { Album } from '../../models/album.model';

@@ -1,1 +1,30 @@
-<p>estudiantes works!</p>
+<section class="estudiantes" aria-labelledby="estudiantes-title">
+
+    <header class="estudiantes__encabezado">
+        <h2 id="estudiantes-title" class="estudiantes__titulo">Explora la vida estudiantil</h2>
+    </header>
+
+    @if (momentosVisibles().length > 0) {
+
+    <div class="estudiantes__grid">
+        @for (momento of momentosVisibles(); track momento.id) {
+        <app-momento-card [momento]="momento" (abrir)="abrirMomento($event)"></app-momento-card>
+        }
+    </div>
+
+    @if (totalPaginas() > 1) {
+    <div class="estudiantes__paginacion">
+        <app-paginacion [paginaActual]="paginaActual()" [totalPaginas]="totalPaginas()"
+            (cambioPagina)="irAPagina($event)"></app-paginacion>
+    </div>
+    }
+
+    } @else {
+    <p class="estudiantes__empty">No encontramos momentos que coincidan con tu búsqueda.</p>
+    }
+
+    <div class="estudiantes__cierre">
+        <app-cierre-estudiantes [testimonio]="testimonio" (irAlPortal)="onIrAlPortal()"></app-cierre-estudiantes>
+    </div>
+
+</section>

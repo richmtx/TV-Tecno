@@ -1,0 +1,237 @@
+/* ============================================================
+   CIERRE-ESTUDIANTES — Testimonio + portal estudiantil
+   ============================================================ */
+
+:host {
+    --ce-wine: #6b1538;
+    --ce-wine-dark: #4d0e28;
+    --ce-wine-soft: #f7edf1;
+    --ce-gold: #c8a96e;
+    --ce-ink: #2b2b2b;
+    --ce-muted: #6f6a6d;
+
+    display: block;
+    font-family: 'Raleway', system-ui, sans-serif;
+}
+
+.cierre {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+/* ============ TESTIMONIO ============ */
+
+.cierre__testimonio {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.1rem;
+    margin: 0;
+    padding: 2.5rem 2.25rem;
+    border-radius: 16px;
+    background: var(--ce-wine-soft);
+    overflow: hidden;
+}
+
+.cierre__comillas {
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    color: var(--ce-wine);
+}
+
+.cierre__comillas svg {
+    width: 100%;
+    height: 100%;
+}
+
+.cierre__cita {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 500;
+    font-style: italic;
+    line-height: 1.65;
+    color: var(--ce-ink);
+}
+
+.cierre__autor {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ce-muted);
+}
+
+/* ============ LLAMADA AL PORTAL ============ */
+
+.cierre__cta {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+    align-items: stretch;
+    min-height: 260px;
+    border-radius: 16px;
+    background: var(--ce-wine);
+    overflow: hidden;
+}
+
+.cierre__cta-contenido {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 2.25rem 1.5rem 2.25rem 2rem;
+}
+
+.cierre__cta-titulo {
+    margin: 0;
+    font-size: 1.32rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #fff;
+}
+
+.cierre__cta-texto {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.cierre__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 0.35rem;
+    padding: 0.8rem 1.35rem;
+    border: none;
+    border-radius: 10px;
+    background: #fff;
+    color: var(--ce-wine);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.cierre__cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+}
+
+.cierre__cta-btn:focus-visible {
+    outline: 2px solid var(--ce-gold);
+    outline-offset: 3px;
+}
+
+.cierre__cta-btn-icon {
+    display: inline-flex;
+    flex: 0 0 auto;
+    width: 16px;
+    height: 16px;
+}
+
+.cierre__cta-btn-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* --- Columna de la fotografía --- */
+
+.cierre__cta-media {
+    position: relative;
+    overflow: hidden;
+}
+
+.cierre__cta-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* Degradado que funde el borde izquierdo de la foto con el vino. */
+.cierre__cta-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+            var(--ce-wine) 0%,
+            rgba(107, 21, 56, 0.55) 35%,
+            rgba(107, 21, 56, 0.12) 70%,
+            rgba(107, 21, 56, 0) 100%);
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 1080px) {
+    .cierre__cta {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 0.65fr);
+    }
+
+    .cierre__cta-contenido {
+        padding: 2rem 1.25rem 2rem 1.75rem;
+    }
+}
+
+@media (max-width: 860px) {
+    .cierre {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .cierre__cta {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+    }
+}
+
+@media (max-width: 560px) {
+    .cierre__testimonio {
+        padding: 2rem 1.5rem;
+    }
+
+    .cierre__cita {
+        font-size: 0.98rem;
+    }
+
+    /* La foto pasa a ser una banda superior para no comprimir el texto. */
+    .cierre__cta {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: 150px auto;
+        min-height: 0;
+    }
+
+    .cierre__cta-media {
+        grid-row: 1;
+    }
+
+    .cierre__cta-media::after {
+        background: linear-gradient(180deg,
+                rgba(107, 21, 56, 0) 0%,
+                rgba(107, 21, 56, 0.2) 55%,
+                rgba(107, 21, 56, 0.75) 85%,
+                var(--ce-wine) 100%);
+    }
+
+    .cierre__cta-contenido {
+        grid-row: 2;
+        padding: 0.5rem 1.5rem 1.75rem;
+    }
+}
+
+/* ============ ACCESIBILIDAD ============ */
+
+@media (prefers-reduced-motion: reduce) {
+    .cierre__cta-btn {
+        transition: none !important;
+    }
+
+    .cierre__cta-btn:hover {
+        transform: none;
+    }
+}

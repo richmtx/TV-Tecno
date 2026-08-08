@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { InstalacionCardComponent } from './components/instalacion-card/instalacion-card.component';
 import { ChipsCategoriaComponent } from './components/chips-categoria/chips-categoria.component';
-import { PaginacionComponent } from '../albumes/components/paginacion/paginacion.component';
+import { PaginacionComponent } from '../../components/paginacion/paginacion.component';
 import { GaleriaFiltrosService } from '../../services/galeria-filtros.service';
 import { OpcionFiltro } from '../../models/filtros-galeria.model';
 import { ChipCategoria, Instalacion } from '../../models/instalacion.model';

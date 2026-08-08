@@ -1,0 +1,121 @@
+/* ============================================================
+   ESTUDIANTES — Sección de vida estudiantil (Galería ITD)
+   ============================================================ */
+
+:host {
+    --es-wine: #6b1538;
+    --es-ink: #2b2b2b;
+    --es-muted: #6f6a6d;
+
+    display: block;
+    font-family: 'Raleway', system-ui, sans-serif;
+}
+
+.estudiantes {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    overflow-x: clip;
+}
+
+/* --- Encabezado --- */
+
+.estudiantes__encabezado {
+    margin-bottom: 1.75rem;
+}
+
+.estudiantes__titulo {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding-bottom: 0.55rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--es-wine);
+}
+
+.estudiantes__titulo::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 42px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--es-wine);
+}
+
+/* --- Cuadrícula --- */
+
+.estudiantes__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.4rem;
+    align-items: stretch;
+}
+
+/* --- Paginación --- */
+
+.estudiantes__paginacion {
+    margin-top: 2.5rem;
+}
+
+.estudiantes__empty {
+    padding: 3rem 0;
+    text-align: center;
+    color: var(--es-muted);
+    font-size: 0.95rem;
+}
+
+/* --- Cierre --- */
+
+.estudiantes__cierre {
+    margin-top: 3rem;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 1080px) {
+    .estudiantes__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.2rem;
+    }
+}
+
+@media (max-width: 860px) {
+    .estudiantes__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 560px) {
+    .estudiantes {
+        padding: 0 1rem;
+    }
+
+    .estudiantes__encabezado {
+        margin-bottom: 1.4rem;
+    }
+
+    .estudiantes__titulo {
+        font-size: 1.2rem;
+    }
+
+    .estudiantes__grid {
+        gap: 1rem;
+    }
+
+    .estudiantes__paginacion {
+        margin-top: 2rem;
+    }
+
+    .estudiantes__cierre {
+        margin-top: 2.25rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .estudiantes__grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

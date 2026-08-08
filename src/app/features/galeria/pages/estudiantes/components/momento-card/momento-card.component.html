@@ -1,0 +1,25 @@
+<button type="button" class="momento-card" (click)="onClick()"
+    [attr.aria-label]="'Ver ' + momento().titulo + ', ' + momento().totalFotos + ' fotos'">
+
+    <span class="momento-card__media" [style.background]="momento().fallback">
+        <img class="momento-card__img" [src]="momento().portada" [alt]="momento().portadaAlt" loading="lazy"
+            (error)="onImgError($event)" />
+    </span>
+
+    <span class="momento-card__body">
+        <span class="momento-card__titulo">{{ momento().titulo }}</span>
+
+        <span class="momento-card__meta">
+            <span class="momento-card__meta-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                    <circle cx="8.5" cy="10" r="1.4"></circle>
+                    <path d="m4 17 4.5-4.5 3 3L15 12l5 5"></path>
+                </svg>
+            </span>
+            <span class="momento-card__meta-texto">{{ momento().totalFotos }} fotos</span>
+        </span>
+    </span>
+
+</button>

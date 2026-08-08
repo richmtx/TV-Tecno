@@ -1,0 +1,47 @@
+<div class="cierre">
+
+    <!-- Testimonio -->
+    <figure class="cierre__testimonio">
+        <span class="cierre__comillas" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M9.5 5.5c-3 1.6-4.8 4.2-4.8 7.4 0 3.2 1.9 5.6 4.6 5.6 2.2 0 3.8-1.6 3.8-3.7 0-2-1.4-3.5-3.3-3.5-.4 0-.8.1-1 .2.4-1.7 1.6-3.2 3.4-4.3zm9.3 0c-3 1.6-4.8 4.2-4.8 7.4 0 3.2 1.9 5.6 4.6 5.6 2.2 0 3.8-1.6 3.8-3.7 0-2-1.4-3.5-3.3-3.5-.4 0-.8.1-1 .2.4-1.7 1.6-3.2 3.4-4.3z">
+                </path>
+            </svg>
+        </span>
+
+        <blockquote class="cierre__cita">{{ testimonio().cita }}</blockquote>
+
+        <figcaption class="cierre__autor">
+            – {{ testimonio().autor }}, {{ testimonio().carrera }}
+        </figcaption>
+    </figure>
+
+    <!-- Llamada al portal -->
+    <div class="cierre__cta">
+
+        <div class="cierre__cta-contenido">
+            <h3 class="cierre__cta-titulo">{{ ctaTitulo() }}</h3>
+            <p class="cierre__cta-texto">{{ ctaTexto() }}</p>
+
+            <button type="button" class="cierre__cta-btn" (click)="onPortal()">
+                <span>{{ ctaBoton() }}</span>
+                <span class="cierre__cta-btn-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M14 4h6v6"></path>
+                        <path d="M20 4 12 12"></path>
+                        <path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path>
+                    </svg>
+                </span>
+            </button>
+        </div>
+
+        <!-- Columna reservada para la fotografía -->
+        <div class="cierre__cta-media" [style.background]="ctaFallback()" aria-hidden="true">
+            <img class="cierre__cta-img" [src]="ctaImagen()" alt="" loading="lazy" (error)="onImgError($event)" />
+        </div>
+
+    </div>
+
+</div>
