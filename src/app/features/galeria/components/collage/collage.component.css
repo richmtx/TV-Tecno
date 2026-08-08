@@ -23,6 +23,7 @@
     max-width: 1180px;
     margin: 0 auto;
     padding: 0 1.5rem 0;
+    overflow-x: clip;
 }
 
 .collage__sr-only {
@@ -43,15 +44,25 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.5rem;
+    gap: 1rem 1.5rem;
     flex-wrap: wrap;
+    min-width: 0;
     margin-bottom: 3rem;
 }
+
+/* --- Tabs --- */
 
 .collage__tabs {
     display: flex;
     align-items: center;
     gap: 0.25rem;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
     padding: 0.4rem;
     background: var(--collage-surface);
     border: 1px solid var(--collage-line);
@@ -59,10 +70,16 @@
     box-shadow: 0 1px 2px rgba(43, 43, 43, 0.04);
 }
 
+.collage__tabs::-webkit-scrollbar {
+    display: none;
+}
+
 .collage__tab {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
+    flex: 0 0 auto;
     padding: 0.65rem 1.05rem;
     border: none;
     border-radius: 10px;
@@ -71,6 +88,7 @@
     font-family: inherit;
     font-size: 0.9rem;
     font-weight: 600;
+    line-height: 1.2;
     cursor: pointer;
     white-space: nowrap;
     transition: background-color 0.22s ease, color 0.22s ease;
@@ -88,8 +106,14 @@
     box-shadow: 0 2px 8px rgba(107, 21, 56, 0.22);
 }
 
+.collage__tab:focus-visible {
+    outline: 2px solid var(--collage-gold);
+    outline-offset: 2px;
+}
+
 .collage__tab-icon {
     display: inline-flex;
+    flex: 0 0 auto;
     width: 17px;
     height: 17px;
 }
@@ -99,21 +123,31 @@
     height: 100%;
 }
 
+.collage__tab-label {
+    min-width: 0;
+}
+
+/* --- Herramientas (buscador + filtro) --- */
+
 .collage__tools {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    flex: 0 1 auto;
+    min-width: 0;
 }
 
-/* Buscador */
 .collage__search {
     position: relative;
     display: flex;
     align-items: center;
+    flex: 1 1 220px;
+    min-width: 0;
 }
 
 .collage__search-input {
-    width: 260px;
+    width: 100%;
+    min-width: 0;
     padding: 0.85rem 2.9rem 0.85rem 1.1rem;
     border: 1px solid var(--collage-line);
     border-radius: 12px;
@@ -156,6 +190,7 @@
 /* Filtro */
 .collage__filter {
     position: relative;
+    flex: 0 0 auto;
 }
 
 .collage__filter-btn {
@@ -170,6 +205,7 @@
     font-family: inherit;
     font-size: 0.9rem;
     font-weight: 600;
+    white-space: nowrap;
     cursor: pointer;
     transition: border-color 0.22s ease, background-color 0.22s ease;
 }
@@ -180,9 +216,15 @@
     background: var(--collage-wine-soft);
 }
 
+.collage__filter-btn:focus-visible {
+    outline: 2px solid var(--collage-gold);
+    outline-offset: 2px;
+}
+
 .collage__filter-icon,
 .collage__filter-chevron {
     display: inline-flex;
+    flex: 0 0 auto;
     color: var(--collage-muted);
 }
 
@@ -213,6 +255,7 @@
     right: 0;
     z-index: 20;
     min-width: 190px;
+    max-width: min(240px, calc(100vw - 2.5rem));
     margin: 0;
     padding: 0.4rem;
     list-style: none;
@@ -304,6 +347,7 @@
 
 /* Info de la época */
 .collage__era-info {
+    min-width: 0;
     padding-right: 0.75rem;
 }
 
@@ -345,6 +389,7 @@
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 1.1rem;
+    min-width: 0;
 }
 
 .collage__photo {
@@ -377,12 +422,10 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-
     width: 100%;
     height: 100%;
     align-self: stretch;
     box-sizing: border-box;
-
     border: 1px solid var(--collage-line);
     border-radius: 10px;
     background: var(--collage-surface);
@@ -422,6 +465,7 @@
 .collage__see-all-arrow {
     width: 20px;
     height: 14px;
+    transition: transform 0.25s ease;
 }
 
 .collage__see-all-arrow svg {
@@ -431,10 +475,6 @@
 
 .collage__see-all:hover .collage__see-all-arrow {
     transform: translateX(3px);
-}
-
-.collage__see-all-arrow {
-    transition: transform 0.25s ease;
 }
 
 .collage__empty {
@@ -459,7 +499,32 @@
 
 /* ============ RESPONSIVE ============ */
 
+/* --- Tabs y tools ya no caben cómodos en una fila --- */
 @media (max-width: 1080px) {
+    .collage__toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .collage__tabs {
+        flex: 0 0 auto;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        overflow-x: visible;
+    }
+
+    .collage__tab {
+        flex: initial;
+        width: 100%;
+        padding: 0.65rem 0.6rem;
+        font-size: 0.86rem;
+    }
+
+    .collage__tools {
+        width: 100%;
+    }
+
     .collage__era {
         grid-template-columns: 180px repeat(3, minmax(0, 1fr));
     }
@@ -476,26 +541,25 @@
     }
 }
 
+/* --- Las etiquetas largas ya no caben junto al icono --- */
 @media (max-width: 860px) {
-    .collage__toolbar {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
     .collage__tabs {
-        overflow-x: auto;
+        gap: 0.2rem;
+        padding: 0.35rem;
     }
 
-    .collage__tools {
-        justify-content: space-between;
+    .collage__tab {
+        flex-direction: column;
+        gap: 0.35rem;
+        padding: 0.6rem 0.35rem;
+        font-size: 0.76rem;
+        text-align: center;
     }
 
-    .collage__search {
-        flex: 1;
-    }
-
-    .collage__search-input {
-        width: 100%;
+    .collage__tab-label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
     }
 
     .collage__era {
@@ -504,7 +568,7 @@
 
     .collage__era-photos {
         grid-column: 1 / -1;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .collage__see-all {
@@ -512,9 +576,51 @@
     }
 }
 
+/* --- Móvil: tabs en 2×2, tools apilados --- */
 @media (max-width: 560px) {
     .collage {
         padding: 0 1rem 0;
+    }
+
+    .collage__toolbar {
+        gap: 0.75rem;
+        margin-bottom: 2.25rem;
+    }
+
+    .collage__tabs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.3rem;
+        border-radius: 16px;
+    }
+
+    .collage__tab {
+        flex-direction: row;
+        gap: 0.45rem;
+        padding: 0.7rem 0.5rem;
+        font-size: 0.82rem;
+    }
+
+    .collage__tools {
+        flex-wrap: wrap;
+    }
+
+    .collage__search {
+        flex: 1 1 100%;
+    }
+
+    .collage__filter {
+        flex: 1 1 100%;
+    }
+
+    .collage__filter-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .collage__filter-menu {
+        right: 0;
+        left: 0;
+        max-width: none;
     }
 
     .collage__timeline {
@@ -523,6 +629,20 @@
 
     .collage__era-dot {
         left: -1.9rem;
+    }
+
+    .collage__era-photos {
+        gap: 0.8rem;
+    }
+}
+
+/* --- Pantallas muy angostas: una columna de tabs sería excesivo,
+       se mantiene 2×2 pero sin etiquetas largas apretadas --- */
+@media (max-width: 380px) {
+    .collage__tab {
+        flex-direction: column;
+        gap: 0.3rem;
+        font-size: 0.74rem;
     }
 }
 
