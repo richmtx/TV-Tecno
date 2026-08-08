@@ -1,4 +1,23 @@
-<section class="seccion-galeria" aria-labelledby="albumes-title">
-    <h2 id="albumes-title" class="seccion-galeria__titulo">Álbumes</h2>
-    <p class="seccion-galeria__texto">Esta sección está en construcción.</p>
+<section class="albumes" aria-labelledby="albumes-title">
+    <h2 id="albumes-title" class="albumes__sr-only">Álbumes de la Galería ITD</h2>
+
+    @if (albumesVisibles().length > 0) {
+
+    <div class="albumes__grid">
+        @for (album of albumesVisibles(); track album.id) {
+        <app-album-card [album]="album" (abrir)="abrirAlbum($event)"></app-album-card>
+        }
+    </div>
+
+    @if (totalPaginas() > 1) {
+    <div class="albumes__paginacion">
+        <app-paginacion [paginaActual]="paginaActual()" [totalPaginas]="totalPaginas()"
+            (cambioPagina)="irAPagina($event)"></app-paginacion>
+    </div>
+    }
+
+    } @else {
+    <p class="albumes__empty">No encontramos álbumes que coincidan con tu búsqueda.</p>
+    }
+
 </section>

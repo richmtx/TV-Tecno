@@ -1,29 +1,86 @@
+/* ============================================================
+   ALBUMES — Sección de álbumes de la Galería ITD
+   ============================================================ */
+
 :host {
+    --al-muted: #6f6a6d;
+
     display: block;
     font-family: 'Raleway', system-ui, sans-serif;
 }
 
-.seccion-galeria {
+.albumes {
     max-width: 1180px;
     margin: 0 auto;
-    padding: 1rem 1.5rem 3rem;
+    padding: 0 1.5rem;
+    overflow-x: clip;
 }
 
-.seccion-galeria__titulo {
-    margin: 0 0 0.6rem;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--tv-wine, #6b1538);
+.albumes__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
 }
 
-.seccion-galeria__texto {
-    margin: 0;
+/* --- Cuadrícula --- */
+
+.albumes__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.4rem;
+    align-items: stretch;
+}
+
+/* --- Paginación --- */
+
+.albumes__paginacion {
+    margin-top: 2.75rem;
+}
+
+.albumes__empty {
+    padding: 3rem 0;
+    text-align: center;
+    color: var(--al-muted);
     font-size: 0.95rem;
-    color: var(--tv-text-soft, #6f6a6d);
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 1080px) {
+    .albumes__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.2rem;
+    }
+}
+
+@media (max-width: 860px) {
+    .albumes__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 560px) {
-    .seccion-galeria {
-        padding: 1rem 1rem 2.5rem;
+    .albumes {
+        padding: 0 1rem;
+    }
+
+    .albumes__grid {
+        gap: 1rem;
+    }
+
+    .albumes__paginacion {
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .albumes__grid {
+        grid-template-columns: minmax(0, 1fr);
     }
 }

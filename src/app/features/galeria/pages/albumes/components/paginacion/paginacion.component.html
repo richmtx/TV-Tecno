@@ -1,0 +1,35 @@
+<nav class="paginacion" aria-label="Paginación de resultados">
+
+    <button type="button" class="paginacion__flecha" [disabled]="!hayAnterior()" (click)="anterior()"
+        aria-label="Página anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" aria-hidden="true">
+            <polyline points="14.5 6 8.5 12 14.5 18"></polyline>
+        </svg>
+    </button>
+
+    <ul class="paginacion__lista">
+        @for (item of items(); track claveItem($index, item)) {
+        <li>
+            @if (item === '...') {
+            <span class="paginacion__elipsis" aria-hidden="true">…</span>
+            } @else {
+            <button type="button" class="paginacion__num" [class.paginacion__num--activa]="item === paginaActual()"
+                [attr.aria-current]="item === paginaActual() ? 'page' : null"
+                [attr.aria-label]="'Ir a la página ' + item" (click)="ir(item)">
+                {{ item }}
+            </button>
+            }
+        </li>
+        }
+    </ul>
+
+    <button type="button" class="paginacion__flecha" [disabled]="!haySiguiente()" (click)="siguiente()"
+        aria-label="Página siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9.5 6 15.5 12 9.5 18"></polyline>
+        </svg>
+    </button>
+
+</nav>
