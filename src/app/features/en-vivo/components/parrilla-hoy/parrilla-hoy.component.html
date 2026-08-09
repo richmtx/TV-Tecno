@@ -5,14 +5,9 @@
         </header>
 
         <div class="parrilla__carrusel">
-            <button type="button" class="nav nav--prev" aria-label="Ver programas anteriores"
-                [disabled]="!puedeIzquierda" (click)="desplazar(-1)">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M15 5 L8 12 L15 19" />
-                </svg>
-            </button>
-
             <div class="parrilla__viewport" #viewport (scroll)="actualizarNav()">
+                <span class="timeline-linea" aria-hidden="true"></span>
+
                 <div class="parrilla__track">
                     @for (franja of franjas; track franja.hora + franja.titulo) {
                     <article class="franja" [class.franja--activa]="franja.activa"
@@ -31,6 +26,13 @@
                     }
                 </div>
             </div>
+
+            <button type="button" class="nav nav--prev" aria-label="Ver programas anteriores"
+                [disabled]="!puedeIzquierda" (click)="desplazar(-1)">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M15 5 L8 12 L15 19" />
+                </svg>
+            </button>
 
             <button type="button" class="nav nav--next" aria-label="Ver programas siguientes" [disabled]="!puedeDerecha"
                 (click)="desplazar(1)">

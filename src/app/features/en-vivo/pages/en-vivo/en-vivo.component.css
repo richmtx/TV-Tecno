@@ -1,10 +1,21 @@
 /* Mismo ancho que la parrilla "HOY, EN TV TECNO" (1300px), centrado,
    con más aire hacia el footer. */
+.en-vivo-page {
+    min-width: 0;
+    overflow-x: clip;
+    /* red de seguridad: nada se sale de la página */
+}
+
+app-parrilla-hoy {
+    display: block;
+    min-width: 0;
+}
+
 app-recordatorios {
     display: block;
     width: 100%;
     max-width: 1365px;
-    margin: 0 auto 80px; /* ↓ más espacio debajo (antes 48px) */
-    padding: 0 32px; /* mismo padding lateral que la parrilla */
+    margin: 0 auto 80px;
+    padding: 0 32px;
     box-sizing: border-box;
 }

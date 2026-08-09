@@ -1,20 +1,32 @@
 :host {
     display: block;
+    min-width: 0;
+
+    --pa-gutter: 32px;
+    --pa-gap: 20px;
+    --pa-card: minmax(228px, 1fr);
+    --pa-fila-punto: 48px;
+    --pa-nav: 40px;
 }
 
 .parrilla-wrapper {
-    max-width: 1300px;
-    margin: 0 auto 32px;
+    /* Mismo ancho y gutter que app-recordatorios para que todo alinee */
+    width: 100%;
+    max-width: 1365px;
+    margin: 0 auto 48px;
+    padding: 0 var(--pa-gutter);
+    box-sizing: border-box;
+    min-width: 0;
 }
 
 .parrilla {
+    min-width: 0;
     padding: 8px 0 4px;
 }
 
 /* ── Encabezado ───────────────────────────── */
 
 .parrilla__head {
-    padding-left: 56px;
     margin-bottom: 18px;
 }
 
@@ -42,41 +54,47 @@
 
 .parrilla__carrusel {
     position: relative;
-    padding: 0 56px;
+    min-width: 0;
 }
 
 .parrilla__viewport {
+    position: relative;
+    min-width: 0;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-behavior: smooth;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding-top: 14px;
     overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+
+    /* Aire arriba para el badge y la sombra del hover */
+    padding: 18px 0 0;
 }
 
 .parrilla__viewport::-webkit-scrollbar {
     display: none;
 }
 
+/* Línea de la timeline: ancho del viewport, centrada en la fila de puntos */
+.timeline-linea {
+    position: absolute;
+    left: 0;
+    bottom: calc(var(--pa-fila-punto) / 2);
+    width: 100%;
+    min-width: 100%;
+    height: 1px;
+    background: rgba(107, 21, 56, 0.22);
+    pointer-events: none;
+}
+
 .parrilla__track {
     position: relative;
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: minmax(232px, 1fr);
-    grid-template-rows: auto 48px;
-    column-gap: 20px;
-}
-
-/* Línea horizontal de la timeline (absoluta = no es grid item) */
-.parrilla__track::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 23px;
-    height: 1px;
-    background: rgba(107, 21, 56, 0.22);
+    grid-auto-columns: var(--pa-card);
+    grid-template-rows: auto var(--pa-fila-punto);
+    column-gap: var(--pa-gap);
 }
 
 /* ── Cards ────────────────────────────────── */
@@ -84,6 +102,7 @@
 .franja {
     position: relative;
     grid-row: 1;
+    min-width: 0;
     scroll-snap-align: start;
     padding: 22px 20px 20px;
     border: 1px solid rgba(107, 21, 56, 0.12);
@@ -135,7 +154,6 @@
     color: var(--tv-wine, #6b1538);
     font-size: 1.0625rem;
     font-weight: 800;
-    letter-spacing: 0.01em;
 }
 
 .franja__titulo {
@@ -144,15 +162,22 @@
     font-size: 0.9375rem;
     font-weight: 700;
     line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .franja__categoria {
     margin: 6px 0 0;
     color: #8b8189;
     font-size: 0.8125rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* ── Puntos de la timeline ────────────────── */
+/* ── Puntos ───────────────────────────────── */
 
 .punto-cell {
     grid-row: 2;
@@ -168,50 +193,65 @@
     height: 11px;
     border-radius: 50%;
     background: rgba(107, 21, 56, 0.4);
-    transition: transform 0.22s ease;
 }
 
 .punto--activo {
     width: 17px;
     height: 17px;
-    background: var(--tv-wine-dark, #6b1538);
+    background: var(--tv-wine, #6b1538);
     box-shadow: 0 0 0 5px rgba(107, 21, 56, 0.14);
 }
 
-/* ── Flechas ──────────────────────────────── */
+/* ── Flechas: montadas encima de las cards ──
+   Sobresalen medio botón hacia afuera, aprovechando
+   el gutter del wrapper. No consumen ancho de contenido. */
 
 .nav {
     position: absolute;
-    top: 50%;
+    top: calc((100% - var(--pa-fila-punto)) / 2 + 9px);
     transform: translateY(-50%);
-    z-index: 2;
+    z-index: 3;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 42px;
-    height: 42px;
+    width: var(--pa-nav);
+    height: var(--pa-nav);
     padding: 0;
-    border: 1px solid rgba(107, 21, 56, 0.12);
+    border: 1px solid rgba(107, 21, 56, 0.14);
     border-radius: 50%;
-    background: #f7f4f5;
-    color: var(--tv-wine-dark, #6b1538);
+    background: #fff;
+    color: var(--tv-wine, #6b1538);
     cursor: pointer;
-    transition: background 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 3px 12px rgba(107, 21, 56, 0.18);
+    transition: box-shadow 0.2s ease, opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.nav--prev {
+    left: calc(var(--pa-nav) / -2);
+}
+
+.nav--next {
+    right: calc(var(--pa-nav) / -2);
 }
 
 .nav:hover:not(:disabled) {
-    background: #fff;
-    box-shadow: 0 4px 14px rgba(107, 21, 56, 0.14);
+    box-shadow: 0 5px 16px rgba(107, 21, 56, 0.26);
+}
+
+.nav:focus-visible {
+    outline: 2px solid var(--tv-wine, #6b1538);
+    outline-offset: 2px;
 }
 
 .nav:disabled {
-    opacity: 0.35;
-    cursor: default;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
 
 .nav svg {
-    width: 20px;
-    height: 20px;
+    width: 19px;
+    height: 19px;
     fill: none;
     stroke: currentColor;
     stroke-width: 2.2;
@@ -219,15 +259,99 @@
     stroke-linejoin: round;
 }
 
-.nav--prev {
-    left: 0;
+.parrilla__carrusel.sin-scroll .nav {
+    opacity: 0;
+    visibility: hidden;
 }
 
-.nav--next {
-    right: 0;
+/* ── Breakpoints ──────────────────────────── */
+
+@media (max-width: 1024px) {
+    :host {
+        --pa-gap: 16px;
+        --pa-card: minmax(210px, 1fr);
+        --pa-nav: 38px;
+    }
 }
 
-/* ── Animación / responsive ───────────────── */
+@media (max-width: 900px) {
+    :host {
+        --pa-gutter: 24px;
+        --pa-card: 212px;
+        --pa-nav: 36px;
+    }
+
+    .parrilla__viewport {
+        scroll-snap-type: x mandatory;
+    }
+
+    /* Ya no cabe medio botón fuera: se pega al borde interno */
+    .nav--prev {
+        left: 0;
+    }
+
+    .nav--next {
+        right: 0;
+    }
+
+    .nav svg {
+        width: 17px;
+        height: 17px;
+    }
+}
+
+/* En táctil el dedo desliza; las flechas estorban */
+@media (max-width: 720px),
+(hover: none) {
+    .nav {
+        display: none;
+    }
+}
+
+@media (max-width: 720px) {
+    :host {
+        --pa-gutter: 20px;
+        --pa-gap: 14px;
+        --pa-card: min(74vw, 244px);
+        --pa-fila-punto: 42px;
+    }
+
+    .parrilla-wrapper {
+        margin-bottom: 36px;
+    }
+
+    .parrilla__head {
+        margin-bottom: 14px;
+    }
+
+    .franja {
+        padding: 20px 16px 18px;
+    }
+
+    /* Respiro al final para que la última card no quede al ras */
+    .parrilla__track::after {
+        content: '';
+        grid-row: 1;
+        width: 4px;
+    }
+}
+
+@media (max-width: 400px) {
+    :host {
+        --pa-gutter: 16px;
+        --pa-card: min(80vw, 228px);
+    }
+
+    .franja__hora {
+        font-size: 1rem;
+    }
+
+    .franja__titulo {
+        font-size: 0.875rem;
+    }
+}
+
+/* ── Animación ────────────────────────────── */
 
 @keyframes latido {
 
@@ -247,7 +371,6 @@
     }
 
     .franja,
-    .punto,
     .nav {
         transition: none;
     }
@@ -258,27 +381,5 @@
 
     .franja:hover {
         transform: none;
-    }
-}
-
-@media (max-width: 720px) {
-    .parrilla__carrusel {
-        padding: 0 12px;
-    }
-
-    .parrilla__head {
-        padding-left: 12px;
-    }
-
-    .parrilla__viewport {
-        scroll-snap-type: x mandatory;
-    }
-
-    .parrilla__track {
-        grid-auto-columns: minmax(210px, 78vw);
-    }
-
-    .nav {
-        display: none;
     }
 }
