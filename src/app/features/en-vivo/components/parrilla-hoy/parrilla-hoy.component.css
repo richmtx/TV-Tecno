@@ -1,53 +1,284 @@
-.parrilla {
-    max-width: 1300px;
-    margin: 0 auto 48px;
-    padding: 20px 32px 24px;
-    background: var(--tv-wine-dark);
-    border-radius: 12px;
-}
-
-.parrilla__titulo {
-    color: #f0c9d6;
-    font-size: 0.8125rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin: 0 0 12px;
-}
-
-.parrilla__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 14px;
-}
-
-.franja {
-    border-left: 3px solid rgba(255, 255, 255, 0.25);
-    padding-left: 12px;
-}
-
-.franja--activa {
-    border-left-color: var(--tv-live);
-}
-
-.franja__hora {
-    color: #fff;
-    font-size: 1.375rem;
-    font-weight: 800;
-    margin: 0;
-}
-
-.franja__info {
-    color: #f0c9d6;
-    font-size: 0.75rem;
-    margin: 2px 0 0;
-}
-
-/* El wrapper ahora lleva la separación inferior */
-.parrilla {
-    margin: 0 auto;
+:host {
+    display: block;
 }
 
 .parrilla-wrapper {
     max-width: 1300px;
-    margin: 0 auto 16px;
+    margin: 0 auto 32px;
+}
+
+.parrilla {
+    padding: 8px 0 4px;
+}
+
+/* ── Encabezado ───────────────────────────── */
+
+.parrilla__head {
+    padding-left: 56px;
+    margin-bottom: 18px;
+}
+
+.parrilla__titulo {
+    display: inline-block;
+    margin: 0;
+    color: var(--tv-wine, #6b1538);
+    font-size: clamp(1.0625rem, 1.6vw, 1.375rem);
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.parrilla__titulo::after {
+    content: '';
+    display: block;
+    width: 58px;
+    height: 3px;
+    margin-top: 8px;
+    border-radius: 2px;
+    background: var(--tv-wine, #6b1538);
+}
+
+/* ── Carrusel ─────────────────────────────── */
+
+.parrilla__carrusel {
+    position: relative;
+    padding: 0 56px;
+}
+
+.parrilla__viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-top: 14px;
+    overscroll-behavior-x: contain;
+}
+
+.parrilla__viewport::-webkit-scrollbar {
+    display: none;
+}
+
+.parrilla__track {
+    position: relative;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(232px, 1fr);
+    grid-template-rows: auto 48px;
+    column-gap: 20px;
+}
+
+/* Línea horizontal de la timeline (absoluta = no es grid item) */
+.parrilla__track::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 23px;
+    height: 1px;
+    background: rgba(107, 21, 56, 0.22);
+}
+
+/* ── Cards ────────────────────────────────── */
+
+.franja {
+    position: relative;
+    grid-row: 1;
+    scroll-snap-align: start;
+    padding: 22px 20px 20px;
+    border: 1px solid rgba(107, 21, 56, 0.12);
+    border-radius: 14px;
+    background: #fbfafb;
+    transition: transform 0.22s ease, box-shadow 0.22s ease,
+        border-color 0.22s ease;
+}
+
+.franja:hover {
+    transform: translateY(-2px);
+    border-color: rgba(107, 21, 56, 0.28);
+    box-shadow: 0 8px 20px rgba(107, 21, 56, 0.08);
+}
+
+.franja--activa {
+    background: #fff;
+    border: 2px solid var(--tv-wine, #6b1538);
+    box-shadow: 0 10px 26px rgba(107, 21, 56, 0.12);
+}
+
+.franja__badge {
+    position: absolute;
+    top: -13px;
+    left: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: var(--tv-wine, #6b1538);
+    color: #fff;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+}
+
+.franja__badge i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #fff;
+    animation: latido 1.6s ease-in-out infinite;
+}
+
+.franja__hora {
+    margin: 0;
+    color: var(--tv-wine, #6b1538);
+    font-size: 1.0625rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+}
+
+.franja__titulo {
+    margin: 6px 0 0;
+    color: #000;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.franja__categoria {
+    margin: 6px 0 0;
+    color: #8b8189;
+    font-size: 0.8125rem;
+}
+
+/* ── Puntos de la timeline ────────────────── */
+
+.punto-cell {
+    grid-row: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.punto {
+    position: relative;
+    z-index: 1;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: rgba(107, 21, 56, 0.4);
+    transition: transform 0.22s ease;
+}
+
+.punto--activo {
+    width: 17px;
+    height: 17px;
+    background: var(--tv-wine-dark, #6b1538);
+    box-shadow: 0 0 0 5px rgba(107, 21, 56, 0.14);
+}
+
+/* ── Flechas ──────────────────────────────── */
+
+.nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid rgba(107, 21, 56, 0.12);
+    border-radius: 50%;
+    background: #f7f4f5;
+    color: var(--tv-wine-dark, #6b1538);
+    cursor: pointer;
+    transition: background 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav:hover:not(:disabled) {
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(107, 21, 56, 0.14);
+}
+
+.nav:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.nav svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.nav--prev {
+    left: 0;
+}
+
+.nav--next {
+    right: 0;
+}
+
+/* ── Animación / responsive ───────────────── */
+
+@keyframes latido {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.35;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .parrilla__viewport {
+        scroll-behavior: auto;
+    }
+
+    .franja,
+    .punto,
+    .nav {
+        transition: none;
+    }
+
+    .franja__badge i {
+        animation: none;
+    }
+
+    .franja:hover {
+        transform: none;
+    }
+}
+
+@media (max-width: 720px) {
+    .parrilla__carrusel {
+        padding: 0 12px;
+    }
+
+    .parrilla__head {
+        padding-left: 12px;
+    }
+
+    .parrilla__viewport {
+        scroll-snap-type: x mandatory;
+    }
+
+    .parrilla__track {
+        grid-auto-columns: minmax(210px, 78vw);
+    }
+
+    .nav {
+        display: none;
+    }
 }

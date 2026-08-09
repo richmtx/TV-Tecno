@@ -1,12 +1,43 @@
 <div class="parrilla-wrapper">
-    <section class="parrilla">
-        <p class="parrilla__titulo">— {{ titulo }} —</p>
+    <section class="parrilla" aria-label="Programación de hoy">
+        <header class="parrilla__head">
+            <h2 class="parrilla__titulo">{{ titulo }}</h2>
+        </header>
 
-        <div class="parrilla__grid">
-            <article class="franja" [class.franja--activa]="franja.activa" *ngFor="let franja of franjas">
-                <p class="franja__hora">{{ franja.hora }}</p>
-                <p class="franja__info">{{ franja.titulo }} · {{ franja.medio }}</p>
-            </article>
+        <div class="parrilla__carrusel">
+            <button type="button" class="nav nav--prev" aria-label="Ver programas anteriores"
+                [disabled]="!puedeIzquierda" (click)="desplazar(-1)">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M15 5 L8 12 L15 19" />
+                </svg>
+            </button>
+
+            <div class="parrilla__viewport" #viewport (scroll)="actualizarNav()">
+                <div class="parrilla__track">
+                    @for (franja of franjas; track franja.hora + franja.titulo) {
+                    <article class="franja" [class.franja--activa]="franja.activa"
+                        [attr.aria-current]="franja.activa ? 'true' : null">
+                        @if (franja.activa) {
+                        <span class="franja__badge"><i></i>EN VIVO</span>
+                        }
+                        <p class="franja__hora">{{ franja.hora }}</p>
+                        <p class="franja__titulo">{{ franja.titulo }}</p>
+                        <p class="franja__categoria">{{ franja.categoria || franja.medio }}</p>
+                    </article>
+
+                    <span class="punto-cell" aria-hidden="true">
+                        <span class="punto" [class.punto--activo]="franja.activa"></span>
+                    </span>
+                    }
+                </div>
+            </div>
+
+            <button type="button" class="nav nav--next" aria-label="Ver programas siguientes" [disabled]="!puedeDerecha"
+                (click)="desplazar(1)">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M9 5 L16 12 L9 19" />
+                </svg>
+            </button>
         </div>
     </section>
 </div>
