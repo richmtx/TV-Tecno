@@ -7,13 +7,13 @@
     --pa-card: minmax(228px, 1fr);
     --pa-fila-punto: 48px;
     --pa-nav: 40px;
+    --pa-top: 56px;
 }
 
 .parrilla-wrapper {
-    /* Mismo ancho y gutter que app-recordatorios para que todo alinee */
     width: 100%;
     max-width: 1365px;
-    margin: 0 auto 48px;
+    margin: var(--pa-top) auto 48px;
     padding: 0 var(--pa-gutter);
     box-sizing: border-box;
     min-width: 0;
@@ -58,7 +58,6 @@
 }
 
 .parrilla__viewport {
-    position: relative;
     min-width: 0;
     overflow-x: auto;
     overflow-y: hidden;
@@ -67,8 +66,6 @@
     -ms-overflow-style: none;
     overscroll-behavior-x: contain;
     scroll-snap-type: x proximity;
-
-    /* Aire arriba para el badge y la sombra del hover */
     padding: 18px 0 0;
 }
 
@@ -80,12 +77,12 @@
 .timeline-linea {
     position: absolute;
     left: 0;
+    right: 0;
     bottom: calc(var(--pa-fila-punto) / 2);
-    width: 100%;
-    min-width: 100%;
     height: 1px;
     background: rgba(107, 21, 56, 0.22);
     pointer-events: none;
+    z-index: 0;
 }
 
 .parrilla__track {
@@ -164,6 +161,7 @@
     line-height: 1.3;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -279,13 +277,13 @@
         --pa-gutter: 24px;
         --pa-card: 212px;
         --pa-nav: 36px;
+        --pa-top: 44px;
     }
 
     .parrilla__viewport {
         scroll-snap-type: x mandatory;
     }
 
-    /* Ya no cabe medio botón fuera: se pega al borde interno */
     .nav--prev {
         left: 0;
     }
@@ -300,7 +298,6 @@
     }
 }
 
-/* En táctil el dedo desliza; las flechas estorban */
 @media (max-width: 720px),
 (hover: none) {
     .nav {
@@ -314,6 +311,7 @@
         --pa-gap: 14px;
         --pa-card: min(74vw, 244px);
         --pa-fila-punto: 42px;
+        --pa-top: 36px;
     }
 
     .parrilla-wrapper {
@@ -328,7 +326,6 @@
         padding: 20px 16px 18px;
     }
 
-    /* Respiro al final para que la última card no quede al ras */
     .parrilla__track::after {
         content: '';
         grid-row: 1;
