@@ -41,4 +41,11 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./features/galeria/galeria.routes').then((m) => m.GALERIA_ROUTES),
   },
+  {
+    path: 'contacto',
+    loadComponent: () =>
+      import('./features/contacto/pages/contacto/contacto.component').then(
+        (m) => m.ContactoComponent
+      ),
+  },
 ];
