@@ -29,6 +29,7 @@ export class FooterComponent {
     { texto: 'Videoteca', ruta: '/videoteca' },
     { texto: 'Galería', ruta: '/galeria' },
     { texto: 'Acerca de', ruta: '/acerca' },
+    { texto: 'Contacto', ruta: '/contacto' },
     { texto: 'En vivo', ruta: '/en-vivo' },
   ];
 
