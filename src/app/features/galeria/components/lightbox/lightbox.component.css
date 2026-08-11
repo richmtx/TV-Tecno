@@ -1,12 +1,14 @@
 /* ============================================================
    LIGHTBOX — Visor de fotografías a pantalla completa
+   Fondo oscuro translúcido: la cuadrícula se insinúa detrás
+   para comunicar que es una capa, no otra página.
    ============================================================ */
 
 :host {
     --lb-wine: #6b1538;
+    --lb-wine-soft: #f7edf1;
     --lb-gold: #c8a96e;
     --lb-ink: #2b2b2b;
-    --lb-muted: #6f6a6d;
 
     font-family: 'Raleway', system-ui, sans-serif;
 }
@@ -20,8 +22,8 @@
     align-items: center;
     justify-content: center;
     padding: 4.5rem 5.5rem 3rem;
-    background: rgba(250, 248, 249, 0.97);
-    backdrop-filter: blur(6px);
+    background: rgba(22, 14, 18, 0.9);
+    backdrop-filter: blur(5px);
     animation: lightbox-in 0.2s ease;
 }
 
@@ -31,7 +33,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 1.1rem;
     margin: 0;
     width: 100%;
     height: 100%;
@@ -48,7 +50,7 @@
     min-height: 0;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 18px 45px rgba(43, 43, 43, 0.22);
+    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.5);
 }
 
 .lightbox__img {
@@ -57,6 +59,8 @@
     object-fit: contain;
     display: block;
 }
+
+/* --- Pie --- */
 
 .lightbox__pie {
     display: flex;
@@ -71,13 +75,13 @@
 .lightbox__pie-texto {
     font-size: 0.92rem;
     font-weight: 500;
-    color: var(--lb-ink);
+    color: rgba(255, 255, 255, 0.92);
 }
 
 .lightbox__pie-anio {
     padding: 0.25rem 0.75rem;
     border-radius: 999px;
-    background: #f7edf1;
+    background: var(--lb-wine-soft);
     font-size: 0.78rem;
     font-weight: 700;
     color: var(--lb-wine);
@@ -86,10 +90,10 @@
 .lightbox__pie-contador {
     padding: 0.25rem 0.75rem;
     border-radius: 999px;
-    background: rgba(43, 43, 43, 0.08);
+    background: rgba(255, 255, 255, 0.16);
     font-size: 0.78rem;
     font-weight: 700;
-    color: var(--lb-muted);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 /* --- Controles --- */
@@ -99,20 +103,24 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #e7e2e4;
+    border: none;
     border-radius: 50%;
     background: #ffffff;
     color: var(--lb-ink);
     cursor: pointer;
-    box-shadow: 0 2px 10px rgba(43, 43, 43, 0.1);
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .lightbox__cerrar:hover,
 .lightbox__nav:hover:not(:disabled) {
-    border-color: var(--lb-wine);
     background: var(--lb-wine);
     color: #fff;
+    transform: scale(1.06);
+}
+
+.lightbox__nav:hover:not(:disabled) {
+    transform: translateY(-50%) scale(1.06);
 }
 
 .lightbox__cerrar:focus-visible,
@@ -156,7 +164,7 @@
 }
 
 .lightbox__nav:disabled {
-    opacity: 0.35;
+    opacity: 0.3;
     cursor: not-allowed;
 }
 
@@ -187,6 +195,10 @@
         height: 44px;
     }
 
+    .lightbox__nav:hover:not(:disabled) {
+        transform: scale(1.06);
+    }
+
     .lightbox__nav--prev {
         left: 1.5rem;
     }
@@ -211,5 +223,14 @@
     .lightbox__nav {
         animation: none !important;
         transition: none !important;
+    }
+
+    .lightbox__cerrar:hover,
+    .lightbox__nav:hover:not(:disabled) {
+        transform: none;
+    }
+
+    .lightbox__nav:hover:not(:disabled) {
+        transform: translateY(-50%);
     }
 }
