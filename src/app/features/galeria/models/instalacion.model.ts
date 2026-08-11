@@ -32,6 +32,9 @@ export interface Instalacion {
     /** Texto alternativo de la portada. */
     portadaAlt: string;
 
+    /** Número de fotos que contiene. */
+    totalFotos: number;
+
     /** Categoría a la que pertenece. */
     categoria: CategoriaInstalacion;
 
@@ -40,4 +43,7 @@ export interface Instalacion {
 
     /** Degradado de respaldo mientras no exista la portada real. */
     fallback: string;
+
+    /** Descripciones que se rotan entre las fotos. */
+    etiquetasFotos: string[];
 }

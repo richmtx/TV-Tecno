@@ -1,10 +1,13 @@
 import { Component, computed, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { InstalacionCardComponent } from './components/instalacion-card/instalacion-card.component';
 import { ChipsCategoriaComponent } from './components/chips-categoria/chips-categoria.component';
 import { PaginacionComponent } from '../../components/paginacion/paginacion.component';
 import { GaleriaFiltrosService } from '../../services/galeria-filtros.service';
+import { GaleriaService } from '../../services/galeria.service';
 import { OpcionFiltro } from '../../models/filtros-galeria.model';
-import { ChipCategoria, Instalacion } from '../../models/instalacion.model';
+import { Instalacion } from '../../models/instalacion.model';
+import { CHIPS_INSTALACIONES } from '../../data/instalaciones.data';
 
 /** Opciones del menú "Filtrar" del layout: aquí controlan el orden. */
 const OPCIONES_INSTALACIONES: OpcionFiltro[] = [
@@ -16,17 +19,6 @@ const OPCIONES_INSTALACIONES: OpcionFiltro[] = [
 
 /** Instalaciones por página. */
 const POR_PAGINA = 12;
-
-/** Degradados de respaldo mientras no existan las portadas reales. */
-const G = {
-  oliva: 'linear-gradient(135deg, #4a3d13, #836d23)',
-  rojo: 'linear-gradient(135deg, #661a20, #b42e38)',
-  morado: 'linear-gradient(135deg, #341830, #5c2c56)',
-  verde: 'linear-gradient(135deg, #022e22, #04513c)',
-  azul: 'linear-gradient(135deg, #191f5a, #2c379d)'
-};
-
-const BASE = 'assets/galeria/instalaciones';
 
 /**
  * Sección "Instalaciones" de la Galería ITD.
@@ -43,142 +35,15 @@ const BASE = 'assets/galeria/instalaciones';
 export class InstalacionesComponent {
 
   private readonly filtros = inject(GaleriaFiltrosService);
+  private readonly galeria = inject(GaleriaService);
+  private readonly router = inject(Router);
 
   readonly paginaActual = signal<number>(1);
   readonly categoriaActiva = signal<string>('todas');
 
-  readonly chips: ChipCategoria[] = [
-    { id: 'todas', label: 'Todas' },
-    { id: 'academicas', label: 'Académicas' },
-    { id: 'laboratorios', label: 'Laboratorios' },
-    { id: 'deportivas', label: 'Deportivas' },
-    { id: 'administrativas', label: 'Administrativas' },
-    { id: 'servicios', label: 'Servicios' },
-    { id: 'areas-comunes', label: 'Áreas comunes' }
-  ];
+  readonly chips = CHIPS_INSTALACIONES;
 
-  readonly instalaciones: Instalacion[] = [
-    {
-      id: 'aulas',
-      titulo: 'Aulas',
-      descripcion: 'Espacios equipados para una enseñanza moderna y colaborativa.',
-      portada: `${BASE}/aulas.jpg`,
-      portadaAlt: 'Aula del ITD con mobiliario y proyector',
-      categoria: 'academicas',
-      categoriaLabel: 'Académicas',
-      fallback: G.oliva
-    },
-    {
-      id: 'centro-computo',
-      titulo: 'Centro de Cómputo',
-      descripcion: 'Laboratorios con tecnología de vanguardia y acceso a internet.',
-      portada: `${BASE}/centro-computo.jpg`,
-      portadaAlt: 'Centro de cómputo con equipos alineados',
-      categoria: 'academicas',
-      categoriaLabel: 'Académicas',
-      fallback: G.azul
-    },
-    {
-      id: 'biblioteca',
-      titulo: 'Biblioteca',
-      descripcion: 'Acervo bibliográfico especializado y espacios de estudio.',
-      portada: `${BASE}/biblioteca.jpg`,
-      portadaAlt: 'Sala de lectura de la biblioteca del ITD',
-      categoria: 'servicios',
-      categoriaLabel: 'Servicios',
-      fallback: G.morado
-    },
-    {
-      id: 'laboratorios',
-      titulo: 'Laboratorios',
-      descripcion: 'Laboratorios especializados para la investigación y la práctica.',
-      portada: `${BASE}/laboratorios.jpg`,
-      portadaAlt: 'Estudiantes trabajando en un laboratorio del ITD',
-      categoria: 'laboratorios',
-      categoriaLabel: 'Laboratorios',
-      fallback: G.verde
-    },
-    {
-      id: 'auditorio',
-      titulo: 'Auditorio',
-      descripcion: 'Espacio para conferencias, eventos y actividades institucionales.',
-      portada: `${BASE}/auditorio.jpg`,
-      portadaAlt: 'Auditorio del ITD con butacas y escenario',
-      categoria: 'areas-comunes',
-      categoriaLabel: 'Áreas comunes',
-      fallback: G.rojo
-    },
-    {
-      id: 'gimnasio',
-      titulo: 'Gimnasio',
-      descripcion: 'Instalaciones deportivas para el desarrollo físico y el bienestar.',
-      portada: `${BASE}/gimnasio.jpg`,
-      portadaAlt: 'Duela del gimnasio techado del ITD',
-      categoria: 'deportivas',
-      categoriaLabel: 'Deportivas',
-      fallback: G.oliva
-    },
-    {
-      id: 'edificio-administrativo',
-      titulo: 'Edificio Administrativo',
-      descripcion: 'Centro de gestión y atención a la comunidad estudiantil.',
-      portada: `${BASE}/edificio-administrativo.jpg`,
-      portadaAlt: 'Fachada del edificio administrativo del ITD',
-      categoria: 'administrativas',
-      categoriaLabel: 'Administrativas',
-      fallback: G.azul
-    },
-    {
-      id: 'cafeteria',
-      titulo: 'Cafetería',
-      descripcion: 'Espacio de convivencia y alimentación para estudiantes y personal.',
-      portada: `${BASE}/cafeteria.jpg`,
-      portadaAlt: 'Área de mesas de la cafetería del ITD',
-      categoria: 'servicios',
-      categoriaLabel: 'Servicios',
-      fallback: G.rojo
-    },
-    {
-      id: 'centro-innovacion',
-      titulo: 'Centro de Innovación',
-      descripcion: 'Espacio para el desarrollo de proyectos e innovación tecnológica.',
-      portada: `${BASE}/centro-innovacion.jpg`,
-      portadaAlt: 'Fachada del Centro de Innovación Tecnológica',
-      categoria: 'laboratorios',
-      categoriaLabel: 'Laboratorios',
-      fallback: G.morado
-    },
-    {
-      id: 'areas-verdes',
-      titulo: 'Áreas Verdes',
-      descripcion: 'Espacios naturales para el descanso y la convivencia.',
-      portada: `${BASE}/areas-verdes.jpg`,
-      portadaAlt: 'Jardines y andadores del campus del ITD',
-      categoria: 'areas-comunes',
-      categoriaLabel: 'Áreas comunes',
-      fallback: G.verde
-    },
-    {
-      id: 'estacionamiento',
-      titulo: 'Estacionamiento',
-      descripcion: 'Amplias áreas de estacionamiento para la comunidad ITD.',
-      portada: `${BASE}/estacionamiento.jpg`,
-      portadaAlt: 'Estacionamiento del campus del ITD',
-      categoria: 'servicios',
-      categoriaLabel: 'Servicios',
-      fallback: G.oliva
-    },
-    {
-      id: 'canchas-multiusos',
-      titulo: 'Canchas Multiusos',
-      descripcion: 'Espacios deportivos al aire libre para diversas actividades.',
-      portada: `${BASE}/canchas-multiusos.jpg`,
-      portadaAlt: 'Canchas multiusos al aire libre del ITD',
-      categoria: 'deportivas',
-      categoriaLabel: 'Deportivas',
-      fallback: G.azul
-    }
-  ];
+  private readonly instalaciones = this.galeria.getInstalaciones();
 
   /** Aplica chip de categoría, búsqueda y orden. */
   private readonly instalacionesFiltradas = computed<Instalacion[]>(() => {
@@ -238,7 +103,6 @@ export class InstalacionesComponent {
   }
 
   abrirInstalacion(instalacion: Instalacion): void {
-    // TODO: navegar a la galería de fotos de la instalación
-    console.log('Abrir instalación', instalacion.id);
+    this.router.navigate(['/galeria/instalaciones', instalacion.id]);
   }
 }

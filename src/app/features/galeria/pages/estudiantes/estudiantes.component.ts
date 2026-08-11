@@ -1,10 +1,13 @@
 import { Component, computed, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { MomentoCardComponent } from './components/momento-card/momento-card.component';
 import { CierreEstudiantesComponent } from './components/cierre-estudiantes/cierre-estudiantes.component';
 import { PaginacionComponent } from '../../components/paginacion/paginacion.component';
 import { GaleriaFiltrosService } from '../../services/galeria-filtros.service';
+import { GaleriaService } from '../../services/galeria.service';
 import { OpcionFiltro } from '../../models/filtros-galeria.model';
-import { Momento, Testimonio } from '../../models/momento.model';
+import { Momento } from '../../models/momento.model';
+import { TESTIMONIO_ESTUDIANTES } from '../../data/momentos.data';
 
 /** Opciones del menú "Filtrar" del layout. */
 const OPCIONES_ESTUDIANTES: OpcionFiltro[] = [
@@ -16,17 +19,6 @@ const OPCIONES_ESTUDIANTES: OpcionFiltro[] = [
 
 /** Momentos por página. */
 const POR_PAGINA = 8;
-
-/** Degradados de respaldo mientras no existan las portadas reales. */
-const G = {
-  oliva: 'linear-gradient(135deg, #4a3d13, #836d23)',
-  rojo: 'linear-gradient(135deg, #661a20, #b42e38)',
-  morado: 'linear-gradient(135deg, #341830, #5c2c56)',
-  verde: 'linear-gradient(135deg, #022e22, #04513c)',
-  azul: 'linear-gradient(135deg, #191f5a, #2c379d)'
-};
-
-const BASE = 'assets/galeria/estudiantes';
 
 /**
  * Sección "Estudiantes" de la Galería ITD.
@@ -43,97 +35,14 @@ const BASE = 'assets/galeria/estudiantes';
 export class EstudiantesComponent {
 
   private readonly filtros = inject(GaleriaFiltrosService);
+  private readonly galeria = inject(GaleriaService);
+  private readonly router = inject(Router);
 
   readonly paginaActual = signal<number>(1);
 
-  readonly testimonio: Testimonio = {
-    cita: 'Ser estudiante del ITD es más que estudiar, es formar parte de una comunidad que te impulsa a crecer y transformar tu entorno.',
-    autor: 'Ana Sofía',
-    carrera: 'Ingeniería en Sistemas'
-  };
+  readonly testimonio = TESTIMONIO_ESTUDIANTES;
 
-  readonly momentos: Momento[] = [
-    {
-      id: 'vida-campus',
-      titulo: 'Vida en el campus',
-      portada: `${BASE}/vida-campus.jpg`,
-      portadaAlt: 'Grupo de estudiantes del ITD en las áreas verdes del campus',
-      totalFotos: 186,
-      categoria: 'campus',
-      anio: 2025,
-      fallback: G.verde
-    },
-    {
-      id: 'proyectos-competencias',
-      titulo: 'Proyectos y competencias',
-      portada: `${BASE}/proyectos-competencias.jpg`,
-      portadaAlt: 'Estudiantes trabajando en un proyecto de robótica',
-      totalFotos: 142,
-      categoria: 'academico',
-      anio: 2025,
-      fallback: G.oliva
-    },
-    {
-      id: 'graduaciones',
-      titulo: 'Graduaciones',
-      portada: `${BASE}/graduaciones.jpg`,
-      portadaAlt: 'Egresados lanzando sus birretes al aire',
-      totalFotos: 98,
-      categoria: 'ceremonias',
-      anio: 2025,
-      fallback: G.azul
-    },
-    {
-      id: 'deportes-itd',
-      titulo: 'Deportes ITD',
-      portada: `${BASE}/deportes-itd.jpg`,
-      portadaAlt: 'Equipos deportivos representativos del ITD',
-      totalFotos: 114,
-      categoria: 'deportivo',
-      anio: 2024,
-      fallback: G.rojo
-    },
-    {
-      id: 'ferias-exposiciones',
-      titulo: 'Ferias y exposiciones',
-      portada: `${BASE}/ferias-exposiciones.jpg`,
-      portadaAlt: 'Estudiantes presentando proyectos en una feria académica',
-      totalFotos: 76,
-      categoria: 'academico',
-      anio: 2024,
-      fallback: G.morado
-    },
-    {
-      id: 'talleres-capacitaciones',
-      titulo: 'Talleres y capacitaciones',
-      portada: `${BASE}/talleres-capacitaciones.jpg`,
-      portadaAlt: 'Estudiantes durante un taller práctico',
-      totalFotos: 89,
-      categoria: 'academico',
-      anio: 2024,
-      fallback: G.oliva
-    },
-    {
-      id: 'cultura-arte',
-      titulo: 'Cultura y arte',
-      portada: `${BASE}/cultura-arte.jpg`,
-      portadaAlt: 'Presentación de danza folclórica del ITD',
-      totalFotos: 67,
-      categoria: 'cultural',
-      anio: 2024,
-      fallback: G.rojo
-    },
-    {
-      id: 'voluntariado',
-      titulo: 'Voluntariado',
-      portada: `${BASE}/voluntariado.jpg`,
-      portadaAlt: 'Estudiantes plantando árboles en una jornada de voluntariado',
-      totalFotos: 55,
-      categoria: 'social',
-      anio: 2023,
-      fallback: G.verde
-    }
-  ];
+  private readonly momentos = this.galeria.getMomentos();
 
   /** Aplica búsqueda y orden sobre el conjunto completo. */
   private readonly momentosFiltrados = computed<Momento[]>(() => {
@@ -179,8 +88,7 @@ export class EstudiantesComponent {
   }
 
   abrirMomento(momento: Momento): void {
-    // TODO: navegar a la galería completa del momento
-    console.log('Abrir momento', momento.id);
+    this.router.navigate(['/galeria/estudiantes', momento.id]);
   }
 
   onIrAlPortal(): void {

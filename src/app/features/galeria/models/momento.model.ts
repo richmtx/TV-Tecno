@@ -16,6 +16,12 @@ export interface Momento {
     /** Título visible de la tarjeta. */
     titulo: string;
 
+    /** Encabezado secundario en la página de detalle. */
+    subtitulo: string;
+
+    /** Descripción breve, mostrada en el detalle. */
+    descripcion: string;
+
     /** Ruta de la imagen de portada. */
     portada: string;
 
@@ -33,6 +39,9 @@ export interface Momento {
 
     /** Degradado de respaldo mientras no exista la portada real. */
     fallback: string;
+
+    /** Descripciones que se rotan entre las fotos. */
+    etiquetasFotos: string[];
 }
 
 /** Testimonio de un estudiante o egresado. */
