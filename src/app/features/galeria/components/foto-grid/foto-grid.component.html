@@ -1,0 +1,8 @@
+<div class="foto-grid">
+    @for (foto of fotos(); track foto.id; let i = $index) {
+    <button type="button" class="foto-grid__item" [style.background]="foto.fallback"
+        [attr.aria-label]="'Ampliar: ' + foto.titulo" (click)="onClick(i)">
+        <img class="foto-grid__img" [src]="foto.src" [alt]="foto.titulo" loading="lazy" (error)="onImgError($event)" />
+    </button>
+    }
+</div>

@@ -1,0 +1,24 @@
+<nav class="nav-col" [class.nav-col--timeline]="variante() === 'timeline'" [attr.aria-label]="titulo()">
+
+    <h3 class="nav-col__titulo">{{ titulo() }}</h3>
+
+    <ul class="nav-col__lista">
+        @for (item of items(); track item.id) {
+        <li class="nav-col__item">
+            <a class="nav-col__link" [class.nav-col__link--activo]="item.id === activoId()"
+                [routerLink]="[rutaBase(), item.id]" [attr.aria-current]="item.id === activoId() ? 'page' : null">
+
+                @if (variante() === 'timeline') {
+                <span class="nav-col__punto" aria-hidden="true"></span>
+                }
+
+                <span class="nav-col__texto">
+                    <span class="nav-col__item-titulo">{{ item.titulo }}</span>
+                    <span class="nav-col__item-subtitulo">{{ item.subtitulo }}</span>
+                </span>
+            </a>
+        </li>
+        }
+    </ul>
+
+</nav>

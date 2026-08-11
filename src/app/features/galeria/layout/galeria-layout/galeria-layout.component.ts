@@ -3,46 +3,36 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map, startWith } from 'rxjs';
 import { HeroGaleriaComponent } from '../../components/hero-galeria/hero-galeria.component';
-import { GaleriaTabsComponent } from '../../components/galeria-tabs/galeria-tabs.component';
-import { BarraFiltrosComponent } from '../../components/barra-filtros/barra-filtros.component';
 import { FotosItdComponent } from '../../../../shared/components/fotos-itd/fotos-itd.component';
 import { HistoriaComponent } from '../../../../shared/components/historia/historia.component';
 import { GaleriaFiltrosService } from '../../services/galeria-filtros.service';
-import { GaleriaTab, TabId } from '../../models/filtros-galeria.model';
+import { TabId } from '../../models/filtros-galeria.model';
 import { CONTENIDO_SECCIONES } from '../../data/galeria-secciones';
 
+/** Segmentos de URL asociados a cada sección. */
+const RUTAS_SECCION: { id: TabId; ruta: string }[] = [
+  { id: 'timeline', ruta: 'linea-del-tiempo' },
+  { id: 'albums', ruta: 'albumes' },
+  { id: 'instalaciones', ruta: 'instalaciones' },
+  { id: 'estudiantes', ruta: 'estudiantes' },
+];
+
 /**
- * Contenedor de la sección Galería.
- * Monta el hero, la barra de controles y el pie común una sola vez;
- * los textos del pie se adaptan a la sección activa.
+ * Contenedor raíz de la Galería.
+ * Aporta el hero y el pie común a todas las páginas, índices y
+ * detalles por igual. La barra de pestañas vive en SeccionesLayout.
  */
 @Component({
   selector: 'app-galeria-layout',
   standalone: true,
-  imports: [
-    RouterOutlet,
-    HeroGaleriaComponent,
-    GaleriaTabsComponent,
-    BarraFiltrosComponent,
-    FotosItdComponent,
-    HistoriaComponent,
-  ],
+  imports: [RouterOutlet, HeroGaleriaComponent, FotosItdComponent, HistoriaComponent],
   providers: [GaleriaFiltrosService],
   templateUrl: './galeria-layout.component.html',
   styleUrl: './galeria-layout.component.css',
 })
 export class GaleriaLayoutComponent {
 
-  readonly filtros = inject(GaleriaFiltrosService);
   private readonly router = inject(Router);
-
-  /** Pestañas de la galería. `ruta` es el segmento bajo /galeria. */
-  readonly tabs: GaleriaTab[] = [
-    { id: 'timeline', ruta: 'linea-del-tiempo', label: 'Línea del tiempo' },
-    { id: 'albums', ruta: 'albumes', label: 'Álbumes' },
-    { id: 'instalaciones', ruta: 'instalaciones', label: 'Instalaciones' },
-    { id: 'estudiantes', ruta: 'estudiantes', label: 'Estudiantes' },
-  ];
 
   /** Sección activa, derivada de la URL. */
   private readonly seccionActiva = toSignal(
@@ -57,11 +47,9 @@ export class GaleriaLayoutComponent {
   /** Textos del pie correspondientes a la sección activa. */
   readonly contenido = computed(() => CONTENIDO_SECCIONES[this.seccionActiva()]);
 
-  /** Traduce el segmento de la URL al identificador de sección. */
   private resolverSeccion(): TabId {
     const url = this.router.url;
-    const tab = this.tabs.find(t => url.includes(`/galeria/${t.ruta}`));
-    return tab?.id ?? 'timeline';
+    return RUTAS_SECCION.find(s => url.includes(`/galeria/${s.ruta}`))?.id ?? 'timeline';
   }
 
   onEnviarFotos(): void {

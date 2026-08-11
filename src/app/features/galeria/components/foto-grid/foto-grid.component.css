@@ -1,0 +1,84 @@
+/* ============================================================
+   FOTO-GRID — Cuadrícula de fotografías (Galería ITD)
+   ============================================================ */
+
+:host {
+    --fg-gold: #c8a96e;
+
+    display: block;
+}
+
+.foto-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.foto-grid__item {
+    position: relative;
+    padding: 0;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(43, 43, 43, 0.08);
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+
+.foto-grid__item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(43, 43, 43, 0.16);
+}
+
+.foto-grid__item:focus-visible {
+    outline: 2px solid var(--fg-gold);
+    outline-offset: 3px;
+}
+
+.foto-grid__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.foto-grid__item:hover .foto-grid__img {
+    transform: scale(1.05);
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 1080px) {
+    .foto-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.9rem;
+    }
+}
+
+@media (max-width: 560px) {
+    .foto-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.7rem;
+    }
+}
+
+/* ============ ACCESIBILIDAD ============ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .foto-grid__item,
+    .foto-grid__img {
+        transition: none !important;
+    }
+
+    .foto-grid__item:hover {
+        transform: none;
+    }
+
+    .foto-grid__item:hover .foto-grid__img {
+        transform: none;
+    }
+}

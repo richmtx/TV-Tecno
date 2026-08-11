@@ -1,0 +1,178 @@
+/* ============================================================
+   NAV-COLECCIONES — Salto entre colecciones hermanas
+   ============================================================ */
+
+:host {
+    --nc-wine: #6b1538;
+    --nc-wine-soft: #f7edf1;
+    --nc-gold: #c8a96e;
+    --nc-ink: #2b2b2b;
+    --nc-muted: #6f6a6d;
+    --nc-line: #e7e2e4;
+    --nc-surface: #ffffff;
+
+    display: block;
+    font-family: 'Raleway', system-ui, sans-serif;
+}
+
+.nav-col {
+    padding: 1.35rem 1.25rem;
+    background: var(--nc-surface);
+    border: 1px solid var(--nc-line);
+    border-radius: 14px;
+    box-shadow: 0 1px 3px rgba(43, 43, 43, 0.05);
+}
+
+.nav-col__titulo {
+    margin: 0 0 1.1rem;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--nc-ink);
+}
+
+.nav-col__lista {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-col__link {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.6rem 0.5rem;
+    border-radius: 9px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.nav-col__link:hover {
+    background: var(--nc-wine-soft);
+}
+
+.nav-col__link:focus-visible {
+    outline: 2px solid var(--nc-gold);
+    outline-offset: 2px;
+}
+
+.nav-col__texto {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+}
+
+.nav-col__item-titulo {
+    font-size: 0.87rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--nc-muted);
+    transition: color 0.2s ease;
+}
+
+.nav-col__item-subtitulo {
+    font-size: 0.78rem;
+    line-height: 1.4;
+    color: #9a9498;
+}
+
+.nav-col__link--activo .nav-col__item-titulo {
+    color: var(--nc-wine);
+}
+
+.nav-col__link--activo .nav-col__item-subtitulo {
+    color: var(--nc-ink);
+    font-weight: 600;
+}
+
+/* ============ VARIANTE TIMELINE ============ */
+
+.nav-col--timeline .nav-col__item {
+    position: relative;
+}
+
+/* Segmento de línea que une un punto con el siguiente. */
+.nav-col--timeline .nav-col__item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 1.06rem;
+    top: 1.55rem;
+    bottom: -0.1rem;
+    width: 2px;
+    background: var(--nc-line);
+}
+
+.nav-col__punto {
+    position: relative;
+    z-index: 1;
+    flex: 0 0 auto;
+    width: 11px;
+    height: 11px;
+    margin-top: 0.28rem;
+    border: 2px solid #cfc8cb;
+    border-radius: 50%;
+    background: var(--nc-surface);
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-col__link--activo .nav-col__punto {
+    border-color: var(--nc-wine);
+    background: var(--nc-wine);
+    box-shadow: 0 0 0 3px rgba(107, 21, 56, 0.15);
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 860px) {
+    .nav-col {
+        padding: 1.1rem 1rem;
+    }
+
+    .nav-col__lista {
+        flex-direction: row;
+        gap: 0.4rem;
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding-bottom: 0.2rem;
+    }
+
+    .nav-col__lista::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-col__item {
+        flex: 0 0 auto;
+    }
+
+    /* En horizontal la línea y los puntos estorban. */
+    .nav-col--timeline .nav-col__item:not(:last-child)::before {
+        display: none;
+    }
+
+    .nav-col__punto {
+        display: none;
+    }
+
+    .nav-col__link {
+        border: 1px solid var(--nc-line);
+        white-space: nowrap;
+    }
+
+    .nav-col__link--activo {
+        border-color: var(--nc-wine);
+        background: var(--nc-wine-soft);
+    }
+}
+
+/* ============ ACCESIBILIDAD ============ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .nav-col__link,
+    .nav-col__punto,
+    .nav-col__item-titulo {
+        transition: none !important;
+    }
+}

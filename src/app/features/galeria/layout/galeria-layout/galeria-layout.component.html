@@ -1,18 +1,5 @@
 <app-hero-galeria></app-hero-galeria>
 
-<div class="galeria-layout__controles">
-    <div class="galeria-layout__toolbar">
-
-        <app-galeria-tabs [tabs]="tabs"></app-galeria-tabs>
-
-        <app-barra-filtros [placeholder]="filtros.placeholder()" [opciones]="filtros.opciones()"
-            [filtroActivo]="filtros.filtroActivo()" [valorBusqueda]="filtros.busqueda()"
-            (busquedaChange)="filtros.setBusqueda($event)"
-            (filtroChange)="filtros.setFiltro($event)"></app-barra-filtros>
-
-    </div>
-</div>
-
 <router-outlet></router-outlet>
 
 <div class="galeria-layout__cta">

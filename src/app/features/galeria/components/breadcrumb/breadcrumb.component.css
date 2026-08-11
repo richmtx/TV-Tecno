@@ -1,0 +1,73 @@
+/* ============================================================
+   BREADCRUMB — Rastro de navegación (Galería ITD)
+   ============================================================ */
+
+:host {
+    --bc-wine: #6b1538;
+    --bc-gold: #c8a96e;
+    --bc-muted: #6f6a6d;
+
+    display: block;
+    font-family: 'Raleway', system-ui, sans-serif;
+}
+
+.breadcrumb__lista {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.15rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.breadcrumb__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+}
+
+.breadcrumb__link {
+    padding: 0.2rem 0.25rem;
+    border-radius: 6px;
+    color: var(--bc-muted);
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.breadcrumb__link:hover {
+    color: var(--bc-wine);
+    text-decoration: underline;
+}
+
+.breadcrumb__link:focus-visible {
+    outline: 2px solid var(--bc-gold);
+    outline-offset: 2px;
+}
+
+.breadcrumb__actual {
+    padding: 0.2rem 0.25rem;
+    color: var(--bc-wine);
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.breadcrumb__sep {
+    display: inline-flex;
+    width: 13px;
+    height: 13px;
+    color: #b8b2b5;
+}
+
+.breadcrumb__sep svg {
+    width: 100%;
+    height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .breadcrumb__link {
+        transition: none !important;
+    }
+}

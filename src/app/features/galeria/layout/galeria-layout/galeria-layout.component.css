@@ -1,5 +1,6 @@
 /* ============================================================
-   GALERIA-LAYOUT — Contenedor de la sección Galería
+   GALERIA-LAYOUT — Contenedor raíz de la sección Galería
+   El toolbar de pestañas y filtros vive en SeccionesLayout.
    ============================================================ */
 
 :host {
@@ -7,25 +8,6 @@
     font-family: 'Raleway', system-ui, sans-serif;
 }
 
-/* Barra de controles: mismo ancho que el contenido de las secciones. */
-.galeria-layout__controles {
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    overflow-x: clip;
-}
-
-.galeria-layout__toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem 1.5rem;
-    flex-wrap: wrap;
-    min-width: 0;
-    margin-bottom: 3rem;
-}
-
-/* Pie común: CTA alineada al mismo ancho. */
 .galeria-layout__cta {
     max-width: 1180px;
     margin: 2.5rem auto 1rem;
@@ -38,25 +20,7 @@ app-historia {
     margin-top: 1.5rem;
 }
 
-/* ============ RESPONSIVE ============ */
-
-@media (max-width: 1080px) {
-    .galeria-layout__toolbar {
-        flex-direction: column;
-        align-items: stretch;
-    }
-}
-
 @media (max-width: 560px) {
-    .galeria-layout__controles {
-        padding: 0 1rem;
-    }
-
-    .galeria-layout__toolbar {
-        gap: 0.75rem;
-        margin-bottom: 2.25rem;
-    }
-
     .galeria-layout__cta {
         padding: 0 1rem;
     }

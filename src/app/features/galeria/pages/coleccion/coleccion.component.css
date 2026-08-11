@@ -1,0 +1,169 @@
+/* ============================================================
+   COLECCION — Detalle de una colección de fotos (Galería ITD)
+   ============================================================ */
+
+:host {
+    --co-wine: #6b1538;
+    --co-wine-soft: #f7edf1;
+    --co-gold: #c8a96e;
+    --co-ink: #2b2b2b;
+    --co-muted: #6f6a6d;
+
+    display: block;
+    font-family: 'Raleway', system-ui, sans-serif;
+}
+
+.coleccion {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    overflow-x: clip;
+}
+
+/* --- Encabezado --- */
+
+.coleccion__encabezado {
+    margin: 1rem 0 2rem;
+}
+
+.coleccion__titulo {
+    margin: 0 0 0.3rem;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: var(--co-wine);
+}
+
+.coleccion__subtitulo {
+    margin: 0 0 0.6rem;
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: var(--co-ink);
+}
+
+.coleccion__desc {
+    max-width: 46ch;
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--co-muted);
+}
+
+/* --- Cuerpo en dos columnas --- */
+
+.coleccion__cuerpo {
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr);
+    gap: 1.75rem;
+    align-items: start;
+}
+
+.coleccion__aside {
+    position: sticky;
+    top: 92px;
+}
+
+.coleccion__contenido {
+    min-width: 0;
+}
+
+.coleccion__paginacion {
+    margin-top: 2.25rem;
+}
+
+/* --- Estado vacío --- */
+
+.coleccion__vacio {
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.coleccion__vacio-titulo {
+    margin: 0 0 0.5rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--co-wine);
+}
+
+.coleccion__vacio-texto {
+    margin: 0 0 1.5rem;
+    font-size: 0.92rem;
+    color: var(--co-muted);
+}
+
+.coleccion__vacio-btn {
+    padding: 0.75rem 1.4rem;
+    border: none;
+    border-radius: 10px;
+    background: var(--co-wine);
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.coleccion__vacio-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(107, 21, 56, 0.28);
+}
+
+.coleccion__vacio-btn:focus-visible {
+    outline: 2px solid var(--co-gold);
+    outline-offset: 3px;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 1080px) {
+    .coleccion__cuerpo {
+        grid-template-columns: 215px minmax(0, 1fr);
+        gap: 1.4rem;
+    }
+}
+
+@media (max-width: 860px) {
+    .coleccion__cuerpo {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.5rem;
+    }
+
+    .coleccion__aside {
+        position: static;
+    }
+
+    .coleccion__titulo {
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 560px) {
+    .coleccion {
+        padding: 0 1rem;
+    }
+
+    .coleccion__encabezado {
+        margin: 0.85rem 0 1.6rem;
+    }
+
+    .coleccion__titulo {
+        font-size: 1.5rem;
+    }
+
+    .coleccion__paginacion {
+        margin-top: 1.75rem;
+    }
+}
+
+/* ============ ACCESIBILIDAD ============ */
+
+@media (prefers-reduced-motion: reduce) {
+    .coleccion__vacio-btn {
+        transition: none !important;
+    }
+
+    .coleccion__vacio-btn:hover {
+        transform: none;
+    }
+}

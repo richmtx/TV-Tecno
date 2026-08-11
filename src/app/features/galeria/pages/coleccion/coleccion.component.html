@@ -1,0 +1,49 @@
+<section class="coleccion">
+
+    @if (coleccion(); as col) {
+
+    <app-breadcrumb [items]="migas()"></app-breadcrumb>
+
+    <header class="coleccion__encabezado">
+        <h1 class="coleccion__titulo">{{ col.titulo }}</h1>
+        <p class="coleccion__subtitulo">{{ col.subtitulo }}</p>
+        <p class="coleccion__desc">{{ col.descripcion }}</p>
+    </header>
+
+    <div class="coleccion__cuerpo">
+
+        <aside class="coleccion__aside">
+            <app-nav-colecciones [items]="navItems()" [activoId]="col.id" [rutaBase]="config().ruta"
+                [titulo]="config().navTitulo" [variante]="config().variante"></app-nav-colecciones>
+        </aside>
+
+        <div class="coleccion__contenido">
+            <app-foto-grid [fotos]="fotosVisibles()" [offset]="offset()"
+                (seleccion)="abrirVisor($event)"></app-foto-grid>
+
+            @if (totalPaginas() > 1) {
+            <div class="coleccion__paginacion">
+                <app-paginacion [paginaActual]="paginaActual()" [totalPaginas]="totalPaginas()"
+                    (cambioPagina)="irAPagina($event)"></app-paginacion>
+            </div>
+            }
+        </div>
+
+    </div>
+
+    <app-lightbox [fotos]="fotos()" [indice]="indiceVisor()" (cambioIndice)="cambiarFoto($event)"
+        (cerrar)="cerrarVisor()"></app-lightbox>
+
+    } @else {
+
+    <div class="coleccion__vacio">
+        <h1 class="coleccion__vacio-titulo">No encontramos esta colección</h1>
+        <p class="coleccion__vacio-texto">Puede que el enlace sea antiguo o que la colección ya no exista.</p>
+        <button type="button" class="coleccion__vacio-btn" (click)="volverAlIndice()">
+            Volver a {{ config().label }}
+        </button>
+    </div>
+
+    }
+
+</section>

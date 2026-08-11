@@ -1,0 +1,39 @@
+@if (abierto() && fotoActual(); as foto) {
+<div class="lightbox" role="dialog" aria-modal="true" [attr.aria-label]="foto.titulo" (click)="onFondo($event)">
+
+    <button type="button" class="lightbox__cerrar" (click)="onCerrar()" aria-label="Cerrar visor">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            aria-hidden="true">
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+        </svg>
+    </button>
+
+    <button type="button" class="lightbox__nav lightbox__nav--prev" [disabled]="!hayAnterior()" (click)="anterior()"
+        aria-label="Foto anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" aria-hidden="true">
+            <polyline points="14.5 6 8.5 12 14.5 18"></polyline>
+        </svg>
+    </button>
+
+    <figure class="lightbox__figura">
+        <div class="lightbox__marco" [style.background]="foto.fallback">
+            <img class="lightbox__img" [src]="foto.src" [alt]="foto.titulo" (error)="onImgError($event)" />
+        </div>
+        <figcaption class="lightbox__pie">
+            <span class="lightbox__pie-texto">{{ foto.titulo }}</span>
+            <span class="lightbox__pie-contador">{{ (indice() ?? 0) + 1 }} / {{ fotos().length }}</span>
+        </figcaption>
+    </figure>
+
+    <button type="button" class="lightbox__nav lightbox__nav--next" [disabled]="!haySiguiente()" (click)="siguiente()"
+        aria-label="Foto siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9.5 6 15.5 12 9.5 18"></polyline>
+        </svg>
+    </button>
+
+</div>
+}
