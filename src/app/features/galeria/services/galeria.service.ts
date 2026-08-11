@@ -76,7 +76,10 @@ export class GaleriaService {
       subtitulo: a.periodo,
       descripcion: a.descripcion,
       totalFotos: a.totalFotos,
-      fotos: generarFotos(BASE_ALBUMES, a.id, a.totalFotos, a.etiquetasFotos)
+      fotos: generarFotos(BASE_ALBUMES, a.id, a.totalFotos, {
+        pies: a.piesFotos,
+        anio: a.anioFotos
+      })
     };
   }
 
@@ -88,7 +91,9 @@ export class GaleriaService {
       subtitulo: i.categoriaLabel,
       descripcion: i.descripcion,
       totalFotos: i.totalFotos,
-      fotos: generarFotos(BASE_INSTALACIONES, i.id, i.totalFotos, i.etiquetasFotos)
+      fotos: generarFotos(BASE_INSTALACIONES, i.id, i.totalFotos, {
+        pies: i.piesFotos
+      })
     };
   }
 
@@ -100,7 +105,10 @@ export class GaleriaService {
       subtitulo: m.subtitulo,
       descripcion: m.descripcion,
       totalFotos: m.totalFotos,
-      fotos: generarFotos(BASE_ESTUDIANTES, m.id, m.totalFotos, m.etiquetasFotos)
+      fotos: generarFotos(BASE_ESTUDIANTES, m.id, m.totalFotos, {
+        pies: m.piesFotos,
+        anio: m.anio
+      })
     };
   }
 }

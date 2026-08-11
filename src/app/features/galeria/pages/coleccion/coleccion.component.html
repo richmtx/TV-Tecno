@@ -18,8 +18,8 @@
         </aside>
 
         <div class="coleccion__contenido">
-            <app-foto-grid [fotos]="fotosVisibles()" [offset]="offset()"
-                (seleccion)="abrirVisor($event)"></app-foto-grid>
+            <app-foto-grid [fotos]="fotosVisibles()" [offset]="offset()" [tituloColeccion]="col.titulo"
+                [totalColeccion]="fotos().length" (seleccion)="abrirVisor($event)"></app-foto-grid>
 
             @if (totalPaginas() > 1) {
             <div class="coleccion__paginacion">
@@ -31,8 +31,8 @@
 
     </div>
 
-    <app-lightbox [fotos]="fotos()" [indice]="indiceVisor()" (cambioIndice)="cambiarFoto($event)"
-        (cerrar)="cerrarVisor()"></app-lightbox>
+    <app-lightbox [fotos]="fotos()" [indice]="indiceVisor()" [tituloColeccion]="col.titulo"
+        (cambioIndice)="cambiarFoto($event)" (cerrar)="cerrarVisor()"></app-lightbox>
 
     } @else {
 

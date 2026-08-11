@@ -31,7 +31,7 @@ export const INSTALACIONES: Instalacion[] = [
         categoria: 'academicas',
         categoriaLabel: 'Académicas',
         fallback: OLIVA,
-        etiquetasFotos: [
+        piesFotos: [
             'Aula equipada con proyector',
             'Clase en sesión',
             'Mobiliario para trabajo colaborativo',
@@ -48,7 +48,7 @@ export const INSTALACIONES: Instalacion[] = [
         categoria: 'academicas',
         categoriaLabel: 'Académicas',
         fallback: AZUL,
-        etiquetasFotos: [
+        piesFotos: [
             'Sala de cómputo del plantel',
             'Estudiantes en práctica de laboratorio',
             'Equipos de cómputo actualizados',
@@ -65,7 +65,7 @@ export const INSTALACIONES: Instalacion[] = [
         categoria: 'servicios',
         categoriaLabel: 'Servicios',
         fallback: MORADO,
-        etiquetasFotos: [
+        piesFotos: [
             'Sala de lectura',
             'Estantería del acervo',
             'Área de estudio en grupo',
@@ -82,7 +82,7 @@ export const INSTALACIONES: Instalacion[] = [
         categoria: 'laboratorios',
         categoriaLabel: 'Laboratorios',
         fallback: VERDE,
-        etiquetasFotos: [
+        piesFotos: [
             'Práctica en laboratorio de química',
             'Equipo de medición especializado',
             'Trabajo en mesa de laboratorio',
@@ -99,7 +99,7 @@ export const INSTALACIONES: Instalacion[] = [
         categoria: 'areas-comunes',
         categoriaLabel: 'Áreas comunes',
         fallback: ROJO,
-        etiquetasFotos: [
+        piesFotos: [
             'Butacas del auditorio',
             'Escenario durante un evento',
             'Conferencia en el auditorio',
@@ -116,7 +116,7 @@ export const INSTALACIONES: Instalacion[] = [
         categoria: 'deportivas',
         categoriaLabel: 'Deportivas',
         fallback: OLIVA,
-        etiquetasFotos: [
+        piesFotos: [
             'Duela del gimnasio techado',
             'Partido en cancha interior',
             'Gradas durante un encuentro',
@@ -133,7 +133,7 @@ export const INSTALACIONES: Instalacion[] = [
         categoria: 'administrativas',
         categoriaLabel: 'Administrativas',
         fallback: AZUL,
-        etiquetasFotos: [
+        piesFotos: [
             'Fachada del edificio administrativo',
             'Área de atención a estudiantes',
             'Oficinas del plantel',
@@ -150,7 +150,7 @@ export const INSTALACIONES: Instalacion[] = [
         categoria: 'servicios',
         categoriaLabel: 'Servicios',
         fallback: ROJO,
-        etiquetasFotos: [
+        piesFotos: [
             'Área de mesas de la cafetería',
             'Convivencia durante el receso',
             'Zona de servicio de alimentos',
@@ -167,7 +167,7 @@ export const INSTALACIONES: Instalacion[] = [
         categoria: 'laboratorios',
         categoriaLabel: 'Laboratorios',
         fallback: MORADO,
-        etiquetasFotos: [
+        piesFotos: [
             'Fachada del Centro de Innovación',
             'Área de prototipado',
             'Estudiantes desarrollando un proyecto',
@@ -184,7 +184,7 @@ export const INSTALACIONES: Instalacion[] = [
         categoria: 'areas-comunes',
         categoriaLabel: 'Áreas comunes',
         fallback: VERDE,
-        etiquetasFotos: [
+        piesFotos: [
             'Jardines del campus',
             'Andador arbolado',
             'Área de descanso al aire libre',
@@ -201,7 +201,7 @@ export const INSTALACIONES: Instalacion[] = [
         categoria: 'servicios',
         categoriaLabel: 'Servicios',
         fallback: OLIVA,
-        etiquetasFotos: [
+        piesFotos: [
             'Área de estacionamiento',
             'Acceso vehicular al plantel',
             'Señalización del estacionamiento',
@@ -218,7 +218,7 @@ export const INSTALACIONES: Instalacion[] = [
         categoria: 'deportivas',
         categoriaLabel: 'Deportivas',
         fallback: AZUL,
-        etiquetasFotos: [
+        piesFotos: [
             'Cancha multiusos al aire libre',
             'Partido de basquetbol',
             'Actividad deportiva estudiantil',

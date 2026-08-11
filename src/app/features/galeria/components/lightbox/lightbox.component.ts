@@ -1,5 +1,5 @@
 import { Component, HostListener, computed, effect, input, output } from '@angular/core';
-import { Foto } from '../../models/coleccion.model';
+import { Foto, altDeFoto } from '../../models/coleccion.model';
 
 /**
  * Visor a pantalla completa con navegación entre fotos.
@@ -21,6 +21,9 @@ export class LightboxComponent {
   /** Índice abierto, o null si el visor está cerrado. */
   readonly indice = input.required<number | null>();
 
+  /** Título de la colección, usado para el texto alternativo. */
+  readonly tituloColeccion = input<string>('');
+
   /** Se emite con el nuevo índice al navegar. */
   readonly cambioIndice = output<number>();
 
@@ -32,6 +35,20 @@ export class LightboxComponent {
   readonly fotoActual = computed<Foto | null>(() => {
     const i = this.indice();
     return i === null ? null : this.fotos()[i] ?? null;
+  });
+
+  /** Texto alternativo de la foto abierta. */
+  readonly altActual = computed<string>(() => {
+    const foto = this.fotoActual();
+    if (!foto) {
+      return '';
+    }
+    return altDeFoto(
+      foto,
+      this.tituloColeccion(),
+      this.indice() ?? 0,
+      this.fotos().length
+    );
   });
 
   readonly hayAnterior = computed(() => (this.indice() ?? 0) > 0);

@@ -7,11 +7,18 @@ export type SeccionId = TabId;
 export interface Foto {
     id: string;
 
-    /** Descripción para accesibilidad y pie de foto en el lightbox. */
-    titulo: string;
-
     /** Ruta del archivo. */
     src: string;
+
+    /**
+     * Pie de foto editorial. Opcional: la mayoría de las fotos de una
+     * colección no necesitan uno, y exigirlo haría inviable la carga
+     * masiva desde el panel de administración.
+     */
+    pie?: string;
+
+    /** Año de la fotografía, si se conoce. */
+    anio?: number;
 
     /** Degradado de respaldo mientras no exista la imagen real. */
     fallback: string;
@@ -57,4 +64,21 @@ export interface MigaPan {
     label: string;
     /** Ruta absoluta; si se omite, el eslabón es el actual y no enlaza. */
     ruta?: string;
+}
+
+/**
+ * Texto alternativo de una foto.
+ * Se genera siempre, sin intervención del administrador: usa el pie
+ * cuando existe y, si no, ubica la foto dentro de su colección.
+ */
+export function altDeFoto(
+    foto: Foto,
+    tituloColeccion: string,
+    indice: number,
+    total: number
+): string {
+    if (foto.pie) {
+        return foto.pie;
+    }
+    return `${tituloColeccion} — fotografía ${indice + 1} de ${total}`;
 }

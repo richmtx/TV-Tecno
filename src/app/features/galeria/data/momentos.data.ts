@@ -28,7 +28,7 @@ export const MOMENTOS: Momento[] = [
         categoria: 'campus',
         anio: 2025,
         fallback: VERDE,
-        etiquetasFotos: [
+        piesFotos: [
             'Estudiantes en las áreas verdes',
             'Convivencia entre clases',
             'Recorrido por el campus',
@@ -46,7 +46,7 @@ export const MOMENTOS: Momento[] = [
         categoria: 'academico',
         anio: 2025,
         fallback: OLIVA,
-        etiquetasFotos: [
+        piesFotos: [
             'Proyecto de robótica en desarrollo',
             'Presentación ante el jurado',
             'Trabajo en equipo sobre el prototipo',
@@ -64,7 +64,7 @@ export const MOMENTOS: Momento[] = [
         categoria: 'ceremonias',
         anio: 2025,
         fallback: AZUL,
-        etiquetasFotos: [
+        piesFotos: [
             'Egresados lanzando el birrete',
             'Foto de generación',
             'Entrega de títulos',
@@ -82,7 +82,7 @@ export const MOMENTOS: Momento[] = [
         categoria: 'deportivo',
         anio: 2024,
         fallback: ROJO,
-        etiquetasFotos: [
+        piesFotos: [
             'Equipo representativo del ITD',
             'Entrenamiento en el gimnasio',
             'Encuentro deportivo',
@@ -100,7 +100,7 @@ export const MOMENTOS: Momento[] = [
         categoria: 'academico',
         anio: 2024,
         fallback: MORADO,
-        etiquetasFotos: [
+        piesFotos: [
             'Stand de proyectos estudiantiles',
             'Explicación a los visitantes',
             'Muestra de prototipos',
@@ -118,7 +118,7 @@ export const MOMENTOS: Momento[] = [
         categoria: 'academico',
         anio: 2024,
         fallback: OLIVA,
-        etiquetasFotos: [
+        piesFotos: [
             'Taller práctico en curso',
             'Instructor guiando la sesión',
             'Trabajo en mesa de proyectos',
@@ -136,7 +136,7 @@ export const MOMENTOS: Momento[] = [
         categoria: 'cultural',
         anio: 2024,
         fallback: ROJO,
-        etiquetasFotos: [
+        piesFotos: [
             'Presentación de danza folclórica',
             'Grupo musical del plantel',
             'Ensayo del grupo artístico',
@@ -154,7 +154,7 @@ export const MOMENTOS: Momento[] = [
         categoria: 'social',
         anio: 2023,
         fallback: VERDE,
-        etiquetasFotos: [
+        piesFotos: [
             'Jornada de reforestación',
             'Trabajo comunitario en equipo',
             'Entrega de apoyos',

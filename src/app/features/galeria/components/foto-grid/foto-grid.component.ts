@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { Foto } from '../../models/coleccion.model';
+import { Foto, altDeFoto } from '../../models/coleccion.model';
 
 /**
  * Cuadrícula de fotografías.
@@ -21,8 +21,24 @@ export class FotoGridComponent {
   /** Índice de la primera foto respecto a la colección completa. */
   readonly offset = input<number>(0);
 
+  /** Título de la colección, usado para el texto alternativo. */
+  readonly tituloColeccion = input<string>('');
+
+  /** Total de fotos de la colección, usado para el texto alternativo. */
+  readonly totalColeccion = input<number>(0);
+
   /** Se emite con el índice global de la foto seleccionada. */
   readonly seleccion = output<number>();
+
+  /** Texto alternativo de una foto de la página actual. */
+  alt(foto: Foto, indiceLocal: number): string {
+    return altDeFoto(
+      foto,
+      this.tituloColeccion(),
+      this.offset() + indiceLocal,
+      this.totalColeccion()
+    );
+  }
 
   onClick(indiceLocal: number): void {
     this.seleccion.emit(this.offset() + indiceLocal);

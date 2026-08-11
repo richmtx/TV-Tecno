@@ -22,7 +22,7 @@ export const ALBUMES: Album[] = [
         anioInicio: 1920,
         categoria: 'historico',
         fallback: OLIVA,
-        etiquetasFotos: [
+        piesFotos: [
             'Fachada original del plantel',
             'Primeros estudiantes del Tecnológico',
             'Acto cívico en el patio central',
@@ -41,7 +41,7 @@ export const ALBUMES: Album[] = [
         anioInicio: 1951,
         categoria: 'historico',
         fallback: ROJO,
-        etiquetasFotos: [
+        piesFotos: [
             'Generación de egresados',
             'Clase en el edificio académico',
             'Vista del campus en los años sesenta',
@@ -60,7 +60,7 @@ export const ALBUMES: Album[] = [
         anioInicio: 1981,
         categoria: 'infraestructura',
         fallback: MORADO,
-        etiquetasFotos: [
+        piesFotos: [
             'Edificio principal renovado',
             'Construcción de nuevas aulas',
             'Andador central del campus',
@@ -79,7 +79,7 @@ export const ALBUMES: Album[] = [
         anioInicio: 2001,
         categoria: 'infraestructura',
         fallback: VERDE,
-        etiquetasFotos: [
+        piesFotos: [
             'Centro de innovación tecnológica',
             'Proyecto de robótica estudiantil',
             'Centro de cómputo del plantel',
@@ -98,7 +98,7 @@ export const ALBUMES: Album[] = [
         anioInicio: 2011,
         categoria: 'infraestructura',
         fallback: AZUL,
-        etiquetasFotos: [
+        piesFotos: [
             'Fachada actual del ITD',
             'Vista panorámica del campus',
             'Áreas verdes del plantel',
@@ -117,7 +117,7 @@ export const ALBUMES: Album[] = [
         anioInicio: 2010,
         categoria: 'eventos',
         fallback: ROJO,
-        etiquetasFotos: [
+        piesFotos: [
             'Ceremonia de aniversario',
             'Autoridades en el presídium',
             'Inauguración de instalaciones',
@@ -136,7 +136,7 @@ export const ALBUMES: Album[] = [
         anioInicio: 2010,
         categoria: 'estudiantil',
         fallback: OLIVA,
-        etiquetasFotos: [
+        piesFotos: [
             'Estudiantes en las áreas verdes',
             'Convivencia entre clases',
             'Trabajo en equipo en el aula',
@@ -155,7 +155,7 @@ export const ALBUMES: Album[] = [
         anioInicio: 2005,
         categoria: 'deportivo',
         fallback: AZUL,
-        etiquetasFotos: [
+        piesFotos: [
             'Equipo representativo del ITD',
             'Partido en el gimnasio',
             'Torneo interno de futbol',
@@ -174,7 +174,7 @@ export const ALBUMES: Album[] = [
         anioInicio: 2000,
         categoria: 'eventos',
         fallback: MORADO,
-        etiquetasFotos: [
+        piesFotos: [
             'Egresados lanzando el birrete',
             'Entrega de reconocimientos',
             'Foto de generación',
@@ -193,7 +193,7 @@ export const ALBUMES: Album[] = [
         anioInicio: 2005,
         categoria: 'eventos',
         fallback: VERDE,
-        etiquetasFotos: [
+        piesFotos: [
             'Firma de convenio institucional',
             'Visita de delegación externa',
             'Recorrido por las instalaciones',
@@ -212,7 +212,7 @@ export const ALBUMES: Album[] = [
         anioInicio: 2010,
         categoria: 'estudiantil',
         fallback: ROJO,
-        etiquetasFotos: [
+        piesFotos: [
             'Taller práctico en laboratorio',
             'Capacitación con equipo especializado',
             'Trabajo en mesa de proyectos',
@@ -231,7 +231,7 @@ export const ALBUMES: Album[] = [
         anioInicio: 1980,
         categoria: 'infraestructura',
         fallback: AZUL,
-        etiquetasFotos: [
+        piesFotos: [
             'Vista aérea del campus',
             'Edificio académico',
             'Accesos y andadores',

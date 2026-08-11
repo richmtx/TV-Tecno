@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { GaleriaFiltrosService } from '../../services/galeria-filtros.service';
 import { GaleriaService } from '../../services/galeria.service';
 import { OpcionFiltro } from '../../models/filtros-galeria.model';
-import { Coleccion, Foto } from '../../models/coleccion.model';
+import { Coleccion, Foto, altDeFoto } from '../../models/coleccion.model';
 
 /** Opciones del menú "Filtrar" para esta sección. */
 const OPCIONES_TIMELINE: OpcionFiltro[] = [
@@ -55,6 +55,11 @@ export class CollageComponent {
   constructor() {
     // Declara al layout qué opciones debe mostrar la barra de filtros.
     this.filtros.configurar(OPCIONES_TIMELINE, 'Buscar fotos...');
+  }
+
+  /** Texto alternativo de una miniatura del adelanto. */
+  alt(epoca: EpocaPreview, foto: Foto, indice: number): string {
+    return altDeFoto(foto, epoca.titulo, indice, epoca.fotos.length);
   }
 
   verTodas(epoca: Coleccion): void {

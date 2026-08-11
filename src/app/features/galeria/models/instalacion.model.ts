@@ -44,6 +44,6 @@ export interface Instalacion {
     /** Degradado de respaldo mientras no exista la portada real. */
     fallback: string;
 
-    /** Descripciones que se rotan entre las fotos. */
-    etiquetasFotos: string[];
+    /** Pies de foto destacados; se asignan a las primeras imágenes. */
+    piesFotos: string[];
 }

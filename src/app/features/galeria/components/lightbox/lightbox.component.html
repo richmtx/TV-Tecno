@@ -1,5 +1,5 @@
 @if (abierto() && fotoActual(); as foto) {
-<div class="lightbox" role="dialog" aria-modal="true" [attr.aria-label]="foto.titulo" (click)="onFondo($event)">
+<div class="lightbox" role="dialog" aria-modal="true" [attr.aria-label]="altActual()" (click)="onFondo($event)">
 
     <button type="button" class="lightbox__cerrar" (click)="onCerrar()" aria-label="Cerrar visor">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -17,12 +17,18 @@
         </svg>
     </button>
 
-    <figure class="lightbox__figura">
+    <figure class="lightbox__figura" (click)="$event.stopPropagation()">
         <div class="lightbox__marco" [style.background]="foto.fallback">
-            <img class="lightbox__img" [src]="foto.src" [alt]="foto.titulo" (error)="onImgError($event)" />
+            <img class="lightbox__img" [src]="foto.src" [alt]="altActual()" (error)="onImgError($event)" />
         </div>
+
         <figcaption class="lightbox__pie">
-            <span class="lightbox__pie-texto">{{ foto.titulo }}</span>
+            @if (foto.pie) {
+            <span class="lightbox__pie-texto">{{ foto.pie }}</span>
+            }
+            @if (foto.anio) {
+            <span class="lightbox__pie-anio">{{ foto.anio }}</span>
+            }
             <span class="lightbox__pie-contador">{{ (indice() ?? 0) + 1 }} / {{ fotos().length }}</span>
         </figcaption>
     </figure>

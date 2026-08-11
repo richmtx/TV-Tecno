@@ -15,10 +15,10 @@
             </div>
 
             <div class="collage__era-photos">
-                @for (foto of epoca.preview; track foto.id) {
+                @for (foto of epoca.preview; track foto.id; let i = $index) {
                 <button type="button" class="collage__photo" [style.background]="foto.fallback"
-                    [attr.aria-label]="foto.titulo" (click)="verTodas(epoca)">
-                    <img class="collage__photo-img" [src]="foto.src" [alt]="foto.titulo" loading="lazy"
+                    [attr.aria-label]="alt(epoca, foto, i)" (click)="verTodas(epoca)">
+                    <img class="collage__photo-img" [src]="foto.src" [alt]="alt(epoca, foto, i)" loading="lazy"
                         (error)="onImgError($event)" />
                 </button>
                 }
