@@ -26,10 +26,11 @@
     display: flex;
     align-items: center;
     gap: 2rem;
+    min-height: 320px;
 }
 
 .hero__contenido {
-    flex: 1 1 50%;
+    flex: 0 1 50%;
     min-width: 0;
 }
 
@@ -90,21 +91,6 @@
     color: rgba(255, 255, 255, 0.7);
 }
 
-.hero__ilustracion {
-    flex: 1 1 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 0;
-}
-
-.hero__ilustracion-img {
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: 320px;
-}
-
 /* ===== Cuerpo: se monta sobre la mitad inferior del hero ===== */
 .programacion__cuerpo {
     position: relative;
@@ -129,14 +115,12 @@ app-recordatorios {
     .hero__inner {
         flex-direction: column;
         gap: 1.5rem;
+        min-height: 0;
     }
 
     .hero__contenido {
         width: 100%;
-    }
-
-    .hero__ilustracion-img {
-        max-height: 240px;
+        flex-basis: auto;
     }
 }
 
