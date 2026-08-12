@@ -1,0 +1,223 @@
+:host {
+    display: block;
+}
+
+.egresados {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    background: #f6f6f7;
+}
+
+.egresados__inner {
+    max-width: 1320px;
+    margin-inline: auto;
+    padding: 2.5rem 1.5rem 4.5rem;
+}
+
+/* Banner */
+.banner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 34% 1fr;
+    min-height: 220px;
+    border-radius: 18px;
+    overflow: hidden;
+    background:
+        radial-gradient(55% 80% at 74% 45%, rgba(224, 92, 138, 0.28), transparent 60%),
+        radial-gradient(45% 90% at 106% 55%, rgba(150, 32, 74, 0.55), transparent 55%),
+        linear-gradient(115deg, #23060f 0%, #3d0c20 45%, #5c1230 100%);
+}
+
+.banner__media {
+    position: relative;
+    min-height: 100%;
+    clip-path: polygon(0 0, 100% 0, 68% 100%, 0 100%);
+}
+
+.banner__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(100% 0,
+            calc(100% - 2px) 0,
+            calc(68% - 2px) 100%,
+            68% 100%);
+    background: rgba(224, 92, 138, 0.65);
+    pointer-events: none;
+}
+
+.banner__placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(150deg, #7d2a3f 0%, #9a3a4e 50%, #6b1538 100%);
+}
+
+.banner__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(118% 0,
+            calc(118% - 2px) 0,
+            calc(82% - 2px) 100%,
+            82% 100%);
+    background: rgba(224, 92, 138, 0.65);
+    pointer-events: none;
+}
+
+/* Contenido */
+.banner__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    padding: 2.25rem 3rem;
+}
+
+.banner__copy {
+    flex: 0 1 auto;
+    min-width: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.22);
+    padding-right: 3rem;
+}
+
+.banner__action {
+    flex: 0 0 auto;
+}
+
+/* Tipografía */
+.banner__title {
+    margin: 0;
+    font-family: var(--font-titulo);
+    font-size: clamp(1.5rem, 3.2vw, 2rem);
+    font-weight: 600;
+    line-height: 1.2;
+    color: #ffffff;
+}
+
+.banner__lead {
+    margin: 0.85rem 0 0;
+    font-family: var(--font-cuerpo);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.banner__text {
+    margin: 0.85rem 0 0;
+    font-family: var(--font-cuerpo);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.88);
+    max-width: 46ch;
+}
+
+/* Botón */
+.banner__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.85rem 1.5rem;
+    border-radius: 9px;
+    background: #ffffff;
+    color: var(--tv-wine);
+    font-family: var(--font-titulo);
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.banner__btn-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+}
+
+.banner__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.25);
+}
+
+.banner__btn:hover .banner__btn-icon {
+    transform: translateX(4px);
+}
+
+.banner__btn:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 4px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .banner__content {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding: 2rem 2.5rem 2rem 3rem;
+        gap: 1.75rem;
+    }
+
+    .banner__copy {
+        flex-basis: 100%;
+        border-right: none;
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 860px) {
+    .banner {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .banner__media {
+        min-height: 220px;
+        clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+    }
+
+    .banner__media::after {
+        display: none;
+    }
+
+    .banner__content {
+        padding: 2.5rem 2rem;
+    }
+}
+
+@media (max-width: 560px) {
+    .egresados__inner {
+        padding: 1.75rem 1rem 3rem;
+    }
+
+    .banner__content {
+        padding: 2rem 1.5rem;
+    }
+
+    .banner__action {
+        width: 100%;
+    }
+
+    .banner__btn {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem 1.5rem;
+    }
+}
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+
+    .banner__btn,
+    .banner__btn-icon {
+        transition: none;
+    }
+
+    .banner__btn:hover,
+    .banner__btn:hover .banner__btn-icon {
+        transform: none;
+    }
+}
