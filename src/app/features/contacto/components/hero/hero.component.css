@@ -12,23 +12,10 @@
     align-items: center;
     overflow: hidden;
 
-    background: linear-gradient(90deg,
-            #4a0e26 0%,
-            var(--tv-wine, #6b1538) 45%,
-            #8e2450 78%,
-            #a02c5c 100%);
-}
-
-/* Velo sutil para dar profundidad al degradado */
-.hero::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg,
-            rgba(0, 0, 0, 0.28) 0%,
-            rgba(0, 0, 0, 0.08) 45%,
-            rgba(0, 0, 0, 0) 100%);
-    pointer-events: none;
+    background:
+        radial-gradient(55% 80% at 74% 45%, rgba(224, 92, 138, 0.28), transparent 60%),
+        radial-gradient(45% 90% at 106% 55%, rgba(150, 32, 74, 0.55), transparent 55%),
+        linear-gradient(115deg, #23060f 0%, #3d0c20 45%, #5c1230 100%);
 }
 
 /* ===== Contenedor interno ===== */
@@ -58,12 +45,16 @@
 }
 
 .hero__subtitle {
-    margin: 0.5rem 0 0;
+    margin: 0.2rem 0 0;
     font-family: var(--font-titulo);
     font-size: clamp(1.5rem, 4vw, 2rem);
     font-weight: 600;
     line-height: 1.2;
-    color: #ffffff;
+    background: linear-gradient(100deg, #ef6a92 0%, #dd8a64 55%, #c8a96e 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    width: fit-content;
 }
 
 .hero__text {
