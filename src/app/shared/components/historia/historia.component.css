@@ -89,7 +89,7 @@
     user-select: none;
 }
 
-/* ============ RESPONSIVE ============ */
+/* RESPONSIVE */
 
 /* Intermedio (≈820px → 560px): la letra se achica para evitar el "escalonado" */
 @media (max-width: 820px) {

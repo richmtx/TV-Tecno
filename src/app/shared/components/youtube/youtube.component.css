@@ -32,7 +32,7 @@
     overflow: hidden;
 }
 
-/* ---- Bloque principal ---- */
+/* Bloque principal */
 
 .yt-cta__main {
     display: flex;
@@ -78,7 +78,7 @@
     color: var(--yt-cta-text);
 }
 
-/* ---- Botón ---- */
+/* Botón */
 
 .yt-cta__button {
     display: inline-flex;
@@ -127,7 +127,7 @@
     transform: translateX(4px);
 }
 
-/* ---- Beneficios ---- */
+/* Beneficios */
 
 .yt-cta__features {
     margin: 0;
@@ -176,7 +176,7 @@
     color: var(--yt-cta-text-soft);
 }
 
-/* ---- Responsive ---- */
+/* Responsive */
 
 @media (max-width: 900px) {
     .yt-cta__inner {

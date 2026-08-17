@@ -68,7 +68,7 @@
     background: var(--tv-wine-dark, #55102c);
 }
 
-/* ===== Responsive ===== */
+/* Responsive */
 @media (max-width: 720px) {
     .recordatorios {
         flex-direction: column;
@@ -81,7 +81,7 @@
     }
 }
 
-/* ===== Movimiento reducido ===== */
+/* Movimiento reducido */
 @media (prefers-reduced-motion: reduce) {
     .recordatorios__btn {
         transition: none;

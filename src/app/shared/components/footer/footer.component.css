@@ -12,7 +12,7 @@
     gap: 2rem;
 }
 
-/* ---------- Columna de marca ---------- */
+/* Columna de marca */
 .footer__brand {
     display: flex;
     align-items: center;
@@ -39,7 +39,6 @@
     object-fit: contain;
     padding: 6px;
     box-sizing: border-box;
-    /* clave: el padding no desborda el círculo */
 }
 
 .footer__brand-text {
@@ -67,7 +66,7 @@
     max-width: 280px;
 }
 
-/* ---------- Redes sociales ---------- */
+/* Redes sociales */
 .footer__redes {
     display: flex;
     gap: 10px;
@@ -90,7 +89,7 @@
     transform: translateY(-3px);
 }
 
-/* ---------- Columnas de enlaces ---------- */
+/* Columnas de enlaces */
 .footer__titulo {
     color: #fff;
     font-size: 0.82rem;
@@ -118,7 +117,7 @@
     color: #fff;
 }
 
-/* ---------- Contacto ---------- */
+/* Contacto */
 .footer__contacto {
     list-style: none;
     display: flex;
@@ -151,7 +150,7 @@
     color: #fff;
 }
 
-/* ---------- Barra inferior ---------- */
+/* Barra inferior */
 .footer__base {
     position: relative;
     border-top: 1px solid rgba(255, 255, 255, 0.12);
@@ -170,7 +169,7 @@
     font-size: 0.82rem;
 }
 
-/* ---------- Botón volver arriba ---------- */
+/* Botón volver arriba */
 .footer__top {
     position: absolute;
     top: 0;
@@ -195,7 +194,7 @@
     transform: translate(-50%, -50%) translateY(-2px);
 }
 
-/* ---------- Responsivo ---------- */
+/* Responsivo */
 @media (max-width: 900px) {
     .footer__container {
         grid-template-columns: 1fr 1fr;
