@@ -57,8 +57,7 @@
 .carrusel {
     --slide-ancho: 70%;
     --flecha-tam: 44px;
-    --flecha-sep: 22px;
-    --flecha-min: 10px;
+    --flecha-borde: clamp(12px, 2.5vw, 32px);
 
     position: relative;
     width: 100vw;
@@ -97,10 +96,6 @@
     user-select: none;
 }
 
-.carrusel--arrastrando .programa {
-    transform: none;
-}
-
 /* ---------- Flechas ---------- */
 .carrusel__flecha {
     position: absolute;
@@ -132,13 +127,10 @@
 }
 
 .carrusel__flecha--prev {
-    left: max(var(--flecha-min),
-            calc((100% - var(--slide-ancho)) / 2 - var(--flecha-tam) - var(--flecha-sep)));
+    left: calc((100% - var(--slide-ancho)) / 4 - var(--flecha-tam) / 2);
 }
-
 .carrusel__flecha--next {
-    right: max(var(--flecha-min),
-            calc((100% - var(--slide-ancho)) / 2 - var(--flecha-tam) - var(--flecha-sep)));
+    right: calc((100% - var(--slide-ancho)) / 4 - var(--flecha-tam) / 2);
 }
 
 /* ---------- Tarjeta de programa ---------- */
@@ -148,11 +140,10 @@
     border-radius: 14px;
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition: box-shadow 0.25s ease;
 }
 
 .programa:hover {
-    transform: translateY(-4px);
     box-shadow: 0 10px 26px rgba(107, 21, 56, 0.22);
 }
 
@@ -279,7 +270,6 @@
     .carrusel {
         --slide-ancho: 84%;
         --flecha-tam: 38px;
-        --flecha-sep: 12px;
     }
 }
 
