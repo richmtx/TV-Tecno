@@ -30,7 +30,7 @@
 .ticker__track {
     display: flex;
     white-space: nowrap;
-    animation: ticker-scroll 30s linear infinite;
+    animation: ticker-scroll var(--ticker-duracion, 30s) linear infinite;
 }
 
 .ticker:hover .ticker__track {
