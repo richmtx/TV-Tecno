@@ -129,6 +129,7 @@
 .carrusel__flecha--prev {
     left: calc((100% - var(--slide-ancho)) / 4 - var(--flecha-tam) / 2);
 }
+
 .carrusel__flecha--next {
     right: calc((100% - var(--slide-ancho)) / 4 - var(--flecha-tam) / 2);
 }
@@ -150,9 +151,15 @@
 .programa__fondo {
     position: absolute;
     inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: linear-gradient(135deg, var(--tv-wine-dark), var(--tv-wine));
+}
+
+.programa__imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 .programa[data-tema="noticias"] .programa__fondo {
@@ -263,6 +270,33 @@
     outline: 2px solid var(--tv-pink);
     outline-offset: -4px;
     border-radius: 50%;
+}
+
+/* ---------- Esqueleto de carga ---------- */
+.carrusel-esqueleto {
+    width: min(1280px, 100%);
+    margin-inline: auto;
+    height: clamp(210px, 52vw, 320px);
+    border-radius: 14px;
+    background: linear-gradient(100deg, #efe9eb 30%, #f8f4f5 50%, #efe9eb 70%);
+    background-size: 200% 100%;
+    animation: esqueleto 1.2s ease-in-out infinite;
+}
+
+@keyframes esqueleto {
+    from {
+        background-position: 200% 0;
+    }
+
+    to {
+        background-position: -200% 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .carrusel-esqueleto {
+        animation: none;
+    }
 }
 
 /* ---------- Responsivo ---------- */

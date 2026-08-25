@@ -1,15 +1,11 @@
-import { AfterViewInit, Component, ElementRef, NgZone, OnDestroy, OnInit, PLATFORM_ID,
-  QueryList, ViewChild, ViewChildren, inject, } from '@angular/core';
+import {
+  AfterViewInit, ChangeDetectorRef, Component, ElementRef, NgZone, OnDestroy,
+  OnInit, PLATFORM_ID, QueryList, ViewChild, ViewChildren, inject,
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
-
-interface ProgramaDestacado {
-  categoria: string;
-  titulo: string;
-  horario: string;
-  icono: 'noticias' | 'ciencia' | 'tecnologia' | 'entrevista' | 'cultura';
-  tema: 'noticias' | 'ciencia' | 'tecnologia' | 'entrevista' | 'cultura';
-}
+import { ProgramacionDestacadaService } from '../../../../core/services/programacion-destacada.service';
+import type { ProgramaDestacado } from '../../../../core/models/programacion-destacada.model';
 
 interface SlideCarrusel {
   programa: ProgramaDestacado;
@@ -28,54 +24,21 @@ export class ProgramacionDestacadaComponent implements OnInit, AfterViewInit, On
   @ViewChildren('slide') slidesRef!: QueryList<ElementRef<HTMLElement>>;
 
   private readonly zone = inject(NgZone);
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly service = inject(ProgramacionDestacadaService);
   private readonly esNavegador = isPlatformBrowser(inject(PLATFORM_ID));
 
-  programas: ProgramaDestacado[] = [
-    {
-      categoria: 'Noticias',
-      titulo: 'Noticiero Tecnológico',
-      horario: 'Lun – Vie · 11:00 hrs',
-      icono: 'noticias',
-      tema: 'noticias',
-    },
-    {
-      categoria: 'Ciencia',
-      titulo: 'Laboratorio Abierto',
-      horario: 'Mar & Jue · 15:00 hrs',
-      icono: 'ciencia',
-      tema: 'ciencia',
-    },
-    {
-      categoria: 'Tecnología',
-      titulo: 'Código y Futuro',
-      horario: 'Miérc · 16:30 hrs',
-      icono: 'tecnologia',
-      tema: 'tecnologia',
-    },
-    {
-      categoria: 'Entrevistas',
-      titulo: 'Voces del Tecnológico',
-      horario: 'Lun & Miérc · 18:00 hrs',
-      icono: 'entrevista',
-      tema: 'entrevista',
-    },
-    {
-      categoria: 'Cultura',
-      titulo: 'Arte y Comunidad',
-      horario: 'Vie · 17:00 hrs',
-      icono: 'cultura',
-      tema: 'cultura',
-    },
-  ];
+  programas: ProgramaDestacado[] = [];
+  cargando = true;
 
   private readonly CLONES = 2;
 
   slides: SlideCarrusel[] = [];
-  posicion = 0;               
-  desplazamiento = 0;       
-  sinTransicion = false;      
-  animando = false;         
-  arrastrando = false;       
+  posicion = 0;
+  desplazamiento = 0;
+  sinTransicion = false;
+  animando = false;
+  arrastrando = false;
 
   private inicioX = 0;
   private inicioY = 0;
@@ -84,29 +47,31 @@ export class ProgramacionDestacadaComponent implements OnInit, AfterViewInit, On
 
   private observador?: ResizeObserver;
   private temporizador?: number;
+  private vistaLista = false;
 
   ngOnInit(): void {
-    const n = this.programas.length;
-
-    const clonesInicio: SlideCarrusel[] = this.programas
-      .slice(n - this.CLONES)
-      .map((p, i) => ({ programa: p, indiceReal: n - this.CLONES + i }));
-
-    const reales: SlideCarrusel[] = this.programas.map((p, i) => ({
-      programa: p,
-      indiceReal: i,
-    }));
-
-    const clonesFin: SlideCarrusel[] = this.programas
-      .slice(0, this.CLONES)
-      .map((p, i) => ({ programa: p, indiceReal: i }));
-
-    this.slides = [...clonesInicio, ...reales, ...clonesFin];
-    this.posicion = this.CLONES;
+    this.service.listar().subscribe({
+      next: (data) => {
+        this.programas = data;
+        this.cargando = false;
+        this.construirSlides();
+      },
+      error: () => {
+        this.programas = [];
+        this.cargando = false;
+      },
+    });
   }
 
   ngAfterViewInit(): void {
     if (!this.esNavegador) return;
+    this.vistaLista = true;
+
+    // Los slides pueden llegar después de esta llamada: reposicionamos
+    // cada vez que la lista renderizada cambie.
+    this.slidesRef.changes.subscribe(() => {
+      requestAnimationFrame(() => this.actualizarDesplazamiento());
+    });
 
     requestAnimationFrame(() => this.actualizarDesplazamiento());
 
@@ -125,8 +90,64 @@ export class ProgramacionDestacadaComponent implements OnInit, AfterViewInit, On
     if (this.temporizador) window.clearTimeout(this.temporizador);
   }
 
+  /* ===========================================
+     Presentación
+     =========================================== */
+  imagen(programa: ProgramaDestacado): string | null {
+    return this.service.urlAbsoluta(programa.imagenUrl);
+  }
+
+  /** "Lun – Vie" + "11:00:00" → "Lun – Vie · 11:00 hrs" */
+  horario(programa: ProgramaDestacado): string {
+    const hora = programa.horaInicio?.slice(0, 5) ?? '';
+    return `${programa.dias} · ${hora} hrs`;
+  }
+
+  /* ===========================================
+     Construcción del loop infinito
+     Los clones a ambos lados permiten que el
+     carrusel dé la vuelta sin salto visible.
+     =========================================== */
+  private construirSlides(): void {
+    const n = this.programas.length;
+
+    if (n === 0) {
+      this.slides = [];
+      return;
+    }
+
+    // Con muy pocos elementos no hay material para clonar: se muestra plano.
+    if (n <= this.CLONES) {
+      this.slides = this.programas.map((p, i) => ({ programa: p, indiceReal: i }));
+      this.posicion = 0;
+      return;
+    }
+
+    const clonesInicio: SlideCarrusel[] = this.programas
+      .slice(n - this.CLONES)
+      .map((p, i) => ({ programa: p, indiceReal: n - this.CLONES + i }));
+
+    const reales: SlideCarrusel[] = this.programas.map((p, i) => ({
+      programa: p,
+      indiceReal: i,
+    }));
+
+    const clonesFin: SlideCarrusel[] = this.programas
+      .slice(0, this.CLONES)
+      .map((p, i) => ({ programa: p, indiceReal: i }));
+
+    this.slides = [...clonesInicio, ...reales, ...clonesFin];
+    this.posicion = this.CLONES;
+
+    if (this.vistaLista) {
+      this.cdr.detectChanges();
+      requestAnimationFrame(() => this.actualizarDesplazamiento());
+    }
+  }
+
   get indiceActivo(): number {
     const n = this.programas.length;
+    if (n === 0) return 0;
     return (((this.posicion - this.CLONES) % n) + n) % n;
   }
 
@@ -208,6 +229,7 @@ export class ProgramacionDestacadaComponent implements OnInit, AfterViewInit, On
   private mover(nuevaPos: number): void {
     if (this.animando) return;
     const n = this.programas.length;
+    if (n <= this.CLONES) return;
 
     this.sinTransicion = false;
     this.posicion = nuevaPos;
