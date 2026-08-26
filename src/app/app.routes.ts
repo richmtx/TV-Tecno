@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
+    title: 'TV Tecno',
     loadComponent: () =>
       import('./features/home/pages/index/index.component').then(
         (m) => m.IndexComponent
@@ -10,6 +11,7 @@ export const routes: Routes = [
   },
   {
     path: 'programacion',
+    title: 'Programación | TV Tecno ITD',
     loadComponent: () =>
       import('./features/programacion/pages/programacion/programacion.component').then(
         (m) => m.ProgramacionComponent
@@ -17,6 +19,7 @@ export const routes: Routes = [
   },
   {
     path: 'acerca',
+    title: 'Acerca de | TV Tecno ITD',
     loadComponent: () =>
       import('./features/acerca/pages/acerca/acerca.component').then(
         (m) => m.AcercaComponent
@@ -24,6 +27,7 @@ export const routes: Routes = [
   },
   {
     path: 'videoteca',
+    title: 'Videoteca | TV Tecno ITD',
     loadComponent: () =>
       import('./features/videoteca/pages/videoteca/videoteca.component').then(
         (m) => m.VideotecaComponent
@@ -31,6 +35,7 @@ export const routes: Routes = [
   },
   {
     path: 'en-vivo',
+    title: 'En vivo | TV Tecno ITD',
     loadComponent: () =>
       import('./features/en-vivo/pages/en-vivo/en-vivo.component').then(
         (m) => m.EnVivoComponent
@@ -43,6 +48,7 @@ export const routes: Routes = [
   },
   {
     path: 'contacto',
+    title: 'Contacto | TV Tecno ITD',
     loadComponent: () =>
       import('./features/contacto/pages/contacto/contacto.component').then(
         (m) => m.ContactoComponent

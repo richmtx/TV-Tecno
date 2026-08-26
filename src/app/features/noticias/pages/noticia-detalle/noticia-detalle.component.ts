@@ -1,10 +1,11 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { CommonModule } from '@angular/common';
-import { Component, PLATFORM_ID, computed, effect, inject, input, signal, } from '@angular/core';
+import { Component, DestroyRef, PLATFORM_ID, computed, effect, inject, input, signal, } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import { CategoriaNoticia, ETIQUETAS_CATEGORIA, Noticia, fechaLarga, } from '../../../../core/models/noticia.model';
 import { NoticiasService } from '../../../../core/services/noticias.service';
+
 
 @Component({
     selector: 'app-noticia-detalle',
@@ -39,6 +40,10 @@ export class NoticiaDetalleComponent {
     constructor() {
         // Actualiza título y meta tags cada vez que cambia la noticia
         effect(() => this.actualizarMetaTags(this.noticia()));
+
+        // Al salir de la página, quita los meta tags para que no
+        // contaminen las demás rutas del sitio
+        inject(DestroyRef).onDestroy(() => this.limpiarMetaTags());
     }
 
     // ---------- Formato ----------
@@ -72,6 +77,20 @@ export class NoticiaDetalleComponent {
         return `${this.origen()}/${ruta.replace(/^\//, '')}`;
     }
 
+    /** Etiquetas que este componente administra */
+    private readonly META_PROPIEDADES = [
+        'og:type',
+        'og:title',
+        'og:description',
+        'og:image',
+        'og:image:alt',
+        'og:url',
+        'og:site_name',
+        'og:locale',
+        'article:published_time',
+        'article:section',
+    ];
+
     private actualizarMetaTags(noticia: Noticia | undefined): void {
         if (!this.esNavegador) return;
 
@@ -80,11 +99,12 @@ export class NoticiaDetalleComponent {
             return;
         }
 
-        const tituloCompleto = `${noticia.titulo} | TV Tecno ITD`;
         const url = this.urlActual();
         const imagen = this.urlAbsoluta(noticia.imagen);
 
-        this.titulo.setTitle(tituloCompleto);
+        // El título de las demás rutas lo pone el router (propiedad `title`);
+        // aquí lo sobrescribimos porque depende de la noticia cargada.
+        this.titulo.setTitle(`${noticia.titulo} | TV Tecno ITD`);
 
         // Descripción estándar (Google, buscadores)
         this.meta.updateTag({ name: 'description', content: noticia.resumen });
@@ -108,6 +128,16 @@ export class NoticiaDetalleComponent {
             property: 'article:section',
             content: this.etiquetaDe(noticia.categoria),
         });
+    }
+
+    /** Quita los meta tags al abandonar la página de detalle */
+    private limpiarMetaTags(): void {
+        if (!this.esNavegador) return;
+
+        this.meta.removeTag("name='description'");
+        for (const propiedad of this.META_PROPIEDADES) {
+            this.meta.removeTag(`property='${propiedad}'`);
+        }
     }
 
     // ---------- Compartir ----------
