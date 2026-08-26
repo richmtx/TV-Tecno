@@ -48,4 +48,9 @@ export const routes: Routes = [
         (m) => m.ContactoComponent
       ),
   },
+  {
+    path: 'noticias',
+    loadChildren: () =>
+      import('./features/noticias/noticias.routes').then((m) => m.NOTICIAS_ROUTES),
+  },
 ];

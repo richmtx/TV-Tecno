@@ -1,4 +1,4 @@
-<section class="noticias" aria-labelledby="noticias-titulo">
+<section class="noticias" id="noticias" aria-labelledby="noticias-titulo">
     <header class="noticias__encabezado">
         <div class="noticias__marca">
             <svg class="noticias__icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
@@ -17,10 +17,11 @@
 
     <div class="noticias__grid">
         <!-- ============ NOTICIA DESTACADA ============ -->
-        @if (destacada; as principal) {
-        <article class="destacada" (click)="abrir(principal)">
+        @if (destacada(); as principal) {
+        <article class="destacada" (click)="abrir(principal)" (keydown.enter)="abrir(principal)" tabindex="0"
+            role="link" [attr.aria-label]="'Leer noticia: ' + principal.titulo">
             <div class="destacada__media">
-                <img [src]="principal.imagen" [alt]="principal.titulo" loading="lazy" />
+                <img [src]="principal.imagen" [alt]="principal.imagenAlt" loading="lazy" />
             </div>
             <span class="destacada__velo" aria-hidden="true"></span>
 
@@ -32,21 +33,10 @@
                 Destacada
             </span>
 
-            @if (principal.fechaCorta; as f) {
-            <div class="destacada__fecha-bloque">
-                <span class="destacada__dia">{{ f.dia }}</span>
-                <span class="destacada__mes">{{ f.mes }}</span>
-                <span class="destacada__anio">{{ f.anio }}</span>
-            </div>
-            }
-
             <div class="destacada__contenido">
-                <span class="destacada__categoria categoria--{{ principal.categoria }}">
-                    {{ etiquetaDe(principal.categoria) }}
-                </span>
 
                 <h3 class="destacada__titulo">{{ principal.titulo }}</h3>
-                <p class="destacada__descripcion">{{ principal.descripcion }}</p>
+                <p class="destacada__descripcion">{{ principal.resumen }}</p>
 
                 <div class="destacada__pie">
                     <div class="destacada__meta">
@@ -56,7 +46,7 @@
                                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
                                 <path d="M16 2v4M8 2v4M3 10h18" />
                             </svg>
-                            {{ principal.fecha }}
+                            {{ fechaDe(principal) }}
                         </span>
 
                         <span class="destacada__dato">
@@ -65,28 +55,19 @@
                                 <circle cx="12" cy="12" r="9" />
                                 <path d="M12 7v5l3 2" />
                             </svg>
-                            {{ principal.tiempoLectura }}
+                            {{ lecturaLarga(principal) }}
                         </span>
 
-                        @if (principal.vistas) {
-                        <span class="destacada__dato">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z" />
-                                <circle cx="12" cy="12" r="3" />
-                            </svg>
-                            {{ formatearVistas(principal.vistas) }}
-                        </span>
-                        }
                     </div>
 
-                    <button class="destacada__boton" type="button" (click)="abrir(principal, $event)">
+                    <a class="destacada__boton" [routerLink]="['/noticias', principal.slug]"
+                        (click)="$event.stopPropagation()">
                         Leer noticia
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M5 12h14M13 6l6 6-6 6" />
                         </svg>
-                    </button>
+                    </a>
                 </div>
             </div>
         </article>
@@ -94,10 +75,11 @@
 
         <!-- ============ NOTICIAS SECUNDARIAS ============ -->
         <div class="noticias__secundarias">
-            @for (noticia of secundarias; track trackByTitulo($index, noticia); let i = $index) {
-            <article class="tarjeta" (click)="abrir(noticia)">
+            @for (noticia of secundarias(); track noticia.slug) {
+            <article class="tarjeta" (click)="abrir(noticia)" (keydown.enter)="abrir(noticia)" tabindex="0" role="link"
+                [attr.aria-label]="'Leer noticia: ' + noticia.titulo">
                 <div class="tarjeta__media">
-                    <img [src]="noticia.imagen" [alt]="noticia.titulo" loading="lazy" />
+                    <img [src]="noticia.imagen" [alt]="noticia.imagenAlt" loading="lazy" />
                 </div>
 
                 <span class="tarjeta__categoria categoria--{{ noticia.categoria }}">
@@ -106,7 +88,7 @@
 
                 <div class="tarjeta__cuerpo">
                     <h3 class="tarjeta__titulo">{{ noticia.titulo }}</h3>
-                    <p class="tarjeta__descripcion">{{ noticia.descripcion }}</p>
+                    <p class="tarjeta__descripcion">{{ noticia.resumen }}</p>
 
                     <div class="tarjeta__pie">
                         <span class="tarjeta__dato">
@@ -115,7 +97,7 @@
                                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
                                 <path d="M16 2v4M8 2v4M3 10h18" />
                             </svg>
-                            {{ noticia.fecha }}
+                            {{ fechaDe(noticia) }}
                         </span>
 
                         <span class="tarjeta__dato">
@@ -124,7 +106,7 @@
                                 <circle cx="12" cy="12" r="9" />
                                 <path d="M12 7v5l3 2" />
                             </svg>
-                            {{ noticia.tiempoLectura }}
+                            {{ lecturaCorta(noticia) }}
                         </span>
 
                         <button class="tarjeta__menu" type="button" aria-label="Más opciones"
