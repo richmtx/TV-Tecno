@@ -337,6 +337,32 @@
     opacity: 0.75;
 }
 
+.noticias__estado {
+    padding: 3rem 1rem;
+    text-align: center;
+    color: var(--tv-text-soft);
+    font-size: 0.95rem;
+}
+
+.noticias__reintentar {
+    margin-top: 0.75rem;
+    padding: 0.55rem 1.2rem;
+    border: 1px solid var(--tv-wine);
+    border-radius: 10px;
+    background: transparent;
+    color: var(--tv-wine);
+    font-family: var(--font-cuerpo);
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.noticias__reintentar:hover {
+    background: var(--tv-wine);
+    color: #fff;
+}
+
 /* ===================== RESPONSIVO ===================== */
 @media (max-width: 1180px) {
     .noticias__grid {

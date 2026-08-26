@@ -1,59 +1,37 @@
 /**
- * Categorías disponibles para las noticias.
- * El valor se usa como clase CSS (ej. .noticia__etiqueta--tecnologia)
+ * Noticia tal como la devuelve el API de NestJS.
+ * Los nombres coinciden con la entity del backend.
  */
-export type CategoriaNoticia =
-    | 'noticias'
-    | 'academico'
-    | 'vinculacion'
-    | 'tecnologia'
-    | 'cultura';
-
-/** Etiquetas visibles de cada categoría */
-export const ETIQUETAS_CATEGORIA: Record<CategoriaNoticia, string> = {
-    noticias: 'Noticias',
-    academico: 'Académico',
-    vinculacion: 'Vinculación',
-    tecnologia: 'Tecnología',
-    cultura: 'Cultura',
-};
-
 export interface Noticia {
-    /** Identificador de base de datos (1 a 5, fijos) */
     id: number;
 
     /** Identificador para la URL: /noticias/:slug */
     slug: string;
 
-    /** Título completo de la noticia */
     titulo: string;
 
-    /** Texto corto: se muestra en la tarjeta y como bajada en el detalle */
-    resumen: string;
+    /** Texto corto: tarjeta del home y bajada del detalle */
+    descripcion: string;
 
-    /**
-     * Cuerpo completo de la noticia en HTML.
-     * Se renderiza con [innerHTML] en la página de detalle.
-     * Opcional: si viene vacío, el detalle muestra solo el resumen.
-     */
-    contenido?: string;
+    /** Cuerpo en HTML sanitizado. Null cuando no se ha capturado. */
+    contenido: string | null;
 
-    categoria: CategoriaNoticia;
+    /** Categoría de texto libre: 'TECNOLOGÍA', 'DEPORTES', etc. */
+    etiqueta: string;
 
-    /** Ruta de la imagen principal */
-    imagen: string;
+    /** Fecha del acontecimiento, formato ISO (yyyy-MM-dd) */
+    fecha: string;
 
-    /** Texto alternativo de la imagen (accesibilidad y SEO) */
-    imagenAlt: string;
+    /** Ruta relativa del backend: /uploads/noticias/xxx.jpg */
+    imagenUrl: string | null;
 
-    /** Fecha de publicación en formato ISO (yyyy-MM-dd) */
-    fechaPublicacion: string;
+    imagenAlt: string | null;
 
-    /** Tiempo estimado de lectura en minutos */
-    tiempoLectura: number;
+    /** Minutos de lectura. Null cuando no hay contenido. */
+    tiempoLectura: number | null;
 
-    /** Solo una noticia puede ser la destacada del home */
-    destacada: boolean;
+    /** Posición en el home. 1 = noticia destacada (panel grande). */
+    orden: number;
 }
 
 const MESES_LARGO = [
@@ -61,31 +39,14 @@ const MESES_LARGO = [
     'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre',
 ];
 
-const MESES_CORTO = [
-    'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-    'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic',
-];
-
 /**
- * Parte una fecha ISO (yyyy-MM-dd) en sus componentes numéricos.
+ * '2026-06-02' -> '2 junio 2026'
  *
- * Importante: NO usamos new Date('2026-06-02') porque JavaScript la
- * interpreta como UTC y en la zona horaria de México (UTC-6) se
- * convierte en el día anterior. Partimos el string a mano.
+ * No usamos new Date() porque interpreta la fecha como UTC y en
+ * México (UTC-6) la recorre al día anterior. Partimos el string.
+ * El backend puede mandar '2026-06-02' o '2026-06-02T00:00:00.000Z'.
  */
-function partesFecha(iso: string): { dia: number; mes: number; anio: number } {
-    const [anio, mes, dia] = iso.split('-').map(Number);
-    return { dia, mes, anio };
-}
-
-/** '2026-06-02' -> '2 junio 2026' */
 export function fechaLarga(iso: string): string {
-    const { dia, mes, anio } = partesFecha(iso);
+    const [anio, mes, dia] = iso.slice(0, 10).split('-').map(Number);
     return `${dia} ${MESES_LARGO[mes - 1]} ${anio}`;
-}
-
-/** '2026-06-02' -> { dia: '2', mes: 'Jun', anio: '2026' } */
-export function fechaCorta(iso: string): { dia: string; mes: string; anio: string } {
-    const { dia, mes, anio } = partesFecha(iso);
-    return { dia: String(dia), mes: MESES_CORTO[mes - 1], anio: String(anio) };
 }

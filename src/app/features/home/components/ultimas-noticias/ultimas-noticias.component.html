@@ -15,13 +15,24 @@
         </p>
     </header>
 
+    @if (cargando()) {
+    <p class="noticias__estado">Cargando noticias…</p>
+    } @else if (error()) {
+    <div class="noticias__estado">
+        <p>No se pudieron cargar las noticias.</p>
+        <button type="button" class="noticias__reintentar" (click)="reintentar()">
+            Reintentar
+        </button>
+    </div>
+    } @else {
+
     <div class="noticias__grid">
         <!-- ============ NOTICIA DESTACADA ============ -->
         @if (destacada(); as principal) {
         <article class="destacada" (click)="abrir(principal)" (keydown.enter)="abrir(principal)" tabindex="0"
             role="link" [attr.aria-label]="'Leer noticia: ' + principal.titulo">
             <div class="destacada__media">
-                <img [src]="principal.imagen" [alt]="principal.imagenAlt" loading="lazy" />
+                <img [src]="imagen(principal)" [alt]="principal.imagenAlt || principal.titulo" loading="lazy" />
             </div>
             <span class="destacada__velo" aria-hidden="true"></span>
 
@@ -36,7 +47,7 @@
             <div class="destacada__contenido">
 
                 <h3 class="destacada__titulo">{{ principal.titulo }}</h3>
-                <p class="destacada__descripcion">{{ principal.resumen }}</p>
+                <p class="destacada__descripcion">{{ principal.descripcion }}</p>
 
                 <div class="destacada__pie">
                     <div class="destacada__meta">
@@ -49,14 +60,16 @@
                             {{ fechaDe(principal) }}
                         </span>
 
+                        @if (lecturaLarga(principal); as lectura) {
                         <span class="destacada__dato">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
                                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                 <circle cx="12" cy="12" r="9" />
                                 <path d="M12 7v5l3 2" />
                             </svg>
-                            {{ lecturaLarga(principal) }}
+                            {{ lectura }}
                         </span>
+                        }
 
                     </div>
 
@@ -79,16 +92,16 @@
             <article class="tarjeta" (click)="abrir(noticia)" (keydown.enter)="abrir(noticia)" tabindex="0" role="link"
                 [attr.aria-label]="'Leer noticia: ' + noticia.titulo">
                 <div class="tarjeta__media">
-                    <img [src]="noticia.imagen" [alt]="noticia.imagenAlt" loading="lazy" />
+                    <img [src]="imagen(noticia)" [alt]="noticia.imagenAlt || noticia.titulo" loading="lazy" />
                 </div>
 
                 <span class="tarjeta__categoria">
-                    {{ etiquetaDe(noticia.categoria) }}
+                    {{ noticia.etiqueta }}
                 </span>
 
                 <div class="tarjeta__cuerpo">
                     <h3 class="tarjeta__titulo">{{ noticia.titulo }}</h3>
-                    <p class="tarjeta__descripcion">{{ noticia.resumen }}</p>
+                    <p class="tarjeta__descripcion">{{ noticia.descripcion }}</p>
 
                     <div class="tarjeta__pie">
                         <span class="tarjeta__dato">
@@ -100,14 +113,16 @@
                             {{ fechaDe(noticia) }}
                         </span>
 
+                        @if (lecturaCorta(noticia); as lectura) {
                         <span class="tarjeta__dato">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
                                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                 <circle cx="12" cy="12" r="9" />
                                 <path d="M12 7v5l3 2" />
                             </svg>
-                            {{ lecturaCorta(noticia) }}
+                            {{ lectura }}
                         </span>
+                        }
 
                     </div>
                 </div>
@@ -115,4 +130,6 @@
             }
         </div>
     </div>
+
+    }
 </section>

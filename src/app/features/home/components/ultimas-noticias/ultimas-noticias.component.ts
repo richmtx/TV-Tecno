@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { CategoriaNoticia, ETIQUETAS_CATEGORIA, Noticia, fechaLarga,
-} from '../../../../core/models/noticia.model';
+
+import { Noticia, fechaLarga } from '../../../../core/models/noticia.model';
 import { NoticiasService } from '../../../../core/services/noticias.service';
 
 @Component({
@@ -12,36 +12,43 @@ import { NoticiasService } from '../../../../core/services/noticias.service';
   templateUrl: './ultimas-noticias.component.html',
   styleUrl: './ultimas-noticias.component.css',
 })
-export class UltimasNoticiasComponent {
+export class UltimasNoticiasComponent implements OnInit {
   private readonly noticiasService = inject(NoticiasService);
   private readonly router = inject(Router);
 
-  /** Noticia principal (tarjeta grande de la izquierda) */
   readonly destacada = this.noticiasService.destacada;
-
-  /** Las otras 4 noticias (cuadrícula de la derecha) */
   readonly secundarias = this.noticiasService.secundarias;
+  readonly cargando = this.noticiasService.cargando;
+  readonly error = this.noticiasService.error;
 
-  etiquetaDe(categoria: CategoriaNoticia): string {
-    return ETIQUETAS_CATEGORIA[categoria] ?? 'Noticias';
+  ngOnInit(): void {
+    this.noticiasService.cargar();
   }
 
-  /** '2 junio 2026' — para el pie de las tarjetas */
+  reintentar(): void {
+    this.noticiasService.cargar(true);
+  }
+
+  /** URL absoluta de la imagen (el backend la sirve en otro puerto) */
+  imagen(noticia: Noticia): string | null {
+    return this.noticiasService.urlImagen(noticia.imagenUrl);
+  }
+
+  /** '2 junio 2026' */
   fechaDe(noticia: Noticia): string {
-    return fechaLarga(noticia.fechaPublicacion);
+    return fechaLarga(noticia.fecha);
   }
 
-  /** '5 min de lectura' — versión larga, tarjeta destacada */
-  lecturaLarga(noticia: Noticia): string {
-    return `${noticia.tiempoLectura} min de lectura`;
+  /** '5 min de lectura' — null cuando la noticia no tiene contenido */
+  lecturaLarga(noticia: Noticia): string | null {
+    return noticia.tiempoLectura ? `${noticia.tiempoLectura} min de lectura` : null;
   }
 
-  /** '3 min' — versión corta, tarjetas secundarias */
-  lecturaCorta(noticia: Noticia): string {
-    return `${noticia.tiempoLectura} min`;
+  /** '3 min' — null cuando la noticia no tiene contenido */
+  lecturaCorta(noticia: Noticia): string | null {
+    return noticia.tiempoLectura ? `${noticia.tiempoLectura} min` : null;
   }
 
-  /** Navega al detalle. Se usa desde el clic en toda la tarjeta. */
   abrir(noticia: Noticia): void {
     this.router.navigate(['/noticias', noticia.slug]);
   }

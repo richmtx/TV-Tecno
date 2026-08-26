@@ -5,7 +5,7 @@
     <nav class="migas" aria-label="Ruta de navegación">
         <a class="migas__enlace" routerLink="/">Inicio</a>
         <span class="migas__sep" aria-hidden="true">›</span>
-        <a class="migas__enlace" routerLink="/">Noticias</a>
+        <a class="migas__enlace" routerLink="/" fragment="noticias">Noticias</a>
         <span class="migas__sep" aria-hidden="true">›</span>
         <span class="migas__actual" aria-current="page">{{ n.titulo }}</span>
     </nav>
@@ -17,11 +17,11 @@
 
             <!-- Imagen principal con etiqueta y metadatos encima -->
             <figure class="articulo__media">
-                <img [src]="n.imagen" [alt]="n.imagenAlt" />
+                <img [src]="imagen(n)" [alt]="n.imagenAlt || n.titulo" />
                 <span class="articulo__velo" aria-hidden="true"></span>
 
                 <span class="articulo__categoria">
-                    {{ n.destacada ? 'Destacada' : etiquetaDe(n.categoria) }}
+                    {{ n.orden === 1 ? 'Destacada' : n.etiqueta }}
                 </span>
 
                 <div class="articulo__meta-media">
@@ -33,21 +33,24 @@
                         </svg>
                         {{ fechaDe(n) }}
                     </span>
+
+                    @if (lecturaDe(n); as lectura) {
                     <span class="articulo__dato">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
                             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <circle cx="12" cy="12" r="9" />
                             <path d="M12 7v5l3 2" />
                         </svg>
-                        {{ lecturaDe(n) }}
+                        {{ lectura }}
                     </span>
+                    }
                 </div>
             </figure>
 
             <!-- Título y bajada -->
             <header class="articulo__encabezado">
                 <h1 class="articulo__titulo">{{ n.titulo }}</h1>
-                <p class="articulo__bajada">{{ n.resumen }}</p>
+                <p class="articulo__bajada">{{ n.descripcion }}</p>
             </header>
 
             <!-- Cuerpo (opcional) -->
@@ -103,12 +106,10 @@
                 <li class="mini">
                     <a class="mini__enlace" [routerLink]="['/noticias', o.slug]">
                         <div class="mini__media">
-                            <img [src]="o.imagen" [alt]="o.imagenAlt" loading="lazy" />
+                            <img [src]="imagen(o)" [alt]="o.imagenAlt || o.titulo" loading="lazy" />
                         </div>
                         <div class="mini__cuerpo">
-                            <span class="mini__categoria">
-                                {{ etiquetaDe(o.categoria) }}
-                            </span>
+                            <span class="mini__categoria">{{ o.etiqueta }}</span>
                             <h3 class="mini__titulo">{{ o.titulo }}</h3>
                             <span class="mini__fecha">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
@@ -129,8 +130,24 @@
 </div>
 }
 
+<!-- ============ CARGANDO ============ -->
+@else if (cargando()) {
+<div class="vacio">
+    <p class="vacio__texto">Cargando noticia…</p>
+</div>
+}
+
+<!-- ============ ERROR DE RED ============ -->
+@else if (error()) {
+<div class="vacio">
+    <h1 class="vacio__titulo">No se pudo cargar</h1>
+    <p class="vacio__texto">Revisa tu conexión e inténtalo de nuevo.</p>
+    <button type="button" class="vacio__boton" (click)="reintentar()">Reintentar</button>
+</div>
+}
+
 <!-- ============ NOTICIA NO ENCONTRADA ============ -->
-@else {
+@else if (noEncontrada()) {
 <div class="vacio">
     <svg class="vacio__icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

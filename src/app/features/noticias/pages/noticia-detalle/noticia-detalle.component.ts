@@ -1,11 +1,12 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { CommonModule } from '@angular/common';
-import { Component, DestroyRef, PLATFORM_ID, computed, effect, inject, input, signal, } from '@angular/core';
+import { Component, DestroyRef, OnInit, PLATFORM_ID, computed, effect, inject, input,
+    signal, } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
-import { CategoriaNoticia, ETIQUETAS_CATEGORIA, Noticia, fechaLarga, } from '../../../../core/models/noticia.model';
-import { NoticiasService } from '../../../../core/services/noticias.service';
 
+import { Noticia, fechaLarga } from '../../../../core/models/noticia.model';
+import { NoticiasService } from '../../../../core/services/noticias.service';
 
 @Component({
     selector: 'app-noticia-detalle',
@@ -14,7 +15,7 @@ import { NoticiasService } from '../../../../core/services/noticias.service';
     templateUrl: './noticia-detalle.component.html',
     styleUrl: './noticia-detalle.component.css',
 })
-export class NoticiaDetalleComponent {
+export class NoticiaDetalleComponent implements OnInit {
     private readonly noticiasService = inject(NoticiasService);
     private readonly documento = inject(DOCUMENT);
     private readonly titulo = inject(Title);
@@ -24,55 +25,73 @@ export class NoticiaDetalleComponent {
     /** Llega desde la ruta /noticias/:slug */
     readonly slug = input.required<string>();
 
+    readonly cargando = this.noticiasService.cargando;
+    readonly error = this.noticiasService.error;
+
     /** La noticia solicitada, o undefined si el slug no existe */
     readonly noticia = computed<Noticia | undefined>(() =>
         this.noticiasService.obtenerPorSlug(this.slug())
     );
 
-    /** Las otras 4 noticias, para el panel lateral */
+    /** Las otras noticias, para el panel lateral */
     readonly otras = computed<Noticia[]>(() =>
         this.noticiasService.obtenerOtras(this.slug())
+    );
+
+    /**
+     * Solo se considera "no encontrada" cuando la carga ya terminó.
+     * Mientras las noticias viajan por la red, noticia() es undefined
+     * y mostrar el mensaje de error sería incorrecto.
+     */
+    readonly noEncontrada = computed(
+        () => this.noticiasService.estado() === 'listo' && !this.noticia()
     );
 
     /** Se pone en true unos segundos tras copiar el enlace */
     readonly enlaceCopiado = signal(false);
 
     constructor() {
-        // Actualiza título y meta tags cada vez que cambia la noticia
         effect(() => this.actualizarMetaTags(this.noticia()));
-
-        // Al salir de la página, quita los meta tags para que no
-        // contaminen las demás rutas del sitio
         inject(DestroyRef).onDestroy(() => this.limpiarMetaTags());
+    }
+
+    ngOnInit(): void {
+        // Si se entra directo por URL, las noticias aún no están cargadas.
+        this.noticiasService.cargar();
+    }
+
+    reintentar(): void {
+        this.noticiasService.cargar(true);
     }
 
     // ---------- Formato ----------
 
-    etiquetaDe(categoria: CategoriaNoticia): string {
-        return ETIQUETAS_CATEGORIA[categoria] ?? 'Noticias';
+    /** URL absoluta de la imagen (el backend la sirve en otro puerto) */
+    imagen(noticia: Noticia): string | null {
+        return this.noticiasService.urlImagen(noticia.imagenUrl);
     }
 
     fechaDe(noticia: Noticia): string {
-        return fechaLarga(noticia.fechaPublicacion);
+        return fechaLarga(noticia.fecha);
     }
 
-    lecturaDe(noticia: Noticia): string {
-        return `${noticia.tiempoLectura} min de lectura`;
+    /** '5 min de lectura' — null cuando la noticia no tiene contenido */
+    lecturaDe(noticia: Noticia): string | null {
+        return noticia.tiempoLectura ? `${noticia.tiempoLectura} min de lectura` : null;
     }
 
     // ---------- SEO / Open Graph ----------
 
-    /** Origen del sitio, ej. https://tvtecno.itdurango.edu.mx */
     private origen(): string {
         return this.esNavegador ? this.documento.location.origin : '';
     }
 
     /**
-     * Convierte una ruta relativa de assets en URL absoluta.
      * Facebook y WhatsApp exigen URL absoluta en og:image;
      * con una ruta relativa no muestran la imagen.
      */
-    private urlAbsoluta(ruta: string): string {
+    private urlAbsoluta(ruta: string | null): string {
+        if (!ruta) return '';
         if (ruta.startsWith('http')) return ruta;
         return `${this.origen()}/${ruta.replace(/^\//, '')}`;
     }
@@ -92,29 +111,27 @@ export class NoticiaDetalleComponent {
     ];
 
     private actualizarMetaTags(noticia: Noticia | undefined): void {
-        if (!this.esNavegador) return;
-
-        if (!noticia) {
-            this.titulo.setTitle('Noticia no encontrada | TV Tecno ITD');
-            return;
-        }
+        if (!this.esNavegador || !noticia) return;
 
         const url = this.urlActual();
-        const imagen = this.urlAbsoluta(noticia.imagen);
+        const imagen = this.urlAbsoluta(this.imagen(noticia));
 
         // El título de las demás rutas lo pone el router (propiedad `title`);
         // aquí lo sobrescribimos porque depende de la noticia cargada.
         this.titulo.setTitle(`${noticia.titulo} | TV Tecno ITD`);
 
         // Descripción estándar (Google, buscadores)
-        this.meta.updateTag({ name: 'description', content: noticia.resumen });
+        this.meta.updateTag({ name: 'description', content: noticia.descripcion });
 
         // Open Graph — Facebook, WhatsApp, LinkedIn
         this.meta.updateTag({ property: 'og:type', content: 'article' });
         this.meta.updateTag({ property: 'og:title', content: noticia.titulo });
-        this.meta.updateTag({ property: 'og:description', content: noticia.resumen });
+        this.meta.updateTag({ property: 'og:description', content: noticia.descripcion });
         this.meta.updateTag({ property: 'og:image', content: imagen });
-        this.meta.updateTag({ property: 'og:image:alt', content: noticia.imagenAlt });
+        this.meta.updateTag({
+            property: 'og:image:alt',
+            content: noticia.imagenAlt ?? noticia.titulo,
+        });
         this.meta.updateTag({ property: 'og:url', content: url });
         this.meta.updateTag({ property: 'og:site_name', content: 'TV Tecno ITD' });
         this.meta.updateTag({ property: 'og:locale', content: 'es_MX' });
@@ -122,11 +139,11 @@ export class NoticiaDetalleComponent {
         // Metadatos del artículo
         this.meta.updateTag({
             property: 'article:published_time',
-            content: noticia.fechaPublicacion,
+            content: noticia.fecha,
         });
         this.meta.updateTag({
             property: 'article:section',
-            content: this.etiquetaDe(noticia.categoria),
+            content: noticia.etiqueta,
         });
     }
 
