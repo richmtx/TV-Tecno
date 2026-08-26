@@ -21,7 +21,7 @@ interface Pilar {
 export class PilaresComponent {
   readonly pilares: Pilar[] = [
     {
-      logo: 'assets/logos/LogoTVTecno.png',
+      logo: 'assets/logos/TV_Tecno_logo_transparente.png',
       alt: 'Logotipo de TV Tecno, canal XHITD 16.1',
       nombre: 'TV Tecno',
       rol: 'El canal',

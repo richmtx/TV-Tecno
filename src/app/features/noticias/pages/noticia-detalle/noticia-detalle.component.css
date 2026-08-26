@@ -147,11 +147,14 @@
 }
 
 .articulo__cuerpo {
+    min-width: 0;
     padding-top: 2rem;
     border-top: 1px solid var(--tv-border);
     font-size: 1rem;
     line-height: 1.78;
     color: #3a3a3a;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 /*
@@ -161,6 +164,7 @@
 */
 .articulo__cuerpo ::ng-deep p {
     margin: 0 0 1.35rem;
+    overflow-wrap: anywhere;
 }
 
 .articulo__cuerpo ::ng-deep p:last-child {
