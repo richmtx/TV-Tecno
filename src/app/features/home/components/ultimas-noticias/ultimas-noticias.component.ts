@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { CategoriaNoticia, ETIQUETAS_CATEGORIA, Noticia, fechaLarga,
@@ -22,8 +22,6 @@ export class UltimasNoticiasComponent {
   /** Las otras 4 noticias (cuadrícula de la derecha) */
   readonly secundarias = this.noticiasService.secundarias;
 
-  @Output() masOpciones = new EventEmitter<Noticia>();
-
   etiquetaDe(categoria: CategoriaNoticia): string {
     return ETIQUETAS_CATEGORIA[categoria] ?? 'Noticias';
   }
@@ -46,10 +44,5 @@ export class UltimasNoticiasComponent {
   /** Navega al detalle. Se usa desde el clic en toda la tarjeta. */
   abrir(noticia: Noticia): void {
     this.router.navigate(['/noticias', noticia.slug]);
-  }
-
-  abrirOpciones(noticia: Noticia, evento: Event): void {
-    evento.stopPropagation();
-    this.masOpciones.emit(noticia);
   }
 }

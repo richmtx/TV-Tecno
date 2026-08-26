@@ -82,7 +82,7 @@
                     <img [src]="noticia.imagen" [alt]="noticia.imagenAlt" loading="lazy" />
                 </div>
 
-                <span class="tarjeta__categoria categoria--{{ noticia.categoria }}">
+                <span class="tarjeta__categoria">
                     {{ etiquetaDe(noticia.categoria) }}
                 </span>
 
@@ -109,14 +109,6 @@
                             {{ lecturaCorta(noticia) }}
                         </span>
 
-                        <button class="tarjeta__menu" type="button" aria-label="Más opciones"
-                            (click)="abrirOpciones(noticia, $event)">
-                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                <circle cx="12" cy="5" r="1.7" />
-                                <circle cx="12" cy="12" r="1.7" />
-                                <circle cx="12" cy="19" r="1.7" />
-                            </svg>
-                        </button>
                     </div>
                 </div>
             </article>

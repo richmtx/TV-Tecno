@@ -52,9 +52,6 @@ export interface Noticia {
     /** Tiempo estimado de lectura en minutos */
     tiempoLectura: number;
 
-    /** Contador de vistas */
-    vistas: number;
-
     /** Solo una noticia puede ser la destacada del home */
     destacada: boolean;
 }

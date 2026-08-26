@@ -271,8 +271,8 @@
     top: calc(var(--media-alto) - 0.85rem);
     padding: 0.35rem 0.7rem;
     border-radius: 8px;
-    background: var(--cat-fondo, #f3eff1);
-    color: var(--cat-texto, #6b1538);
+    background: var(--tv-cream);
+    color: var(--tv-wine);
     font-size: 0.63rem;
     font-weight: 700;
     letter-spacing: 0.11em;
@@ -335,57 +335,6 @@
     width: 14px;
     height: 14px;
     opacity: 0.75;
-}
-
-.tarjeta__menu {
-    margin-left: auto;
-    display: grid;
-    place-items: center;
-    width: 26px;
-    height: 26px;
-    padding: 0;
-    border: 0;
-    border-radius: 8px;
-    background: transparent;
-    color: var(--tv-text-soft, #8a838a);
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
-}
-
-.tarjeta__menu svg {
-    width: 16px;
-    height: 16px;
-}
-
-.tarjeta__menu:hover {
-    background: rgba(107, 21, 56, 0.08);
-    color: var(--tv-wine, #6b1538);
-}
-
-/* ===================== COLORES POR CATEGORÍA ===================== */
-.categoria--noticias {
-    --cat-fondo: var(--tv-wine, #6b1538);
-    --cat-texto: #ffffff;
-}
-
-.categoria--academico {
-    --cat-fondo: #efe9fb;
-    --cat-texto: #5b3aa8;
-}
-
-.categoria--vinculacion {
-    --cat-fondo: #fdeadb;
-    --cat-texto: #9a4a12;
-}
-
-.categoria--tecnologia {
-    --cat-fondo: #ddf4e3;
-    --cat-texto: #1f7a44;
-}
-
-.categoria--cultura {
-    --cat-fondo: #f3e8fb;
-    --cat-texto: #7b2c9e;
 }
 
 /* ===================== RESPONSIVO ===================== */

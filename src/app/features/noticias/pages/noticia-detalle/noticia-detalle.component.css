@@ -91,6 +91,8 @@
     left: 1rem;
     padding: 0.32rem 0.8rem;
     border-radius: 999px;
+    background: var(--tv-cream);
+    color: var(--tv-wine);
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.05em;
@@ -396,6 +398,7 @@
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
+    color: var(--tv-wine);
 }
 
 .mini__titulo {
@@ -427,55 +430,6 @@
 .mini__fecha svg {
     width: 12px;
     height: 12px;
-}
-
-/* ============================================================
-   CATEGORÍAS — fondo (etiqueta sobre la imagen)
-   ============================================================ */
-.categoria--noticias {
-    background: var(--tv-wine);
-    color: #fff;
-}
-
-.categoria--academico {
-    background: #ede9fe;
-    color: #6d28d9;
-}
-
-.categoria--vinculacion {
-    background: #ffedd5;
-    color: #c2410c;
-}
-
-.categoria--tecnologia {
-    background: #dcfce7;
-    color: #15803d;
-}
-
-.categoria--cultura {
-    background: #fae8ff;
-    color: #a21caf;
-}
-
-/* CATEGORÍAS — solo texto (panel lateral) */
-.categoria-texto--noticias {
-    color: var(--tv-wine);
-}
-
-.categoria-texto--academico {
-    color: #6d28d9;
-}
-
-.categoria-texto--vinculacion {
-    color: #c2410c;
-}
-
-.categoria-texto--tecnologia {
-    color: #15803d;
-}
-
-.categoria-texto--cultura {
-    color: #a21caf;
 }
 
 /* ============================================================

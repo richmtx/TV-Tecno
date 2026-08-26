@@ -25,7 +25,6 @@ export class NoticiasService {
             imagenAlt: 'Estudiantes del ITD trabajando en el prototipo de riego inteligente',
             fechaPublicacion: '2026-06-02',
             tiempoLectura: 5,
-            vistas: 1245,
             destacada: true,
         },
         {
@@ -44,7 +43,6 @@ export class NoticiasService {
             imagenAlt: 'Auditorio durante el Congreso de Tecnología e Innovación',
             fechaPublicacion: '2026-06-01',
             tiempoLectura: 3,
-            vistas: 812,
             destacada: false,
         },
         {
@@ -63,7 +61,6 @@ export class NoticiasService {
             imagenAlt: 'Firma del convenio entre el ITD y la industria regional de software',
             fechaPublicacion: '2026-05-30',
             tiempoLectura: 4,
-            vistas: 543,
             destacada: false,
         },
         {
@@ -85,7 +82,6 @@ export class NoticiasService {
             imagenAlt: 'Equipo de robótica del ITD con sus trofeos y el robot ganador',
             fechaPublicacion: '2026-05-28',
             tiempoLectura: 3,
-            vistas: 967,
             destacada: false,
         },
         {
@@ -103,7 +99,6 @@ export class NoticiasService {
             imagenAlt: 'Integrantes del Ballet Folclórico del ITD durante su presentación',
             fechaPublicacion: '2026-05-25',
             tiempoLectura: 2,
-            vistas: 421,
             destacada: false,
         },
     ]);
