@@ -22,17 +22,17 @@ export class MisionVisionComponent {
       icono: 'broadcast',
       variante: 'wine',
       texto:
-        'Producir y transmitir contenidos que difundan la ciencia, la tecnología y la vida estudiantil del Instituto Tecnológico de Durango, formando a la vez a los estudiantes que los crean.',
+        'Brindar comunicación audiovisual pública y digital desde el Instituto Tecnológico de Durango mediante producciones innovadoras, inclusivas y de calidad que divulguen la ciencia, la tecnología y la cultura generadas en la institución, fortalezcan el vínculo entre nuestra comunidad y la sociedad duranguense, y contribuyan a la formación de los estudiantes que participan en su creación.',
     },
     {
       eyebrow: 'Visión',
-      titulo: 'Ser la referencia educativa de Durango',
+      titulo: 'Ser la referencia educativa del norte del país',
       icono: 'telescope',
       variante: 'gold',
       texto:
-        'Consolidarnos como el canal universitario de mayor alcance en el estado, reconocido por la calidad de su producción y por abrir espacio a las voces jóvenes de la región.',
+        'Consolidarnos hacia 2030 como el medio de comunicación universitario de mayor alcance en Durango y un referente en el norte de México, reconocidos por la calidad de nuestras producciones, la innovación tecnológica, la co-creación de contenidos con la comunidad estudiantil y una programación sostenible que genere valor público, identidad y arraigo en la región.',
     },
   ];
 
-  readonly valores: string[] = ['Formación', 'Identidad', 'Divulgación'];
+  readonly valores: string[] = ['Identidad', 'Colaboración', 'Innovación'];
 }
