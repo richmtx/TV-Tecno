@@ -61,8 +61,8 @@
 .collage__era {
     position: relative;
     display: grid;
-    grid-template-columns: 200px repeat(5, minmax(0, 1fr));
-    gap: 1.1rem;
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: 1.4rem;
     align-items: start;
     padding-bottom: 2.6rem;
 }
@@ -131,97 +131,98 @@
     color: var(--collage-wine);
 }
 
-/* Fotos */
-.collage__era-photos {
-    grid-column: 2 / -1;
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 1.1rem;
-    min-width: 0;
-}
+/* ============ PORTADA DE LA ÉPOCA ============ */
 
-.collage__photo {
+.collage__portada {
     position: relative;
+    display: block;
+    width: 100%;
     padding: 0;
     border: none;
-    box-sizing: border-box;
     border-radius: 10px;
     overflow: hidden;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 21 / 9;
+    background: var(--collage-wine-soft);
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(43, 43, 43, 0.08);
     transition: transform 0.28s ease, box-shadow 0.28s ease;
 }
 
-.collage__photo:hover {
+.collage__portada:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 22px rgba(43, 43, 43, 0.16);
+    box-shadow: 0 12px 26px rgba(43, 43, 43, 0.16);
 }
 
-.collage__photo:focus-visible {
+/* Sin portada, el bloque no necesita ocupar tanto espacio. */
+.collage__portada--vacia {
+    aspect-ratio: 3 / 1;
+    display: grid;
+    place-items: center;
+    color: var(--collage-muted);
+    font-size: 0.85rem;
+}
+
+.collage__portada:focus-visible {
     outline: 2px solid var(--collage-gold);
     outline-offset: 3px;
 }
 
-/* Tarjeta "Ver todas" */
-.collage__see-all {
+.collage__portada-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.collage__portada:hover .collage__portada-img {
+    transform: scale(1.04);
+}
+
+.collage__portada-velo {
+    position: absolute;
+    inset: 0;
     display: flex;
-    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 1rem;
+    background: linear-gradient(to top,
+            rgba(20, 12, 16, 0.55) 0%,
+            rgba(20, 12, 16, 0.1) 45%,
+            rgba(20, 12, 16, 0) 100%);
+}
+
+.collage__portada-texto {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
     gap: 0.5rem;
-    width: 100%;
-    height: 100%;
-    align-self: stretch;
-    box-sizing: border-box;
-    border: 1px solid var(--collage-line);
-    border-radius: 10px;
-    background: var(--collage-surface);
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
     color: var(--collage-wine);
-    font-family: inherit;
-    cursor: pointer;
-    transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+    font-size: 0.82rem;
+    font-weight: 700;
 }
 
-.collage__see-all:hover {
-    border-color: var(--collage-wine);
-    background: var(--collage-wine-soft);
-    transform: translateY(-4px);
-}
-
-.collage__see-all:focus-visible {
-    outline: 2px solid var(--collage-gold);
-    outline-offset: 3px;
-}
-
-.collage__see-all-icon {
-    width: 26px;
-    height: 26px;
-}
-
-.collage__see-all-icon svg {
-    width: 100%;
-    height: 100%;
-}
-
-.collage__see-all-label {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--collage-ink);
-}
-
+.collage__see-all-icon,
 .collage__see-all-arrow {
-    width: 20px;
-    height: 14px;
-    transition: transform 0.25s ease;
+    display: inline-flex;
+    flex: 0 0 auto;
+    width: 16px;
+    height: 16px;
 }
 
+.collage__see-all-icon svg,
 .collage__see-all-arrow svg {
     width: 100%;
     height: 100%;
 }
 
-.collage__see-all:hover .collage__see-all-arrow {
+.collage__see-all-arrow {
+    transition: transform 0.25s ease;
+}
+
+.collage__portada:hover .collage__see-all-arrow {
     transform: translateX(3px);
 }
 
@@ -231,44 +232,21 @@
     font-size: 0.95rem;
 }
 
-.collage__photo-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
 /* ============ RESPONSIVE ============ */
 
 @media (max-width: 1080px) {
     .collage__era {
-        grid-template-columns: 180px repeat(3, minmax(0, 1fr));
-    }
-
-    .collage__era-photos {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .collage__see-all {
-        grid-column: span 3;
-        height: auto;
-        flex-direction: row;
-        padding: 0.9rem;
+        grid-template-columns: 180px minmax(0, 1fr);
     }
 }
 
 @media (max-width: 860px) {
     .collage__era {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 
-    .collage__era-photos {
-        grid-column: 1 / -1;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .collage__see-all {
-        grid-column: span 2;
+    .collage__portada {
+        aspect-ratio: 16 / 9;
     }
 }
 
@@ -284,25 +262,24 @@
     .collage__era-dot {
         left: -1.9rem;
     }
-
-    .collage__era-photos {
-        gap: 0.8rem;
-    }
 }
 
 /* ============ ACCESIBILIDAD ============ */
 
 @media (prefers-reduced-motion: reduce) {
 
-    .collage__photo,
-    .collage__see-all,
+    .collage__portada,
+    .collage__portada-img,
     .collage__see-all-arrow {
         transition: none !important;
         animation: none !important;
     }
 
-    .collage__photo:hover,
-    .collage__see-all:hover {
+    .collage__portada:hover {
+        transform: none;
+    }
+
+    .collage__portada:hover .collage__portada-img {
         transform: none;
     }
 }

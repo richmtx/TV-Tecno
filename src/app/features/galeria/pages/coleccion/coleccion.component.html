@@ -18,6 +18,7 @@
         </aside>
 
         <div class="coleccion__contenido">
+            @if (fotos().length > 0) {
             <app-foto-grid [fotos]="fotosVisibles()" [offset]="offset()" [tituloColeccion]="col.titulo"
                 [totalColeccion]="fotos().length" (seleccion)="abrirVisor($event)"></app-foto-grid>
 
@@ -26,6 +27,11 @@
                 <app-paginacion [paginaActual]="paginaActual()" [totalPaginas]="totalPaginas()"
                     (cambioPagina)="irAPagina($event)"></app-paginacion>
             </div>
+            }
+            } @else {
+            <p class="coleccion__sin-fotos">
+                Esta colección todavía no tiene fotografías publicadas.
+            </p>
             }
         </div>
 

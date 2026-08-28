@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { Testimonio } from '../../../../models/momento.model';
+import { Testimonio } from '../../../../data/galeria-secciones';
 
 /**
  * Cierre de la sección Estudiantes: testimonio a la izquierda

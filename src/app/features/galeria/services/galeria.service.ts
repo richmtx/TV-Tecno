@@ -1,114 +1,93 @@
-import { Injectable } from '@angular/core';
-import { Coleccion, ItemNavColeccion, SeccionId } from '../models/coleccion.model';
-import { Album } from '../models/album.model';
-import { Instalacion } from '../models/instalacion.model';
-import { Momento } from '../models/momento.model';
-import { EPOCAS } from '../data/epocas.data';
-import { ALBUMES, BASE_ALBUMES } from '../data/albumes.data';
-import { BASE_INSTALACIONES, INSTALACIONES } from '../data/instalaciones.data';
-import { BASE_ESTUDIANTES, MOMENTOS } from '../data/momentos.data';
-import { generarFotos } from '../data/fotos.util';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, map, shareReplay } from 'rxjs';
+import { environment } from '../../../../environments/environment';
+import type { Coleccion, ColeccionConFotos, ItemNavColeccion, SeccionId, } from '../models/coleccion.model';
+
+/** Segmento de URL de cada sección, tal como lo espera la API. */
+const RUTA_DE_SECCION: Record<SeccionId, string> = {
+  timeline: 'linea-del-tiempo',
+  albums: 'albumes',
+  instalaciones: 'instalaciones',
+  estudiantes: 'estudiantes',
+};
+
+/** Chip de categoría para los filtros del sitio. */
+export interface CategoriaPublica {
+  slug: string;
+  nombre: string;
+}
+
+/** Totales para el encabezado de la Galería. */
+export interface EstadisticasGaleria {
+  totalFotos: number;
+}
 
 /**
  * Acceso a los contenidos de la Galería ITD.
  *
- * Expone dos vistas de los mismos datos: los tipos específicos que
- * consumen las tarjetas de cada índice (Album, Instalacion, Momento),
- * y la vista unificada `Coleccion` que consume la página de detalle.
- *
- * Hoy resuelve contra datos locales; cuando exista el backend,
- * solo cambia el interior de estos métodos.
+ * Las respuestas se comparten entre suscriptores con shareReplay:
+ * la barra lateral de una colección y su cuadrícula piden los
+ * mismos datos, y no tiene sentido traerlos dos veces.
  */
 @Injectable({ providedIn: 'root' })
 export class GaleriaService {
+  private readonly http = inject(HttpClient);
+  private readonly url = `${environment.apiUrl}/galeria`;
 
-  // ---------- Índices ----------
+  /** Caché por sección, válida mientras dure la visita. */
+  private readonly cache = new Map<SeccionId, Observable<Coleccion[]>>();
 
-  getAlbumes(): Album[] {
-    return ALBUMES;
+  /** Colecciones publicadas de una sección. */
+  getColecciones(seccion: SeccionId): Observable<Coleccion[]> {
+    const enCache = this.cache.get(seccion);
+    if (enCache) return enCache;
+
+    const peticion = this.http
+      .get<Coleccion[]>(`${this.url}/${RUTA_DE_SECCION[seccion]}`)
+      .pipe(shareReplay({ bufferSize: 1, refCount: false }));
+
+    this.cache.set(seccion, peticion);
+    return peticion;
   }
 
-  getInstalaciones(): Instalacion[] {
-    return INSTALACIONES;
-  }
-
-  getMomentos(): Momento[] {
-    return MOMENTOS;
-  }
-
-  // ---------- Detalle ----------
-
-  /** Colecciones de una sección, en la vista unificada. */
-  getColecciones(seccion: SeccionId): Coleccion[] {
-    switch (seccion) {
-      case 'timeline':
-        return EPOCAS;
-      case 'albums':
-        return ALBUMES.map(a => this.albumAColeccion(a));
-      case 'instalaciones':
-        return INSTALACIONES.map(i => this.instalacionAColeccion(i));
-      case 'estudiantes':
-        return MOMENTOS.map(m => this.momentoAColeccion(m));
-    }
-  }
-
-  /** Una colección concreta, o undefined si el id no existe. */
-  getColeccion(seccion: SeccionId, id: string): Coleccion | undefined {
-    return this.getColecciones(seccion).find(c => c.id === id);
+  /** Una colección con todas sus fotografías. */
+  getColeccion(
+    seccion: SeccionId,
+    id: string,
+  ): Observable<ColeccionConFotos> {
+    return this.http.get<ColeccionConFotos>(
+      `${this.url}/${RUTA_DE_SECCION[seccion]}/${id}`,
+    );
   }
 
   /** Lista reducida para la barra lateral de navegación. */
-  getNavColecciones(seccion: SeccionId): ItemNavColeccion[] {
-    return this.getColecciones(seccion).map(c => ({
-      id: c.id,
-      titulo: c.titulo,
-      subtitulo: c.subtitulo
-    }));
+  getNavColecciones(seccion: SeccionId): Observable<ItemNavColeccion[]> {
+    return this.getColecciones(seccion).pipe(
+      map((colecciones) =>
+        colecciones.map((c) => ({
+          id: c.id,
+          titulo: c.titulo,
+          subtitulo: c.subtitulo ?? '',
+        })),
+      ),
+    );
   }
 
-  // ---------- Mapeos ----------
-
-  private albumAColeccion(a: Album): Coleccion {
-    return {
-      id: a.id,
-      seccion: 'albums',
-      titulo: a.titulo,
-      subtitulo: a.periodo,
-      descripcion: a.descripcion,
-      totalFotos: a.totalFotos,
-      fotos: generarFotos(BASE_ALBUMES, a.id, a.totalFotos, {
-        pies: a.piesFotos,
-        anio: a.anioFotos
-      })
-    };
+  /** Categorías de una sección, para los chips de filtro. */
+  getCategorias(seccion: SeccionId): Observable<CategoriaPublica[]> {
+    return this.http.get<CategoriaPublica[]>(
+      `${this.url}/${RUTA_DE_SECCION[seccion]}/categorias`,
+    );
   }
 
-  private instalacionAColeccion(i: Instalacion): Coleccion {
-    return {
-      id: i.id,
-      seccion: 'instalaciones',
-      titulo: i.titulo,
-      subtitulo: i.categoriaLabel,
-      descripcion: i.descripcion,
-      totalFotos: i.totalFotos,
-      fotos: generarFotos(BASE_INSTALACIONES, i.id, i.totalFotos, {
-        pies: i.piesFotos
-      })
-    };
+  /** Totales para el encabezado. */
+  getEstadisticas(): Observable<EstadisticasGaleria> {
+    return this.http.get<EstadisticasGaleria>(`${this.url}/estadisticas`);
   }
 
-  private momentoAColeccion(m: Momento): Coleccion {
-    return {
-      id: m.id,
-      seccion: 'estudiantes',
-      titulo: m.titulo,
-      subtitulo: m.subtitulo,
-      descripcion: m.descripcion,
-      totalFotos: m.totalFotos,
-      fotos: generarFotos(BASE_ESTUDIANTES, m.id, m.totalFotos, {
-        pies: m.piesFotos,
-        anio: m.anio
-      })
-    };
+  /** La API entrega rutas relativas; el `img` necesita la absoluta. */
+  urlAbsoluta(ruta: string | null | undefined): string {
+    return ruta ? `${environment.apiUrl}${ruta}` : '';
   }
 }

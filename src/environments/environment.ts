@@ -1,4 +1,5 @@
+/** Configuración de producción. Ajusta la URL al desplegar. */
 export const environment = {
-    production: true,
-    apiUrl: 'http://localhost:3000',
+    produccion: true,
+    apiUrl: '/api',
 };

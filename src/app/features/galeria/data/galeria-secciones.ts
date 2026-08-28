@@ -76,3 +76,17 @@ export const CONTENIDO_SECCIONES: Record<TabId, ContenidoSeccion> = {
     }
 
 };
+
+/** Testimonio de un estudiante o egresado. */
+export interface Testimonio {
+    cita: string;
+    autor: string;
+    carrera: string;
+}
+
+/** Testimonio mostrado al cierre de la sección Estudiantes. */
+export const TESTIMONIO_ESTUDIANTES: Testimonio = {
+    cita: 'Ser estudiante del ITD es más que estudiar, es formar parte de una comunidad que te impulsa a crecer y transformar tu entorno.',
+    autor: 'Ana Sofía',
+    carrera: 'Ingeniería en Sistemas',
+};

@@ -1,9 +1,9 @@
-import { Component, input, output } from '@angular/core';
-import { Momento } from '../../../../models/momento.model';
+import { Component, inject, input, output } from '@angular/core';
+import { GaleriaService } from '../../../../services/galeria.service';
+import type { Coleccion } from '../../../../models/coleccion.model';
 
 /**
- * Tarjeta de un momento estudiantil: portada, título y conteo de fotos.
- * Componente de presentación: no conoce el origen de los datos.
+ * Tarjeta de un momento estudiantil: portada, título y conteo.
  */
 @Component({
   selector: 'app-momento-card',
@@ -13,19 +13,17 @@ import { Momento } from '../../../../models/momento.model';
   styleUrl: './momento-card.component.css',
 })
 export class MomentoCardComponent {
+  private readonly galeria = inject(GaleriaService);
 
-  /** Momento a mostrar. */
-  readonly momento = input.required<Momento>();
+  readonly momento = input.required<Coleccion>();
 
-  /** Se emite al seleccionar la tarjeta. */
-  readonly abrir = output<Momento>();
+  readonly abrir = output<Coleccion>();
+
+  portada(): string {
+    return this.galeria.urlAbsoluta(this.momento().portada?.thumb);
+  }
 
   onClick(): void {
     this.abrir.emit(this.momento());
-  }
-
-  /** Oculta la imagen si el archivo no existe, dejando ver el degradado. */
-  onImgError(event: Event): void {
-    (event.target as HTMLImageElement).style.display = 'none';
   }
 }

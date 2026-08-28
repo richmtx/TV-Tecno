@@ -1,5 +1,6 @@
-import { Component, input, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { Foto, altDeFoto } from '../../models/coleccion.model';
+import { GaleriaService } from '../../services/galeria.service';
 
 /**
  * Cuadrícula de fotografías.
@@ -14,6 +15,7 @@ import { Foto, altDeFoto } from '../../models/coleccion.model';
   styleUrl: './foto-grid.component.css',
 })
 export class FotoGridComponent {
+  private readonly galeria = inject(GaleriaService);
 
   /** Fotos visibles en la página actual. */
   readonly fotos = input.required<Foto[]>();
@@ -30,22 +32,21 @@ export class FotoGridComponent {
   /** Se emite con el índice global de la foto seleccionada. */
   readonly seleccion = output<number>();
 
+  url(foto: Foto): string {
+    return this.galeria.urlAbsoluta(foto.thumb);
+  }
+
   /** Texto alternativo de una foto de la página actual. */
   alt(foto: Foto, indiceLocal: number): string {
     return altDeFoto(
       foto,
       this.tituloColeccion(),
       this.offset() + indiceLocal,
-      this.totalColeccion()
+      this.totalColeccion(),
     );
   }
 
   onClick(indiceLocal: number): void {
     this.seleccion.emit(this.offset() + indiceLocal);
-  }
-
-  /** Oculta la imagen si el archivo no existe, dejando ver el degradado. */
-  onImgError(event: Event): void {
-    (event.target as HTMLImageElement).style.display = 'none';
   }
 }

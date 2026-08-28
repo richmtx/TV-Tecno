@@ -3,25 +3,38 @@ import { TabId } from './filtros-galeria.model';
 /** Identificador de sección; alias de TabId para legibilidad. */
 export type SeccionId = TabId;
 
-/** Fotografía individual dentro de una colección. */
+/**
+ * Fotografía de una colección, tal como la entrega la API.
+ * Las tres variantes vienen resueltas: la miniatura para la
+ * cuadrícula y las mayores para el visor.
+ */
 export interface Foto {
     id: string;
 
-    /** Ruta del archivo. */
-    src: string;
-
-    /**
-     * Pie de foto editorial. Opcional: la mayoría de las fotos de una
-     * colección no necesitan uno, y exigirlo haría inviable la carga
-     * masiva desde el panel de administración.
-     */
-    pie?: string;
+    /** Pie de foto editorial. La mayoría de las fotos no llevan uno. */
+    pie: string | null;
 
     /** Año de la fotografía, si se conoce. */
-    anio?: number;
+    anio: number | null;
 
-    /** Degradado de respaldo mientras no exista la imagen real. */
-    fallback: string;
+    ancho: number | null;
+    alto: number | null;
+
+    thumb: string;
+    medium: string;
+    original: string;
+}
+
+/** Categoría temática de una colección. */
+export interface CategoriaColeccion {
+    slug: string;
+    nombre: string;
+}
+
+/** Portada de una colección, en dos tamaños. */
+export interface PortadaColeccion {
+    thumb: string;
+    medium: string;
 }
 
 /**
@@ -36,19 +49,17 @@ export interface Coleccion {
     /** Sección a la que pertenece. */
     seccion: SeccionId;
 
-    /** Encabezado principal, ej. '1951 - 1980'. */
     titulo: string;
+    subtitulo: string | null;
+    descripcion: string | null;
 
-    /** Encabezado secundario, ej. 'Crecimiento y formación'. */
-    subtitulo: string;
-
-    /** Descripción breve bajo el encabezado. */
-    descripcion: string;
-
-    /** Total de fotos declarado. */
+    categoria: CategoriaColeccion | null;
     totalFotos: number;
+    portada: PortadaColeccion | null;
+}
 
-    /** Fotografías de la colección. */
+/** Colección con sus fotografías, para la página de detalle. */
+export interface ColeccionConFotos extends Coleccion {
     fotos: Foto[];
 }
 
@@ -75,7 +86,7 @@ export function altDeFoto(
     foto: Foto,
     tituloColeccion: string,
     indice: number,
-    total: number
+    total: number,
 ): string {
     if (foto.pie) {
         return foto.pie;

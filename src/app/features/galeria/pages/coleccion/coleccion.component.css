@@ -114,6 +114,13 @@
     outline-offset: 3px;
 }
 
+.coleccion__sin-fotos {
+    padding: 3rem 0;
+    text-align: center;
+    color: var(--co-muted);
+    font-size: 0.95rem;
+}
+
 /* ============ RESPONSIVE ============ */
 
 @media (max-width: 1080px) {

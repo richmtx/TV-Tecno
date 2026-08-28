@@ -1,9 +1,9 @@
-import { Component, input, output } from '@angular/core';
-import { Album } from '../../../../models/album.model';
+import { Component, inject, input, output } from '@angular/core';
+import { GaleriaService } from '../../../../services/galeria.service';
+import type { Coleccion } from '../../../../models/coleccion.model';
 
 /**
  * Tarjeta de un álbum: portada, título, conteo de fotos y periodo.
- * Componente de presentación: no conoce el origen de los datos.
  */
 @Component({
   selector: 'app-album-card',
@@ -13,19 +13,17 @@ import { Album } from '../../../../models/album.model';
   styleUrl: './album-card.component.css',
 })
 export class AlbumCardComponent {
+  private readonly galeria = inject(GaleriaService);
 
-  /** Álbum a mostrar. */
-  readonly album = input.required<Album>();
+  readonly album = input.required<Coleccion>();
 
-  /** Se emite al seleccionar la tarjeta. */
-  readonly abrir = output<Album>();
+  readonly abrir = output<Coleccion>();
+
+  portada(): string {
+    return this.galeria.urlAbsoluta(this.album().portada?.thumb);
+  }
 
   onClick(): void {
     this.abrir.emit(this.album());
-  }
-
-  /** Oculta la imagen si el archivo no existe, dejando ver el degradado. */
-  onImgError(event: Event): void {
-    (event.target as HTMLImageElement).style.display = 'none';
   }
 }

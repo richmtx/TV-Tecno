@@ -1,9 +1,10 @@
 <button type="button" class="momento-card" (click)="onClick()"
     [attr.aria-label]="'Ver ' + momento().titulo + ', ' + momento().totalFotos + ' fotos'">
 
-    <span class="momento-card__media" [style.background]="momento().fallback">
-        <img class="momento-card__img" [src]="momento().portada" [alt]="momento().portadaAlt" loading="lazy"
-            (error)="onImgError($event)" />
+    <span class="momento-card__media">
+        @if (portada(); as src) {
+        <img class="momento-card__img" [src]="src" [alt]="momento().titulo" loading="lazy" />
+        }
     </span>
 
     <span class="momento-card__body">

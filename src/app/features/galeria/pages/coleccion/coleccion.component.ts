@@ -1,14 +1,20 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
+import { map, of, switchMap, catchError } from 'rxjs';
 import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
 import { NavColeccionesComponent } from '../../components/nav-colecciones/nav-colecciones.component';
 import { FotoGridComponent } from '../../components/foto-grid/foto-grid.component';
 import { LightboxComponent } from '../../components/lightbox/lightbox.component';
 import { PaginacionComponent } from '../../components/paginacion/paginacion.component';
 import { GaleriaService } from '../../services/galeria.service';
-import { Foto, MigaPan, SeccionId } from '../../models/coleccion.model';
+import type {
+  ColeccionConFotos,
+  Foto,
+  ItemNavColeccion,
+  MigaPan,
+  SeccionId,
+} from '../../models/coleccion.model';
 
 /** Fotos por página: 4 columnas × 5 filas. */
 const POR_PAGINA = 20;
@@ -26,26 +32,26 @@ const CONFIG: Record<SeccionId, ConfigSeccion> = {
     ruta: '/galeria/linea-del-tiempo',
     label: 'Línea del tiempo',
     navTitulo: 'Explorar línea del tiempo',
-    variante: 'timeline'
+    variante: 'timeline',
   },
   albums: {
     ruta: '/galeria/albumes',
     label: 'Álbumes',
     navTitulo: 'Explorar álbumes',
-    variante: 'lista'
+    variante: 'lista',
   },
   instalaciones: {
     ruta: '/galeria/instalaciones',
     label: 'Instalaciones',
     navTitulo: 'Explorar instalaciones',
-    variante: 'lista'
+    variante: 'lista',
   },
   estudiantes: {
     ruta: '/galeria/estudiantes',
     label: 'Estudiantes',
     navTitulo: 'Explorar momentos',
-    variante: 'lista'
-  }
+    variante: 'lista',
+  },
 };
 
 /**
@@ -61,13 +67,12 @@ const CONFIG: Record<SeccionId, ConfigSeccion> = {
     NavColeccionesComponent,
     FotoGridComponent,
     LightboxComponent,
-    PaginacionComponent
+    PaginacionComponent,
   ],
   templateUrl: './coleccion.component.html',
   styleUrl: './coleccion.component.css',
 })
 export class ColeccionComponent {
-
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly galeria = inject(GaleriaService);
@@ -77,24 +82,39 @@ export class ColeccionComponent {
 
   /** Sección declarada en el `data` de la ruta. */
   private readonly seccion = toSignal(
-    this.route.data.pipe(map(d => d['seccion'] as SeccionId)),
-    { initialValue: 'timeline' as SeccionId }
-  );
-
-  /** Id de la colección tomado de la URL. */
-  private readonly coleccionId = toSignal(
-    this.route.paramMap.pipe(map(p => p.get('coleccionId') ?? '')),
-    { initialValue: '' }
+    this.route.data.pipe(map((d) => d['seccion'] as SeccionId)),
+    { initialValue: 'timeline' as SeccionId },
   );
 
   readonly config = computed<ConfigSeccion>(() => CONFIG[this.seccion()]);
 
-  readonly coleccion = computed(() =>
-    this.galeria.getColeccion(this.seccion(), this.coleccionId())
+  /**
+   * Colección abierta. Se resuelve cada vez que cambia el segmento
+   * de la URL, de modo que saltar entre hermanas desde la barra
+   * lateral recarga el contenido sin recrear el componente.
+   */
+  readonly coleccion = toSignal(
+    this.route.paramMap.pipe(
+      switchMap((params) => {
+        const id = params.get('coleccionId') ?? '';
+        this.paginaActual.set(1);
+        this.indiceVisor.set(null);
+
+        return this.galeria
+          .getColeccion(this.seccion(), id)
+          .pipe(catchError(() => of(null)));
+      }),
+    ),
+    { initialValue: null as ColeccionConFotos | null },
   );
 
-  readonly navItems = computed(() =>
-    this.galeria.getNavColecciones(this.seccion())
+  readonly navItems = toSignal(
+    this.route.data.pipe(
+      switchMap((d) =>
+        this.galeria.getNavColecciones(d['seccion'] as SeccionId),
+      ),
+    ),
+    { initialValue: [] as ItemNavColeccion[] },
   );
 
   readonly migas = computed<MigaPan[]>(() => {
@@ -102,14 +122,14 @@ export class ColeccionComponent {
     return [
       { label: 'Galería', ruta: '/galeria' },
       { label: this.config().label, ruta: this.config().ruta },
-      { label: c?.titulo ?? 'No encontrada' }
+      { label: c?.titulo ?? 'No encontrada' },
     ];
   });
 
   readonly fotos = computed<Foto[]>(() => this.coleccion()?.fotos ?? []);
 
   readonly totalPaginas = computed<number>(() =>
-    Math.max(1, Math.ceil(this.fotos().length / POR_PAGINA))
+    Math.max(1, Math.ceil(this.fotos().length / POR_PAGINA)),
   );
 
   /** Índice de la primera foto de la página, en la colección completa. */
@@ -119,21 +139,8 @@ export class ColeccionComponent {
   });
 
   readonly fotosVisibles = computed<Foto[]>(() =>
-    this.fotos().slice(this.offset(), this.offset() + POR_PAGINA)
+    this.fotos().slice(this.offset(), this.offset() + POR_PAGINA),
   );
-
-  constructor() {
-    // Al cambiar de colección se vuelve a la primera página.
-    let anterior = '';
-    this.route.paramMap.subscribe(p => {
-      const id = p.get('coleccionId') ?? '';
-      if (id !== anterior) {
-        anterior = id;
-        this.paginaActual.set(1);
-        this.indiceVisor.set(null);
-      }
-    });
-  }
 
   irAPagina(pagina: number): void {
     this.paginaActual.set(pagina);
@@ -155,6 +162,6 @@ export class ColeccionComponent {
   }
 
   volverAlIndice(): void {
-    this.router.navigate([this.config().ruta]);
+    void this.router.navigate([this.config().ruta]);
   }
 }

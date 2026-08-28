@@ -49,6 +49,7 @@
     width: 100%;
     aspect-ratio: 4 / 3;
     overflow: hidden;
+    background: var(--mc-wine-soft, #f7edf1);
 }
 
 .momento-card__img {

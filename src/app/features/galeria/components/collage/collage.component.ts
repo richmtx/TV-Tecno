@@ -1,55 +1,54 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { GaleriaFiltrosService } from '../../services/galeria-filtros.service';
 import { GaleriaService } from '../../services/galeria.service';
 import { OpcionFiltro } from '../../models/filtros-galeria.model';
-import { Coleccion, Foto, altDeFoto } from '../../models/coleccion.model';
+import { Coleccion } from '../../models/coleccion.model';
 
 /** Opciones del menú "Filtrar" para esta sección. */
 const OPCIONES_TIMELINE: OpcionFiltro[] = [
   'Más recientes',
   'Más antiguas',
   'Más vistas',
-  'Blanco y negro'
+  'Blanco y negro',
 ];
-
-/** Época con las cuatro fotos que se muestran como adelanto. */
-interface EpocaPreview extends Coleccion {
-  preview: Foto[];
-}
 
 /**
  * Línea del tiempo del ITD: una fila por época con un adelanto
- * de cuatro fotos y acceso a la colección completa.
+ * de la portada y acceso a la colección completa.
  */
 @Component({
   selector: 'app-collage',
   standalone: true,
   imports: [],
   templateUrl: './collage.component.html',
-  styleUrl: './collage.component.css'
+  styleUrl: './collage.component.css',
 })
 export class CollageComponent {
-
   private readonly filtros = inject(GaleriaFiltrosService);
   private readonly galeria = inject(GaleriaService);
   private readonly router = inject(Router);
 
-  private readonly epocas = this.galeria.getColecciones('timeline');
+  readonly cargando = signal(true);
+
+  private readonly epocas = toSignal(this.galeria.getColecciones('timeline'), {
+    initialValue: [] as Coleccion[],
+  });
 
   /** Filtrado en cliente por años, título o descripción. */
-  readonly epocasVisibles = computed<EpocaPreview[]>(() => {
+  readonly epocasVisibles = computed<Coleccion[]>(() => {
     const term = this.filtros.busqueda().trim().toLowerCase();
+    const lista = this.epocas();
 
-    const encontradas = term
-      ? this.epocas.filter(e =>
+    if (!term) return lista;
+
+    return lista.filter(
+      (e) =>
         e.titulo.toLowerCase().includes(term) ||
-        e.subtitulo.toLowerCase().includes(term) ||
-        e.descripcion.toLowerCase().includes(term)
-      )
-      : this.epocas;
-
-    return encontradas.map(e => ({ ...e, preview: e.fotos.slice(0, 4) }));
+        (e.subtitulo ?? '').toLowerCase().includes(term) ||
+        (e.descripcion ?? '').toLowerCase().includes(term),
+    );
   });
 
   constructor() {
@@ -57,13 +56,12 @@ export class CollageComponent {
     this.filtros.configurar(OPCIONES_TIMELINE, 'Buscar fotos...');
   }
 
-  /** Texto alternativo de una miniatura del adelanto. */
-  alt(epoca: EpocaPreview, foto: Foto, indice: number): string {
-    return altDeFoto(foto, epoca.titulo, indice, epoca.fotos.length);
+  portada(epoca: Coleccion): string {
+    return this.galeria.urlAbsoluta(epoca.portada?.medium);
   }
 
   verTodas(epoca: Coleccion): void {
-    this.router.navigate(['/galeria/linea-del-tiempo', epoca.id]);
+    void this.router.navigate(['/galeria/linea-del-tiempo', epoca.id]);
   }
 
   onImgError(event: Event): void {

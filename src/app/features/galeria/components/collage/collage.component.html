@@ -14,38 +14,42 @@
                 <span class="collage__era-count">{{ epoca.totalFotos }} fotos</span>
             </div>
 
-            <div class="collage__era-photos">
-                @for (foto of epoca.preview; track foto.id; let i = $index) {
-                <button type="button" class="collage__photo" [style.background]="foto.fallback"
-                    [attr.aria-label]="alt(epoca, foto, i)" (click)="verTodas(epoca)">
-                    <img class="collage__photo-img" [src]="foto.src" [alt]="alt(epoca, foto, i)" loading="lazy"
-                        (error)="onImgError($event)" />
-                </button>
-                }
+            <button type="button" class="collage__portada" [class.collage__portada--vacia]="!portada(epoca)"
+                (click)="verTodas(epoca)" [attr.aria-label]="'Ver las fotografías de ' + epoca.titulo">
 
-                <button type="button" class="collage__see-all" (click)="verTodas(epoca)">
-                    <span class="collage__see-all-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-                            <circle cx="8.5" cy="10" r="1.4"></circle>
-                            <path d="m4 17 4.5-4.5 3 3L15 12l5 5"></path>
-                        </svg>
+                @if (portada(epoca); as src) {
+                <img class="collage__portada-img" [src]="src" [alt]="epoca.titulo" loading="lazy" />
+
+                <span class="collage__portada-velo">
+                    <span class="collage__portada-texto">
+                        <span class="collage__see-all-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                                <circle cx="8.5" cy="10" r="1.4"></circle>
+                                <path d="m4 17 4.5-4.5 3 3L15 12l5 5"></path>
+                            </svg>
+                        </span>
+                        Ver todas
+                        <span class="collage__see-all-arrow" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="4" y1="12" x2="19" y2="12"></line>
+                                <polyline points="13.5 6.5 20 12 13.5 17.5"></polyline>
+                            </svg>
+                        </span>
                     </span>
-                    <span class="collage__see-all-label">Ver todas</span>
-                    <span class="collage__see-all-arrow" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="4" y1="12" x2="19" y2="12"></line>
-                            <polyline points="13.5 6.5 20 12 13.5 17.5"></polyline>
-                        </svg>
-                    </span>
-                </button>
-            </div>
+                </span>
+                } @else {
+                <span>Sin fotografías todavía</span>
+                }
+            </button>
 
         </article>
         } @empty {
-        <p class="collage__empty">No encontramos fotos que coincidan con tu búsqueda.</p>
+        <p class="collage__empty">
+            Todavía no hay épocas publicadas en la línea del tiempo.
+        </p>
         }
     </div>
 

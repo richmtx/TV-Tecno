@@ -1,5 +1,6 @@
-import { Component, HostListener, computed, effect, input, output } from '@angular/core';
+import { Component, HostListener, computed, effect, inject, input, output } from '@angular/core';
 import { Foto, altDeFoto } from '../../models/coleccion.model';
+import { GaleriaService } from '../../services/galeria.service';
 
 /**
  * Visor a pantalla completa con navegación entre fotos.
@@ -14,6 +15,8 @@ import { Foto, altDeFoto } from '../../models/coleccion.model';
   styleUrl: './lightbox.component.css',
 })
 export class LightboxComponent {
+
+  private readonly galeria = inject(GaleriaService);
 
   /** Colección completa que se puede recorrer. */
   readonly fotos = input.required<Foto[]>();
@@ -49,6 +52,12 @@ export class LightboxComponent {
       this.indice() ?? 0,
       this.fotos().length
     );
+  });
+
+  /** URL de la variante grande de la foto abierta. */
+  readonly urlActual = computed<string>(() => {
+    const foto = this.fotoActual();
+    return foto ? this.galeria.urlAbsoluta(foto.medium) : '';
   });
 
   readonly hayAnterior = computed(() => (this.indice() ?? 0) > 0);

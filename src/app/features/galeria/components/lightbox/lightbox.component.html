@@ -18,8 +18,8 @@
     </button>
 
     <figure class="lightbox__figura" (click)="$event.stopPropagation()">
-        <div class="lightbox__marco" [style.background]="foto.fallback">
-            <img class="lightbox__img" [src]="foto.src" [alt]="altActual()" (error)="onImgError($event)" />
+        <div class="lightbox__marco">
+            <img class="lightbox__img" [src]="urlActual()" [alt]="altActual()" />
         </div>
 
         <figcaption class="lightbox__pie">

@@ -2,7 +2,7 @@
     <h2 id="instalaciones-title" class="instalaciones__sr-only">Instalaciones del ITD</h2>
 
     <div class="instalaciones__chips">
-        <app-chips-categoria [chips]="chips" [activo]="categoriaActiva()"
+        <app-chips-categoria [chips]="chips()" [activo]="categoriaActiva()"
             ariaLabel="Filtrar instalaciones por categoría" (seleccion)="onCategoria($event)"></app-chips-categoria>
     </div>
 

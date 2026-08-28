@@ -1,20 +1,21 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MomentoCardComponent } from './components/momento-card/momento-card.component';
 import { CierreEstudiantesComponent } from './components/cierre-estudiantes/cierre-estudiantes.component';
 import { PaginacionComponent } from '../../components/paginacion/paginacion.component';
 import { GaleriaFiltrosService } from '../../services/galeria-filtros.service';
 import { GaleriaService } from '../../services/galeria.service';
 import { OpcionFiltro } from '../../models/filtros-galeria.model';
-import { Momento } from '../../models/momento.model';
-import { TESTIMONIO_ESTUDIANTES } from '../../data/momentos.data';
+import { Coleccion } from '../../models/coleccion.model';
+import { TESTIMONIO_ESTUDIANTES } from '../../data/galeria-secciones';
 
 /** Opciones del menú "Filtrar" del layout. */
 const OPCIONES_ESTUDIANTES: OpcionFiltro[] = [
-  'Más recientes',
+  'Orden sugerido',
   'Más fotos',
   'Por título',
-  'Por categoría'
+  'Por categoría',
 ];
 
 /** Momentos por página. */
@@ -33,7 +34,6 @@ const POR_PAGINA = 8;
   styleUrl: './estudiantes.component.css',
 })
 export class EstudiantesComponent {
-
   private readonly filtros = inject(GaleriaFiltrosService);
   private readonly galeria = inject(GaleriaService);
   private readonly router = inject(Router);
@@ -42,15 +42,20 @@ export class EstudiantesComponent {
 
   readonly testimonio = TESTIMONIO_ESTUDIANTES;
 
-  private readonly momentos = this.galeria.getMomentos();
+  private readonly momentos = toSignal(
+    this.galeria.getColecciones('estudiantes'),
+    { initialValue: [] as Coleccion[] },
+  );
 
   /** Aplica búsqueda y orden sobre el conjunto completo. */
-  private readonly momentosFiltrados = computed<Momento[]>(() => {
+  private readonly momentosFiltrados = computed<Coleccion[]>(() => {
     const term = this.filtros.busqueda().trim().toLowerCase();
 
     const encontrados = term
-      ? this.momentos.filter(m => m.titulo.toLowerCase().includes(term))
-      : [...this.momentos];
+      ? this.momentos().filter((m) =>
+        m.titulo.toLowerCase().includes(term),
+      )
+      : [...this.momentos()];
 
     switch (this.filtros.filtroActivo()) {
       case 'Más fotos':
@@ -58,21 +63,24 @@ export class EstudiantesComponent {
       case 'Por título':
         return encontrados.sort((a, b) => a.titulo.localeCompare(b.titulo, 'es'));
       case 'Por categoría':
-        return encontrados.sort((a, b) =>
-          a.categoria.localeCompare(b.categoria, 'es') ||
-          a.titulo.localeCompare(b.titulo, 'es')
+        return encontrados.sort(
+          (a, b) =>
+            (a.categoria?.nombre ?? '').localeCompare(
+              b.categoria?.nombre ?? '',
+              'es',
+            ) || a.titulo.localeCompare(b.titulo, 'es'),
         );
       default:
-        return encontrados.sort((a, b) => b.anio - a.anio);
+        return encontrados;
     }
   });
 
   readonly totalPaginas = computed<number>(() =>
-    Math.max(1, Math.ceil(this.momentosFiltrados().length / POR_PAGINA))
+    Math.max(1, Math.ceil(this.momentosFiltrados().length / POR_PAGINA)),
   );
 
   /** Momentos visibles en la página actual. */
-  readonly momentosVisibles = computed<Momento[]>(() => {
+  readonly momentosVisibles = computed<Coleccion[]>(() => {
     const pagina = Math.min(this.paginaActual(), this.totalPaginas());
     const desde = (pagina - 1) * POR_PAGINA;
     return this.momentosFiltrados().slice(desde, desde + POR_PAGINA);
@@ -87,8 +95,8 @@ export class EstudiantesComponent {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  abrirMomento(momento: Momento): void {
-    this.router.navigate(['/galeria/estudiantes', momento.id]);
+  abrirMomento(momento: Coleccion): void {
+    void this.router.navigate(['/galeria/estudiantes', momento.id]);
   }
 
   onIrAlPortal(): void {

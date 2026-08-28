@@ -1,4 +1,5 @@
+/** Configuración de desarrollo local. */
 export const environment = {
-    production: false,
+    produccion: false,
     apiUrl: 'http://localhost:3000',
 };

@@ -1,9 +1,9 @@
-import { Component, input, output } from '@angular/core';
-import { Instalacion } from '../../../../models/instalacion.model';
+import { Component, inject, input, output } from '@angular/core';
+import { GaleriaService } from '../../../../services/galeria.service';
+import type { Coleccion } from '../../../../models/coleccion.model';
 
 /**
  * Tarjeta de una instalación: portada, título, descripción y etiqueta.
- * Componente de presentación: no conoce el origen de los datos.
  */
 @Component({
   selector: 'app-instalacion-card',
@@ -13,19 +13,17 @@ import { Instalacion } from '../../../../models/instalacion.model';
   styleUrl: './instalacion-card.component.css',
 })
 export class InstalacionCardComponent {
+  private readonly galeria = inject(GaleriaService);
 
-  /** Instalación a mostrar. */
-  readonly instalacion = input.required<Instalacion>();
+  readonly instalacion = input.required<Coleccion>();
 
-  /** Se emite al seleccionar la tarjeta. */
-  readonly abrir = output<Instalacion>();
+  readonly abrir = output<Coleccion>();
+
+  portada(): string {
+    return this.galeria.urlAbsoluta(this.instalacion().portada?.thumb);
+  }
 
   onClick(): void {
     this.abrir.emit(this.instalacion());
-  }
-
-  /** Oculta la imagen si el archivo no existe, dejando ver el degradado. */
-  onImgError(event: Event): void {
-    (event.target as HTMLImageElement).style.display = 'none';
   }
 }

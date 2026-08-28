@@ -1,9 +1,10 @@
 <button type="button" class="album-card" (click)="onClick()"
     [attr.aria-label]="'Abrir álbum ' + album().titulo + ', ' + album().totalFotos + ' fotos'">
 
-    <span class="album-card__media" [style.background]="album().fallback">
-        <img class="album-card__img" [src]="album().portada" [alt]="album().portadaAlt" loading="lazy"
-            (error)="onImgError($event)" />
+    <span class="album-card__media">
+        @if (portada(); as src) {
+        <img class="album-card__img" [src]="src" [alt]="album().titulo" loading="lazy" />
+        }
     </span>
 
     <span class="album-card__body">
@@ -21,7 +22,9 @@
             <span class="album-card__meta-texto">{{ album().totalFotos }} fotos</span>
         </span>
 
-        <span class="album-card__periodo">{{ album().periodo }}</span>
+        @if (album().subtitulo; as periodo) {
+        <span class="album-card__periodo">{{ periodo }}</span>
+        }
     </span>
 
 </button>
