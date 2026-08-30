@@ -13,6 +13,7 @@
 
             <div class="hero-galeria__stats">
                 <!-- Stat: Fotos -->
+                @if (totalFotos(); as total) {
                 <div class="hero-galeria__stat">
                     <span class="hero-galeria__stat-icon">
                         <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor"
@@ -23,10 +24,13 @@
                         </svg>
                     </span>
                     <div class="hero-galeria__stat-text">
-                        <span class="hero-galeria__stat-number">1,248</span>
-                        <span class="hero-galeria__stat-label">Fotos</span>
+                        <span class="hero-galeria__stat-number">{{ total }}</span>
+                        <span class="hero-galeria__stat-label">
+                            {{ estadisticas()?.totalFotos === 1 ? 'Foto' : 'Fotos' }}
+                        </span>
                     </div>
                 </div>
+                }
 
                 <!-- Stat: Años de historia -->
                 <div class="hero-galeria__stat">
@@ -40,7 +44,7 @@
                         </svg>
                     </span>
                     <div class="hero-galeria__stat-text">
-                        <span class="hero-galeria__stat-number">78+</span>
+                        <span class="hero-galeria__stat-number">{{ aniosDeHistoria() }}+</span>
                         <span class="hero-galeria__stat-label">Años de historia</span>
                     </div>
                 </div>
