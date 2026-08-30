@@ -51,9 +51,4 @@ export class GaleriaLayoutComponent {
     const url = this.router.url;
     return RUTAS_SECCION.find(s => url.includes(`/galeria/${s.ruta}`))?.id ?? 'timeline';
   }
-
-  onEnviarFotos(): void {
-    // TODO: abrir modal o navegar al formulario de envío
-    console.log('Enviar mis fotos desde', this.seccionActiva());
-  }
 }

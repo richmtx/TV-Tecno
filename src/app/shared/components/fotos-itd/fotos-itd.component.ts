@@ -1,26 +1,30 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-fotos-itd',
   standalone: true,
+  imports: [RouterLink],
   templateUrl: './fotos-itd.component.html',
   styleUrl: './fotos-itd.component.css'
 })
 export class FotosItdComponent {
 
-  /** Título principal del CTA. */
-  @Input() titulo = '¿Tienes fotos históricas del ITD?';
+  /** Título principal de la invitación. */
+  @Input() titulo = '¿Tienes fotografías históricas del ITD?';
 
   /** Texto secundario debajo del título. */
-  @Input() subtitulo = 'Comparte tus recuerdos y sé parte de nuestra historia.';
+  @Input() subtitulo = 'Escríbenos y ayúdanos a completar el archivo.';
 
-  /** Texto del botón. */
-  @Input() textoBoton = 'Enviar mis fotos';
+  /** Texto del enlace. */
+  @Input() textoBoton = 'Ir a contacto';
 
-  /** Se emite al hacer clic en el botón; cada página decide qué hacer. */
-  @Output() enviar = new EventEmitter<void>();
-
-  onEnviar(): void {
-    this.enviar.emit();
-  }
+  /**
+   * Destino del enlace.
+   *
+   * La invitación lleva al formulario de contacto en lugar de a un
+   * envío directo: el material histórico llega en conversaciones,
+   * no en archivos sueltos, y ahí sí hay alguien que responde.
+   */
+  @Input() ruta = '/contacto';
 }

@@ -23,7 +23,7 @@ export const CONTENIDO_SECCIONES: Record<TabId, ContenidoSeccion> = {
         fotos: {
             titulo: '¿Tienes fotos históricas del ITD?',
             subtitulo: 'Comparte tus recuerdos y sé parte de nuestra historia.',
-            textoBoton: 'Enviar mis fotos'
+            textoBoton: 'Ir a contacto'
         },
         historia: {
             lineas: [
@@ -37,7 +37,7 @@ export const CONTENIDO_SECCIONES: Record<TabId, ContenidoSeccion> = {
         fotos: {
             titulo: '¿Tienes más fotos para compartir?',
             subtitulo: 'Ayúdanos a seguir construyendo nuestra memoria histórica.',
-            textoBoton: 'Aportar a un álbum'
+            textoBoton: 'Ir a contacto'
         },
         historia: {
             lineas: [
@@ -51,7 +51,7 @@ export const CONTENIDO_SECCIONES: Record<TabId, ContenidoSeccion> = {
         fotos: {
             titulo: '¿Conoces alguna instalación que no aparece?',
             subtitulo: 'Ayúdanos a mantener actualizada nuestra galería de instalaciones.',
-            textoBoton: 'Compartir una foto'
+            textoBoton: 'Ir a contacto'
         },
         historia: {
             lineas: [
@@ -65,7 +65,7 @@ export const CONTENIDO_SECCIONES: Record<TabId, ContenidoSeccion> = {
         fotos: {
             titulo: '¿Tienes fotos para compartir?',
             subtitulo: 'Comparte esas fotografías que resumen tu paso por el Tecnológico.',
-            textoBoton: 'Enviar mi recuerdo'
+            textoBoton: 'Ir a contacto'
         },
         historia: {
             lineas: [
