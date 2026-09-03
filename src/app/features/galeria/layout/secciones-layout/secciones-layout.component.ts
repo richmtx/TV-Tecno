@@ -25,6 +25,6 @@ export class SeccionesLayoutComponent {
     { id: 'timeline', ruta: 'linea-del-tiempo', label: 'Línea del tiempo' },
     { id: 'albums', ruta: 'albumes', label: 'Álbumes' },
     { id: 'instalaciones', ruta: 'instalaciones', label: 'Instalaciones' },
-    { id: 'estudiantes', ruta: 'estudiantes', label: 'Estudiantes' },
+    { id: 'estudiantes', ruta: 'estudiantes', label: 'Estudiantes y Egresados' },
   ];
 }

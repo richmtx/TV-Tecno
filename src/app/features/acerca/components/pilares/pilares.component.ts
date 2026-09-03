@@ -21,20 +21,20 @@ interface Pilar {
 export class PilaresComponent {
   readonly pilares: Pilar[] = [
     {
-      logo: 'assets/logos/TV_Tecno_logo_transparente.png',
-      alt: 'Logotipo de TV Tecno, canal XHITD 16.1',
-      nombre: 'TV Tecno',
-      rol: 'El canal',
-      texto: 'La señal XHITD 16.1 y el equipo que la produce día con día.',
-      width: 400,
-      height: 400
-    },
-    {
       logo: 'assets/logos/LogoITD.png',
       alt: 'Escudo del Instituto Tecnológico de Durango',
       nombre: 'Instituto Tecnológico de Durango',
       rol: 'La casa',
       texto: 'La institución que nos alberga y da sentido a todo lo que transmitimos.',
+      width: 400,
+      height: 400
+    },
+    {
+      logo: 'assets/logos/TV_Tecno_logo_transparente.png',
+      alt: 'Logotipo de TV Tecno, canal XHITD 16.1',
+      nombre: 'TV Tecno',
+      rol: 'El canal',
+      texto: 'La señal XHITD 16.1 y el equipo que la produce día con día.',
       width: 400,
       height: 400
     },
