@@ -1,55 +1,61 @@
-import { Component } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
+import { Component, OnInit, computed, inject } from '@angular/core';
+import { AcercaService } from '../../../../core/services/acerca.service';
+import type { AcercaImagen } from '../../../../core/models/acerca.model';
 
+/** Un hueco del collage, ya resuelto para el template. */
 interface MosaicoItem {
-  src: string;
+  src: string | null;
   alt: string;
   etiqueta: string;
-  width: number;
-  height: number;
   modificador: string;
 }
+
+/**
+ * Orden y forma de los cuatro huecos del collage.
+ *
+ * El acomodo es parte del diseño y no se administra: la clave dice
+ * qué imagen va en cada hueco, y el modificador define su posición
+ * en la rejilla. La foto se adapta al hueco, nunca al revés.
+ */
+const HUECOS: { clave: string; modificador: string }[] = [
+  { clave: 'hero_casa', modificador: 'mosaico__item--alta' },
+  { clave: 'hero_noticiero', modificador: 'mosaico__item--ancha' },
+  { clave: 'hero_entrevistas', modificador: 'mosaico__item--cuadrada' },
+  { clave: 'hero_foro', modificador: 'mosaico__item--desfasada' },
+];
 
 @Component({
   selector: 'app-mosaico',
   standalone: true,
-  imports: [NgOptimizedImage],
   templateUrl: './mosaico.component.html',
-  styleUrl: './mosaico.component.css'
+  styleUrl: './mosaico.component.css',
 })
-export class MosaicoComponent {
-  readonly items: MosaicoItem[] = [
-    {
-      src: 'assets/acerca/Totem.png',
-      alt: 'Cabina de transmisión de TV Tecno en el campus ITD',
-      etiqueta: 'Nuestra Casa',
-      width: 941,
-      height: 1672,
-      modificador: 'mosaico__item--alta'
-    },
-    {
-      src: 'assets/acerca/Estudio2.png',
-      alt: 'Transmisión en vivo desde el set de TV Tecno',
-      etiqueta: 'Noticiero',
-      width: 1535,
-      height: 1024,
-      modificador: 'mosaico__item--ancha'
-    },
-    {
-      src: 'assets/acerca/Estudio3.png',
-      alt: 'Equipo de producción grabando en el campus',
-      etiqueta: 'Entrevistas',
-      width: 900,
-      height: 900,
-      modificador: 'mosaico__item--cuadrada'
-    },
-    {
-      src: 'assets/acerca/EstudioMusica.png',
-      alt: 'Vida estudiantil en el Instituto Tecnológico de Durango',
-      etiqueta: 'Foro Musical',
-      width: 900,
-      height: 1200,
-      modificador: 'mosaico__item--desfasada'
-    }
-  ];
+export class MosaicoComponent implements OnInit {
+  private readonly acerca = inject(AcercaService);
+
+  readonly listo = this.acerca.listo;
+
+  /** Los huecos vacíos, para pintar el esqueleto con la misma forma. */
+  readonly huecos = HUECOS;
+
+  readonly items = computed<MosaicoItem[]>(() => {
+    const imagenes = this.acerca.imagenesHero();
+    if (imagenes.length === 0) return [];
+
+    // Se recorre el diseño, no la respuesta: si el backend
+    // devolviera un slot de más, no aparecería en la página.
+    return HUECOS.map((hueco) => {
+      const imagen: AcercaImagen | undefined = this.acerca.imagenPorClave(imagenes, hueco.clave);
+      return {
+        src: this.acerca.urlMedium(imagen),
+        alt: imagen?.alt ?? '',
+        etiqueta: imagen?.etiqueta ?? '',
+        modificador: hueco.modificador,
+      };
+    });
+  });
+
+  ngOnInit(): void {
+    this.acerca.cargar();
+  }
 }

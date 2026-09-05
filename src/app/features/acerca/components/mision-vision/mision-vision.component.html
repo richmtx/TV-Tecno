@@ -1,12 +1,15 @@
 <section class="mv">
+
+    @if (contenido(); as datos) {
+
     <div class="mv__head">
-        <span class="mv__eyebrow">Quiénes somos</span>
-        <h2 class="mv__title-main">Misión y visión</h2>
+        <span class="mv__eyebrow">{{ datos.mvEyebrow }}</span>
+        <h2 class="mv__title-main">{{ datos.mvTitulo }}</h2>
         <span class="mv__rule" aria-hidden="true"></span>
     </div>
 
     <div class="mv__grid">
-        @for (bloque of bloques; track bloque.titulo) {
+        @for (bloque of bloques(); track bloque.eyebrow) {
         <article class="mv__card">
             <div class="mv__icon" [class]="'mv__icon mv__icon--' + bloque.variante" aria-hidden="true">
                 @switch (bloque.icono) {
@@ -41,11 +44,42 @@
     </div>
 
     <ul class="mv__valores">
-        @for (valor of valores; track valor) {
+        @for (valor of valores(); track valor.clave) {
         <li class="mv__valor">
             <span class="mv__valor-label">Valor</span>
-            <span class="mv__valor-name">{{ valor }}</span>
+            <span class="mv__valor-name">{{ valor.titulo }}</span>
         </li>
         }
     </ul>
+
+    } @else {
+
+    <!-- Esqueleto con la misma estructura del bloque real -->
+    <div class="mv__head">
+        <div class="esqueleto esqueleto--eyebrow" aria-hidden="true"></div>
+        <div class="esqueleto esqueleto--titulo" aria-hidden="true"></div>
+        <span class="mv__rule" aria-hidden="true"></span>
+    </div>
+
+    <div class="mv__grid">
+        @for (n of [1, 2]; track n) {
+        <article class="mv__card" aria-hidden="true">
+            <div class="esqueleto esqueleto--icono"></div>
+            <div class="esqueleto esqueleto--linea esqueleto--corta"></div>
+            <div class="esqueleto esqueleto--linea esqueleto--media"></div>
+            <div class="esqueleto esqueleto--parrafo"></div>
+        </article>
+        }
+    </div>
+
+    <ul class="mv__valores">
+        @for (n of [1, 2, 3]; track n) {
+        <li class="mv__valor" aria-hidden="true">
+            <div class="esqueleto esqueleto--linea esqueleto--corta"></div>
+        </li>
+        }
+    </ul>
+
+    }
+
 </section>

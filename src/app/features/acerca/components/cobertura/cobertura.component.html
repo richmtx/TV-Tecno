@@ -3,30 +3,52 @@
 
         <!-- Par desfasado -->
         <div class="cobertura__media">
-            @for (img of imagenes; track img.src) {
+            @if (listo()) {
+
+            @for (img of imagenes(); track img.modificador) {
             <figure class="cobertura__figura {{ img.modificador }}">
-                <img [ngSrc]="img.src" [alt]="img.alt" [width]="img.width" [height]="img.height"
-                    class="cobertura__img" />
+                @if (img.src) {
+                <img [src]="img.src" [alt]="img.alt" class="cobertura__img" loading="lazy" decoding="async" />
+                }
+                @if (img.etiqueta) {
                 <figcaption class="cobertura__etiqueta">{{ img.etiqueta }}</figcaption>
+                }
             </figure>
+            }
+
+            } @else {
+
+            @for (hueco of huecos; track hueco.clave) {
+            <figure class="cobertura__figura {{ hueco.modificador }} cobertura__figura--esqueleto" aria-hidden="true">
+            </figure>
+            }
+
             }
         </div>
 
         <!-- Información -->
         <div class="cobertura__info">
-            <span class="cobertura__eyebrow">Cobertura</span>
-            <h2 class="cobertura__title">Transmitimos para todo Durango</h2>
-            <p class="cobertura__text">
-                Nuestra señal llega a plataformas digitales, redes sociales y el circuito
-                interno del campus — en vivo y bajo demanda.
-            </p>
+
+            @if (contenido(); as datosTexto) {
+
+            <span class="cobertura__eyebrow">{{ datosTexto.coberturaEyebrow }}</span>
+            <h2 class="cobertura__title">{{ datosTexto.coberturaTitulo }}</h2>
+            <p class="cobertura__text">{{ datosTexto.coberturaTexto }}</p>
 
             <ul class="cobertura__canales">
-                @for (canal of canales; track canal.texto) {
+                @for (canal of canales(); track canal.texto) {
                 <li class="cobertura__canal">
                     <span class="cobertura__canal-icon" aria-hidden="true">
                         @switch (canal.icono) {
                         @case ('broadcast') {
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18.364 19.364a9 9 0 1 0 -12.728 0" />
+                            <path d="M15.536 16.536a5 5 0 1 0 -7.072 0" />
+                            <circle cx="12" cy="13" r="1" />
+                        </svg>
+                        }
+                        @case ('senal') {
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round">
                             <path d="M18.364 19.364a9 9 0 1 0 -12.728 0" />
@@ -48,6 +70,13 @@
                             <path d="M10 9l5 3l-5 3z" />
                         </svg>
                         }
+                        @case ('play') {
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="5" width="18" height="14" rx="4" />
+                            <path d="M10 9l5 3l-5 3z" />
+                        </svg>
+                        }
                         }
                     </span>
                     <span class="cobertura__canal-texto">{{ canal.texto }}</span>
@@ -56,13 +85,40 @@
             </ul>
 
             <dl class="cobertura__datos">
-                @for (dato of datos; track dato.label) {
+                @for (dato of datos(); track dato.label) {
                 <div class="cobertura__dato">
                     <dt class="cobertura__dato-valor">{{ dato.valor }}</dt>
                     <dd class="cobertura__dato-label">{{ dato.label }}</dd>
                 </div>
                 }
             </dl>
+
+            } @else {
+
+            <div class="cob-esqueleto cob-esqueleto--eyebrow" aria-hidden="true"></div>
+            <div class="cob-esqueleto cob-esqueleto--titulo" aria-hidden="true"></div>
+            <div class="cob-esqueleto cob-esqueleto--parrafo" aria-hidden="true"></div>
+
+            <ul class="cobertura__canales">
+                @for (n of [1, 2, 3]; track n) {
+                <li class="cobertura__canal" aria-hidden="true">
+                    <div class="cob-esqueleto cob-esqueleto--icono"></div>
+                    <div class="cob-esqueleto cob-esqueleto--linea"></div>
+                </li>
+                }
+            </ul>
+
+            <dl class="cobertura__datos">
+                @for (n of [1, 2, 3]; track n) {
+                <div class="cobertura__dato" aria-hidden="true">
+                    <div class="cob-esqueleto cob-esqueleto--dato"></div>
+                    <div class="cob-esqueleto cob-esqueleto--label"></div>
+                </div>
+                }
+            </dl>
+
+            }
+
         </div>
 
     </div>

@@ -168,3 +168,34 @@
         transform: none;
     }
 }
+
+/* ============================================================
+   ESQUELETO
+   Los huecos ya tienen su tamaño definido por la rejilla, así
+   que basta con animar el fondo que la caja ya traía.
+   ============================================================ */
+
+.mosaico__item--esqueleto {
+    background: linear-gradient(90deg,
+            var(--tv-cream) 25%,
+            rgba(255, 255, 255, 0.6) 50%,
+            var(--tv-cream) 75%);
+    background-size: 200% 100%;
+    animation: mosaico-brillo 1.4s ease-in-out infinite;
+}
+
+@keyframes mosaico-brillo {
+    from {
+        background-position: 200% 0;
+    }
+
+    to {
+        background-position: -200% 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mosaico__item--esqueleto {
+        animation: none;
+    }
+}

@@ -1,15 +1,28 @@
 <section class="hero">
     <div class="hero__inner">
-        <span class="hero__eyebrow">XHITD 16.1</span>
+
+        @if (contenido(); as datos) {
+
+        <span class="hero__eyebrow">{{ datos.heroEyebrow }}</span>
 
         <h1 class="hero__title">
-            Somos <span class="hero__title-accent">TV&nbsp;Tecno</span>
+            {{ tituloInicio() }}@if (tituloAcento()) {<span class="hero__title-accent">&nbsp;{{ tituloAcento()
+                }}</span>}
         </h1>
 
         <span class="hero__rule" aria-hidden="true"></span>
 
-        <p class="hero__text">
-            El canal oficial del Instituto Tecnológico de Durango
-        </p>
+        <p class="hero__text">{{ datos.heroSubtitulo }}</p>
+
+        } @else {
+
+        <!-- Esqueleto: conserva la altura del bloque real -->
+        <span class="hero__eyebrow esqueleto esqueleto--eyebrow" aria-hidden="true"></span>
+        <div class="esqueleto esqueleto--titulo" aria-hidden="true"></div>
+        <span class="hero__rule" aria-hidden="true"></span>
+        <div class="esqueleto esqueleto--texto" aria-hidden="true"></div>
+
+        }
+
     </div>
 </section>

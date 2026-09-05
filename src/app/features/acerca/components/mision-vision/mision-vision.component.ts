@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, computed, inject } from '@angular/core';
+import { AcercaService } from '../../../../core/services/acerca.service';
 
+/** Un bloque de la rejilla, ya resuelto para el template. */
 interface Bloque {
   eyebrow: string;
   titulo: string;
@@ -8,31 +10,49 @@ interface Bloque {
   variante: 'wine' | 'gold';
 }
 
+/**
+ * Misión, visión y valores.
+ *
+ * Los dos bloques se arman desde el contenido administrable, pero
+ * su ícono y su variante de color son parte del diseño y no se
+ * editan: la misión siempre lleva el ícono de señal en vino, la
+ * visión el de telescopio en dorado.
+ */
 @Component({
   selector: 'app-acerca-mision-vision',
   standalone: true,
   templateUrl: './mision-vision.component.html',
   styleUrl: './mision-vision.component.css',
 })
-export class MisionVisionComponent {
-  readonly bloques: Bloque[] = [
-    {
-      eyebrow: 'Misión',
-      titulo: 'Contar el Tecnológico desde adentro',
-      icono: 'broadcast',
-      variante: 'wine',
-      texto:
-        'Brindar comunicación audiovisual pública y digital desde el Instituto Tecnológico de Durango mediante producciones innovadoras, inclusivas y de calidad que divulguen la ciencia, la tecnología y la cultura generadas en la institución, fortalezcan el vínculo entre nuestra comunidad y la sociedad duranguense, y contribuyan a la formación de los estudiantes que participan en su creación.',
-    },
-    {
-      eyebrow: 'Visión',
-      titulo: 'Ser la referencia educativa del norte del país',
-      icono: 'telescope',
-      variante: 'gold',
-      texto:
-        'Consolidarnos hacia 2030 como el medio de comunicación universitario de mayor alcance en Durango y un referente en el norte de México, reconocidos por la calidad de nuestras producciones, la innovación tecnológica, la co-creación de contenidos con la comunidad estudiantil y una programación sostenible que genere valor público, identidad y arraigo en la región.',
-    },
-  ];
+export class MisionVisionComponent implements OnInit {
+  private readonly acerca = inject(AcercaService);
 
-  readonly valores: string[] = ['Identidad', 'Colaboración', 'Innovación'];
+  readonly contenido = this.acerca.contenido;
+  readonly valores = this.acerca.valores;
+
+  readonly bloques = computed<Bloque[]>(() => {
+    const datos = this.contenido();
+    if (!datos) return [];
+
+    return [
+      {
+        eyebrow: 'Misión',
+        titulo: datos.misionTitulo,
+        texto: datos.misionTexto,
+        icono: 'broadcast',
+        variante: 'wine',
+      },
+      {
+        eyebrow: 'Visión',
+        titulo: datos.visionTitulo,
+        texto: datos.visionTexto,
+        icono: 'telescope',
+        variante: 'gold',
+      },
+    ];
+  });
+
+  ngOnInit(): void {
+    this.acerca.cargar();
+  }
 }

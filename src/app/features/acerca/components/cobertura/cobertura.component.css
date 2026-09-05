@@ -241,3 +241,82 @@
         transform: none;
     }
 }
+
+/* ============================================================
+   ESQUELETO
+   Las figuras ya tienen altura fija arriba, así que el diseño
+   no depende de la imagen: basta con animar el fondo crema que
+   la caja ya traía mientras llega la respuesta.
+   Los nombres van prefijados para no chocar con las clases del
+   bloque, que tienen sus propios tamaños.
+   ============================================================ */
+
+.cobertura__figura--esqueleto,
+.cob-esqueleto {
+    background: linear-gradient(90deg,
+            var(--tv-cream) 25%,
+            rgba(255, 255, 255, 0.6) 50%,
+            var(--tv-cream) 75%);
+    background-size: 200% 100%;
+    border-radius: 8px;
+    animation: cobertura-brillo 1.4s ease-in-out infinite;
+}
+
+.cob-esqueleto--eyebrow {
+    width: 110px;
+    height: 13px;
+    margin-bottom: 8px;
+}
+
+.cob-esqueleto--titulo {
+    width: 85%;
+    height: 40px;
+    margin-bottom: 12px;
+}
+
+.cob-esqueleto--parrafo {
+    width: 95%;
+    height: 44px;
+    margin-bottom: 22px;
+}
+
+/* Ocupa el lugar del cuadro del ícono sin heredar sus estilos. */
+.cob-esqueleto--icono {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+}
+
+.cob-esqueleto--linea {
+    width: 60%;
+    height: 15px;
+}
+
+.cob-esqueleto--dato {
+    width: 52px;
+    height: 24px;
+    margin-bottom: 3px;
+}
+
+.cob-esqueleto--label {
+    width: 44px;
+    height: 11px;
+}
+
+@keyframes cobertura-brillo {
+    from {
+        background-position: 200% 0;
+    }
+
+    to {
+        background-position: -200% 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .cobertura__figura--esqueleto,
+    .cob-esqueleto {
+        animation: none;
+    }
+}
