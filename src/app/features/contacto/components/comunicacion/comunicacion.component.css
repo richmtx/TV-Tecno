@@ -277,3 +277,116 @@
         transform: none;
     }
 }
+
+/* ============================================================
+   ENLACES DE LAS TARJETAS
+   El correo y el teléfono ahora se pueden tocar; conservan el
+   estilo del texto para no romper la simetría de las tarjetas.
+   ============================================================ */
+
+.card__enlace {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    overflow-wrap: anywhere;
+}
+
+.card__enlace:hover {
+    color: var(--tv-wine);
+    text-decoration: underline;
+}
+
+/* ============================================================
+   ESQUELETO
+   ============================================================ */
+
+.esqueleto {
+    display: block;
+    background: linear-gradient(90deg,
+            var(--tv-cream) 25%,
+            rgba(255, 255, 255, 0.6) 50%,
+            var(--tv-cream) 75%);
+    background-size: 200% 100%;
+    border-radius: 6px;
+    animation: comunicacion-brillo 1.4s ease-in-out infinite;
+}
+
+.esqueleto--linea {
+    width: 80%;
+    height: 13px;
+    margin: 0.25rem auto;
+}
+
+.esqueleto--corta {
+    width: 55%;
+}
+
+.esqueleto--red {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+}
+
+@keyframes comunicacion-brillo {
+    from {
+        background-position: 200% 0;
+    }
+
+    to {
+        background-position: -200% 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .esqueleto {
+        animation: none;
+    }
+}
+
+/* ============================================================
+   REDES EN PANTALLAS ANGOSTAS
+   La lista crece con el tiempo: hoy son tres, pero el panel
+   admite hasta ocho. Envolver evita que se aprieten hasta
+   deformarse cuando alguien agregue una plataforma más.
+   ============================================================ */
+
+.social {
+    flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+    .social {
+        gap: 0.55rem;
+    }
+
+    .social__link {
+        width: 36px;
+        height: 36px;
+    }
+
+    .social__link svg {
+        width: 17px;
+        height: 17px;
+    }
+}
+
+/* El ícono viene de un componente compartido: el host toma el
+   tamaño y el SVG lo llena, para que el círculo conserve su
+   proporción original. */
+.social__link app-icono-red {
+    width: 18px;
+    height: 18px;
+}
+
+.social__link app-icono-red svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+@media (max-width: 480px) {
+    .social__link app-icono-red {
+        width: 17px;
+        height: 17px;
+    }
+}

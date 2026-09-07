@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ContactoService } from '../../../core/services/contacto.service';
+import type { RedSocial } from '../../../core/models/contacto.model';
+import { IconoRedComponent } from '../icono-red/icono-red.component';
 
 interface EnlaceNav {
   texto: string;
@@ -7,21 +10,29 @@ interface EnlaceNav {
   externo?: boolean;
 }
 
-interface RedSocial {
-  nombre: string;
-  url: string;
-  icono: 'facebook' | 'instagram' | 'youtube';
-}
-
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, IconoRedComponent],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.css'
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
+  private readonly contacto = inject(ContactoService);
+
   anioActual = new Date().getFullYear();
+
+  /**
+   * Los datos de contacto y las redes vienen del panel: son los
+   * mismos que muestra la página de Contacto, para que corregir el
+   * correo en un lugar no deje al otro contradiciéndolo.
+   */
+  readonly datos = this.contacto.datos;
+  readonly redes = this.contacto.redes;
+  readonly listo = this.contacto.listo;
+
+  /** La versión abreviada cabe mejor en la columna del pie. */
+  readonly direccion = computed(() => this.datos()?.direccionCorta ?? '');
 
   navegacion: EnlaceNav[] = [
     { texto: 'Inicio', ruta: '/' },
@@ -41,19 +52,14 @@ export class FooterComponent {
     { texto: 'Sitio del ITD', ruta: 'https://www.itdurango.edu.mx/', externo: true },
   ];
 
-  // Datos de contacto (PLACEHOLDER: reemplazar por los reales)
-  contacto = {
-    correo: 'correo@tvtecno.mx',
-    telefono: '(618) 000 0000',
-    direccion: 'Blvd. Felipe Pescador, Durango, Dgo.',
-  };
+  ngOnInit(): void {
+    this.contacto.cargar();
+  }
 
-  // Redes sociales (PLACEHOLDER: reemplazar las URLs por las reales)
-  redes: RedSocial[] = [
-    { nombre: 'Facebook', url: '#', icono: 'facebook' },
-    { nombre: 'Instagram', url: '#', icono: 'instagram' },
-    { nombre: 'YouTube', url: '#', icono: 'youtube' },
-  ];
+  /** Texto del aria-label de cada red. */
+  etiquetaDe(red: RedSocial): string {
+    return this.contacto.etiquetaDe(red);
+  }
 
   scrollArriba(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });

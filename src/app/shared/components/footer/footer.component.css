@@ -212,3 +212,88 @@
         align-items: flex-start;
     }
 }
+
+/* ============================================================
+   ESQUELETO
+   Reserva el espacio del bloque real para que el pie no salte
+   cuando llega la respuesta. Aparece en todas las páginas, así
+   que un salto aquí se nota en todo el sitio.
+   ============================================================ */
+
+.footer__red--esqueleto,
+.footer__esqueleto {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    animation: footer-brillo 1.4s ease-in-out infinite;
+}
+
+.footer__red--esqueleto {
+    display: block;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.footer__esqueleto--icono {
+    width: 17px;
+    height: 17px;
+    flex: none;
+}
+
+.footer__esqueleto--linea {
+    width: 140px;
+    height: 13px;
+}
+
+@keyframes footer-brillo {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.45;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .footer__red--esqueleto,
+    .footer__esqueleto {
+        animation: none;
+    }
+}
+
+/* ============================================================
+   REDES EN REJILLA
+   La lista crece con el tiempo: hoy son ocho, y en una sola
+   línea se desbordan de la columna. Cuatro por fila mantiene
+   el bloque compacto y alineado con el texto de arriba.
+   ============================================================ */
+
+.footer__redes {
+    display: grid;
+    grid-template-columns: repeat(4, max-content);
+    gap: 0.7rem;
+    justify-content: start;
+}
+
+@media (max-width: 360px) {
+    .footer__redes {
+        gap: 0.55rem;
+    }
+}
+
+/* El ícono viene de un componente compartido: el host toma el
+   tamaño y el SVG lo llena. */
+.footer__red app-icono-red {
+    width: 20px;
+    height: 20px;
+}
+
+.footer__red app-icono-red svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}

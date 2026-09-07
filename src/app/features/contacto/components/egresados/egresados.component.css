@@ -34,17 +34,6 @@
     clip-path: polygon(0 0, 100% 0, 68% 100%, 0 100%);
 }
 
-.banner__media::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    clip-path: polygon(100% 0,
-            calc(100% - 2px) 0,
-            calc(68% - 2px) 100%,
-            68% 100%);
-    background: rgba(224, 92, 138, 0.65);
-    pointer-events: none;
-}
 
 .banner__placeholder {
     width: 100%;
@@ -219,5 +208,74 @@
     .banner__btn:hover,
     .banner__btn:hover .banner__btn-icon {
         transform: none;
+    }
+}
+
+/* ============================================================
+   ALTURA FIJA DEL BANNER
+   El diseño manda: la caja conserva su forma sin importar qué
+   imagen suba el editor, y la foto se recorta centrada para
+   llenarla. Sin esto, una fotografía vertical estiraría el
+   banner y desbalancearía toda la sección.
+   ============================================================ */
+
+.banner {
+    height: 320px;
+    min-height: 0;
+}
+
+.banner__media {
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.banner__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    .banner {
+        height: auto;
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 860px) {
+    .banner {
+        height: auto;
+        min-height: 0;
+    }
+
+    .banner__media {
+        height: 240px;
+    }
+}
+
+/* ============================================================
+   PANTALLAS MUY ANGOSTAS
+   El texto del botón es largo y no cabe en una línea por debajo
+   de los 380px: sin permitirle envolver, empuja el contenido
+   fuera del banner y se lleva el título con él.
+   ============================================================ */
+
+@media (max-width: 380px) {
+    .banner__content {
+        padding: 1.75rem 1.25rem;
+    }
+
+    .banner__btn {
+        white-space: normal;
+        text-align: center;
+        line-height: 1.35;
+        padding: 0.85rem 1.1rem;
+        gap: 0.6rem;
+    }
+
+    .banner__title {
+        overflow-wrap: break-word;
     }
 }

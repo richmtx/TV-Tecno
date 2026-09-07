@@ -5,7 +5,11 @@
 
             <!-- Imagen -->
             <div class="banner__media" aria-hidden="true">
+                @if (urlImagen(); as url) {
+                <img class="banner__img" [src]="url" [alt]="altImagen()" loading="lazy" decoding="async" />
+                } @else {
                 <div class="banner__placeholder"></div>
+                }
             </div>
 
             <!-- Contenido -->
@@ -28,7 +32,8 @@
                 </div>
 
                 <div class="banner__action">
-                    <a class="banner__btn" [href]="enlaceSeguimiento">
+                    @if (enlaceSeguimiento(); as destino) {
+                    <a class="banner__btn" [href]="destino" target="_blank" rel="noopener noreferrer">
                         <span>Ir al seguimiento de egresados</span>
                         <svg class="banner__btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -36,6 +41,7 @@
                             <path d="m13 6 6 6-6 6" />
                         </svg>
                     </a>
+                    }
                 </div>
 
             </div>
