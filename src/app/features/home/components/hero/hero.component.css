@@ -4,39 +4,67 @@
     overflow: hidden;
     color: #fff;
 
-    /* ===========================================================
-     FONDO GUINDA — esto es lo único que cambiarás por la imagen.
-     Para usar imagen, reemplaza el "background" de abajo por:
-        background: url('/ruta/imagen.jpg') center/cover no-repeat;
-     y deja el .hero__overlay para que el texto siga legible.
-     =========================================================== */
-    background:
-        radial-gradient(circle at 85% 50%, rgba(176, 58, 99, 0.35), transparent 45%),
-        linear-gradient(135deg, #4d0e28 0%, #6b1538 55%, #3a0a1f 100%);
+    /* Fondo negro de respaldo (se ve mientras cargan las imágenes) */
+    background: #0a0a0a;
 }
 
-/* Capa oscura encima del fondo (útil sobre todo cuando sea imagen) */
+/* ===========================================================
+   Carrusel de fondo
+   =========================================================== */
+.hero__slides {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.hero__slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transform: scale(1.08);
+    /* Fundido entre imágenes + zoom lento tipo "Ken Burns" */
+    transition: opacity 1.5s ease-in-out, transform 6.5s ease-out;
+    will-change: opacity, transform;
+}
+
+.hero__slide--active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===========================================================
+   Filtro oscuro con tono guinda.
+   - Ajusta los valores de alpha (0.xx) para oscurecer más o menos.
+   - El lado izquierdo es más oscuro para que el texto sea legible.
+   =========================================================== */
 .hero__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(20, 5, 12, 0.55), transparent 70%);
+    z-index: 1;
     pointer-events: none;
+    background:
+        linear-gradient(90deg,
+            rgba(0, 0, 0, 0.75) 0%,
+            rgba(0, 0, 0, 0.55) 45%,
+            rgba(0, 0, 0, 0.35) 100%),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.35), transparent 40%);
 }
 
 .hero__container {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     max-width: 1280px;
     margin: 0 auto;
     padding: 5rem 1.5rem;
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 3rem;
+    align-items: center;
     min-height: 520px;
 }
 
-/* ---------- Contenido izquierdo ---------- */
+/* ---------- Contenido ---------- */
 .hero__content {
     max-width: 560px;
 }
@@ -58,7 +86,7 @@
 .hero__subtitle {
     font-size: 1.15rem;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.82);
+    color: rgba(255, 255, 255, 0.85);
     margin-bottom: 2.25rem;
     max-width: 480px;
 }
@@ -98,14 +126,15 @@
 }
 
 .hero__btn--ghost {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.04);
     color: #fff;
     border: 1px solid rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(4px);
 }
 
 .hero__btn--ghost:hover {
     border-color: #fff;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .hero__btn-dot {
@@ -131,56 +160,14 @@
     }
 }
 
-/* ---------- Tarjeta "transmitiendo ahora" ---------- */
-.hero__now {
-    width: 290px;
-    flex-shrink: 0;
-    padding: 1.15rem 1.35rem;
-    border-radius: 12px;
-    background: rgba(10, 3, 7, 0.45);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(6px);
-    margin-bottom: 0.25rem;
-}
-
-.hero__now-label {
-    display: block;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 0.6rem;
-}
-
-.hero__now-title {
-    font-family: var(--font-titulo);
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 0.35rem;
-}
-
-.hero__now-time {
-    display: block;
-    font-size: 0.88rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 1rem;
-}
-
-.hero__progress {
-    width: 100%;
-    height: 5px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.15);
-    overflow: hidden;
-}
-
-.hero__progress-fill {
-    height: 100%;
-    border-radius: 999px;
-    background: var(--tv-live);
-    transition: width 0.4s ease;
+/* ===========================================================
+   Accesibilidad: sin animaciones si el usuario las desactiva
+   =========================================================== */
+@media (prefers-reduced-motion: reduce) {
+    .hero__slide {
+        transition: none;
+        transform: none;
+    }
 }
 
 /* ===========================================================
@@ -188,19 +175,17 @@
    =========================================================== */
 @media (max-width: 900px) {
     .hero__container {
-        flex-direction: column;
-        align-items: flex-start;
         padding: 3.5rem 1.5rem;
-        gap: 2.5rem;
-        min-height: auto;
+        min-height: 440px;
     }
 
     .hero__title {
         font-size: 2.5rem;
     }
 
-    .hero__now {
-        width: 100%;
+    /* En móvil el texto ocupa todo el ancho: oscurece parejo */
+    .hero__overlay {
+        background: rgba(0, 0, 0, 0.65);
     }
 }
 

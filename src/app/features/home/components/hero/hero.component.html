@@ -1,9 +1,18 @@
 <section class="hero">
+
+    <!-- Carrusel de fondo (decorativo) -->
+    <div class="hero__slides" aria-hidden="true">
+        @for (imagen of imagenes; track imagen; let i = $index) {
+        <div class="hero__slide" [class.hero__slide--active]="i === indiceActual()"
+            [style.background-image]="'url(' + imagen + ')'">
+        </div>
+        }
+    </div>
+
+    <!-- Filtro oscuro/guinda encima de las imágenes -->
     <div class="hero__overlay"></div>
 
     <div class="hero__container">
-
-        <!-- Columna izquierda: contenido -->
         <div class="hero__content">
             <h1 class="hero__title">
                 El canal del
@@ -25,18 +34,6 @@
                 </a>
             </div>
         </div>
-
-        <!-- Columna derecha: tarjeta "transmitiendo ahora" -->
-        <aside class="hero__now">
-            <span class="hero__now-label">Transmitiendo ahora</span>
-            <h2 class="hero__now-title">{{ programaActual.titulo }}</h2>
-            <span class="hero__now-time">{{ programaActual.horario }}</span>
-
-            <div class="hero__progress" role="progressbar" [attr.aria-valuenow]="programaActual.progreso"
-                aria-valuemin="0" aria-valuemax="100">
-                <div class="hero__progress-fill" [style.width.%]="programaActual.progreso"></div>
-            </div>
-        </aside>
-
     </div>
+
 </section>
